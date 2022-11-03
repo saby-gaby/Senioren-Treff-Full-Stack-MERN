@@ -8,9 +8,9 @@ import {
 
 const router = Router();
 
-router.route("/").post(createUser);
+router.route("/user").post(createUser);
 router
-  .route("/:id")
+  .route("/user/:id")
   .get(getUserByID)
   .delete(deleteUserByID)
   .patch(updateUserByID);
