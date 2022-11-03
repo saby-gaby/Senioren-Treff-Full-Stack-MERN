@@ -1,1 +1,1 @@
-# Senioren-Treff-Full-Stack-MEARN-Gruppen-Projekt
+# Senioren-Treff-Full-Stack-MERN-Gruppen-Projekt
