@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 
-export default function UploadImage() {
+export default function EventForm() {
   const [file, setFile] = useState(null);
   const [eventTitle, setEventTitle] = useState(null);
   const [eventCategory, setCategory] = useState(null);
