@@ -5,10 +5,12 @@ import {
   deleteUserByID,
   updateUserByID,
 } from "../controller/userController.js";
+import { userValidationSchema } from "../models/userValidationModel.js";
+import { validator } from "../middleware/validator.js";
 
 const router = Router();
 
-router.route("/user").post(createUser);
+router.route("/user").post(userValidationSchema, validator, createUser);
 router
   .route("/user/:id")
   .get(getUserByID)
