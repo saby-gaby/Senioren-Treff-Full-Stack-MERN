@@ -86,7 +86,7 @@ export default function EventForm() {
           }}
         />
         <input
-          type="datetime"
+          type="time"
           name="time"
           id="time"
           placeholder="Veranstaltungsbeginn"
@@ -104,7 +104,9 @@ export default function EventForm() {
           }}
         />
         <input
-          type="text"
+          type="number"
+          min="1"
+          max="99"
           name="participants"
           id="participants"
           placeholder="wieviele Teilnehmer?"
@@ -113,8 +115,9 @@ export default function EventForm() {
           }}
         />
         <input
-          type="text"
+          type="currency"
           name="price"
+          currency="EUR"
           placeholder="Teilnahmegebühr"
           onChange={(e) => {
             setPrice(e.target.value);
