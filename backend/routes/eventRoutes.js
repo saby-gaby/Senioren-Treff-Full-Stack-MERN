@@ -8,10 +8,15 @@ import {
   deleteEventById,
 } from "../controller/eventController.js";
 import { imageUpload } from "../middleware/imageUpload.js";
+import { validator } from "../middleware/validator.js";
+import { eventValidationSchema } from "../models/eventValidationModel.js";
 
 const router = new Router();
 
-router.route("/event").get(getAllEvents).post(imageUpload, createEvent);
+router
+  .route("/event")
+  .get(getAllEvents)
+  .post(eventValidationSchema, validator, imageUpload, createEvent);
 
 router
   .route("/event/:id")
