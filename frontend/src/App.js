@@ -1,14 +1,14 @@
 import React from "react";
 import NavBar from "./components/Nav/NavBar.jsx";
 import Landing from "./components/Landing/Landing.jsx";
-import UploadImage from "./components/UploadImage/UploadImage.js";
+import EventForm from "./components/EventForm/EventForm.js";
 
 function App() {
   return (
     <div className="App">
       <NavBar />
       <Landing />
-      <UploadImage />
+      <EventForm />
     </div>
   );
 }
