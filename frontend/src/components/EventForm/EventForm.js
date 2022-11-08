@@ -109,7 +109,6 @@ export default function EventForm() {
           max="99"
           name="participants"
           id="participants"
-          placeholder="wieviele Teilnehmer?"
           onChange={(e) => {
             setParticipants(e.target.value);
           }}
@@ -118,7 +117,6 @@ export default function EventForm() {
           type="currency"
           name="price"
           currency="EUR"
-          placeholder="Teilnahmegebühr"
           onChange={(e) => {
             setPrice(e.target.value);
           }}
