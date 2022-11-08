@@ -13,7 +13,7 @@ export const eventValidationSchema = [
     max: 2,
   }),
   body("price").isString().not().isEmpty(),
-  body("desciption").trim().isString().isLength({
+  body("description").trim().isString().isLength({
     min: 10,
     max: 2500,
   }),
