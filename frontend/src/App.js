@@ -1,14 +1,33 @@
-import React from "react";
-import NavBar from "./components/Nav/NavBar.jsx";
-import Landing from "./components/Landing/Landing.jsx";
-import EventForm from "./components/EventForm/EventForm.js";
+import React, { useContext } from "react";
+import { SectionsContext } from "./context/sectionsContext.js";
+import Home from "./components/Home/Home.jsx";
+import Login from "./components/Login/Login.jsx";
+import RegisterForm from "./components/RegisterForm/RegisterForm";
+import EventForm from "./components/EventForm/EventForm";
+import OneEvent from './components/OneEvent/OneEvent';
+import SearchedEvent from './components/SearchedEvents/SearchedEvents';
+import UserProfile from './components/UserProfile/UserProfile'
 
 function App() {
+  const {
+    isHome,
+    isLogin,
+    isRegister,
+    isEventForm,
+    isOneEvent,
+    isSearchedEvents,
+    isUserProfile,
+  } = useContext(SectionsContext);
+
   return (
     <div className="App">
-      <NavBar />
-      <Landing />
-      <EventForm />
+      {isHome && <Home />}
+      {isLogin && <Login />}
+      {isRegister && <RegisterForm />}
+      {isEventForm && <EventForm />}
+      {isOneEvent && <OneEvent />}
+      {isSearchedEvents && <SearchedEvent />}
+      {isUserProfile && <UserProfile />}
     </div>
   );
 }
