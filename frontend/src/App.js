@@ -7,6 +7,7 @@ import EventForm from "./components/EventForm/EventForm";
 import OneEvent from './components/OneEvent/OneEvent';
 import SearchedEvent from './components/SearchedEvents/SearchedEvents';
 import UserProfile from './components/UserProfile/UserProfile'
+import AuthLogin from "./util/AuthLogin.js";
 
 function App() {
   const {
@@ -28,6 +29,7 @@ function App() {
       {isOneEvent && <OneEvent />}
       {isSearchedEvents && <SearchedEvent />}
       {isUserProfile && <UserProfile />}
+      <AuthLogin />
     </div>
   );
 }
