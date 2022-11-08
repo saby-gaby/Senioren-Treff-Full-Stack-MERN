@@ -5,11 +5,12 @@ import "dotenv/config";
 import userRouter from "./routes/userRoutes.js";
 import eventRouter from "./routes/eventRoutes.js";
 import expressFileUpload from "express-fileupload";
+import cookieParser from "cookie-parser";
 
 const server = express();
 const PORT = process.env.PORT;
 
-server.use(express.json(), cors());
+server.use(express.json(), cors(), cookieParser());
 server.use(
   expressFileUpload({
     createParentPath: true,
