@@ -16,7 +16,7 @@ const router = Router();
 router.route("/user").post(userValidationSchema, validator, createUser);
 router
   .route("/user/:id")
-  .get(isAuth, getUserByID)
+  .get(getUserByID)
   .delete(isAuth, deleteUserByID)
   .patch(isAuth, updateUserByID);
 router.route("/user/login").post(userLogin);

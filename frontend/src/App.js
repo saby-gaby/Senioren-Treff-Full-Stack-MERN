@@ -23,14 +23,12 @@ function App() {
   return (
     <div className="App">
       {isHome && <Home />}
-      {isLogin && <Login />}
+      {isLogin && <AuthLogin />}
       {isRegister && <RegisterForm />}
       {isEventForm && <EventForm />}
       {isOneEvent && <OneEvent />}
       {isSearchedEvents && <SearchedEvent />}
       {isUserProfile && <UserProfile />}
-      <AuthLogin />
-
     </div>
   );
 }
