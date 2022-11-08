@@ -10,7 +10,13 @@ import cookieParser from "cookie-parser";
 const server = express();
 const PORT = process.env.PORT;
 
-server.use(express.json(), cors(), cookieParser());
+server.use(express.json(), cookieParser());
+server.use(
+  cors({
+    origin: "http://localhost:3000", // Der Create React App Port
+    credentials: true, // Cookies zulassen
+  })
+);
 server.use(
   expressFileUpload({
     createParentPath: true,
