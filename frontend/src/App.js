@@ -1,3 +1,4 @@
+
 import React, { useContext } from "react";
 import { SectionsContext } from "./context/sectionsContext.js";
 import Home from "./components/Home/Home.jsx";
