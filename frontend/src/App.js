@@ -6,7 +6,7 @@ import RegisterForm from "./components/RegisterForm/RegisterForm";
 import EventForm from "./components/EventForm/EventForm";
 import OneEvent from './components/OneEvent/OneEvent';
 import SearchedEvent from './components/SearchedEvents/SearchedEvents';
-import UserProfile from './components/UserProfile/UserProfile'
+import UserProfile from './components/UserProfile/UserProfile';
 import AuthLogin from "./util/AuthLogin.js";
 
 function App() {
@@ -30,6 +30,7 @@ function App() {
       {isSearchedEvents && <SearchedEvent />}
       {isUserProfile && <UserProfile />}
       <AuthLogin />
+
     </div>
   );
 }
