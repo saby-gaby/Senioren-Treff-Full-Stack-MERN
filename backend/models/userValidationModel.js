@@ -1,4 +1,5 @@
 import { body, check } from "express-validator";
+import isStrongPassword from "validator";
 
 export const userValidationSchema = [
     body("userName")
@@ -22,22 +23,17 @@ export const userValidationSchema = [
         .not().isEmpty()
         .withMessage("Has to be a valid email"),
     body("password")
+        .isString()
         .isLength({ min: 8 })
-        .withMessage("min 8 chararackters")
-        .not().isEmpty(),
-        // ({
-        //   minLength: 8,
-        //   minLowercase: 1,
-        //   minUppercase: 1,
-        //   minNumbers: 1,
-        //   returnScore: true,
-        //   pointsPerUnique: 1,
-        //   pointsPerRepeat: 0.5,
-        //   pointsForContainingLower: 10,
-        //   pointsForContainingUpper: 10,
-        //   pointsForContainingNumber: 10,
-        //   pointsForContainingSymbol: 10,
-        // }),
+        .not()
+        .isLowercase()
+        .not()
+        .isUppercase()
+        .not()
+        .isNumeric()
+        .not()
+        .isAlpha()
+        .withMessage("Password has to have at least 8 characters, one upper and one lowercase and one number"),
     body("location")
         .trim()
         .isString()
