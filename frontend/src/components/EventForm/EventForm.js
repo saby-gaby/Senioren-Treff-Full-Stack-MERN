@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
+import Nav from '../Nav/Nav'
 
 export default function EventForm() {
   const [file, setFile] = useState(null);
@@ -49,6 +50,7 @@ export default function EventForm() {
   };
   return (
     <div>
+      <Nav />
       <form
         onSubmit={handleSubmit}
         encType="multipart/form-data"
