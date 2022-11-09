@@ -1,4 +1,5 @@
 import { Schema, model } from "mongoose";
+import UserModel from "./UserModel.js";
 
 const eventSchema = new Schema({
   eventTitle: {
@@ -37,7 +38,31 @@ const eventSchema = new Schema({
   imageUrl: {
     type: String,
   },
+  createdAt: {
+    type: Date,
+    immutable: true,
+    default: () => new Date()
+  },
+  updatedAt: {
+    type: Date
+  },
+  subscribers: [{
+    type: Schema.Types.ObjectId,
+    ref: "user"
+  }]
 });
+
+eventSchema.pre(["save"], function (next) {
+  console.log("mongoose save() oder updateOne() aufgerufen");
+  this.updatedAt = new Date();
+  next();
+});
+
+eventSchema.pre(["updateOne", "findOneAndUpdate"], function (next) {
+  console.debug('updateOne aufgerufen');
+  next()
+})
+
 
 const EventModel = model("event", eventSchema);
 
