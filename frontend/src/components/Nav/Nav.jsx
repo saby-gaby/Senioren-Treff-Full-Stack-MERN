@@ -10,13 +10,6 @@ const NavBar = () => {
     isLogin,
     setIsLogin,
     isRegister,
-    setIsRegister,
-    isEventForm,
-    setIsEventForm,
-    isOneEvent,
-    setIsOneEvent,
-    isSearchedEvents,
-    setIsSearchedEvents,
     isUserProfile,
     setIsUserProfile,
     isAuth
@@ -38,11 +31,11 @@ const NavBar = () => {
   }
 
   return (
-    <header className={isLogin ? "logo-center": null}>
+    <header className={isLogin && !isAuth ? "logo-center": null}>
       <div onClick={!isHome ? navigateMeHome: null} className="logo">
         <img src="logo.svg"></img>
       </div>
-      {(!isLogin && !isAuth && !isRegister && !isUserProfile) ? <button onClick={navigateToLogin}>button</button>:null}
+      {(!isLogin && !isAuth && !isRegister && !isUserProfile) ? <button onClick={navigateToLogin}>Anmelden / Registrieren</button>:null}
       {(!isUserProfile && isAuth && !isRegister) ? <button onClick={navigateToProfile}>Mein Bereich</button>:null}
       {isUserProfile && <p>Mein Bereich</p>}
       {isRegister && <p>Register</p>}
