@@ -39,7 +39,7 @@ export const userLogin = async (req, res) => {
 
   res.cookie("jwt", token, { httpOnly: true, maxAge: expiresInSec * 1000 });
 
-  return res.send({ msg: "successfully logged in", userName: loginUser.userName });
+  return res.send({ msg: "successfully logged in", userName: loginUser.userName, userId: loginUser._id});
 };
 
 export const userLogout = (req, res) => {
