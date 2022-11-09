@@ -48,14 +48,24 @@ export const userLogout = (req, res) => {
   return res.status(200).json({ msg: "successfully logged out" });
 }; 
 
+
+
 export const getUserByID = async (req, res) => {
   try {
-    const getUser = await UserModel.findById(req.params.id);
+    const getUser = await UserModel
+      .findById(req.params.id)
+      .populate("myEvents")
+      .populate("watchedEvents");
+    
     res.status(302).send(getUser);
+
   } catch (error) {
     res.status(404).send(error.message);
   }
 };
+
+
+
 export const deleteUserByID = async (req, res) => {
   try {
     const deleteUser = await UserModel.deleteOne({ _id: req.params.id });
