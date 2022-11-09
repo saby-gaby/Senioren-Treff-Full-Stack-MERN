@@ -11,6 +11,8 @@ function AuthLogin() {
   const handleSuccessfulLogin = (respData) => {
     setIsAuth(true);
     localStorage.setItem("userName", respData.userName);
+    localStorage.setItem("userId", respData.userId);
+    console.log(respData);
   };
 
   const hasValidToken = () => {
