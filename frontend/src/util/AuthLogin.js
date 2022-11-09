@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import Cookies from "js-cookie";
+import { SectionsContext } from "../context/sectionsContext.js";
 import LoginForm from "../components/LoginForm/LoginForm.js";
 import axiosConfig from "./axiosConfig.js";
+import UserProfil from "../components/UserProfile/UserProfile.jsx";
 
 function AuthLogin() {
-  const [isAuth, setIsAuth] = useState(false);
+  const {isAuth, setIsAuth, setAllSectFalse, setIsHome} = useContext(SectionsContext);
 
   const handleSuccessfulLogin = (respData) => {
     setIsAuth(true);
-    localStorage.setItem("name", respData.userName);
+    localStorage.setItem("userName", respData.userName);
   };
 
   const hasValidToken = () => {
@@ -18,15 +20,6 @@ function AuthLogin() {
     const expiresInMs = new Date(expireDate) - new Date();
     if (expiresInMs <= 0) return false;
     return true;
-  };
-
-  const logout = () => {
-    localStorage.clear();
-    setIsAuth(false);
-
-    axiosConfig.post("/user/logout").then((res) => {
-      console.log(res.data);
-    });
   };
 
   useEffect(() => {
@@ -41,8 +34,7 @@ function AuthLogin() {
         <LoginForm handleSuccessfulLogin={handleSuccessfulLogin} />
       ) : (
         <>
-          <p>Herzlich willkommen {localStorage.getItem("name")}</p>
-          <button onClick={logout}>Logout</button>
+        <UserProfil />
         </>
       )}
     </div>

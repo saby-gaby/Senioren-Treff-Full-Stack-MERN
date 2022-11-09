@@ -1,5 +1,7 @@
+
 import React, { useState, useRef } from "react";
 import axiosConfig from "../../util/axiosConfig.js";
+import Nav from '../Nav/Nav';
 
 export default function RegisterForm() {
   const [isError, setIsError] = useState(false);
@@ -53,6 +55,7 @@ export default function RegisterForm() {
 
   return (
     <div>
+      <Nav />
       RegisterForm
       <form ref={formEl} method="POST" action="/user" onSubmit={submitHandler}>
         <label htmlFor="">

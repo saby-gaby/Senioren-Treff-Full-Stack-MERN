@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import axiosConfig from "../../util/axiosConfig.js";
+import Nav from '../Nav/Nav'
 
 function LoginForm(props) {
   const [error, setError] = useState("");
@@ -39,6 +40,7 @@ function LoginForm(props) {
 
   return (
     <div>
+      <Nav />
       <form ref={formEl} method="post" onSubmit={submitHandler}>
         <h2>Login</h2>
         <label htmlFor="username"> Nutzername:</label>

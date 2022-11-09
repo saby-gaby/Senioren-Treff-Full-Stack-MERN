@@ -1,7 +1,11 @@
-import React from 'react'
+import React from 'react';
+import Nav from '../Nav/Nav'
 
 export default function SearchedEvents() {
   return (
-    <div>SearchedEvents</div>
+    <div>
+      <Nav />
+      SearchedEvents
+      </div>
   )
 }

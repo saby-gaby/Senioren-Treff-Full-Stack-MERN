@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { SectionsContext } from "./context/sectionsContext.js";
 import Home from "./components/Home/Home.jsx";
-import Login from "./components/Login/Login.jsx";
 import RegisterForm from "./components/RegisterForm/RegisterForm";
 import EventForm from "./components/EventForm/EventForm";
 import OneEvent from './components/OneEvent/OneEvent';
