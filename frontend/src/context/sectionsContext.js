@@ -5,7 +5,7 @@ const SectionsContext = createContext();
 const SectionsProvider = ({ children }) => {
   const [isHome, setIsHome] = useState(true);
   const [isLogin, setIsLogin] = useState(false);
-  const [isRegister, setIsRegister] = useState(false);
+  const [isRegister, setIsRegister] = useState(true);
   const [isEventForm, setIsEventForm] = useState(false);
   const [isOneEvent, setIsOneEvent] = useState(false);
   const [isSearchedEvents, setIsSearchedEvents] = useState(false);
