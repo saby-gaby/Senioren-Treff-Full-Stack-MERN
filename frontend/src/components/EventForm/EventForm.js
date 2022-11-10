@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
-import Nav from '../Nav/Nav'
+import Nav from '../Nav/Nav';
+import axiosConfig from '../../util/axiosConfig'
 
 export default function EventForm() {
   const [file, setFile] = useState(null);
@@ -19,8 +20,8 @@ export default function EventForm() {
       const formData = new FormData(e.target);
       console.log(formData);
       try {
-        const response = await axios.post(
-          "http://localhost:6001/event",
+        const response = await axiosConfig.post(
+          "/event",
           {
             image: formData.get("image"),
             eventTitle: eventTitle,

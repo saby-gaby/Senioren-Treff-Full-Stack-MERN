@@ -15,18 +15,16 @@ const SectionsProvider = ({ children }) => {
   const [isUserProfile, setIsUserProfile] = useState(false);
   const [isAuth, setIsAuth] = useState(() => {
     const token = Cookies.get("jwt");
-    if (token){
+    if (token) {
       const decodedToken = jwt_decode(token, { complete: true });
-
-    const newDate = parseInt(new Date().getTime() / 1000);
-
-    if (decodedToken.exp < newDate) {
-      return false;
-    } else {
-      return true;
+      const newDate = parseInt(new Date().getTime() / 1000);
+      if (decodedToken.exp < newDate) {
+        return false;
+      } else {
+        return true;
       }
     } else {
-      return false
+      return false;
     }
   });
 
