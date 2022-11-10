@@ -1,7 +1,7 @@
 import { createContext, useState } from "react";
-import axiosConfig from '../util/axiosConfig';
+import axiosConfig from "../util/axiosConfig";
 import Cookies from "js-cookie";
-import jwt_decode from 'jwt-decode'
+import jwt_decode from "jwt-decode";
 
 const SectionsContext = createContext();
 
@@ -13,15 +13,20 @@ const SectionsProvider = ({ children }) => {
   const [isOneEvent, setIsOneEvent] = useState(false);
   const [isSearchedEvents, setIsSearchedEvents] = useState(false);
   const [isUserProfile, setIsUserProfile] = useState(false);
-  const [isAuth, setIsAuth] = useState(()=>{
-    /* const token=Cookies.get("jwt")
-    console.log(Cookies.get("jwt"));
-    const decodedToken=jwt_decode(token, {complete:true})
-    if(decodedToken<new Date()) return false; */
-    return false
+  const [isAuth, setIsAuth] = useState(() => {
+    const token = Cookies.get("jwt");
+    const decodedToken = jwt_decode(token, { complete: true });
+    console.log(decodedToken.exp);
+    const newDate = parseInt(new Date().getTime() / 1000);
+    console.log(newDate);
+    if (decodedToken.exp < newDate) {
+      return false;
+    } else {
+      return true;
+    }
   });
 
-  const setAllSectFalse=()=>{
+  const setAllSectFalse = () => {
     setIsLogin(false);
     setIsHome(false);
     setIsRegister(false);
@@ -29,7 +34,7 @@ const SectionsProvider = ({ children }) => {
     setIsOneEvent(false);
     setIsSearchedEvents(false);
     setIsUserProfile(false);
-  }
+  };
 
   const logout = () => {
     localStorage.clear();
