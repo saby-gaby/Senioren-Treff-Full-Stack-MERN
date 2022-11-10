@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useState } from "react";
 import Nav from "../Nav/Nav";
 import axiosConfig from "../../util/axiosConfig.js";
@@ -16,7 +15,6 @@ export default function EventForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (file) {
       const formData = new FormData(e.target);
       console.log(formData);
       try {
@@ -45,9 +43,6 @@ export default function EventForm() {
         console.error(error);
         alert("Es ist ein Fehler aufgetreten");
       }
-    } else {
-      alert("Please input a file!");
-    }
   };
   return (
     <div>
