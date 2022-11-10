@@ -2,17 +2,16 @@ import React, { useContext, useEffect } from "react";
 import Cookies from "js-cookie";
 import { SectionsContext } from "../context/sectionsContext.js";
 import LoginForm from "../components/LoginForm/LoginForm.js";
-import axiosConfig from "./axiosConfig.js";
-import UserProfil from "../components/UserProfile/UserProfile.jsx";
+import UserProfile from "../components/UserProfile/UserProfile.jsx";
 
 function AuthLogin() {
-  const {isAuth, setIsAuth, setAllSectFalse, setIsHome} = useContext(SectionsContext);
+  const { isAuth, setIsAuth, setAllSectFalse, setIsHome } =
+    useContext(SectionsContext);
 
   const handleSuccessfulLogin = (respData) => {
     setIsAuth(true);
     localStorage.setItem("userName", respData.userName);
     localStorage.setItem("userId", respData.userId);
-    console.log(respData);
   };
 
   const hasValidToken = () => {
@@ -36,7 +35,7 @@ function AuthLogin() {
         <LoginForm handleSuccessfulLogin={handleSuccessfulLogin} />
       ) : (
         <>
-        <UserProfil />
+          <UserProfile />
         </>
       )}
     </div>

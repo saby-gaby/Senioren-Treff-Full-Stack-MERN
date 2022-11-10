@@ -16,9 +16,9 @@ const SectionsProvider = ({ children }) => {
   const [isAuth, setIsAuth] = useState(() => {
     const token = Cookies.get("jwt");
     const decodedToken = jwt_decode(token, { complete: true });
-    console.log(decodedToken.exp);
+
     const newDate = parseInt(new Date().getTime() / 1000);
-    console.log(newDate);
+
     if (decodedToken.exp < newDate) {
       return false;
     } else {
