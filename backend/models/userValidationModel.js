@@ -1,5 +1,4 @@
-import { body, check } from "express-validator";
-import isStrongPassword from "validator";
+import { body } from "express-validator";
 
 export const userValidationSchema = [
     body("userName")
