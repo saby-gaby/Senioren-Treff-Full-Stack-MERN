@@ -1,5 +1,7 @@
 import { createContext, useState } from "react";
-import axiosConfig from '../util/axiosConfig'
+import axiosConfig from '../util/axiosConfig';
+import Cookies from "js-cookie";
+import jwt_decode from 'jwt-decode'
 
 const SectionsContext = createContext();
 
@@ -11,7 +13,13 @@ const SectionsProvider = ({ children }) => {
   const [isOneEvent, setIsOneEvent] = useState(false);
   const [isSearchedEvents, setIsSearchedEvents] = useState(false);
   const [isUserProfile, setIsUserProfile] = useState(false);
-  const [isAuth, setIsAuth] = useState(false);
+  const [isAuth, setIsAuth] = useState(()=>{
+    /* const token=Cookies.get("jwt")
+    console.log(Cookies.get("jwt"));
+    const decodedToken=jwt_decode(token, {complete:true})
+    if(decodedToken<new Date()) return false; */
+    return false
+  });
 
   const setAllSectFalse=()=>{
     setIsLogin(false);
