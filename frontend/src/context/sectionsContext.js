@@ -15,7 +15,8 @@ const SectionsProvider = ({ children }) => {
   const [isUserProfile, setIsUserProfile] = useState(false);
   const [isAuth, setIsAuth] = useState(() => {
     const token = Cookies.get("jwt");
-    const decodedToken = jwt_decode(token, { complete: true });
+    if (token){
+      const decodedToken = jwt_decode(token, { complete: true });
 
     const newDate = parseInt(new Date().getTime() / 1000);
 
@@ -23,6 +24,9 @@ const SectionsProvider = ({ children }) => {
       return false;
     } else {
       return true;
+      }
+    } else {
+      return false
     }
   });
 
