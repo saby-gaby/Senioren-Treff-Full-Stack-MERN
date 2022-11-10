@@ -29,7 +29,6 @@ function LoginForm(props) {
       }
       setError(""); // Falls wir zuvor einen Fehler hatten, wird dieser entfernt
       props.handleSuccessfulLogin(axiosResp.data);
-      console.log(axiosResp.data);
     } catch (error) {
       console.error("Error while sending with axios", error);
       setError(error);
