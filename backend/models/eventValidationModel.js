@@ -16,5 +16,5 @@ export const eventValidationSchema = [
   body("description").trim().isString().isLength({
     min: 10,
     max: 2500,
-  }),
-];
+  })
+]   
