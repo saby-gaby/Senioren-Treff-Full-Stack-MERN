@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Nav from '../Nav/Nav';
-import axiosConfig from '../../util/axiosConfig'
+import Nav from "../Nav/Nav";
+import axiosConfig from "../../util/axiosConfig.js";
 
 export default function EventForm() {
   const [file, setFile] = useState(null);
