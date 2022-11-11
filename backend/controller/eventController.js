@@ -22,7 +22,9 @@ export const getEventByLocation = async (req, res) => {
 
 export const getEventById = async (req, res) => {
   try {
-    const getEvent = await EventModel.findById(req.params.id).populate("subscribers");
+    const getEvent = await EventModel.findById(req.params.id).populate(
+      "subscribers"
+    );
     res.status(200).send(getEvent);
   } catch (error) {
     res.status(404).send(error.message);
@@ -42,29 +44,19 @@ export const createEvent = async (req, res) => {
   try {
     const newEvent = await EventModel.create(req.body);
 
-    const passedToken = req.cookies.jwt
-    const decodedToken = jwt.verify(passedToken, process.env.TOKEN_SECRET)
-    
-    await UserModel.findOneAndUpdate({ _id: decodedToken.userId }, { myEvents: newEvent._id })
-    
+    const passedToken = req.cookies.jwt;
+    const decodedToken = jwt.verify(passedToken, process.env.TOKEN_SECRET);
+
+    await UserModel.findOneAndUpdate(
+      { _id: decodedToken.userId },
+      { myEvents: newEvent._id }
+    );
+
     res.status(201).send(newEvent);
   } catch (error) {
     res.status(401).send(error.message);
   }
 };
-
-// Event auf die Merkliste setzen 
-
-// export const watchEvent = async (req, res) => {
-//   try {
-//     const passedToken = req.cookies.jwt
-//     const decodedToken = jwt.verify(passedToken, process.env.TOKEN_SECRET)
-    
-//     await UserModel.findOneAndUpdate({ _id: decodedToken.userId }, { watchedEvents: req.params.id })
-//   } catch (error) {
-//     res.status(401).send(error.message);
-//   }
-// }
 
 export const updateEventById = async (req, res) => {
   try {

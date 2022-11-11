@@ -10,6 +10,8 @@ export const createUser = async (req, res) => {
       userName: req.body.userName,
       firstName: req.body.firstName,
       lastName: req.body.lastName,
+      gender: req.body.gender,
+      disabilities: req.body.disabilities,
       email: req.body.email,
       password: hashedSaltyPassword,
       location: req.body.location,
@@ -92,5 +94,21 @@ export const updateUserByID = async (req, res) => {
     res.status(206).send(`user: ${getUser.userName} successfully updated`);
   } catch (error) {
     res.status(404).send(error.message);
+  }
+};
+
+// Event auf die Merkliste setzen
+
+export const addToWatchList = async (req, res) => {
+  try {
+    const passedToken = req.cookies.jwt;
+    const decodedToken = jwt.verify(passedToken, process.env.TOKEN_SECRET);
+
+    await UserModel.findOneAndUpdate(
+      { _id: decodedToken.userId }
+      // { watchedEvents: req.body._id } // hier müssen wir uns kümmern wenn frontend bereit
+    );
+  } catch (error) {
+    res.status(401).send(error.message);
   }
 };

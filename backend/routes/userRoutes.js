@@ -5,7 +5,8 @@ import {
   deleteUserByID,
   updateUserByID,
   userLogin,
-  userLogout
+  userLogout,
+  addToWatchList,
 } from "../controller/userController.js";
 import { userValidationSchema } from "../models/userValidationModel.js";
 import { validator } from "../middleware/validator.js";
@@ -20,5 +21,8 @@ router
   .delete(isAuth, deleteUserByID)
   .patch(isAuth, updateUserByID);
 router.route("/user/login").post(userLogin);
-router.route("/user/logout").post(userLogout); 
+router.route("/user/logout").post(userLogout);
+
+router.route("/user/watchedEvents").patch(isAuth, addToWatchList);
+
 export default router;

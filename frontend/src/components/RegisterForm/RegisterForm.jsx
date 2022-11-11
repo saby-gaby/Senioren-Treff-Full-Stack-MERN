@@ -1,7 +1,6 @@
-
 import React, { useState, useRef } from "react";
 import axiosConfig from "../../util/axiosConfig.js";
-import Nav from '../Nav/Nav';
+import Nav from "../Nav/Nav";
 
 export default function RegisterForm() {
   const [isError, setIsError] = useState(false);
@@ -15,6 +14,8 @@ export default function RegisterForm() {
   const emailEl = useRef(null);
   const passwordEl = useRef(null);
   const locationEl = useRef(null);
+  const genderEl = useRef(null);
+  const disabilitiesEl = useRef(null);
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -23,6 +24,8 @@ export default function RegisterForm() {
       userName: userNameEl.current.value,
       firstName: firstNameEl.current.value,
       lastName: lastNameEl.current.value,
+      gender: genderEl.current.value,
+      disabilities: disabilitiesEl.current.value,
       email: emailEl.current.value,
       password: passwordEl.current.value,
       location: locationEl.current.value,
@@ -89,6 +92,25 @@ export default function RegisterForm() {
             required
           />
         </label>
+        <label htmlFor="">
+          Geschlecht:
+          <select name="gender" id="gender" ref={genderEl}>
+            <option value="female">Frau</option>
+            <option value="male">Mann</option>
+            <option value="diverse">Nicht binär</option>
+            <option value="none">keine Angabe</option>
+          </select>
+        </label>
+        <label htmlFor="">
+          eventuelle Einschränkung
+          <input
+            type="text"
+            name="disabilities"
+            id="disabilities"
+            ref={disabilitiesEl}
+          />
+        </label>
+
         <label htmlFor="">
           E-Mail Adresse:
           <input ref={emailEl} type="email" name="email" id="email" required />
