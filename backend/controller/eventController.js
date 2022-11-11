@@ -1,4 +1,6 @@
 import EventModel from "../models/EventModel.js";
+import UserModel from "../models/UserModel.js";
+import jwt from "jsonwebtoken";
 
 export const getAllEvents = async (req, res) => {
   try {
@@ -40,11 +42,29 @@ export const createEvent = async (req, res) => {
   try {
     const newEvent = await EventModel.create(req.body);
 
+    const passedToken = req.cookies.jwt
+    const decodedToken = jwt.verify(passedToken, process.env.TOKEN_SECRET)
+    
+    await UserModel.findOneAndUpdate({ _id: decodedToken.userId }, { myEvents: newEvent._id })
+    
     res.status(201).send(newEvent);
   } catch (error) {
     res.status(401).send(error.message);
   }
 };
+
+// Event auf die Merkliste setzen 
+
+// export const watchEvent = async (req, res) => {
+//   try {
+//     const passedToken = req.cookies.jwt
+//     const decodedToken = jwt.verify(passedToken, process.env.TOKEN_SECRET)
+    
+//     await UserModel.findOneAndUpdate({ _id: decodedToken.userId }, { watchedEvents: req.params.id })
+//   } catch (error) {
+//     res.status(401).send(error.message);
+//   }
+// }
 
 export const updateEventById = async (req, res) => {
   try {
