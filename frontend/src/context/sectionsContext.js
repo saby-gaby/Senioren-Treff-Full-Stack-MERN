@@ -1,7 +1,6 @@
 import { createContext, useState } from "react";
 import axiosConfig from "../util/axiosConfig";
 import Cookies from "js-cookie";
-import jwt_decode from "jwt-decode";
 
 const SectionsContext = createContext();
 
@@ -14,11 +13,10 @@ const SectionsProvider = ({ children }) => {
   const [isSearchedEvents, setIsSearchedEvents] = useState(false);
   const [isUserProfile, setIsUserProfile] = useState(false);
   const [isAuth, setIsAuth] = useState(() => {
-    const token = Cookies.get("isLogged");
-    if (token) {
-      //  const decodedToken = jwt_decode(token, { complete: true });
-      const newDate = parseInt(new Date().getTime() / 1000);
-      if (token < newDate) {
+    const isLoggedCookie = Cookies.get("isLogged");
+    if (isLoggedCookie) {
+      const newDate = parseInt(new Date().getTime());
+      if (isLoggedCookie < newDate) {
         return false;
       } else {
         return true;
