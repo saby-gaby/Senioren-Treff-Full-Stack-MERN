@@ -15,6 +15,14 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+  gender: {
+    type: String,
+    enum: ["female", "male", "diverse", "none"],
+    required: true,
+  },
+  disabilities: {
+    type: String,
+  },
   email: {
     type: String,
     required: true,
@@ -31,20 +39,23 @@ const userSchema = new Schema({
   createdAt: {
     type: Date,
     immutable: true,
-    default: () => new Date()
+    default: () => new Date(),
   },
   updatedAt: {
-    type: Date
+    type: Date,
   },
-  myEvents: [{
-    type: Schema.Types.ObjectId,
-    ref: EventModel
-  }],
-  watchedEvents: [{
-    type: Schema.Types.ObjectId,
-    ref: "event"
-  }]
-
+  myEvents: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: EventModel,
+    },
+  ],
+  watchedEvents: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "event",
+    },
+  ],
 });
 
 userSchema.pre(["save"], function (next) {
