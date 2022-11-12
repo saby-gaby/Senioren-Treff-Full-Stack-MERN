@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Nav from "../Nav/Nav";
 import axiosConfig from "../../util/axiosConfig.js";
 
 export default function EventForm() {
@@ -46,7 +45,7 @@ export default function EventForm() {
   };
   return (
     <div>
-      <Nav />
+      {/* <Nav /> */}
       <form
         onSubmit={handleSubmit}
         encType="multipart/form-data"
