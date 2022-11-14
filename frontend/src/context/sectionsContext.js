@@ -5,7 +5,6 @@ import Cookies from "js-cookie";
 const SectionsContext = createContext();
 
 const SectionsProvider = ({ children }) => {
-  
   const [isAuth, setIsAuth] = useState(() => {
     const isLoggedCookie = Cookies.get("isLogged");
     if (!isLoggedCookie) return false;
@@ -16,6 +15,8 @@ const SectionsProvider = ({ children }) => {
       return true;
     }
   });
+
+  const [foundEvents, setFoundEvents] = useState();
 
   const logout = () => {
     localStorage.clear();
@@ -32,6 +33,8 @@ const SectionsProvider = ({ children }) => {
         isAuth,
         logout,
         setIsAuth,
+        foundEvents,
+        setFoundEvents,
       }}
     >
       {children}
