@@ -10,8 +10,6 @@ function AuthLogin() {
 
   const hasValidToken = () => {
     const cookieValue = Cookies.get("isLogged");
-    console.log("cookieValue", cookieValue);
-    console.log("expiresInMs", cookieValue - new Date().getTime());
     if (!cookieValue) return false;
     const expiresInMs = cookieValue - new Date().getTime();
     if (expiresInMs <= 0) return false;
