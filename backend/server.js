@@ -30,9 +30,12 @@ server.use("/", eventRouter);
 server.get("/", (req, res) => {
   res.send("Hallo Hallo");
 });
+const connDB = async () => {
+  if (await connectMongoose()) {
+    server.listen(PORT, () => {
+      console.log("server started on Port ", PORT);
+    });
+  }
+};
 
-if (await connectMongoose()) {
-  server.listen(PORT, () => {
-    console.log("server started on Port ", PORT);
-  });
-}
+connDB();
