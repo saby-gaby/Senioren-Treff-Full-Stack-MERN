@@ -48,9 +48,9 @@ function LoginForm() {
 
   return (
     <div>
-      {/* {isAuth ? (
+      {isAuth ? (
         <Navigate to="/profile" replace={true} />
-      ) : ( */}
+      ) : (
         <form ref={formEl} method="post" onSubmit={submitHandler}>
           <h2>Login</h2>
           <label htmlFor="username"> Nutzername:</label>
@@ -64,7 +64,7 @@ function LoginForm() {
           />
           <input type="submit" value="einloggen" />
         </form>
-      {/* )} */}
+      )}
 
       {error && <p>Da ist etwas schief gelaufen: {error}</p>}
 

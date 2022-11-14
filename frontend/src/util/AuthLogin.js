@@ -8,17 +8,12 @@ function AuthLogin() {
   const { isAuth, setIsAuth, setAllSectFalse, setIsHome } =
     useContext(SectionsContext);
 
-  /* const handleSuccessfulLogin = (respData) => {
-    setIsAuth(true);
-    localStorage.setItem("userName", respData.userName);
-    localStorage.setItem("userId", respData.userId);
-  }; */
-
   const hasValidToken = () => {
     const cookieValue = Cookies.get("isLogged");
+    console.log("cookieValue", cookieValue);
+    console.log("expiresInMs", cookieValue - new Date().getTime());
     if (!cookieValue) return false;
-    const expireDate = decodeURIComponent(cookieValue);
-    const expiresInMs = new Date(expireDate) - new Date();
+    const expiresInMs = cookieValue - new Date().getTime();
     if (expiresInMs <= 0) return false;
     return true;
   };
@@ -29,17 +24,7 @@ function AuthLogin() {
     }
   }, [isAuth]);
 
-  return (
-    <div>
-      {!isAuth ? (
-        <LoginForm handleSuccessfulLogin={handleSuccessfulLogin} />
-      ) : (
-        <>
-          <UserProfile />
-        </>
-      )}
-    </div>
-  );
+  return <div>{!isAuth ? <LoginForm /> : <UserProfile />}</div>;
 }
 
 export default AuthLogin;
