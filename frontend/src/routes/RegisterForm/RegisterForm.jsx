@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
+import { NavLink } from "react-router-dom";
 import axiosConfig from "../../util/axiosConfig.js";
-import Nav from "../Nav/Nav";
 
 export default function RegisterForm() {
   const [isError, setIsError] = useState(false);
@@ -58,7 +58,7 @@ export default function RegisterForm() {
 
   return (
     <div>
-      <Nav />
+      {}
       RegisterForm
       <form ref={formEl} method="POST" action="/user" onSubmit={submitHandler}>
         <label htmlFor="">
@@ -140,7 +140,10 @@ export default function RegisterForm() {
       <p>{isError ? <strong>Es ist ein Fehler aufgetreten.</strong> : null}</p>
       <p>
         {hasRegistered ? (
-          <strong>Sie haben sich erfolgreich registriert.</strong>
+          <>
+            <strong>Sie haben sich erfolgreich registriert.</strong> 
+            <NavLink to="/login">Jetzt Anmelden</NavLink>
+          </>
         ) : null}
       </p>
       <p>{isLoading ? <strong>Lade – bitte warten...</strong> : null}</p>
