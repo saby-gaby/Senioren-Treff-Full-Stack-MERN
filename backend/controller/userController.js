@@ -101,11 +101,12 @@ export const updateUserByID = async (req, res) => {
 
 export const addToWatchList = async (req, res) => {
   try {
-    // const passedToken = req.cookies.jwt;
-    // const decodedToken = jwt.verify(passedToken, process.env.TOKEN_SECRET);
-
-    const getUser = await UserModel.findOne({ _id: req.params.id });
-
+    const passedToken = req.cookies.jwt;
+    const decodedToken = jwt.verify(passedToken, process.env.TOKEN_SECRET);
+    console.log(req.params.id);
+    const getUser = await UserModel.findOne({ _id: decodedToken.userId });
+    console.log(getUser);
+    console.log(req.body.watchedEvents);
     getUser.watchedEvents.push(req.body.watchedEvents);
 
     await getUser.save();
