@@ -20,12 +20,13 @@ export default function Home() {
     } catch (error) {}
   };
   useEffect(() => {
+    setFound(false);
     console.log(foundEvents);
-  }, [found]);
+  }, [foundEvents]);
 
   return (
     <div className="Home">
-      {found && <Navigate to="/events" replace={true} />}
+      {found && <Navigate to="/events" />}
       <div>
         <h1>Veranstaltungen in deiner Nähe</h1>
         <p>Wo bist du gerade?</p>
