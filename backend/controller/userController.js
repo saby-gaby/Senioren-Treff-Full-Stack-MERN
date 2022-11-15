@@ -47,7 +47,7 @@ export const userLogin = async (req, res) => {
 
   res.cookie("jwt", token, { httpOnly: true, maxAge: expiresInSec * 1000 });
 
-  const expireDate = new Date().getTime() + expiresInSec;
+  const expireDate = new Date().getTime() + expiresInSec * 1000;
 
   res.cookie("isLogged", expireDate, {
     httpOnly: false,

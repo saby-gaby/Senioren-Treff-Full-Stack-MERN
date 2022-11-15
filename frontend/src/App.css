@@ -18,8 +18,9 @@
 
 header {
     background-color: #011b1080;
-    padding: 0.5rem;
+    padding: 0.5rem 1rem;
     min-width: max-content;
+    max-height: 20vmin;
 }
 
 
@@ -46,7 +47,11 @@ nav img {
     width: max-content;
     font-size: 1.5rem;
     font-weight: bold;
-    padding: 0.5rem;
+    padding: 1rem;
     outline: 2px solid #004200;
     border-radius: 0.75rem;
+}
+
+.text {
+    color: #f4e3d7;
 }
