@@ -7,6 +7,8 @@ import eventRouter from "./routes/eventRoutes.js";
 import expressFileUpload from "express-fileupload";
 import cookieParser from "cookie-parser";
 
+
+
 const server = express();
 const PORT = process.env.PORT;
 
@@ -17,6 +19,8 @@ server.use(
     credentials: true, // Cookies zulassen
   })
 );
+server.use("/images", express.static("images"))
+
 server.use(
   expressFileUpload({
     createParentPath: true,
