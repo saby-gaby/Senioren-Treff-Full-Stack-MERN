@@ -36,18 +36,18 @@ export default function OneEvent() {
   const handleWatchEvent = async () => {
     try {
       const response = await axiosConfig.patch(
-        `/user/${localStorage.getItem("userId")}`,
+        `/user/watchedEvents/${localStorage.getItem("userId")}`,
         {
           watchedEvents: propsEventId,
         }
       );
 
-      alert("zur Merkliste hinzugefügt");
+      alert(response + "zur Merkliste hinzugefügt");
     } catch (error) {
       console.log(error);
     }
   };
-
+  console.log(localStorage.getItem("userId"));
   return (
     <div>
       <h3>{eventData.eventTitle}</h3>
