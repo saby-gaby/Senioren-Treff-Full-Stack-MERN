@@ -6,6 +6,7 @@ import {
   createEvent,
   updateEventById,
   deleteEventById,
+  addSubscribers,
 } from "../controller/eventController.js";
 import { imageUpload } from "../middleware/imageUpload.js";
 import isAuth from "../middleware/is-auth.js";
@@ -24,6 +25,9 @@ router
   .get(getEventById)
   .delete(isAuth, deleteEventById)
   .patch(isAuth, updateEventById);
+// .post(isAuth, addSubscribers);
+
+router.route("/event/subscribe/:id").patch(isAuth, addSubscribers);
 
 router.route("/search/:location").get(getEventByLocation);
 
