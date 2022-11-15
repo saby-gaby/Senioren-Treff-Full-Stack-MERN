@@ -23,6 +23,6 @@ router
 router.route("/user/login").post(userLogin);
 router.route("/user/logout").post(userLogout);
 
-router.route("/user/watchedEvents").patch(isAuth, addToWatchList);
+router.route("/user/watchedEvents/:id").patch(isAuth, addToWatchList);
 
 export default router;
