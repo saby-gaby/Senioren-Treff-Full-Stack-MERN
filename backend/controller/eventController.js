@@ -67,3 +67,18 @@ export const updateEventById = async (req, res) => {
     res.status(401).send(error.message);
   }
 };
+
+export const addSubscribers = async (req, res) => {
+  try {
+    const getEvent = await EventModel.findById(req.params.id);
+    getEvent.subscribers.push(req.body.subscribers);
+    // await EventModel.updateOne(
+    //   { _id: req.params.id },
+    //   { subscribers: req.body.subscribers }
+    // );
+    await getEvent.save();
+    res.send(getEvent);
+  } catch (error) {
+    res.status(401).send(error.message);
+  }
+};
