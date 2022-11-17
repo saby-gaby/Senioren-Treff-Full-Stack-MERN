@@ -29,6 +29,7 @@ export default function EventForm() {
             participants: eventParticipants,
             price: eventPrice,
             description: eventDescription,
+            eventOwner: localStorage.getItem("userId")
           },
           {
             headers: {

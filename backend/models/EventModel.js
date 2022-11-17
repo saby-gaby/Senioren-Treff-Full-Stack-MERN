@@ -49,6 +49,10 @@ const eventSchema = new Schema({
   subscribers: [{
     type: Schema.Types.ObjectId,
     ref: "user"
+  }],
+  eventOwner: [{
+    type: Schema.Types.ObjectId,
+    ref: "user"
   }]
 });
 

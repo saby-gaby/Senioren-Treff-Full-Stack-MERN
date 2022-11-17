@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axiosConfig from "../../util/axiosConfig";
 
 export default function OneEvent() {
-  const propsEventId = "636e101aa6eb000e6eae0689"; //dummy
+  const propsEventId = "6375ffd1bc90d85b06530110"; //dummy
 
   const [eventData, setEventData] = useState({});
 
@@ -51,6 +51,7 @@ export default function OneEvent() {
   return (
     <div>
       <h3>{eventData.eventTitle}</h3>
+      <p>Eventersteller: </p>
       <img src={"http://localhost:6001" + eventData.imageUrl} alt="" />
       <div>
         <h4>{eventData.category}</h4>

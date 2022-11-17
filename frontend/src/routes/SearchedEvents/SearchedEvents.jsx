@@ -23,6 +23,7 @@ export default function SearchedEvents() {
               return (
                 <li key={i}>
                   <h3>{oneEvent.eventTitle}</h3>
+                  <img src={"http://localhost:6001" + oneEvent.imageUrl} alt="" />
                   <button>Ansehen</button>
                 </li>
               );
