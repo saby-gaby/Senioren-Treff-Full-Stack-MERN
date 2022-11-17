@@ -1,33 +1,37 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import axiosConfig from "../../util/axiosConfig";
+import { useParams } from "react-router-dom";
 
 export default function OneEvent() {
-  const propsEventId = "6376167a2c3825f3837d7421"; //dummy
+  const { id } = useParams()
+  const eventId = id; //dummy
 
   const [eventData, setEventData] = useState({});
-
-  useEffect(() => {
+  const getEventData = () => {
     const getEventById = async () => {
       const axiosResp = await axiosConfig.get(
-        `http://localhost:6001/event/${propsEventId}`
+        `http://localhost:6001/event/${eventId}`
       );
       const data = axiosResp.data;
       setEventData(data);
     };
     getEventById();
+  }
+  useEffect(() => {
+    getEventData()
   }, []);
 
-  const handleSubscribeEvent = async (id) => {
+  const handleSubscribeEvent = async () => {
     try {
       const response = await axiosConfig.patch(
-        `/event/subscribe/${propsEventId}`,
+        `/event/subscribe/${eventId}`,
         {
           subscribers: localStorage.getItem("userId"),
         }
       );
 
       alert("Buchung erfolgreich!");
-      location.reload();
+      getEventData()
     } catch (error) {
       console.log(error);
     }
@@ -38,11 +42,11 @@ export default function OneEvent() {
       const response = await axiosConfig.patch(
         `/user/watchedEvents/${localStorage.getItem("userId")}`,
         {
-          watchedEvents: propsEventId,
+          watchedEvents: eventId,
         }
       );
-
-      alert(response + "zur Merkliste hinzugefügt");
+      
+      alert(`${eventData.eventTitle} zur Merkliste von ${response.data.userName} hinzugefügt`);
     } catch (error) {
       console.log(error);
     }

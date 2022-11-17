@@ -1,9 +1,13 @@
 import React, { useContext } from "react";
 import { SectionsContext } from "../../context/sectionsContext";
+import { NavLink } from "react-router-dom";
+
 
 export default function SearchedEvents() {
+
   const { foundEvents } = useContext(SectionsContext);
   console.log(foundEvents);
+
   return (
     <div>
       SearchedEvents
@@ -24,7 +28,7 @@ export default function SearchedEvents() {
                 <li key={i}>
                   <h3>{oneEvent.eventTitle}</h3>
                   <img src={"http://localhost:6001" + oneEvent.imageUrl} alt="" />
-                  <button>Ansehen</button>
+                  <NavLink to={`/event/${oneEvent._id}`}>Ansehen</NavLink>
                 </li>
               );
             })}
