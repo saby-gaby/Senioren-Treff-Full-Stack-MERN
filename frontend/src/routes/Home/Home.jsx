@@ -4,7 +4,7 @@ import { SectionsContext } from "../../context/sectionsContext";
 import { NavLink } from "react-router-dom";
 
 export default function Home() {
-  const { foundEvents, setFoundEvents, navigate } = useContext(SectionsContext);
+  const { setFoundEvents, navigate } = useContext(SectionsContext);
   const formElement = useRef(null);
   const locationElement = useRef(null);
   const submitHandler = async (e) => {

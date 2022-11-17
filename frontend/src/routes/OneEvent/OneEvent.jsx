@@ -1,17 +1,16 @@
 import React, { useEffect, useState, useContext } from "react";
 import axiosConfig from "../../util/axiosConfig";
-import { SectionsContext } from "../../context/sectionsContext";
 import { useParams } from "react-router-dom";
 
 export default function OneEvent() {
   const { id } = useParams()
-  const propsEventId = id; //dummy
+  const eventId = id; //dummy
 
   const [eventData, setEventData] = useState({});
   const getEventData = () => {
     const getEventById = async () => {
       const axiosResp = await axiosConfig.get(
-        `http://localhost:6001/event/${propsEventId}`
+        `http://localhost:6001/event/${eventId}`
       );
       const data = axiosResp.data;
       setEventData(data);
@@ -22,10 +21,10 @@ export default function OneEvent() {
     getEventData()
   }, []);
 
-  const handleSubscribeEvent = async (id) => {
+  const handleSubscribeEvent = async () => {
     try {
       const response = await axiosConfig.patch(
-        `/event/subscribe/${propsEventId}`,
+        `/event/subscribe/${eventId}`,
         {
           subscribers: localStorage.getItem("userId"),
         }
@@ -43,11 +42,11 @@ export default function OneEvent() {
       const response = await axiosConfig.patch(
         `/user/watchedEvents/${localStorage.getItem("userId")}`,
         {
-          watchedEvents: propsEventId,
+          watchedEvents: eventId,
         }
       );
-
-      alert(response + "zur Merkliste hinzugefügt");
+      
+      alert(`${eventData.eventTitle} zur Merkliste von ${response.data.userName} hinzugefügt`);
     } catch (error) {
       console.log(error);
     }
