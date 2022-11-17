@@ -103,11 +103,14 @@ export const addToWatchList = async (req, res) => {
   try {
     const passedToken = req.cookies.jwt;
     const decodedToken = jwt.verify(passedToken, process.env.TOKEN_SECRET);
+    console.log(req.params.id);
+    const getUser = await UserModel.findOne({ _id: decodedToken.userId });
+    console.log(getUser);
+    console.log(req.body.watchedEvents);
+    getUser.watchedEvents.push(req.body.watchedEvents);
 
-    await UserModel.findOneAndUpdate(
-      { _id: decodedToken.userId }
-      // { watchedEvents: req.body._id } // hier müssen wir uns kümmern wenn frontend bereit
-    );
+    await getUser.save();
+    res.send(getUser);
   } catch (error) {
     res.status(401).send(error.message);
   }
