@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import axiosConfig from "../../util/axiosConfig";
+import { SectionsContext } from "../../context/sectionsContext";
+import { useParams } from "react-router-dom";
 
 export default function OneEvent() {
-  const propsEventId = "6376167a2c3825f3837d7421"; //dummy
+  const { id } = useParams()
+  const propsEventId = id; //dummy
 
   const [eventData, setEventData] = useState({});
-
-  useEffect(() => {
+  const getEventData = () => {
     const getEventById = async () => {
       const axiosResp = await axiosConfig.get(
         `http://localhost:6001/event/${propsEventId}`
@@ -15,6 +17,9 @@ export default function OneEvent() {
       setEventData(data);
     };
     getEventById();
+  }
+  useEffect(() => {
+    getEventData()
   }, []);
 
   const handleSubscribeEvent = async (id) => {
@@ -27,7 +32,7 @@ export default function OneEvent() {
       );
 
       alert("Buchung erfolgreich!");
-      location.reload();
+      getEventData()
     } catch (error) {
       console.log(error);
     }

@@ -1,13 +1,12 @@
 import React, { useContext, useRef } from "react";
 import axiosConfig from "../../util/axiosConfig";
 import { SectionsContext } from "../../context/sectionsContext";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export default function Home() {
-  const { foundEvents, setFoundEvents } = useContext(SectionsContext);
+  const { foundEvents, setFoundEvents, navigate } = useContext(SectionsContext);
   const formElement = useRef(null);
   const locationElement = useRef(null);
-  const navigate = useNavigate()
   const submitHandler = async (e) => {
     e.preventDefault();
     const location = locationElement.current.value;

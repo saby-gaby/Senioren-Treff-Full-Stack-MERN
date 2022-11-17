@@ -1,10 +1,16 @@
 import { createContext, useState } from "react";
 import axiosConfig from "../util/axiosConfig";
 import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 
 const SectionsContext = createContext();
 
 const SectionsProvider = ({ children }) => {
+  
+  const navigate = useNavigate()
+
+  const [eventId, setEventId] = useState("")
+
   const [isAuth, setIsAuth] = useState(() => {
     const isLoggedCookie = Cookies.get("isLogged");
     if (!isLoggedCookie) return false;
@@ -35,6 +41,9 @@ const SectionsProvider = ({ children }) => {
         setIsAuth,
         foundEvents,
         setFoundEvents,
+        navigate,
+        eventId,
+        setEventId
       }}
     >
       {children}

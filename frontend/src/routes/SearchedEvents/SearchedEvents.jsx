@@ -1,9 +1,11 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import { SectionsContext } from "../../context/sectionsContext";
 
 export default function SearchedEvents() {
-  const { foundEvents } = useContext(SectionsContext);
+
+  const { foundEvents, setEventId, eventId, navigate } = useContext(SectionsContext);
   console.log(foundEvents);
+
   return (
     <div>
       SearchedEvents
@@ -24,7 +26,10 @@ export default function SearchedEvents() {
                 <li key={i}>
                   <h3>{oneEvent.eventTitle}</h3>
                   <img src={"http://localhost:6001" + oneEvent.imageUrl} alt="" />
-                  <button>Ansehen</button>
+                  <button onClick={() => {
+                     navigate(`/event/${oneEvent._id}`)
+                  }}
+                  >Ansehen</button>
                 </li>
               );
             })}
