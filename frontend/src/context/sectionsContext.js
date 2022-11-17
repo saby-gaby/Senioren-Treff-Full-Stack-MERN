@@ -25,10 +25,10 @@ const SectionsProvider = ({ children }) => {
   const logout = () => {
     localStorage.clear();
     setIsAuth(false);
-
     axiosConfig.post("/user/logout").then((res) => {
       console.log(res.data);
     });
+    navigate("/login")
   };
 
   return (

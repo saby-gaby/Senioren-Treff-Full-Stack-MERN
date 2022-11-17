@@ -51,7 +51,7 @@ export default function UserProfil() {
           })}
         </ul>
       </div>
-      {/* {isAuth ?  */}<button onClick={logout}>Abmelden</button> {/* : <Navigate to="/" replace={true} />} */}
+      <button onClick={logout}>Abmelden</button>
     </div>
   );
 }
