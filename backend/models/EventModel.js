@@ -50,10 +50,10 @@ const eventSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "user"
   }],
-  eventOwner: [{
+  eventOwner: {
     type: Schema.Types.ObjectId,
     ref: "user"
-  }]
+  }
 });
 
 eventSchema.pre(["save"], function (next) {

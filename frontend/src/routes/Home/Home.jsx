@@ -1,32 +1,35 @@
-import React, { useContext, useState, useRef, useEffect } from "react";
+import React, { useContext, useRef } from "react";
 import axiosConfig from "../../util/axiosConfig";
 import { SectionsContext } from "../../context/sectionsContext";
-import { Navigate, NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 export default function Home() {
   const { foundEvents, setFoundEvents } = useContext(SectionsContext);
   const formElement = useRef(null);
   const locationElement = useRef(null);
-  const [found, setFound] = useState(false);
+  const navigate = useNavigate()
   const submitHandler = async (e) => {
     e.preventDefault();
     const location = locationElement.current.value;
+    if (!location) {alert("bitte gib eine Stadt ein")}
     try {
       const axiosResp = await axiosConfig.get(`/search/${location}`);
-      if (axiosResp.data[0]) {
-        setFound(true);
+      if (axiosResp.data[0]) {  
         setFoundEvents(axiosResp.data);
+        navigateToEvents()
+      }  else {
+        alert("keine Veranstaltungen in deiner Stadt gefunden")
       }
-    } catch (error) {}
+    } catch (error) {
+    }
   };
-  useEffect(() => {
-    setFound(false);
-    console.log(foundEvents);
-  }, [foundEvents]);
+
+  const navigateToEvents = () => {
+    navigate("/events")
+  }
 
   return (
     <div className="Home">
-      {found && <Navigate to="/events" />}
       <div>
         <h1>Veranstaltungen in deiner Nähe</h1>
         <p>Wo bist du gerade?</p>
