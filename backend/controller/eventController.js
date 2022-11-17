@@ -22,9 +22,9 @@ export const getEventByLocation = async (req, res) => {
 
 export const getEventById = async (req, res) => {
   try {
-    const getEvent = await EventModel.findById(req.params.id).populate(
-      "subscribers"
-    );
+    const getEvent = await EventModel.findById(req.params.id)
+      .populate("subscribers")
+      .populate("eventOwner");
     res.status(200).send(getEvent);
   } catch (error) {
     res.status(404).send(error.message);

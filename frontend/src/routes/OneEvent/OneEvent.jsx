@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axiosConfig from "../../util/axiosConfig";
 
 export default function OneEvent() {
-  const propsEventId = "63760854068a8e931d509270"; //dummy
+  const propsEventId = "6376167a2c3825f3837d7421"; //dummy
 
   const [eventData, setEventData] = useState({});
 
@@ -16,7 +16,7 @@ export default function OneEvent() {
     };
     getEventById();
   }, []);
-  console.log(eventData);
+
   const handleSubscribeEvent = async (id) => {
     try {
       const response = await axiosConfig.patch(
@@ -47,11 +47,10 @@ export default function OneEvent() {
       console.log(error);
     }
   };
-  console.log(localStorage.getItem("userId"));
   return (
     <div>
       <h3>{eventData.eventTitle}</h3>
-      <p>Eventersteller:</p>
+      <p>Eventersteller: {eventData.eventOwner && eventData.eventOwner.userName} </p>
       <img src={"http://localhost:6001" + eventData.imageUrl} alt="" />
       <div>
         <h4>{eventData.category}</h4>
