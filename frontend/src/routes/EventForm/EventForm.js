@@ -38,7 +38,7 @@ export default function EventForm() {
           }
         );
         console.log(response.data);
-        alert("Datei wurde gespeichert!");
+        alert("Event wurde erfolgreich erstellt!");
       } catch (error) {
         console.error(error);
         alert("Es ist ein Fehler aufgetreten");

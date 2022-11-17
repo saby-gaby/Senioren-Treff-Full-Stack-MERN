@@ -9,8 +9,6 @@ const SectionsProvider = ({ children }) => {
   
   const navigate = useNavigate()
 
-  const [eventId, setEventId] = useState("")
-
   const [isAuth, setIsAuth] = useState(() => {
     const isLoggedCookie = Cookies.get("isLogged");
     if (!isLoggedCookie) return false;
@@ -27,10 +25,10 @@ const SectionsProvider = ({ children }) => {
   const logout = () => {
     localStorage.clear();
     setIsAuth(false);
-
     axiosConfig.post("/user/logout").then((res) => {
       console.log(res.data);
     });
+    navigate("/login")
   };
 
   return (
@@ -42,8 +40,6 @@ const SectionsProvider = ({ children }) => {
         foundEvents,
         setFoundEvents,
         navigate,
-        eventId,
-        setEventId
       }}
     >
       {children}

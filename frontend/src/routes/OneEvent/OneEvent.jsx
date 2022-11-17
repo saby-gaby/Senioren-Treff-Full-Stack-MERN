@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 
 export default function OneEvent() {
   const { id } = useParams()
-  const eventId = id; //dummy
+  const eventId = id;
 
   const [eventData, setEventData] = useState({});
   const getEventData = () => {
@@ -17,6 +17,7 @@ export default function OneEvent() {
     };
     getEventById();
   }
+  
   useEffect(() => {
     getEventData()
   }, []);
@@ -45,7 +46,7 @@ export default function OneEvent() {
           watchedEvents: eventId,
         }
       );
-      
+
       alert(`${eventData.eventTitle} zur Merkliste von ${response.data.userName} hinzugefügt`);
     } catch (error) {
       console.log(error);
