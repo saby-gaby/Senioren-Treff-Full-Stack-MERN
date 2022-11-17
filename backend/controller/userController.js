@@ -73,7 +73,7 @@ export const getUserByID = async (req, res) => {
       .populate("myEvents")
       .populate("watchedEvents");
 
-    res.status(302).send(getUser);
+    res.status(200).send(getUser);
   } catch (error) {
     res.status(404).send(error.message);
   }

@@ -47,7 +47,6 @@ function App() {
         <NavLink to="/register">Register</NavLink>
         <NavLink to="/profile">Profile</NavLink>
         <NavLink to="/event-form">Event-Form</NavLink>
-        <NavLink to="/event">1 Event</NavLink>
         <NavLink to="/events">Events</NavLink>
       </div>
       <main>
