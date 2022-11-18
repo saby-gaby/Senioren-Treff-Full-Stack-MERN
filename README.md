@@ -4,8 +4,13 @@
 
 ---
 
-![Mockup how the Idea started] <img src="images/Mockup.png" width="300"/> <br>
-![Layout for our Website and Functions] <img src="images/Layout.png" width="300"/>
+#### Mockup how the Idea started <br>
+
+<img src="images/Mockup.png" width="300"/> <br>
+
+#### Layout for our Website and Functions <br>
+
+<img src="images/Layout.png" width="300"/><br>
 
 #### Navigation
 
@@ -39,7 +44,7 @@ In back- & front folder type in this command:
 - [x] _HTML5_
 - [x] _CSS3_
 - [ ] _SASS_
-- [x] _SCSS_
+- [ ] _SCSS_
 - [x] _JavaScript_
 - [x] _React_
 - [x] _npm_
@@ -51,10 +56,10 @@ In back- & front folder type in this command:
 
 ### Contact
 
-GitHub: <https://github.com/DennisPiecha>
-GitHub: <https://github.com/Tom-Necke>
-GitHub: <https://github.com/saby-gaby>
-GitHub: <https://github.com/Holledrums>
+GitHub: <https://github.com/DennisPiecha> <br>
+GitHub: <https://github.com/Tom-Necke> <br>
+GitHub: <https://github.com/saby-gaby> <br>
+GitHub: <https://github.com/Holledrums> <br>
 
 ---
 
