@@ -21,7 +21,7 @@ export default function UserProfil() {
 
   return (
     <div>
-      <h2>Herzlich willkommen {localStorage.getItem("userName")}</h2>
+      <h2>Herzlich willkommen {userData.firstName}</h2>
       <div>
         <h3>hier sind nur grob die Daten zusammengefasst zum testen</h3>
         <ul>

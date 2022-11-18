@@ -3,8 +3,9 @@ import axiosConfig from "../../util/axiosConfig";
 import { SectionsContext } from "../../context/sectionsContext";
 import { NavLink } from "react-router-dom";
 
+
 export default function Home() {
-  const { setFoundEvents, navigate } = useContext(SectionsContext);
+  const { setFoundEvents, navigate, isAuth, setEventLogin } = useContext(SectionsContext);
   const formElement = useRef(null);
   const locationElement = useRef(null);
   const submitHandler = async (e) => {
@@ -37,10 +38,11 @@ export default function Home() {
           <input type="submit" value="Los geht´s!" />
         </form>
       </div>
-      <div>
-        <h2>Veranstaltung erstellen</h2>
-        <NavLink to="/event-form">Erstellen</NavLink>
-      </div>
+        <div>
+          <h2>Veranstaltung erstellen</h2>
+          {isAuth ? <NavLink to="/event-form">Erstellen</NavLink> : <NavLink to="/login" onClick={()=> setEventLogin(true)}>Erstellen</NavLink> } 
+          
+        </div>
     </div>
   );
 }
