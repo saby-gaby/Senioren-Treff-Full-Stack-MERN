@@ -4,8 +4,8 @@
 
 ---
 
-![describe your Picture] <img src="images/Mockup.png" width="128"/>
-![describe your Picture] <img src="images/Layout.png" width="128"/>
+![Mockup how the Idea started] <img src="images/Mockup.png" width="300"/> <br>
+![Layout for our Website and Functions] <img src="images/Layout.png" width="300"/>
 
 #### Navigation
 
@@ -15,9 +15,7 @@
   - _Description_
 - Developed With
 - Contact
-  - _Mail_
   - _GitHub_
-  - _LinkedIn_
 - Used Tools
   - _Fonts_
   - _Design_
@@ -28,7 +26,7 @@
 
 ### About Project
 
-Step by step creation of an ole people event App
+Step by step creation of an old people event App
 
 ### How to use this Project
 
@@ -53,10 +51,10 @@ In back- & front folder type in this command:
 
 ### Contact
 
-GitHub: <DennisPiecha>
-GitHub: <Tom-Necke>
-GitHub: <saby-gaby>
-GitHub: <Holledrums>
+GitHub: <https://github.com/DennisPiecha>
+GitHub: <https://github.com/Tom-Necke>
+GitHub: <https://github.com/saby-gaby>
+GitHub: <https://github.com/Holledrums>
 
 ---
 
@@ -65,10 +63,11 @@ GitHub: <Holledrums>
 - [icons](https://)
 - [excalidraw](https://excalidraw.com/#room=fe633d02fd4a46cc1dc0,ODbm7jX1aPKXrCksAoHAeA)
 - [npm](https://www.npmjs.com/)
+- [google.presentation](https://docs.google.com/presentation/d/1Xq9_OY2YEIlT-Q83_-bZsbpGEH6M-wsvAVpsRcDM5Ss/edit#slide=id.p)
 - [Google Fonts](https://fonts.google.com/)
 - [Visual Studio Code](https://code.visualstudio.com/)
 - [ColorZilla](https://www.colorzilla.com/chrome/)
 
 ---
 
-Made with ❤️ by Sabina, Holger, Tom & Dennis
+Made with ❤️❤️❤️ by Sabina, Holger, Tom & Dennis ❤️❤️❤️
