@@ -6,11 +6,11 @@
 
 #### Mockup how the Idea started <br>
 
-<img src="images/Mockup.png" width="300"/> <br>
+<img src="images/Mockup.png" width="800"/> <br>
 
 #### Layout for our Website and Functions <br>
 
-<img src="images/Layout.png" width="300"/><br>
+<img src="images/Layout.png" width="800"/><br>
 
 #### Navigation
 
