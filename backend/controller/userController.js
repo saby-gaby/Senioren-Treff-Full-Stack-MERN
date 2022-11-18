@@ -40,7 +40,10 @@ export const userLogin = async (req, res) => {
   const expiresInSec = 1 * 60 * 60 * 24; // 1 h * 24 => 24h
 
   const token = jwt.sign(
-    { userName: loginUser.userName, userId: loginUser._id },
+    {
+      userName: loginUser.userName,
+      userId: loginUser._id,
+    },
     process.env.TOKEN_SECRET,
     { expiresIn: expiresInSec }
   );

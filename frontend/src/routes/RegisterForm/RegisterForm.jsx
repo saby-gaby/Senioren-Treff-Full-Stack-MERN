@@ -1,11 +1,13 @@
-import React, { useState, useRef } from "react";
-import { NavLink } from "react-router-dom";
+import React, { useState, useRef, useContext } from "react";
+import { Navigate, NavLink } from "react-router-dom";
 import axiosConfig from "../../util/axiosConfig.js";
+import { SectionsContext } from "../../context/sectionsContext.js";
 
 export default function RegisterForm() {
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [hasRegistered, setHasRegistered] = useState(false);
+  const { isAuth, navigate, setIsAuth } = useContext(SectionsContext)
 
   const formEl = useRef(null);
   const userNameEl = useRef(null);
@@ -54,6 +56,19 @@ export default function RegisterForm() {
     setIsError(false);
     setHasRegistered(true);
     formEl.current.reset();
+    try {
+      const axiosResp = await axiosConfig.post("/user/login", data);
+      console.log("successful logged in");
+      handleSuccessfulLogin(axiosResp.data)
+    } catch (error) {
+      console.log("fehler beim login", error);
+    }
+  };
+
+  const handleSuccessfulLogin = (respData) => {
+    setIsAuth(true);
+    localStorage.setItem("userName", respData.userName);
+    localStorage.setItem("userId", respData.userId);
   };
 
   return (
@@ -141,12 +156,13 @@ export default function RegisterForm() {
       <p>
         {hasRegistered ? (
           <>
-            <strong>Sie haben sich erfolgreich registriert.</strong> 
-            <NavLink to="/login">Jetzt Anmelden</NavLink>
+            <strong>Sie haben sich erfolgreich registriert.</strong>
           </>
         ) : null}
+        {isAuth && <Navigate to="/profile"/>}
       </p>
       <p>{isLoading ? <strong>Lade – bitte warten...</strong> : null}</p>
+      <NavLink to={"/login"}>bereits registriert?</NavLink>
     </div>
   );
 }

@@ -21,10 +21,13 @@ const SectionsProvider = ({ children }) => {
   });
 
   const [foundEvents, setFoundEvents] = useState();
+  const [eventLogin, setEventLogin] = useState(false);
+
 
   const logout = () => {
     localStorage.clear();
     setIsAuth(false);
+    setEventLogin(false);
     axiosConfig.post("/user/logout").then((res) => {
       console.log(res.data);
     });
@@ -40,6 +43,8 @@ const SectionsProvider = ({ children }) => {
         foundEvents,
         setFoundEvents,
         navigate,
+        eventLogin,
+        setEventLogin
       }}
     >
       {children}
