@@ -7,7 +7,8 @@ export default function RegisterForm() {
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [hasRegistered, setHasRegistered] = useState(false);
-  const { isAuth, navigate, setIsAuth } = useContext(SectionsContext)
+  const { isAuth, navigate, setIsAuth } = useContext(SectionsContext);
+  const [genderRadio, setGenderRadio] = useState("");
 
   const formEl = useRef(null);
   const userNameEl = useRef(null);
@@ -26,7 +27,7 @@ export default function RegisterForm() {
       userName: userNameEl.current.value,
       firstName: firstNameEl.current.value,
       lastName: lastNameEl.current.value,
-      gender: genderEl.current.value,
+      gender: genderRadio,
       disabilities: disabilitiesEl.current.value,
       email: emailEl.current.value,
       password: passwordEl.current.value,
@@ -59,7 +60,7 @@ export default function RegisterForm() {
     try {
       const axiosResp = await axiosConfig.post("/user/login", data);
       console.log("successful logged in");
-      handleSuccessfulLogin(axiosResp.data)
+      handleSuccessfulLogin(axiosResp.data);
     } catch (error) {
       console.log("fehler beim login", error);
     }
@@ -107,14 +108,46 @@ export default function RegisterForm() {
             required
           />
         </label>
+        Geschlecht:
         <label htmlFor="">
-          Geschlecht:
-          <select name="gender" id="gender" ref={genderEl}>
-            <option value="female">Frau</option>
-            <option value="male">Mann</option>
-            <option value="diverse">Nicht binär</option>
-            <option value="none">keine Angabe</option>
-          </select>
+          <input
+            onClick={() => setGenderRadio("female")}
+            type="radio"
+            name="gender"
+            id=""
+            value="female"
+          />
+          Weiblich
+        </label>
+        <label htmlFor="">
+          <input
+            onClick={() => setGenderRadio("male")}
+            type="radio"
+            name="gender"
+            id=""
+            value="male"
+          />
+          Männlich
+        </label>
+        <label htmlFor="">
+          <input
+            onClick={() => setGenderRadio("diverse")}
+            type="radio"
+            name="gender"
+            id=""
+            value="diverse"
+          />
+          Nicht binär
+        </label>
+        <label htmlFor="">
+          <input
+            onClick={() => setGenderRadio("none")}
+            type="radio"
+            name="gender"
+            id=""
+            value="none"
+          />
+          keine Angabe
         </label>
         <label htmlFor="">
           eventuelle Einschränkung
@@ -125,7 +158,6 @@ export default function RegisterForm() {
             ref={disabilitiesEl}
           />
         </label>
-
         <label htmlFor="">
           E-Mail Adresse:
           <input ref={emailEl} type="email" name="email" id="email" required />
@@ -159,7 +191,7 @@ export default function RegisterForm() {
             <strong>Sie haben sich erfolgreich registriert.</strong>
           </>
         ) : null}
-        {isAuth && <Navigate to="/profile"/>}
+        {isAuth && <Navigate to="/profile" />}
       </p>
       <p>{isLoading ? <strong>Lade – bitte warten...</strong> : null}</p>
       <NavLink to={"/login"}>bereits registriert?</NavLink>
