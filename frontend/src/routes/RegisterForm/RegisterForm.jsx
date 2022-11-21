@@ -10,28 +10,37 @@ export default function RegisterForm() {
   const [hasRegistered, setHasRegistered] = useState(false);
   const { isAuth, navigate, setIsAuth } = useContext(SectionsContext);
 
+  
+  const [stepOne, setStepOne] = useState(true);
+  const [stepTwo, setStepTwo] = useState(false);
+  const [stepThree, setStepThree] = useState(false);
+
+
+  
+  
   const formEl = useRef(null);
-  const userNameEl = useRef(null);
-  const firstNameEl = useRef(null);
-  const lastNameEl = useRef(null);
-  const emailEl = useRef(null);
-  const passwordEl = useRef(null);
-  const locationEl = useRef(null);
-  const genderEl = useRef(null);
-  const disabilitiesEl = useRef(null);
+  const [userName, setUserName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [genderRadio, setGenderRadio] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [location, setLocation] = useState("");
+  const [disabilities, setDisabilities] = useState("");
 
   const submitHandler = async (e) => {
+
     e.preventDefault();
 
     const data = {
-      userName: userNameEl.current.value,
-      firstName: firstNameEl.current.value,
-      lastName: lastNameEl.current.value,
-      gender: genderEl.current.value,
-      disabilities: disabilitiesEl.current.value,
-      email: emailEl.current.value,
-      password: passwordEl.current.value,
-      location: locationEl.current.value,
+      userName: userName,
+      firstName: firstName,
+      lastName: lastName,
+      gender: genderRadio,
+      disabilities: disabilities,
+      email: email,
+      password: password,
+      location: location
     };
 
     try {
@@ -77,81 +86,138 @@ export default function RegisterForm() {
       {}
       RegisterForm
       <form ref={formEl} method="POST" action="/user" onSubmit={submitHandler}>
-        <label htmlFor="">
-          {" "}
-          Benutzername:
-          <input
-            ref={userNameEl}
-            type="text"
-            name="userName"
-            id="userName"
-            required
-          />
-        </label>
-        <label htmlFor="">
-          Vorname:
-          <input
-            ref={firstNameEl}
-            type="text"
-            name="firstName"
-            id="firstName"
-            required
-          />
-        </label>
-        <label htmlFor="">
-          Nachname:
-          <input
-            ref={lastNameEl}
-            type="text"
-            name="lastName"
-            id="lastName"
-            required
-          />
-        </label>
-        <label htmlFor="">
+        {stepOne ? (
+          <div>
+            <label htmlFor="">
+              {" "}
+              Benutzername:
+              <input
+                onChange={(e)=>setUserName(e.target.value)}
+                type="text"
+                name="userName"
+                id="userName"
+                required
+              />
+            </label>
+            <label htmlFor="">
+              Vorname:
+              <input
+                onChange={(e)=>setFirstName(e.target.value)}
+                type="text"
+                name="firstName"
+                id="firstName"
+                required
+              />
+            </label>
+            <label htmlFor="">
+              Nachname:
+              <input
+                onChange={(e)=>setLastName(e.target.value)}
+                type="text"
+                name="lastName"
+                id="lastName"
+                required
+              />
+            </label>
+            <label htmlFor="">
+              Wohnort:
+              <input
+                onChange={(e)=>setLocation(e.target.value)}
+                type="text"
+                name="location"
+                id="location"
+                required
+              />
+            </label>
+            <button id="button" onClick={() => {
+              setStepOne(false)
+              setStepTwo(true)
+            }}>Weiter</button>
+          </div>
+        ) : (
+          ""
+        )}
+        {stepTwo ? <div>
           Geschlecht:
-          <select name="gender" id="gender" ref={genderEl}>
-            <option value="female">Frau</option>
-            <option value="male">Mann</option>
-            <option value="diverse">Nicht binär</option>
-            <option value="none">keine Angabe</option>
-          </select>
-        </label>
-        <label htmlFor="">
-          eventuelle Einschränkung
-          <input
-            type="text"
-            name="disabilities"
-            id="disabilities"
-            ref={disabilitiesEl}
-          />
-        </label>
-
-        <label htmlFor="">
-          E-Mail Adresse:
-          <input ref={emailEl} type="email" name="email" id="email" required />
-        </label>
-        <label htmlFor="">
-          Passwort:
-          <input
-            ref={passwordEl}
-            type="password"
-            name="password"
-            id="password"
-            required
-          />
-        </label>
-        <label htmlFor="">
-          Wohnort:
-          <input
-            ref={locationEl}
-            type="text"
-            name="location"
-            id="location"
-            required
-          />
-        </label>
-        <input id="button" type="submit" value="Registrieren" />
+          <label htmlFor="">
+            <input
+              onClick={() => setGenderRadio("female")}
+              type="radio"
+              name="gender"
+              id=""
+              value="female"
+            />
+            Weiblich
+          </label>
+          <label htmlFor="">
+            <input
+              onClick={() => setGenderRadio("male")}
+              type="radio"
+              name="gender"
+              id=""
+              value="male"
+            />
+            Männlich
+          </label>
+          <label htmlFor="">
+            <input
+              onClick={() => setGenderRadio("diverse")}
+              type="radio"
+              name="gender"
+              id=""
+              value="diverse"
+            />
+            Nicht binär
+          </label>
+          <label htmlFor="">
+            <input
+              onClick={() => setGenderRadio("none")}
+              type="radio"
+              name="gender"
+              id=""
+              value="none"
+            />
+            keine Angabe
+          </label>
+          <label htmlFor="">
+            eventuelle Einschränkung
+            <input
+              type="text"
+              name="disabilities"
+              id="disabilities"
+              onChange={(e)=>setDisabilities(e.target.value)}
+            />
+          </label>
+          <button id="button" onClick={() => {
+            setStepOne(true)
+            setStepTwo(false)
+          }}>Zurück</button>
+          <button id="button" onClick={() => {
+            setStepTwo(false)
+            setStepThree(true)
+          }}>Weiter</button>
+        </div> : ""}
+        {stepThree ? <div>
+          <label htmlFor="">
+            E-Mail Adresse:
+            <input onChange={(e)=>setEmail(e.target.value)} type="email" name="email" id="email" required />
+          </label>
+          <label htmlFor="">
+            Passwort:
+            <input
+              onChange={(e)=>setPassword(e.target.value)}
+              type="password"
+              name="password"
+              id="password"
+              required
+            />
+          </label>
+          <button id="button" onClick={() => {
+            setStepTwo(true)
+            setStepThree(false)
+          }}>Zurück</button>
+          <input id="button" type="submit" value="Registrieren" />
+        </div> : ""}
       </form>
       <p>{isError ? <strong>Es ist ein Fehler aufgetreten.</strong> : null}</p>
       <p>

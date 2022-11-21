@@ -7,7 +7,7 @@ import "./LoginForm.css";
 function LoginForm() {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const { isAuth, setIsAuth, eventLogin } = useContext(SectionsContext);
+  const { isAuth, setIsAuth, eventLogin, setStepOne } = useContext(SectionsContext);
 
   const formEl = useRef(null);
   const usernameEL = useRef(null);
@@ -67,9 +67,11 @@ function LoginForm() {
           <input id="button" type="submit" value="einloggen" />
         </form>
       )}
+
       <button id="button">
         <NavLink to={"/register"}>noch nicht registriert?</NavLink>
       </button>
+
 
       {error && <p>Da ist etwas schief gelaufen: {error}</p>}
 
