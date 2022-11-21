@@ -10,13 +10,27 @@ export default function SearchedEvents() {
   return (
     <div>
       SearchedEvents
-      <div>
-        <button>Sport</button>
-        <button>Kurse</button>
-        <button>Kultur</button>
-        <button>Reisen</button>
-        <button>Natur</button>
-        <button>Spiele</button>
+      <div id="Auswahl">
+        <div class="selection">
+          <div class="box">
+            <button>Sport</button>
+          </div>
+          <div class="box">
+            <button>Kurse</button>
+          </div>
+          <div class="box">
+            <button>Kultur</button>
+          </div>
+          <div class="box">
+            <button>Reisen</button>
+          </div>
+          <div class="box">
+            <button>Natur</button>
+          </div>
+          <div class="box">
+            <button>Spiele</button>
+          </div>
+        </div>
       </div>
       <div>
         <h2>Vorschläge für dich</h2>
