@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axiosConfig from "../../util/axiosConfig.js";
+import "./EventForm.css";
 
 export default function EventForm() {
   const [file, setFile] = useState(null);
@@ -14,35 +15,35 @@ export default function EventForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-      const formData = new FormData(e.target);
-      console.log(formData);
-      try {
-        const response = await axiosConfig.post(
-          "/event",
-          {
-            image: formData.get("image"),
-            eventTitle: eventTitle,
-            category: eventCategory,
-            date: eventDate,
-            time: eventTime,
-            location: eventLocation,
-            participants: eventParticipants,
-            price: eventPrice,
-            description: eventDescription,
-            eventOwner: localStorage.getItem("userId")
+    const formData = new FormData(e.target);
+    console.log(formData);
+    try {
+      const response = await axiosConfig.post(
+        "/event",
+        {
+          image: formData.get("image"),
+          eventTitle: eventTitle,
+          category: eventCategory,
+          date: eventDate,
+          time: eventTime,
+          location: eventLocation,
+          participants: eventParticipants,
+          price: eventPrice,
+          description: eventDescription,
+          eventOwner: localStorage.getItem("userId"),
+        },
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
           },
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          }
-        );
-        console.log(response.data);
-        alert("Event wurde erfolgreich erstellt!");
-      } catch (error) {
-        console.error(error);
-        alert("Es ist ein Fehler aufgetreten");
-      }
+        }
+      );
+      console.log(response.data);
+      alert("Event wurde erfolgreich erstellt!");
+    } catch (error) {
+      console.error(error);
+      alert("Es ist ein Fehler aufgetreten");
+    }
   };
   return (
     <div>
@@ -135,7 +136,7 @@ export default function EventForm() {
           onChange={(e) => setFile(e.target.files[0])}
         />
 
-        <input type="submit" value="Schicken" />
+        <input id="button" type="submit" value="Schicken" />
       </form>
     </div>
   );

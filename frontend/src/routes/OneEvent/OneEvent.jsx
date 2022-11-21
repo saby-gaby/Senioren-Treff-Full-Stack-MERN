@@ -1,9 +1,10 @@
 import React, { useEffect, useState, useContext } from "react";
 import axiosConfig from "../../util/axiosConfig";
 import { useParams } from "react-router-dom";
+import "./OneEvent.css";
 
 export default function OneEvent() {
-  const { id } = useParams()
+  const { id } = useParams();
   const eventId = id;
 
   const [eventData, setEventData] = useState({});
@@ -16,23 +17,20 @@ export default function OneEvent() {
       setEventData(data);
     };
     getEventById();
-  }
-  
+  };
+
   useEffect(() => {
-    getEventData()
+    getEventData();
   }, []);
 
   const handleSubscribeEvent = async () => {
     try {
-      const response = await axiosConfig.patch(
-        `/event/subscribe/${eventId}`,
-        {
-          subscribers: localStorage.getItem("userId"),
-        }
-      );
+      const response = await axiosConfig.patch(`/event/subscribe/${eventId}`, {
+        subscribers: localStorage.getItem("userId"),
+      });
 
       alert("Buchung erfolgreich!");
-      getEventData()
+      getEventData();
     } catch (error) {
       console.log(error);
     }
@@ -47,7 +45,9 @@ export default function OneEvent() {
         }
       );
 
-      alert(`${eventData.eventTitle} zur Merkliste von ${response.data.userName} hinzugefügt`);
+      alert(
+        `${eventData.eventTitle} zur Merkliste von ${response.data.userName} hinzugefügt`
+      );
     } catch (error) {
       console.log(error);
     }
@@ -55,7 +55,9 @@ export default function OneEvent() {
   return (
     <div>
       <h3>{eventData.eventTitle}</h3>
-      <p>Eventersteller: {eventData.eventOwner && eventData.eventOwner.userName} </p>
+      <p>
+        Eventersteller: {eventData.eventOwner && eventData.eventOwner.userName}{" "}
+      </p>
       <img src={"http://localhost:6001" + eventData.imageUrl} alt="" />
       <div>
         <h4>{eventData.category}</h4>

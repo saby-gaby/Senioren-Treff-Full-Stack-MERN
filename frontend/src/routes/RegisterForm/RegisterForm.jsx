@@ -2,12 +2,13 @@ import React, { useState, useRef, useContext } from "react";
 import { Navigate, NavLink } from "react-router-dom";
 import axiosConfig from "../../util/axiosConfig.js";
 import { SectionsContext } from "../../context/sectionsContext.js";
+import "./RegisterForm.css";
 
 export default function RegisterForm() {
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [hasRegistered, setHasRegistered] = useState(false);
-  const { isAuth, navigate, setIsAuth } = useContext(SectionsContext)
+  const { isAuth, navigate, setIsAuth } = useContext(SectionsContext);
 
   const formEl = useRef(null);
   const userNameEl = useRef(null);
@@ -59,7 +60,7 @@ export default function RegisterForm() {
     try {
       const axiosResp = await axiosConfig.post("/user/login", data);
       console.log("successful logged in");
-      handleSuccessfulLogin(axiosResp.data)
+      handleSuccessfulLogin(axiosResp.data);
     } catch (error) {
       console.log("fehler beim login", error);
     }
@@ -150,7 +151,7 @@ export default function RegisterForm() {
             required
           />
         </label>
-        <input type="submit" value="Registrieren" />
+        <input id="button" type="submit" value="Registrieren" />
       </form>
       <p>{isError ? <strong>Es ist ein Fehler aufgetreten.</strong> : null}</p>
       <p>
@@ -159,10 +160,12 @@ export default function RegisterForm() {
             <strong>Sie haben sich erfolgreich registriert.</strong>
           </>
         ) : null}
-        {isAuth && <Navigate to="/profile"/>}
+        {isAuth && <Navigate to="/profile" />}
       </p>
       <p>{isLoading ? <strong>Lade – bitte warten...</strong> : null}</p>
-      <NavLink to={"/login"}>bereits registriert?</NavLink>
+      <button id="button">
+        <NavLink to={"/login"}>bereits registriert?</NavLink>
+      </button>
     </div>
   );
 }
