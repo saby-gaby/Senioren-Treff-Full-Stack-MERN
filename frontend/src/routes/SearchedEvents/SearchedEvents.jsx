@@ -1,80 +1,36 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { SectionsContext } from "../../context/sectionsContext";
 import { NavLink, useParams } from "react-router-dom";
+import CategoryFilter from "../../components/CategoryFilter/CategoryFilter";
 import "./SearchedEvents.css";
-import axiosConfig from "../../util/axiosConfig";
 
 export default function SearchedEvents() {
   const { searchedLocation } = useParams();
-  const currLocation = searchedLocation;
-  const { foundEvents, setFoundEvents } = useContext(SectionsContext);
-  const [filteredArray, setFilteredArray] = useState();
+  const { foundEvents, categoryArray } = useContext(SectionsContext);
 
-  const getSearchedEvents = async () => {
-    try {
-      const axiosResp = await axiosConfig.get(`/search/${currLocation}`);
-      setFoundEvents(axiosResp.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  const sportEvents = (searchedCategory) => {
-    const array = foundEvents.filter((element) =>
-      element.category.some((ele) => ele === searchedCategory)
-    );
-    if (array[0]) {
-      setFilteredArray(array);
-    } else {
-      alert("keine treffer");
-    }
-  };
-
-  const renderEvents = (dataArray) =>{
+  const renderEvents = (dataArray) => {
     return dataArray.map((oneEvent, i) => {
       return (
         <li key={i}>
           <h3>{oneEvent.eventTitle}</h3>
-          <img
-            src={"http://localhost:6001" + oneEvent.imageUrl}
-            alt=""
-          />
-          
-          <NavLink to={`/event/${oneEvent._id}`} className="button">Ansehen</NavLink>
+          <img src={"http://localhost:6001" + oneEvent.imageUrl} alt="" />
+
+          <NavLink to={`/event/${oneEvent._id}`} className="button">
+            Ansehen
+          </NavLink>
         </li>
       );
-    })
-  }
-
-  useEffect(() => {
-    getSearchedEvents();
-  }, []);
+    });
+  };
 
   return (
     <div className="SearchedEvents">
-      <div class="selection">
-        <button onClick={() => sportEvents("sport")} className="button">Sport</button>
-        <button onClick={() => sportEvents("kurse")} className="button">Kurse</button>
-        <button onClick={() => sportEvents("kultur")} className="button">Kultur</button>
-        <button onClick={() => sportEvents("reisen")} className="button">Reisen</button>
-        <button onClick={() => sportEvents("natur")} className="button">Natur</button>
-        <button onClick={() => sportEvents("spiele")} className="button">Spiele</button>
-      </div>
- 
-      
- 
-
-   
-      
-      
- 
+      <CategoryFilter />
       <div>
-        <h2>Vorschläge für dich</h2>
+        <h2>Vorschläge für dich in {searchedLocation}</h2>
         <ul>
-          {foundEvents &&
-
-            !filteredArray && renderEvents(foundEvents)}
-          {filteredArray && renderEvents(filteredArray)}
-
+          {foundEvents && !categoryArray && renderEvents(foundEvents)}
+          {categoryArray && renderEvents(categoryArray)}
         </ul>
       </div>
     </div>
