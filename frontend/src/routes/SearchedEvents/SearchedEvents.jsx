@@ -38,7 +38,8 @@ export default function SearchedEvents() {
             src={"http://localhost:6001" + oneEvent.imageUrl}
             alt=""
           />
-          <NavLink to={`/event/${oneEvent._id}`}>Ansehen</NavLink>
+          
+          <button id="button"><NavLink to={`/event/${oneEvent._id}`}>Ansehen</NavLink></button>
         </li>
       );
     })

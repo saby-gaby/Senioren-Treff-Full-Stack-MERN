@@ -15,7 +15,7 @@ export default function Home() {
           <h2>Veranstaltung erstellen</h2>
           <button id="button">
             {isAuth ? <NavLink to="/event-form">Erstellen</NavLink> : <NavLink to="/login" onClick={()=> setEventLogin(true)}>Erstellen</NavLink>}
-          </button
+          </button>
         </div>
     </div>
   );
