@@ -44,7 +44,7 @@ const SectionsProvider = ({ children }) => {
         setFoundEvents,
         navigate,
         eventLogin,
-        setEventLogin
+        setEventLogin,
       }}
     >
       {children}
