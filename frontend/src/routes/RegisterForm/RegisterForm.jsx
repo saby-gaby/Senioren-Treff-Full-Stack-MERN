@@ -2,16 +2,19 @@ import React, { useState, useRef, useContext } from "react";
 import { Navigate, NavLink } from "react-router-dom";
 import axiosConfig from "../../util/axiosConfig.js";
 import { SectionsContext } from "../../context/sectionsContext.js";
+import "./RegisterForm.css";
 
 export default function RegisterForm() {
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [hasRegistered, setHasRegistered] = useState(false);
   const { isAuth, navigate, setIsAuth } = useContext(SectionsContext);
+
   
   const [stepOne, setStepOne] = useState(true);
   const [stepTwo, setStepTwo] = useState(false);
   const [stepThree, setStepThree] = useState(false);
+
 
   
   
@@ -83,7 +86,6 @@ export default function RegisterForm() {
       {}
       RegisterForm
       <form ref={formEl} method="POST" action="/user" onSubmit={submitHandler}>
-
         {stepOne ? (
           <div>
             <label htmlFor="">
@@ -127,7 +129,7 @@ export default function RegisterForm() {
                 required
               />
             </label>
-            <button onClick={() => {
+            <button id="button" onClick={() => {
               setStepOne(false)
               setStepTwo(true)
             }}>Weiter</button>
@@ -186,11 +188,11 @@ export default function RegisterForm() {
               onChange={(e)=>setDisabilities(e.target.value)}
             />
           </label>
-          <button onClick={() => {
+          <button id="button" onClick={() => {
             setStepOne(true)
             setStepTwo(false)
           }}>Zurück</button>
-          <button onClick={() => {
+          <button id="button" onClick={() => {
             setStepTwo(false)
             setStepThree(true)
           }}>Weiter</button>
@@ -210,11 +212,11 @@ export default function RegisterForm() {
               required
             />
           </label>
-          <button onClick={() => {
+          <button id="button" onClick={() => {
             setStepTwo(true)
             setStepThree(false)
           }}>Zurück</button>
-          <input type="submit" value="Registrieren" />
+          <input id="button" type="submit" value="Registrieren" />
         </div> : ""}
       </form>
       <p>{isError ? <strong>Es ist ein Fehler aufgetreten.</strong> : null}</p>
@@ -227,7 +229,9 @@ export default function RegisterForm() {
         {isAuth && <Navigate to="/profile" />}
       </p>
       <p>{isLoading ? <strong>Lade – bitte warten...</strong> : null}</p>
-      <NavLink to={"/login"}>bereits registriert?</NavLink>
+      <button id="button">
+        <NavLink to={"/login"}>bereits registriert?</NavLink>
+      </button>
     </div>
   );
 }

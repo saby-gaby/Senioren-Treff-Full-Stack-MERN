@@ -5,9 +5,11 @@ import axiosConfig from "../../util/axiosConfig";
 
 export default function UserProfil() {
   const { logout, isAuth } = useContext(SectionsContext);
+
   const [myEvents, setMyEvents] = useState(false);
   const [watchedEvents, setWatchedEvents] = useState(false);
   const [userDetails, setUserDetails] = useState(false);
+
 
   const userId = localStorage.getItem("userId");
   const [userData, setUserData] = useState({});

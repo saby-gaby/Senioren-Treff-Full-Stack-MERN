@@ -2,6 +2,7 @@ import React, { useState, useRef, useContext } from "react";
 import axiosConfig from "../../util/axiosConfig.js";
 import { SectionsContext } from "../../context/sectionsContext";
 import { Navigate, NavLink } from "react-router-dom";
+import "./LoginForm.css";
 
 function LoginForm() {
   const [error, setError] = useState("");
@@ -48,11 +49,10 @@ function LoginForm() {
 
   return (
     <div>
-      {isAuth && eventLogin && <Navigate to="/event-form" replace={true} /> }
+      {isAuth && eventLogin && <Navigate to="/event-form" replace={true} />}
       {isAuth && !eventLogin ? (
-          <Navigate to="/profile" replace={true} /> 
+        <Navigate to="/profile" replace={true} />
       ) : (
-        
         <form ref={formEl} method="post" onSubmit={submitHandler}>
           <h2>Login</h2>
           <label htmlFor="username"> Nutzername:</label>
@@ -64,10 +64,14 @@ function LoginForm() {
             id="password"
             ref={passwordEl}
           />
-          <input type="submit" value="einloggen" />
+          <input id="button" type="submit" value="einloggen" />
         </form>
       )}
-      <NavLink to={"/register"} >noch nicht registriert?</NavLink>
+
+      <button id="button">
+        <NavLink to={"/register"}>noch nicht registriert?</NavLink>
+      </button>
+
 
       {error && <p>Da ist etwas schief gelaufen: {error}</p>}
 

@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { SectionsContext } from "../../context/sectionsContext";
 import { NavLink, useParams } from "react-router-dom";
+import "./SearchedEvents.css";
 import axiosConfig from "../../util/axiosConfig";
 
 export default function SearchedEvents() {
@@ -49,20 +50,51 @@ export default function SearchedEvents() {
 
   return (
     <div className="SearchedEvents">
-      <div>
-        <button onClick={() => sportEvents("sport")}>Sport</button>
-        <button onClick={() => sportEvents("kurse")}>Kurse</button>
-        <button onClick={() => sportEvents("kultur")}>Kultur</button>
-        <button onClick={() => sportEvents("reisen")}>Reisen</button>
-        <button onClick={() => sportEvents("natur")}>Natur</button>
-        <button onClick={() => sportEvents("spiele")}>Spiele</button>
+      <div class="selection">
+      
+        <div class="box">
+          <button onClick={() => sportEvents("sport")}>Sport</button>
+        </div>
+        <div class="box">
+          <button onClick={() => sportEvents("kurse")}>Kurse</button>
+        </div>
+
+        <div class="box">
+          <button onClick={() => sportEvents("kultur")}>Kultur</button>
+        </div>  
+
+
+        <div class="box">
+          <button onClick={() => sportEvents("reisen")}>Reisen</button>
+        </div>
+
+
+        <div class="box">  
+          <button onClick={() => sportEvents("natur")}>Natur</button>
+        </div>
+
+
+        <div class="box">  
+          <button onClick={() => sportEvents("spiele")}>Spiele</button>
+        </div>
+        
       </div>
+ 
+      
+ 
+
+   
+      
+      
+ 
       <div>
         <h2>Vorschläge für dich</h2>
         <ul>
           {foundEvents &&
+
             !filteredArray && renderEvents(foundEvents)}
           {filteredArray && renderEvents(filteredArray)}
+
         </ul>
       </div>
     </div>
