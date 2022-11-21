@@ -39,7 +39,7 @@ export default function SearchedEvents() {
             alt=""
           />
           
-          <button id="button"><NavLink to={`/event/${oneEvent._id}`}>Ansehen</NavLink></button>
+          <NavLink to={`/event/${oneEvent._id}`} className="button">Ansehen</NavLink>
         </li>
       );
     })
@@ -52,33 +52,12 @@ export default function SearchedEvents() {
   return (
     <div className="SearchedEvents">
       <div class="selection">
-      
-        <div class="box">
-          <button onClick={() => sportEvents("sport")}>Sport</button>
-        </div>
-        <div class="box">
-          <button onClick={() => sportEvents("kurse")}>Kurse</button>
-        </div>
-
-        <div class="box">
-          <button onClick={() => sportEvents("kultur")}>Kultur</button>
-        </div>  
-
-
-        <div class="box">
-          <button onClick={() => sportEvents("reisen")}>Reisen</button>
-        </div>
-
-
-        <div class="box">  
-          <button onClick={() => sportEvents("natur")}>Natur</button>
-        </div>
-
-
-        <div class="box">  
-          <button onClick={() => sportEvents("spiele")}>Spiele</button>
-        </div>
-        
+        <button onClick={() => sportEvents("sport")} className="button">Sport</button>
+        <button onClick={() => sportEvents("kurse")} className="button">Kurse</button>
+        <button onClick={() => sportEvents("kultur")} className="button">Kultur</button>
+        <button onClick={() => sportEvents("reisen")} className="button">Reisen</button>
+        <button onClick={() => sportEvents("natur")} className="button">Natur</button>
+        <button onClick={() => sportEvents("spiele")} className="button">Spiele</button>
       </div>
  
       
