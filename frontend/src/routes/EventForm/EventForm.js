@@ -49,6 +49,7 @@ export default function EventForm() {
     <div>
       {/* <Nav /> */}
       <form
+        className="center"
         onSubmit={handleSubmit}
         encType="multipart/form-data"
         id="eventForm"
@@ -135,6 +136,9 @@ export default function EventForm() {
           id="image"
           onChange={(e) => setFile(e.target.files[0])}
         />
+        <label id="button" for="image">
+          Bild hochladen
+        </label>
 
         <input id="button" type="submit" value="Schicken" />
       </form>

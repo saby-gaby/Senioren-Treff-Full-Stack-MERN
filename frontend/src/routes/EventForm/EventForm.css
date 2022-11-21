@@ -1,4 +1,5 @@
-#button {
+#button,
+#image {
   display: inline-block;
   padding: 15px 25px;
   font-size: 24px;
@@ -6,7 +7,7 @@
   text-align: center;
   text-decoration: none;
   outline: none;
-  color: #fff;
+  color: #f4e3d7;
   background-color: #4caf50;
   border: none;
   border-radius: 15px;
@@ -14,12 +15,27 @@
   margin: 10px;
 }
 
-#button:hover {
+#button:hover,
+#image:hover {
   background-color: #3e8e41;
+  cursor: pointer;
 }
 
-#button:active {
+#button:active,
+#image:active {
   background-color: #3e8e41;
   box-shadow: 0 5px #666;
   transform: translateY(4 px);
+  cursor: pointer;
+}
+
+textarea {
+  resize: none;
+}
+
+input[type="file"] {
+  visibility: hidden;
+  position: absolute;
+  background-color: #f4e3d7;
+  color: #3e8e41;
 }
