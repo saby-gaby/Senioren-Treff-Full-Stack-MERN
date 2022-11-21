@@ -54,7 +54,7 @@ function LoginForm() {
         <Navigate to="/profile" replace={true} />
       ) : (
         <form ref={formEl} method="post" onSubmit={submitHandler}>
-          <h2>Login</h2>
+          <h2>Anmelden</h2>
           <label htmlFor="username"> Nutzername:</label>
           <input type="text" name="username" id="username" ref={usernameEL} />
           <label htmlFor="password">Passwort:</label>
@@ -64,13 +64,16 @@ function LoginForm() {
             id="password"
             ref={passwordEl}
           />
-          <input id="button" type="submit" value="einloggen" />
+          <input className="button" type="submit" value="einloggen" />
         </form>
       )}
 
-      <button id="button">
-        <NavLink to={"/register"}>noch nicht registriert?</NavLink>
-      </button>
+      <h2>Sie haben noch kein Konto?</h2>
+      <div>
+        <p>als neuer Benutzer</p>
+        <NavLink to={"/register"} className="button">Registrieren</NavLink>
+      </div>
+      
 
 
       {error && <p>Da ist etwas schief gelaufen: {error}</p>}

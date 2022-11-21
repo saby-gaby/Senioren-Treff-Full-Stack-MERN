@@ -33,9 +33,9 @@ function App() {
             {location.pathname !== "/login" && (
               <li>
                 {isAuth && location.pathname === "/profile" && <span className="text">Mein Bereich</span>}
-                {location.pathname==="/register" && <span className="text">Register</span>}
-                {(isAuth && location.pathname !== "/profile" && location.pathname !=="/register") && <NavLink to="/profile" className="navBtn">Mein Bereich</NavLink>}
-                {!isAuth && <NavLink to="/login" className="navBtn">Anmelden / Registrieren</NavLink>}
+                {(isAuth && location.pathname !== "/profile" && location.pathname !== "/register") && <NavLink to="/profile" className="navBtn">Mein Bereich</NavLink>}
+                {location.pathname === "/register" && <span className="text">Registrieren</span>}
+                {(!isAuth && location.pathname !=="/register" ) && <NavLink to="/login" className="navBtn">Anmelden / Registrieren</NavLink>}
               </li>
             )}
           </ul>

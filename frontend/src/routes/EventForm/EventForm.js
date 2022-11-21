@@ -54,93 +54,119 @@ export default function EventForm() {
         encType="multipart/form-data"
         id="eventForm"
       >
-        <input
-          type="text"
-          id="eventTitle"
-          name="eventTitle"
-          placeholder="Event Name"
-          onChange={(e) => {
-            setEventTitle(e.target.value);
-          }}
-        />
-        <select
-          name="category"
-          id="category"
-          onChange={(e) => {
-            setCategory(e.target.value);
-          }}
-        >
-          <option value="sport">Sport</option>
-          <option value="kurse">Kurse</option>
-          <option value="kultur">Kultur</option>
-          <option value="reisen">Reisen</option>
-          <option value="natur">Natur</option>
-          <option value="spiele">Spiele</option>
-        </select>
-        <input
-          type="date"
-          name="date"
-          id="date"
-          onChange={(e) => {
-            setDate(e.target.value);
-          }}
-        />
-        <input
-          type="time"
-          name="time"
-          id="time"
-          placeholder="Veranstaltungsbeginn"
-          onChange={(e) => {
-            setTime(e.target.value);
-          }}
-        />
-        <input
-          type="text"
-          name="location"
-          id="location"
-          placeholder="mein Ort"
-          onChange={(e) => {
-            setLocation(e.target.value);
-          }}
-        />
-        <input
-          type="number"
-          min="1"
-          max="99"
-          name="participants"
-          id="participants"
-          onChange={(e) => {
-            setParticipants(e.target.value);
-          }}
-        />
-        <input
-          type="currency"
-          name="price"
-          currency="EUR"
-          onChange={(e) => {
-            setPrice(e.target.value);
-          }}
-        />
-        <textarea
-          name="description"
-          id="description"
-          cols="30"
-          rows="10"
-          onChange={(e) => {
-            setDescription(e.target.value);
-          }}
-        ></textarea>
-        <input
-          type="file"
-          name="image"
-          id="image"
-          onChange={(e) => setFile(e.target.files[0])}
-        />
-        <label id="button" for="image">
-          Bild hochladen
+        <label>
+          Titel:
+          <input
+            type="text"
+            id="eventTitle"
+            name="eventTitle"
+            placeholder="Event Name"
+            onChange={(e) => {
+              setEventTitle(e.target.value);
+            }}
+          />
         </label>
-
-        <input id="button" type="submit" value="Schicken" />
+        <label>
+          Kategorie:
+          <select
+            name="category"
+            id="category"
+            onChange={(e) => {
+              setCategory(e.target.value);
+            }}
+          >
+            <option value="sport">Sport</option>
+            <option value="kurse">Kurse</option>
+            <option value="kultur">Kultur</option>
+            <option value="reisen">Reisen</option>
+            <option value="natur">Natur</option>
+            <option value="spiele">Spiele</option>
+          </select>
+        </label>
+        <label>
+          Ort:
+          <input
+            type="text"
+            name="location"
+            id="location"
+            placeholder="mein Ort"
+            onChange={(e) => {
+              setLocation(e.target.value);
+            }}
+          />
+        </label>
+        <label>
+          Datum:
+          <input
+            type="date"
+            name="date"
+            id="date"
+            onChange={(e) => {
+              setDate(e.target.value);
+            }}
+          />
+        </label>
+        <label>
+          Uhrzeit:
+          <input
+            type="time"
+            name="time"
+            id="time"
+            placeholder="Veranstaltungsbeginn"
+            onChange={(e) => {
+              setTime(e.target.value);
+            }}
+          />
+        </label>
+        <label>
+          Anzahl Personen:
+          <input
+            type="number"
+            min="1"
+            max="99"
+            name="participants"
+            id="participants"
+            onChange={(e) => {
+              setParticipants(e.target.value);
+            }}
+          />
+        </label>
+        <label>
+          Beschreibung:
+          <textarea
+            name="description"
+            id="description"
+            cols="30"
+            rows="10"
+            onChange={(e) => {
+              setDescription(e.target.value);
+            }}
+          ></textarea>
+        </label>
+        <label>
+          Foto hochladen:
+          <input
+            type="file"
+            name="image"
+            id="image"
+            onChange={(e) => setFile(e.target.files[0])}
+          />
+        </label>
+        <label id="button" for="image">
+          Dateien durchsuchen
+        </label>
+        <label>
+          Preis pro Person:
+          <input
+            type="currency"
+            name="price"
+            currency="EUR"
+            onChange={(e) => {
+              setPrice(e.target.value);
+            }}
+          />
+        </label>
+        <input id="button" type="submit" value="Erstellen" />
       </form>
     </div>
   );
