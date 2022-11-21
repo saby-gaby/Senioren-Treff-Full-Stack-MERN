@@ -56,7 +56,7 @@ function App() {
           <Route path="/register" element={<RegisterForm />} />
           <Route path="/event-form" element={<EventForm />} />
           <Route path="/event/:id" element={<OneEvent />} />
-          <Route path="/events" element={<SearchedEvents />} />
+          <Route path="/events/:searchedLocation" element={<SearchedEvents />} />
           <Route path="/profile" element={<UserProfile />} />
           <Route path="/*" element={<Page404 />} />
         </Routes>
