@@ -6,7 +6,7 @@ import { Navigate, NavLink } from "react-router-dom";
 function LoginForm() {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const { isAuth, setIsAuth, eventLogin } = useContext(SectionsContext);
+  const { isAuth, setIsAuth, eventLogin, setStepOne } = useContext(SectionsContext);
 
   const formEl = useRef(null);
   const usernameEL = useRef(null);
@@ -67,7 +67,7 @@ function LoginForm() {
           <input type="submit" value="einloggen" />
         </form>
       )}
-      <NavLink to={"/register"}>noch nicht registriert?</NavLink>
+      <NavLink to={"/register"} >noch nicht registriert?</NavLink>
 
       {error && <p>Da ist etwas schief gelaufen: {error}</p>}
 
