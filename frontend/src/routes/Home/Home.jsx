@@ -13,9 +13,7 @@ export default function Home() {
       <Search />
         <div>
           <h2>Veranstaltung erstellen</h2>
-          <button id="button">
-            {isAuth ? <NavLink to="/event-form">Erstellen</NavLink> : <NavLink to="/login" onClick={()=> setEventLogin(true)}>Erstellen</NavLink>}
-          </button>
+            {isAuth ? <NavLink to="/event-form" className="button">Erstellen</NavLink> : <NavLink to="/login" className="button" onClick={()=> setEventLogin(true)}>Erstellen</NavLink>}
         </div>
     </div>
   );

@@ -129,7 +129,7 @@ export default function RegisterForm() {
                 required
               />
             </label>
-            <button id="button" onClick={() => {
+            <button className="button" onClick={() => {
               setStepOne(false)
               setStepTwo(true)
             }}>Weiter</button>
@@ -188,11 +188,11 @@ export default function RegisterForm() {
               onChange={(e)=>setDisabilities(e.target.value)}
             />
           </label>
-          <button id="button" onClick={() => {
+          <button className="button" onClick={() => {
             setStepOne(true)
             setStepTwo(false)
           }}>Zurück</button>
-          <button id="button" onClick={() => {
+          <button className="button" onClick={() => {
             setStepTwo(false)
             setStepThree(true)
           }}>Weiter</button>
@@ -212,11 +212,11 @@ export default function RegisterForm() {
               required
             />
           </label>
-          <button id="button" onClick={() => {
+          <button className="button" onClick={() => {
             setStepTwo(true)
             setStepThree(false)
           }}>Zurück</button>
-          <input id="button" type="submit" value="Registrieren" />
+          <input className="button" type="submit" value="Registrieren" />
         </div> : ""}
       </form>
       <p>{isError ? <strong>Es ist ein Fehler aufgetreten.</strong> : null}</p>
@@ -229,9 +229,9 @@ export default function RegisterForm() {
         {isAuth && <Navigate to="/profile" />}
       </p>
       <p>{isLoading ? <strong>Lade – bitte warten...</strong> : null}</p>
-      <button id="button">
-        <NavLink to={"/login"}>bereits registriert?</NavLink>
-      </button>
+      
+      <NavLink to={"/login"} className="button">bereits registriert?</NavLink>
+      
     </div>
   );
 }

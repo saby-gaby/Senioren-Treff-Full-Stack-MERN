@@ -35,7 +35,7 @@ export default function Search() {
         <p>Wo bist du gerade?</p>
         <form ref={formElement} method="" onSubmit={submitHandler}>
           <input ref={locationElement} type="text" />
-          <input type="submit" value="Los geht´s!" />
+          <input className="button" type="submit" value="Los geht´s!" />
         </form>
       </div>
     </div>
