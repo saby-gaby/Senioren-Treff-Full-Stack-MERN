@@ -1,11 +1,15 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Kanit&display=swap");
+
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
+
 body {
   font-size: 3rem;
-  font-family: lora;
+  font-family: "Poppins", "Kanit";
   color: rgb(29, 59, 44);
   background-image: url("../public/grün.jpg");
   background-repeat: no-repeat;
