@@ -34,6 +34,7 @@ body {
   border: 2px solid var(--dark-green-color);
   box-shadow: none;
   border-radius: 1rem;
+  text-decoration: none;
 }
 
 .button-green:hover {
@@ -49,6 +50,7 @@ body {
   border: 2px solid var(--beige-color);
   box-shadow: none;
   border-radius: 1rem;
+  text-decoration: none;
 }
 
 .button-beige {
@@ -59,4 +61,5 @@ body {
   border: 2px solid var(--dark-green-color);
   box-shadow: none;
   border-radius: 1rem;
+  text-decoration: none;
 }
