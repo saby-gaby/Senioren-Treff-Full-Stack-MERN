@@ -35,6 +35,7 @@ body {
   box-shadow: none;
   border-radius: 1rem;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .button-green:hover {
@@ -51,6 +52,7 @@ body {
   box-shadow: none;
   border-radius: 1rem;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .button-beige {
@@ -62,4 +64,5 @@ body {
   box-shadow: none;
   border-radius: 1rem;
   text-decoration: none;
+  cursor: pointer;
 }
