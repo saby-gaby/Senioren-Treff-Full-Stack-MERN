@@ -26,7 +26,7 @@ export default function EventForm() {
           category: eventCategory,
           date: eventDate,
           time: eventTime,
-          location: eventLocation,
+          location: JSON.stringify(eventLocation),
           participants: eventParticipants,
           price: eventPrice,
           description: eventDescription,
@@ -45,6 +45,11 @@ export default function EventForm() {
       alert("Es ist ein Fehler aufgetreten");
     }
   };
+
+  const locationArray = (e) =>{
+
+  }
+
   return (
     <div>
       {/* <Nav /> */}
@@ -75,6 +80,7 @@ export default function EventForm() {
               setCategory(e.target.value);
             }}
           >
+            <option value="none">-----</option>
             <option value="sport">Sport</option>
             <option value="kurse">Kurse</option>
             <option value="kultur">Kultur</option>
@@ -91,7 +97,8 @@ export default function EventForm() {
             id="location"
             placeholder="mein Ort"
             onChange={(e) => {
-              setLocation(e.target.value);
+              const valuesArray=e.target.value.split(",")
+              setLocation(valuesArray);
             }}
           />
         </label>
@@ -152,7 +159,7 @@ export default function EventForm() {
             onChange={(e) => setFile(e.target.files[0])}
           />
         </label>
-        <label id="button" for="image">
+        <label id="button" htmlFor="image">
           Dateien durchsuchen
         </label>
         <label>

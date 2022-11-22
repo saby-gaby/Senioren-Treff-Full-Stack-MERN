@@ -42,8 +42,9 @@ export const deleteEventById = async (req, res) => {
 
 export const createEvent = async (req, res) => {
   try {
+    req.body.location=JSON.parse(req.body.location);
+    req.body.location = req.body.location.map(city=>city.trim().toLowerCase());
     const newEvent = await EventModel.create(req.body);
-
     const passedToken = req.cookies.jwt;
     const decodedToken = jwt.verify(passedToken, process.env.TOKEN_SECRET);
 
