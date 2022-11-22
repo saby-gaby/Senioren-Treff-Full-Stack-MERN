@@ -27,24 +27,24 @@ export default function UserProfil() {
   }, []);
 
   const findGender = () => {
-    let gender 
+    let gender;
 
     switch (userData.gender) {
       case "female":
-        gender = "weiblich"
+        gender = "weiblich";
         break;
       case "male":
-        gender = "männlich"
+        gender = "männlich";
         break;
       case "diverse":
-        gender = "nicht binär"
+        gender = "nicht binär";
         break;
       case "none":
-        gender = "keine Angabe"
+        gender = "keine Angabe";
         break;
     }
-    return gender
-  }
+    return gender;
+  };
 
   return (
     <div>
@@ -53,11 +53,14 @@ export default function UserProfil() {
         <div>
           <h2>Meine erstellten Events:</h2>
           {!myEvents ? (
-            <button className="button" onClick={() => setMyEvents(true)}>
+            <button
+              className="button-dark-green"
+              onClick={() => setMyEvents(true)}
+            >
               Ansehen
             </button>
           ) : (
-            <button className="button" onClick={() => setMyEvents(false)}>
+            <button className="button-beige" onClick={() => setMyEvents(false)}>
               Zuklappen
             </button>
           )}
@@ -74,7 +77,7 @@ export default function UserProfil() {
                       src={`http://localhost:6001${ele.imageUrl}`}
                       alt={ele.imageUrl}
                     />
-                    <NavLink to={`/event/${ele._id}`} className="button">
+                    <NavLink to={`/event/${ele._id}`} className="button-green">
                       Ansehen
                     </NavLink>
                   </li>
@@ -85,11 +88,17 @@ export default function UserProfil() {
         <div>
           <h2>Meine Merkliste:</h2>
           {!watchedEvents ? (
-            <button className="button" onClick={() => setWatchedEvents(true)}>
+            <button
+              className="button-dark-green"
+              onClick={() => setWatchedEvents(true)}
+            >
               Ansehen
             </button>
           ) : (
-            <button className="button" onClick={() => setWatchedEvents(false)}>
+            <button
+              className="button-beige"
+              onClick={() => setWatchedEvents(false)}
+            >
               Zuklappen
             </button>
           )}
@@ -106,7 +115,7 @@ export default function UserProfil() {
                       src={`http://localhost:6001${ele.imageUrl}`}
                       alt={ele.imageUrl}
                     />
-                    <NavLink to={`/event/${ele._id}`} className="button">
+                    <NavLink to={`/event/${ele._id}`} className="button-green">
                       Ansehen
                     </NavLink>
                   </li>
@@ -118,11 +127,17 @@ export default function UserProfil() {
         <div>
           <h3>Meine Daten</h3>
           {!userDetails ? (
-            <button className="button" onClick={() => setUserDetails(true)}>
+            <button
+              className="button-dark-green"
+              onClick={() => setUserDetails(true)}
+            >
               Ansehen
             </button>
           ) : (
-            <button className="button" onClick={() => setUserDetails(false)}>
+            <button
+              className="button-beige"
+              onClick={() => setUserDetails(false)}
+            >
               Zuklappen
             </button>
           )}
@@ -143,18 +158,22 @@ export default function UserProfil() {
             <li>Email: {userData.email}</li>
 
             <li>Wohnort: {userData.location}</li>
-            <li><NavLink to={`/user/edit`} className="button">Profil bearbeiten</NavLink></li>
+            <li>
+              <NavLink to={`/user/edit`} className="button-green">
+                Profil bearbeiten
+              </NavLink>
+            </li>
           </ul>
         ) : null}
       </div>
       <div>
-        <NavLink to={`/event-form`} className="button">
+        <NavLink to={`/event-form`} className="button-green ">
           Eigene Veranstaltung Erstellen
         </NavLink>
       </div>
       <Search />
       <div>
-        <button className="button" onClick={logout}>
+        <button className="button-green" onClick={logout}>
           Abmelden
         </button>
       </div>

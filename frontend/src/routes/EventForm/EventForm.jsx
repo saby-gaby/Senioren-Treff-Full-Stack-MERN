@@ -152,7 +152,7 @@ export default function EventForm() {
             onChange={(e) => setFile(e.target.files[0])}
           />
         </label>
-        <label id="button" for="image">
+        <label className="button-beige" for="image">
           Dateien durchsuchen
         </label>
         <label>
@@ -166,7 +166,7 @@ export default function EventForm() {
             }}
           />
         </label>
-        <input id="button" type="submit" value="Erstellen" />
+        <input className="button-green" type="submit" value="Erstellen" />
       </form>
     </div>
   );

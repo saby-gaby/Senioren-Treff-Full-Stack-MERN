@@ -1,6 +1,15 @@
 @import url("https://fonts.googleapis.com/css?family=Poppins&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Kanit&display=swap");
 
+:root {
+  --beige-transparent-color: #f4e3d7bb;
+  --beige-color: #f4e3d7;
+  --middle-green-color: #008000;
+  --dark-green-color: #004200;
+  --dark-color: #011b10;
+  --dark-transparent-color: #011b1080;
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -15,4 +24,39 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   min-height: 100vh;
+}
+
+.button-green {
+  font-size: 2rem;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--middle-green-color);
+  color: var(--beige-color);
+  border: 2px solid var(--dark-green-color);
+  box-shadow: none;
+  border-radius: 1rem;
+}
+
+.button-green:hover {
+  background-color: var(--dark-green-color);
+  font-weight: bolder;
+}
+
+.button-dark-green {
+  font-size: 2rem;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--dark-green-color);
+  color: var(--beige-color);
+  border: 2px solid var(--beige-color);
+  box-shadow: none;
+  border-radius: 1rem;
+}
+
+.button-beige {
+  font-size: 2rem;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--beige-color);
+  color: var(--dark-green-color);
+  border: 2px solid var(--dark-green-color);
+  box-shadow: none;
+  border-radius: 1rem;
 }
