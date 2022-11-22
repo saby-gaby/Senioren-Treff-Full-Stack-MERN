@@ -93,7 +93,14 @@ export const deleteUserByID = async (req, res) => {
 export const updateUserByID = async (req, res) => {
   try {
     const getUser = await UserModel.findById(req.params.id);
-    await UserModel.updateOne({ _id: req.params.id }, req.body);
+
+    if (req.body.password) {
+      const hashedSaltyPassword = await bcrypt.hash(req.body.password, 14);
+
+      await UserModel.updateOne({ _id: req.params.id }, {password: hashedSaltyPassword})
+    } else {
+      await UserModel.updateOne({ _id: req.params.id }, req.body);
+    }
     res.status(206).send(`user: ${getUser.userName} successfully updated`);
   } catch (error) {
     res.status(404).send(error.message);
