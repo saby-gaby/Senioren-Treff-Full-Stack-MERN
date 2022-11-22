@@ -6,7 +6,8 @@ import "./SearchedEvents.css";
 
 export default function SearchedEvents() {
   const { searchedLocation } = useParams();
-  const { foundEvents, categoryArray } = useContext(SectionsContext);
+  const { foundEvents, categoryArray, capitalize } =
+    useContext(SectionsContext);
 
   const renderEvents = (dataArray) => {
     return dataArray.map((oneEvent, i) => {
@@ -27,7 +28,7 @@ export default function SearchedEvents() {
     <div className="SearchedEvents">
       <CategoryFilter />
       <div>
-        <h2>Vorschläge für dich in {searchedLocation}</h2>
+        <h2>Vorschläge für dich in {capitalize(searchedLocation)}</h2>
         <ul>
           {foundEvents && !categoryArray && renderEvents(foundEvents)}
           {categoryArray && renderEvents(categoryArray)}

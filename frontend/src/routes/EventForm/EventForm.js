@@ -46,13 +46,8 @@ export default function EventForm() {
     }
   };
 
-  const locationArray = (e) =>{
-
-  }
-
   return (
     <div>
-      {/* <Nav /> */}
       <form
         className="center"
         onSubmit={handleSubmit}
@@ -97,7 +92,7 @@ export default function EventForm() {
             id="location"
             placeholder="mein Ort"
             onChange={(e) => {
-              const valuesArray=e.target.value.split(",")
+              const valuesArray = e.target.value.split(",");
               setLocation(valuesArray);
             }}
           />
