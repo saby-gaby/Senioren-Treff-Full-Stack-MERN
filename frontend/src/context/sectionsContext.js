@@ -6,8 +6,7 @@ import { useNavigate } from "react-router-dom";
 const SectionsContext = createContext();
 
 const SectionsProvider = ({ children }) => {
-  
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [isAuth, setIsAuth] = useState(() => {
     const isLoggedCookie = Cookies.get("isLogged");
@@ -25,8 +24,6 @@ const SectionsProvider = ({ children }) => {
   const [categoryArray, setCategoryArray] = useState();
   const [userData, setUserData] = useState({});
 
-
-
   const logout = () => {
     localStorage.clear();
     setIsAuth(false);
@@ -34,8 +31,11 @@ const SectionsProvider = ({ children }) => {
     axiosConfig.post("/user/logout").then((res) => {
       console.log(res.data);
     });
-    navigate("/login")
+    navigate("/login");
   };
+
+  const capitalize = (term) =>
+    term[0].toUpperCase() + term.substring(1).toLowerCase();
 
   return (
     <SectionsContext.Provider
@@ -48,10 +48,11 @@ const SectionsProvider = ({ children }) => {
         navigate,
         eventLogin,
         setEventLogin,
-        categoryArray, 
+        categoryArray,
         setCategoryArray,
         userData,
-        setUserData
+        setUserData,
+        capitalize,
       }}
     >
       {children}
