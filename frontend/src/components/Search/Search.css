@@ -1,70 +1,79 @@
-.Search {
-    display: flex;
-    justify-content: center;
+:root {
+  --beige-transparent-color: #f4e3d7bb;
+  --beige-color: #f4e3d7;
+  --middle-green-color: #008000;
+  --dark-green-color: #004200;
+  --dark-color: #011b10;
+  --dark-transparent-color: #011b1080;
 }
 
-.Search>div {
-    width: 80%;
-    min-width: 400px;
-    max-width: 800px;
-    background-color: #f4e3d7bb;
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-    border-radius: 1.5rem;
-    color: #004200;
+.Search {
+  display: flex;
+  justify-content: center;
+}
+
+.Search > div {
+  width: 80%;
+  min-width: 400px;
+  max-width: 800px;
+  background-color: var(--beige-transparent-color);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 1.5rem;
+  color: var(--dark-green-color);
 }
 
 .Search h1 {
-    max-width: 80%;
-    text-align: center;
-    font-size: 3rem;
+  max-width: 80%;
+  text-align: center;
+  font-size: 3rem;
 }
 
 .Search p {
-    font-size: 2rem;
+  font-size: 2rem;
 }
 
 .Search form {
-    max-width: 80%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.25rem;
+  max-width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
 }
 
 .Search form input:first-child {
-    height: 3rem;
-    width: 100%;    
-    background-color: #f4e3d7;
-    border-color: #004200;
-    border-radius: 0.75rem;
-    font-size: 2rem;
-    padding-left: 0.5rem;
+  height: 3rem;
+  width: 100%;
+  background-color: var(--beige-color);
+  border-color: var(--middle-green-color);
+  border-radius: 0.75rem;
+  font-size: 2rem;
+  padding-left: 0.5rem;
 }
 
 .Search form input:first-child::placeholder {
-    color: #133a1b88;
-    margin-left: 0.5rem;
+  color: var(--dark-green-color);
+  margin-left: 0.5rem;
 }
 
 .Search form input:first-child:focus {
-    border: none;
-    outline: 3px solid #008000;
+  border: none;
+  outline: 3px solid var(--middle-green-color);
 }
 
-.Search form input:last-child{
-    font-size: 2rem;
-    padding: 0.75rem 1.5rem;
-    background-color: #008000;
-    color: #f4e3d7;
-    border: 2px solid #004200;
-    box-shadow: none;
+.Search form input:last-child {
+  font-size: 2rem;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--middle-green-color);
+  color: var(--beige-color);
+  border: 2px solid var(--dark-green-color);
+  box-shadow: none;
 }
 
 .Search form input:last-child:hover {
-    background-color: #004200;
-    font-weight: bolder;
+  background-color: var(--dark-green-color);
+  font-weight: bolder;
 }

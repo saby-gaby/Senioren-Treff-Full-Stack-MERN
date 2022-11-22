@@ -23,6 +23,8 @@ const SectionsProvider = ({ children }) => {
   const [foundEvents, setFoundEvents] = useState();
   const [eventLogin, setEventLogin] = useState(false);
   const [categoryArray, setCategoryArray] = useState();
+  const [userData, setUserData] = useState({});
+
 
 
   const logout = () => {
@@ -47,7 +49,9 @@ const SectionsProvider = ({ children }) => {
         eventLogin,
         setEventLogin,
         categoryArray, 
-        setCategoryArray
+        setCategoryArray,
+        userData,
+        setUserData
       }}
     >
       {children}

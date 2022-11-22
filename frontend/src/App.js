@@ -10,6 +10,7 @@ import OneEvent from "./routes/OneEvent/OneEvent";
 import SearchedEvents from "./routes/SearchedEvents/SearchedEvents";
 import UserProfile from "./routes/UserProfile/UserProfile";
 import Page404 from "./routes/Page404/Page404";
+import UpdateUser from "./routes/UpdateUser/UpdateUser";
 
 function App() {
   const { isAuth } = useContext(SectionsContext);
@@ -59,6 +60,7 @@ function App() {
           <Route path="/events/:searchedLocation" element={<SearchedEvents />} />
           <Route path="/profile" element={<UserProfile />} />
           <Route path="/*" element={<Page404 />} />
+          <Route path="/user/edit" element={<UpdateUser />} />
         </Routes>
       </main>
     </div>

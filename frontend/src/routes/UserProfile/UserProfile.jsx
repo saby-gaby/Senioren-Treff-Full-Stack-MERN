@@ -5,14 +5,13 @@ import axiosConfig from "../../util/axiosConfig";
 import Search from "../../components/Search/Search";
 
 export default function UserProfil() {
-  const { logout, isAuth } = useContext(SectionsContext);
+  const { logout, isAuth, userData, setUserData } = useContext(SectionsContext);
 
   const [myEvents, setMyEvents] = useState(false);
   const [watchedEvents, setWatchedEvents] = useState(false);
   const [userDetails, setUserDetails] = useState(false);
 
   const userId = localStorage.getItem("userId");
-  const [userData, setUserData] = useState({});
 
   const getUserData = async () => {
     const axiosResp = await axiosConfig.get(
@@ -26,6 +25,26 @@ export default function UserProfil() {
   useEffect(() => {
     getUserData();
   }, []);
+
+  const findGender = () => {
+    let gender 
+
+    switch (userData.gender) {
+      case "female":
+        gender = "weiblich"
+        break;
+      case "male":
+        gender = "männlich"
+        break;
+      case "diverse":
+        gender = "nicht binär"
+        break;
+      case "none":
+        gender = "keine Angabe"
+        break;
+    }
+    return gender
+  }
 
   return (
     <div>
@@ -111,19 +130,20 @@ export default function UserProfil() {
 
         {userDetails ? (
           <ul>
-            <li>userName: {userData.userName}</li>
-            <li>firstName: {userData.firstName}</li>
-            <li>lastName: {userData.lastName}</li>
-            <li>gender: {userData.gender}</li>
+            <li>Benutzername: {userData.userName}</li>
+            <li>Vorname: {userData.firstName}</li>
+            <li>Nachname: {userData.lastName}</li>
+            <li>Geschlecht: {findGender()}</li>
             <li>
-              disabilities:{" "}
+              Einschränkungen:{" "}
               {userData.disabilities
                 ? userData.disabilities
                 : "keine Einschränkungen"}
             </li>
-            <li>email: {userData.email}</li>
+            <li>Email: {userData.email}</li>
 
-            <li>location: {userData.location}</li>
+            <li>Wohnort: {userData.location}</li>
+            <li><NavLink to={`/user/edit`} className="button">Profil bearbeiten</NavLink></li>
           </ul>
         ) : null}
       </div>
