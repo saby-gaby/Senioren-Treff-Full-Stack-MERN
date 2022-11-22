@@ -137,7 +137,6 @@ export default function RegisterForm() {
         ) : (
           ""
         )}
-<<<<<<< HEAD
         {stepTwo ? <div>
           Geschlecht:
           <label htmlFor="female">
@@ -219,122 +218,6 @@ export default function RegisterForm() {
           }}>Zurück</button>
           <input className="button" type="submit" value="Registrieren" />
         </div> : ""}
-=======
-        {stepTwo ? (
-          <div>
-            Geschlecht:
-            <label htmlFor="">
-              <input
-                onClick={() => setGenderRadio("female")}
-                type="radio"
-                name="gender"
-                id=""
-                value="female"
-              />
-              Weiblich
-            </label>
-            <label htmlFor="">
-              <input
-                onClick={() => setGenderRadio("male")}
-                type="radio"
-                name="gender"
-                id=""
-                value="male"
-              />
-              Männlich
-            </label>
-            <label htmlFor="">
-              <input
-                onClick={() => setGenderRadio("diverse")}
-                type="radio"
-                name="gender"
-                id=""
-                value="diverse"
-              />
-              Nicht binär
-            </label>
-            <label htmlFor="">
-              <input
-                onClick={() => setGenderRadio("none")}
-                type="radio"
-                name="gender"
-                id=""
-                value="none"
-              />
-              keine Angabe
-            </label>
-            <label htmlFor="">
-              eventuelle Einschränkung
-              <input
-                type="text"
-                name="disabilities"
-                id="disabilities"
-                onChange={(e) => setDisabilities(e.target.value)}
-              />
-            </label>
-            <button
-              className="button-green"
-              onClick={() => {
-                setStepOne(true);
-                setStepTwo(false);
-              }}
-            >
-              Zurück
-            </button>
-            <button
-              className="button-green"
-              onClick={() => {
-                setStepTwo(false);
-                setStepThree(true);
-              }}
-            >
-              Weiter
-            </button>
-          </div>
-        ) : (
-          ""
-        )}
-        {stepThree ? (
-          <div>
-            <label htmlFor="">
-              E-Mail Adresse:
-              <input
-                onChange={(e) => setEmail(e.target.value)}
-                type="email"
-                name="email"
-                id="email"
-                required
-              />
-            </label>
-            <label htmlFor="">
-              Passwort:
-              <input
-                onChange={(e) => setPassword(e.target.value)}
-                type="password"
-                name="password"
-                id="password"
-                required
-              />
-            </label>
-            <button
-              className="button-green"
-              onClick={() => {
-                setStepTwo(true);
-                setStepThree(false);
-              }}
-            >
-              Zurück
-            </button>
-            <input
-              className="button-green"
-              type="submit"
-              value="Registrieren"
-            />
-          </div>
-        ) : (
-          ""
-        )}
->>>>>>> f81743e4485246594a35261f762e5a1b171ef484
       </form>
       <p>{isError ? <strong>Es ist ein Fehler aufgetreten.</strong> : null}</p>
       <p>
