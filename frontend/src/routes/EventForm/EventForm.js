@@ -152,7 +152,7 @@ export default function EventForm() {
             onChange={(e) => setFile(e.target.files[0])}
           />
         </label>
-        <label id="button" for="image">
+        <label id="button" htmlFor="image">
           Dateien durchsuchen
         </label>
         <label>

@@ -27,24 +27,24 @@ export default function UserProfil() {
   }, []);
 
   const findGender = () => {
-    let gender 
+    let gender;
 
     switch (userData.gender) {
       case "female":
-        gender = "weiblich"
+        gender = "weiblich";
         break;
       case "male":
-        gender = "männlich"
+        gender = "männlich";
         break;
       case "diverse":
-        gender = "nicht binär"
+        gender = "nicht binär";
         break;
       case "none":
-        gender = "keine Angabe"
+        gender = "keine Angabe";
         break;
     }
-    return gender
-  }
+    return gender;
+  };
 
   return (
     <div>
@@ -67,13 +67,47 @@ export default function UserProfil() {
           <ul>
             {userData.myEvents &&
               userData.myEvents.map((ele, i) => {
+                const categoryImage = () => {
+                  let image;
+                  switch (ele.category[0]) {
+                    case "kultur":
+                      image = "/images/kultur.jpg";
+                      break;
+                    case "sport":
+                      image = "/images/sport.jpg";
+                      break;
+                    case "kurse":
+                      image = "/images/kurse.jpg";
+                      break;
+                    case "spiele":
+                      image = "/images/Würfel.jpg";
+                      break;
+                    case "reisen":
+                      image = "/images/reisen.jpeg";
+                      break;
+                    case "natur":
+                      image = "/images/natur.jpg";
+                      break;
+                    default:
+                      image = "/images/default.webp";
+                  }
+                  return image;
+                };
+
                 return (
                   <li key={i}>
                     <h4>{ele.eventTitle}</h4>
-                    <img
-                      src={`http://localhost:6001${ele.imageUrl}`}
-                      alt={ele.imageUrl}
-                    />
+                    {ele.imageUrl ? (
+                      <img
+                        src={"http://localhost:6001" + ele.imageUrl}
+                        alt=""
+                      />
+                    ) : (
+                      <img
+                        src={"http://localhost:6001" + categoryImage()}
+                        alt="test"
+                      />
+                    )}
                     <NavLink to={`/event/${ele._id}`} className="button">
                       Ansehen
                     </NavLink>
@@ -99,13 +133,47 @@ export default function UserProfil() {
           <ul>
             {userData.watchedEvents &&
               userData.watchedEvents.map((ele, i) => {
+                const categoryImage = () => {
+                  let image;
+                  switch (ele.category[0]) {
+                    case "kultur":
+                      image = "/images/kultur.jpg";
+                      break;
+                    case "sport":
+                      image = "/images/sport.jpg";
+                      break;
+                    case "kurse":
+                      image = "/images/kurse.jpg";
+                      break;
+                    case "spiele":
+                      image = "/images/Würfel.jpg";
+                      break;
+                    case "reisen":
+                      image = "/images/reisen.jpeg";
+                      break;
+                    case "natur":
+                      image = "/images/natur.jpg";
+                      break;
+                    default:
+                      image = "/images/default.webp";
+                  }
+                  return image;
+                };
+
                 return (
                   <li key={i}>
                     <h4>{ele.eventTitle}</h4>
-                    <img
-                      src={`http://localhost:6001${ele.imageUrl}`}
-                      alt={ele.imageUrl}
-                    />
+                    {ele.imageUrl ? (
+                      <img
+                        src={"http://localhost:6001" + ele.imageUrl}
+                        alt=""
+                      />
+                    ) : (
+                      <img
+                        src={"http://localhost:6001" + categoryImage()}
+                        alt="test"
+                      />
+                    )}
                     <NavLink to={`/event/${ele._id}`} className="button">
                       Ansehen
                     </NavLink>
@@ -143,7 +211,11 @@ export default function UserProfil() {
             <li>Email: {userData.email}</li>
 
             <li>Wohnort: {userData.location}</li>
-            <li><NavLink to={`/user/edit`} className="button">Profil bearbeiten</NavLink></li>
+            <li>
+              <NavLink to={`/user/edit`} className="button">
+                Profil bearbeiten
+              </NavLink>
+            </li>
           </ul>
         ) : null}
       </div>

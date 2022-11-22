@@ -139,42 +139,42 @@ export default function RegisterForm() {
         )}
         {stepTwo ? <div>
           Geschlecht:
-          <label htmlFor="">
+          <label htmlFor="female">
             <input
               onClick={() => setGenderRadio("female")}
               type="radio"
               name="gender"
-              id=""
+              id="female"
               value="female"
             />
             Weiblich
           </label>
-          <label htmlFor="">
+          <label htmlFor="male">
             <input
               onClick={() => setGenderRadio("male")}
               type="radio"
               name="gender"
-              id=""
+              id="male"
               value="male"
             />
             Männlich
           </label>
-          <label htmlFor="">
+          <label htmlFor="diverse">
             <input
               onClick={() => setGenderRadio("diverse")}
               type="radio"
               name="gender"
-              id=""
+              id="diverse"
               value="diverse"
             />
             Nicht binär
           </label>
-          <label htmlFor="">
+          <label htmlFor="none">
             <input
               onClick={() => setGenderRadio("none")}
               type="radio"
               name="gender"
-              id=""
+              id="none"
               value="none"
             />
             keine Angabe
