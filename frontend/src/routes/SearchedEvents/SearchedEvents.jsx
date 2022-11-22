@@ -46,7 +46,7 @@ export default function SearchedEvents() {
             <img src={"http://localhost:6001" + categoryImage()} alt="test" />
           )}
 
-          <NavLink to={`/event/${oneEvent._id}`} className="button">
+          <NavLink to={`/event/${oneEvent._id}`} className="button-green">
             Ansehen
           </NavLink>
         </li>

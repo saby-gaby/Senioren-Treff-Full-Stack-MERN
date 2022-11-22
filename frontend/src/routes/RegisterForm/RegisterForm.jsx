@@ -10,14 +10,10 @@ export default function RegisterForm() {
   const [hasRegistered, setHasRegistered] = useState(false);
   const { isAuth, navigate, setIsAuth } = useContext(SectionsContext);
 
-  
   const [stepOne, setStepOne] = useState(true);
   const [stepTwo, setStepTwo] = useState(false);
   const [stepThree, setStepThree] = useState(false);
 
-
-  
-  
   const formEl = useRef(null);
   const [userName, setUserName] = useState("");
   const [firstName, setFirstName] = useState("");
@@ -29,7 +25,6 @@ export default function RegisterForm() {
   const [disabilities, setDisabilities] = useState("");
 
   const submitHandler = async (e) => {
-
     e.preventDefault();
 
     const data = {
@@ -40,7 +35,7 @@ export default function RegisterForm() {
       disabilities: disabilities,
       email: email,
       password: password,
-      location: location
+      location: location,
     };
 
     try {
@@ -92,7 +87,7 @@ export default function RegisterForm() {
               {" "}
               Benutzername:
               <input
-                onChange={(e)=>setUserName(e.target.value)}
+                onChange={(e) => setUserName(e.target.value)}
                 type="text"
                 name="userName"
                 id="userName"
@@ -102,7 +97,7 @@ export default function RegisterForm() {
             <label htmlFor="">
               Vorname:
               <input
-                onChange={(e)=>setFirstName(e.target.value)}
+                onChange={(e) => setFirstName(e.target.value)}
                 type="text"
                 name="firstName"
                 id="firstName"
@@ -112,7 +107,7 @@ export default function RegisterForm() {
             <label htmlFor="">
               Nachname:
               <input
-                onChange={(e)=>setLastName(e.target.value)}
+                onChange={(e) => setLastName(e.target.value)}
                 type="text"
                 name="lastName"
                 id="lastName"
@@ -122,17 +117,22 @@ export default function RegisterForm() {
             <label htmlFor="">
               Wohnort:
               <input
-                onChange={(e)=>setLocation(e.target.value)}
+                onChange={(e) => setLocation(e.target.value)}
                 type="text"
                 name="location"
                 id="location"
                 required
               />
             </label>
-            <button className="button" onClick={() => {
-              setStepOne(false)
-              setStepTwo(true)
-            }}>Weiter</button>
+            <button
+              className="button"
+              onClick={() => {
+                setStepOne(false);
+                setStepTwo(true);
+              }}
+            >
+              Weiter
+            </button>
           </div>
         ) : (
           ""
@@ -229,9 +229,9 @@ export default function RegisterForm() {
         {isAuth && <Navigate to="/profile" />}
       </p>
       <p>{isLoading ? <strong>Lade – bitte warten...</strong> : null}</p>
-      
-      <NavLink to={"/login"} className="button">bereits registriert?</NavLink>
-      
+      <NavLink to={"/login"} className="button-green">
+        bereits registriert?
+      </NavLink>
     </div>
   );
 }

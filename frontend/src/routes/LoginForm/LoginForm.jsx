@@ -64,17 +64,17 @@ function LoginForm() {
             id="password"
             ref={passwordEl}
           />
-          <input className="button" type="submit" value="einloggen" />
+          <input className="button-green" type="submit" value="einloggen" />
         </form>
       )}
 
       <h2>Sie haben noch kein Konto?</h2>
       <div>
         <p>als neuer Benutzer</p>
-        <NavLink to={"/register"} className="button">Registrieren</NavLink>
+        <NavLink to={"/register"} className="button-green">
+          Registrieren
+        </NavLink>
       </div>
-      
-
 
       {error && <p>Da ist etwas schief gelaufen: {error}</p>}
 

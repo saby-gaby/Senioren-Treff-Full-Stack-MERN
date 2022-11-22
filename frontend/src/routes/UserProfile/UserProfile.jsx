@@ -53,11 +53,14 @@ export default function UserProfil() {
         <div>
           <h2>Meine erstellten Events:</h2>
           {!myEvents ? (
-            <button className="button" onClick={() => setMyEvents(true)}>
+            <button
+              className="button-dark-green"
+              onClick={() => setMyEvents(true)}
+            >
               Ansehen
             </button>
           ) : (
-            <button className="button" onClick={() => setMyEvents(false)}>
+            <button className="button-beige" onClick={() => setMyEvents(false)}>
               Zuklappen
             </button>
           )}
@@ -108,7 +111,7 @@ export default function UserProfil() {
                         alt="test"
                       />
                     )}
-                    <NavLink to={`/event/${ele._id}`} className="button">
+                    <NavLink to={`/event/${ele._id}`} className="button-green">
                       Ansehen
                     </NavLink>
                   </li>
@@ -119,11 +122,17 @@ export default function UserProfil() {
         <div>
           <h2>Meine Merkliste:</h2>
           {!watchedEvents ? (
-            <button className="button" onClick={() => setWatchedEvents(true)}>
+            <button
+              className="button-dark-green"
+              onClick={() => setWatchedEvents(true)}
+            >
               Ansehen
             </button>
           ) : (
-            <button className="button" onClick={() => setWatchedEvents(false)}>
+            <button
+              className="button-beige"
+              onClick={() => setWatchedEvents(false)}
+            >
               Zuklappen
             </button>
           )}
@@ -174,7 +183,7 @@ export default function UserProfil() {
                         alt="test"
                       />
                     )}
-                    <NavLink to={`/event/${ele._id}`} className="button">
+                    <NavLink to={`/event/${ele._id}`} className="button-green">
                       Ansehen
                     </NavLink>
                   </li>
@@ -186,11 +195,17 @@ export default function UserProfil() {
         <div>
           <h3>Meine Daten</h3>
           {!userDetails ? (
-            <button className="button" onClick={() => setUserDetails(true)}>
+            <button
+              className="button-dark-green"
+              onClick={() => setUserDetails(true)}
+            >
               Ansehen
             </button>
           ) : (
-            <button className="button" onClick={() => setUserDetails(false)}>
+            <button
+              className="button-beige"
+              onClick={() => setUserDetails(false)}
+            >
               Zuklappen
             </button>
           )}
@@ -212,7 +227,7 @@ export default function UserProfil() {
 
             <li>Wohnort: {userData.location}</li>
             <li>
-              <NavLink to={`/user/edit`} className="button">
+              <NavLink to={`/user/edit`} className="button-green">
                 Profil bearbeiten
               </NavLink>
             </li>
@@ -220,13 +235,13 @@ export default function UserProfil() {
         ) : null}
       </div>
       <div>
-        <NavLink to={`/event-form`} className="button">
+        <NavLink to={`/event-form`} className="button-green ">
           Eigene Veranstaltung Erstellen
         </NavLink>
       </div>
       <Search />
       <div>
-        <button className="button" onClick={logout}>
+        <button className="button-green" onClick={logout}>
           Abmelden
         </button>
       </div>
