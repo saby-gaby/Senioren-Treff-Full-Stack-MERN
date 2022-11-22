@@ -10,10 +10,40 @@ export default function SearchedEvents() {
 
   const renderEvents = (dataArray) => {
     return dataArray.map((oneEvent, i) => {
+      const categoryImage = () => {
+        let image;
+        switch (oneEvent.category[0]) {
+          case "kultur":
+            image = "/images/kultur.jpg";
+            break;
+          case "sport":
+            image = "/images/sport.jpg";
+            break;
+          case "kurse":
+            image = "/images/kurse.jpg";
+            break;
+          case "spiele":
+            image = "/images/Würfel.jpg";
+            break;
+          case "reisen":
+            image = "/images/reisen.jpeg";
+            break;
+          case "natur":
+            image = "/images/natur.jpg";
+            break;
+          default:
+            image = "/images/default.webp";
+        }
+        return image;
+      };
       return (
         <li key={i}>
           <h3>{oneEvent.eventTitle}</h3>
-          <img src={"http://localhost:6001" + oneEvent.imageUrl} alt="" />
+          {oneEvent.imageUrl ? (
+            <img src={"http://localhost:6001" + oneEvent.imageUrl} alt="" />
+          ) : (
+            <img src={"http://localhost:6001" + categoryImage()} alt="test" />
+          )}
 
           <NavLink to={`/event/${oneEvent._id}`} className="button">
             Ansehen

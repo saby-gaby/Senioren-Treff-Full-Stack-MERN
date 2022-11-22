@@ -52,13 +52,46 @@ export default function OneEvent() {
       console.log(error);
     }
   };
+  const categoryImage = () => {
+    let image;
+    switch (eventData.category) {
+      case "kultur":
+        image = "/images/kultur.jpg";
+        break;
+      case "sport":
+        image = "/images/sport.jpg";
+        break;
+      case "kurse":
+        image = "/images/kurse.jpg";
+        break;
+      case "spiele":
+        image = "/images/Würfel.jpg";
+        break;
+      case "reisen":
+        image = "/images/reisen.jpeg";
+        break;
+      case "natur":
+        image = "/images/natur.jpg";
+        break;
+      default:
+        image = "/images/default.webp";
+    }
+    return image;
+  };
   return (
+    
+
+
     <div>
       <h3>{eventData.eventTitle}</h3>
       <p>
         Eventersteller: {eventData.eventOwner && eventData.eventOwner.userName}{" "}
       </p>
-      <img src={"http://localhost:6001" + eventData.imageUrl} alt="" />
+      {eventData.imageUrl ? (
+            <img src={"http://localhost:6001" + eventData.imageUrl} alt="" />
+          ) : (
+            <img src={"http://localhost:6001" + categoryImage()} alt="test" />
+          )}
       <div>
         <h4>{eventData.category}</h4>
         <p>
