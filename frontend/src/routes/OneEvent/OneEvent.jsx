@@ -111,8 +111,13 @@ export default function OneEvent() {
             })}
         </ul>
       </div>
-      <button onClick={handleSubscribeEvent} className="button">Buchen</button>
-      <button onClick={handleWatchEvent} className="button">Merken</button>
+      <button onClick={handleSubscribeEvent} className="button-green">
+        Buchen
+      </button>
+      <button onClick={handleWatchEvent} className="button-beige">
+        Merken
+      </button>
+      {/* <button onClick={} className="button-beige">Mag ich!</button> */}
     </div>
   );
 }

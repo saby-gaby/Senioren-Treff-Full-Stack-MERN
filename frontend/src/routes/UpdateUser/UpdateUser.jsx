@@ -194,7 +194,8 @@ export default function UpdateUser() {
         </li>
         <li>
           {!editPassword ? (
-            <button className="button"
+            <button
+              className="button-green"
               onClick={() => {
                 setEditPassword(true);
               }}

@@ -7,6 +7,7 @@ export default function Search() {
   const { navigate, isAuth, capitalize } = useContext(SectionsContext);
   const formElement = useRef(null);
   const locationElement = useRef(null);
+
   const defSearch = localStorage.getItem("defSearch").toLowerCase();
 
   const submitHandler = async (e) => {
@@ -57,7 +58,7 @@ export default function Search() {
             type="text"
             placeholder={isAuth ? capitalize(defSearch) : "Dein Ort"}
           />
-          <input className="button" type="submit" value="Los geht's!" />
+          <input className="button-green" type="submit" value="Los geht's!" />
         </form>
       </div>
     </div>
