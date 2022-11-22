@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { SectionsContext } from "../../context/sectionsContext";
 import { NavLink, useParams } from "react-router-dom";
 import CategoryFilter from "../../components/CategoryFilter/CategoryFilter";
@@ -7,7 +7,6 @@ import "./SearchedEvents.css";
 export default function SearchedEvents() {
   const { searchedLocation } = useParams();
   const { foundEvents, categoryArray, capitalize } = useContext(SectionsContext);  
-  const [errorImage, setErrorImage] = useState(false);
 
   const renderEvents = (dataArray) => {
     return dataArray.map((oneEvent, i) => {
