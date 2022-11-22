@@ -24,7 +24,7 @@ function App() {
     <div className="App">
       <header>
         <nav>
-          <ul>
+          <ul className={location.pathname === "/login"?"logo-center":null}>
             <li>
               <NavLink to="/">
                 <img src="logo.svg" />

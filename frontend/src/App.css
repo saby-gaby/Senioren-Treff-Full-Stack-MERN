@@ -31,6 +31,10 @@ nav > ul {
   gap: 1rem;
 }
 
+.logo-center {
+  justify-content: center;
+}
+
 nav > ul li {
   width: max-content;
 }

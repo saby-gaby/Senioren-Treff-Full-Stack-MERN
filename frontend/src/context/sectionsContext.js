@@ -22,6 +22,7 @@ const SectionsProvider = ({ children }) => {
 
   const [foundEvents, setFoundEvents] = useState();
   const [eventLogin, setEventLogin] = useState(false);
+  const [categoryArray, setCategoryArray] = useState();
 
 
   const logout = () => {
@@ -45,6 +46,8 @@ const SectionsProvider = ({ children }) => {
         navigate,
         eventLogin,
         setEventLogin,
+        categoryArray, 
+        setCategoryArray
       }}
     >
       {children}

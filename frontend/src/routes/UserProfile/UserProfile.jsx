@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { SectionsContext } from "../../context/sectionsContext";
 import axiosConfig from "../../util/axiosConfig";
+import Search from "../../components/Search/Search";
 
 export default function UserProfil() {
   const { logout, isAuth } = useContext(SectionsContext);
@@ -9,7 +10,6 @@ export default function UserProfil() {
   const [myEvents, setMyEvents] = useState(false);
   const [watchedEvents, setWatchedEvents] = useState(false);
   const [userDetails, setUserDetails] = useState(false);
-
 
   const userId = localStorage.getItem("userId");
   const [userData, setUserData] = useState({});
@@ -20,6 +20,7 @@ export default function UserProfil() {
     );
     const data = axiosResp.data;
     setUserData(data);
+    localStorage.setItem("defSearch", data.location);
   };
 
   useEffect(() => {
@@ -33,9 +34,13 @@ export default function UserProfil() {
         <div>
           <h2>Meine erstellten Events:</h2>
           {!myEvents ? (
-            <button className="button" onClick={() => setMyEvents(true)}>Ansehen</button>
+            <button className="button" onClick={() => setMyEvents(true)}>
+              Ansehen
+            </button>
           ) : (
-            <button className="button" onClick={() => setMyEvents(false)}>Zuklappen</button>
+            <button className="button" onClick={() => setMyEvents(false)}>
+              Zuklappen
+            </button>
           )}
         </div>
 
@@ -50,7 +55,9 @@ export default function UserProfil() {
                       src={`http://localhost:6001${ele.imageUrl}`}
                       alt={ele.imageUrl}
                     />
-                    <NavLink to={`/event/${ele._id}`} className="button">Ansehen</NavLink>
+                    <NavLink to={`/event/${ele._id}`} className="button">
+                      Ansehen
+                    </NavLink>
                   </li>
                 );
               })}
@@ -59,9 +66,13 @@ export default function UserProfil() {
         <div>
           <h2>Meine Merkliste:</h2>
           {!watchedEvents ? (
-            <button className="button" onClick={() => setWatchedEvents(true)}>Ansehen</button>
+            <button className="button" onClick={() => setWatchedEvents(true)}>
+              Ansehen
+            </button>
           ) : (
-            <button className="button" onClick={() => setWatchedEvents(false)}>Zuklappen</button>
+            <button className="button" onClick={() => setWatchedEvents(false)}>
+              Zuklappen
+            </button>
           )}
         </div>
 
@@ -76,7 +87,9 @@ export default function UserProfil() {
                       src={`http://localhost:6001${ele.imageUrl}`}
                       alt={ele.imageUrl}
                     />
-                    <NavLink to={`/event/${ele._id}`} className="button">Ansehen</NavLink>
+                    <NavLink to={`/event/${ele._id}`} className="button">
+                      Ansehen
+                    </NavLink>
                   </li>
                 );
               })}
@@ -86,9 +99,13 @@ export default function UserProfil() {
         <div>
           <h3>Meine Daten</h3>
           {!userDetails ? (
-            <button className="button" onClick={() => setUserDetails(true)}>Ansehen</button>
+            <button className="button" onClick={() => setUserDetails(true)}>
+              Ansehen
+            </button>
           ) : (
-            <button className="button" onClick={() => setUserDetails(false)}>Zuklappen</button>
+            <button className="button" onClick={() => setUserDetails(false)}>
+              Zuklappen
+            </button>
           )}
         </div>
 
@@ -111,11 +128,15 @@ export default function UserProfil() {
         ) : null}
       </div>
       <div>
-        <NavLink to={`/event-form`} className="button">Eigene Veranstaltung Erstellen</NavLink>
+        <NavLink to={`/event-form`} className="button">
+          Eigene Veranstaltung Erstellen
+        </NavLink>
       </div>
-
+      <Search />
       <div>
-        <button className="button" onClick={logout}>Abmelden</button>
+        <button className="button" onClick={logout}>
+          Abmelden
+        </button>
       </div>
     </div>
   );
