@@ -37,6 +37,7 @@ export default function SearchedEvents() {
         }
         return image;
       };
+      
       return (
         <li key={i}>
           <h3>{oneEvent.eventTitle}</h3>

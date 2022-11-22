@@ -78,10 +78,9 @@ export default function OneEvent() {
     }
     return image;
   };
+
+  
   return (
-    
-
-
     <div>
       <h3>{eventData.eventTitle}</h3>
       <p>
