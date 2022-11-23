@@ -13,7 +13,18 @@ function LoginForm() {
   const usernameEL = useRef(null);
   const passwordEl = useRef(null);
 
-  const handleSuccessfulLogin = (respData) => {
+
+  const getUserData = async (respData) => {
+    const axiosResp = await axiosConfig.get(
+      `http://localhost:6001/user/${respData}`
+    );
+    return axiosResp.data.location;
+  };
+
+
+
+  const handleSuccessfulLogin = async(respData) => {
+    localStorage.setItem("defSearch", await getUserData(respData.userId));
     setIsAuth(true);
     localStorage.setItem("userName", respData.userName);
     localStorage.setItem("userId", respData.userId);

@@ -29,8 +29,8 @@ export default function UpdateUser() {
       `http://localhost:6001/user/${userId}`
     );
     const data = axiosResp.data;
-    setUserData(data);
-    localStorage.setItem("defSearch", data.location);
+    setUserData(data);/* 
+    localStorage.setItem("defSearch", data.location); */
   };
 
   const updateUser = async (data) => {
@@ -164,6 +164,7 @@ export default function UpdateUser() {
                 const data = { location: location };
                 updateUser(data);
                 getUserData();
+                localStorage.setItem("defSearch", data.location)
               }}
             />
           )}

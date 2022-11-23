@@ -10,7 +10,7 @@ export default function Search() {
 
   let defSearch;
   if(isAuth){
-    defSearch = localStorage.getItem("defSearch").toLowerCase();
+    defSearch = localStorage.getItem("defSearch");
   }
 
   const submitHandler = async (e) => {

@@ -19,7 +19,6 @@ export default function UserProfil() {
     );
     const data = axiosResp.data;
     setUserData(data);
-    localStorage.setItem("defSearch", data.location);
   };
 
   useEffect(() => {
