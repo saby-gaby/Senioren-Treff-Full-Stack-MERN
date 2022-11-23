@@ -5,9 +5,10 @@ import axiosConfig from "../../util/axiosConfig";
 import Search from "../../components/Search/Search";
 
 export default function UserProfil() {
-  const { logout, isAuth, userData, setUserData } = useContext(SectionsContext);
+  const { logout, isAuth, userData, setUserData, myEvent, setMyEvent } =
+    useContext(SectionsContext);
 
-  const [myEvents, setMyEvents] = useState(false);
+  const [showMyEvents, setShowMyEvents] = useState(false);
   const [watchedEvents, setWatchedEvents] = useState(false);
   const [userDetails, setUserDetails] = useState(false);
 
@@ -52,21 +53,24 @@ export default function UserProfil() {
       <div>
         <div>
           <h2>Meine erstellten Events:</h2>
-          {!myEvents ? (
+          {!showMyEvents ? (
             <button
               className="button-dark-green"
-              onClick={() => setMyEvents(true)}
+              onClick={() => setShowMyEvents(true)}
             >
               Ansehen
             </button>
           ) : (
-            <button className="button-beige" onClick={() => setMyEvents(false)}>
+            <button
+              className="button-beige"
+              onClick={() => setShowMyEvents(false)}
+            >
               Zuklappen
             </button>
           )}
         </div>
 
-        {myEvents ? (
+        {showMyEvents ? (
           <ul>
             {userData.myEvents &&
               userData.myEvents.map((ele, i) => {
@@ -101,17 +105,28 @@ export default function UserProfil() {
                   <li key={i}>
                     <h4>{ele.eventTitle}</h4>
                     {ele.imageUrl ? (
-                      <img src={"http://localhost:6001" + ele.imageUrl} alt="image not found" onError={({ currentTarget }) => {
-                        currentTarget.onerror = null;
-                        currentTarget.src= `http://localhost:6001${categoryImage()}`;
-                      }} />
+                      <img
+                        src={"http://localhost:6001" + ele.imageUrl}
+                        alt="image not found"
+                        onError={({ currentTarget }) => {
+                          currentTarget.onerror = null;
+                          currentTarget.src = `http://localhost:6001${categoryImage()}`;
+                        }}
+                      />
                     ) : (
                       <img
                         src={"http://localhost:6001" + categoryImage()}
                         alt="test"
                       />
                     )}
-                    <NavLink to={`/event/${ele._id}`} className="button-green">
+                    <NavLink
+                      to={`/event/${ele._id}`}
+                      onClick={() => {
+                        setMyEvent(true);
+                        console.log(myEvent);
+                      }}
+                      className="button-green"
+                    >
                       Ansehen
                     </NavLink>
                   </li>
@@ -173,10 +188,14 @@ export default function UserProfil() {
                   <li key={i}>
                     <h4>{ele.eventTitle}</h4>
                     {ele.imageUrl ? (
-                      <img src={"http://localhost:6001" + ele.imageUrl} alt="image not found" onError={({ currentTarget }) => {
-                        currentTarget.onerror = null;
-                        currentTarget.src= `http://localhost:6001${categoryImage()}`;
-                      }} />
+                      <img
+                        src={"http://localhost:6001" + ele.imageUrl}
+                        alt="image not found"
+                        onError={({ currentTarget }) => {
+                          currentTarget.onerror = null;
+                          currentTarget.src = `http://localhost:6001${categoryImage()}`;
+                        }}
+                      />
                     ) : (
                       <img
                         src={"http://localhost:6001" + categoryImage()}

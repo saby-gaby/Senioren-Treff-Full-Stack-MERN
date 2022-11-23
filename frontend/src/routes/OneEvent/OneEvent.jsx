@@ -1,11 +1,14 @@
 import React, { useEffect, useState, useContext } from "react";
 import axiosConfig from "../../util/axiosConfig";
-import { useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import "./OneEvent.css";
+import { SectionsContext } from "../../context/sectionsContext";
 
 export default function OneEvent() {
   const { id } = useParams();
   const eventId = id;
+
+  const { myEvent, setMyEvent } = useContext(SectionsContext);
 
   const [eventData, setEventData] = useState({});
   const getEventData = () => {
@@ -79,7 +82,6 @@ export default function OneEvent() {
     return image;
   };
 
-  
   return (
     <div>
       <h3>{eventData.eventTitle}</h3>
@@ -87,13 +89,17 @@ export default function OneEvent() {
         Eventersteller: {eventData.eventOwner && eventData.eventOwner.userName}{" "}
       </p>
       {eventData.imageUrl ? (
-            <img src={"http://localhost:6001" + eventData.imageUrl} alt="image not found" onError={({ currentTarget }) => {
-              currentTarget.onerror = null;
-              currentTarget.src= `http://localhost:6001${categoryImage()}`;
-            }} />
-          ) : (
-            <img src={"http://localhost:6001" + categoryImage()} alt="test" />
-          )}
+        <img
+          src={"http://localhost:6001" + eventData.imageUrl}
+          alt="image not found"
+          onError={({ currentTarget }) => {
+            currentTarget.onerror = null;
+            currentTarget.src = `http://localhost:6001${categoryImage()}`;
+          }}
+        />
+      ) : (
+        <img src={"http://localhost:6001" + categoryImage()} alt="test" />
+      )}
       <div>
         <h4>{eventData.category}</h4>
         <p>
@@ -119,7 +125,17 @@ export default function OneEvent() {
       <button onClick={handleWatchEvent} className="button-beige">
         Merken
       </button>
-      {/* <button onClick={} className="button-beige">Mag ich!</button> */}
+      {myEvent ? (
+        <NavLink
+          to={`/event-edit/${eventData._id}`}
+          onClick={() => {
+            setMyEvent(false);
+          }}
+          className="button-green"
+        >
+          bearbeiten
+        </NavLink>
+      ) : null}
     </div>
   );
 }

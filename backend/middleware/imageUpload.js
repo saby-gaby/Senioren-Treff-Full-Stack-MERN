@@ -7,8 +7,10 @@ export const imageUpload = async (req, res, next) => {
     const imageName = `${uuidv4()}_${image.name}`;
     image.mv(`./images/${imageName}`);
     req.body.imageUrl = `/images/${imageName}`;
+  } else if (!req.files) {
+    next();
   } else {
-    console.log("da ist etwas schief gelaufen beim UploadImage");
+    console.error("da ist etwas schief gelaufen beim UploadImage");
   }
   next();
 };
