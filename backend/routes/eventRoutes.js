@@ -24,8 +24,8 @@ router
   .route("/event/:id")
   .get(getEventById)
   .delete(isAuth, deleteEventById)
-  .patch(isAuth, updateEventById);
-// .post(isAuth, addSubscribers);
+  .patch(isAuth, imageUpload, updateEventById)
+  .post(isAuth, addSubscribers);
 
 router.route("/event/subscribe/:id").patch(isAuth, addSubscribers);
 

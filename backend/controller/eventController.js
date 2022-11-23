@@ -42,8 +42,10 @@ export const deleteEventById = async (req, res) => {
 
 export const createEvent = async (req, res) => {
   try {
-    req.body.location=JSON.parse(req.body.location);
-    req.body.location = req.body.location.map(city=>city.trim().toLowerCase());
+    req.body.location = JSON.parse(req.body.location);
+    req.body.location = req.body.location.map((city) =>
+      city.trim().toLowerCase()
+    );
     const newEvent = await EventModel.create(req.body);
     const passedToken = req.cookies.jwt;
     const decodedToken = jwt.verify(passedToken, process.env.TOKEN_SECRET);
@@ -63,6 +65,7 @@ export const updateEventById = async (req, res) => {
   try {
     const getEvent = await EventModel.findById(req.params.id);
     await EventModel.updateOne({ _id: req.params.id }, req.body);
+
     res.status(206).send(`event: ${getEvent.eventTitle} successfully updated`);
   } catch (error) {
     res.status(401).send(error.message);

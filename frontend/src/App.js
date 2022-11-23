@@ -11,6 +11,7 @@ import SearchedEvents from "./routes/SearchedEvents/SearchedEvents";
 import UserProfile from "./routes/UserProfile/UserProfile";
 import Page404 from "./routes/Page404/Page404";
 import UpdateUser from "./routes/UpdateUser/UpdateUser";
+import UpdateEvent from "./routes/UpdateEvent/UpdateEvent";
 
 function App() {
   const { isAuth } = useContext(SectionsContext);
@@ -25,7 +26,7 @@ function App() {
     <div className="App">
       <header>
         <nav>
-          <ul className={location.pathname === "/login"?"logo-center":null}>
+          <ul className={location.pathname === "/login" ? "logo-center" : null}>
             <li>
               <NavLink to="/">
                 <img src="logo.svg" />
@@ -33,10 +34,24 @@ function App() {
             </li>
             {location.pathname !== "/login" && (
               <li>
-                {isAuth && location.pathname === "/profile" && <span className="text">Mein Bereich</span>}
-                {(isAuth && location.pathname !== "/profile" && location.pathname !== "/register") && <NavLink to="/profile" className="navBtn">Mein Bereich</NavLink>}
-                {location.pathname === "/register" && <span className="text">Registrieren</span>}
-                {(!isAuth && location.pathname !=="/register" ) && <NavLink to="/login" className="navBtn">Anmelden / Registrieren</NavLink>}
+                {isAuth && location.pathname === "/profile" && (
+                  <span className="text">Mein Bereich</span>
+                )}
+                {isAuth &&
+                  location.pathname !== "/profile" &&
+                  location.pathname !== "/register" && (
+                    <NavLink to="/profile" className="navBtn">
+                      Mein Bereich
+                    </NavLink>
+                  )}
+                {location.pathname === "/register" && (
+                  <span className="text">Registrieren</span>
+                )}
+                {!isAuth && location.pathname !== "/register" && (
+                  <NavLink to="/login" className="navBtn">
+                    Anmelden / Registrieren
+                  </NavLink>
+                )}
               </li>
             )}
           </ul>
@@ -57,10 +72,14 @@ function App() {
           <Route path="/register" element={<RegisterForm />} />
           <Route path="/event-form" element={<EventForm />} />
           <Route path="/event/:id" element={<OneEvent />} />
-          <Route path="/events/:searchedLocation" element={<SearchedEvents />} />
+          <Route
+            path="/events/:searchedLocation"
+            element={<SearchedEvents />}
+          />
           <Route path="/profile" element={<UserProfile />} />
           <Route path="/*" element={<Page404 />} />
           <Route path="/user/edit" element={<UpdateUser />} />
+          <Route path="/event-edit/:id" element={<UpdateEvent />} />
         </Routes>
       </main>
     </div>
