@@ -8,7 +8,7 @@ export const imageUpload = async (req, res, next) => {
     image.mv(`./images/${imageName}`);
     req.body.imageUrl = `/images/${imageName}`;
   } else if (!req.files) {
-    next();
+    console.log("Event erfolgreich geändert")
   } else {
     console.error("da ist etwas schief gelaufen beim UploadImage");
   }

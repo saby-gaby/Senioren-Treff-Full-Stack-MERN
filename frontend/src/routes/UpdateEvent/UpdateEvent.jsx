@@ -45,9 +45,10 @@ export default function UpdateEvent() {
 
   const updateEvent = async (ele) => {
     const axiosResp = await axiosConfig.patch(`/event/${id}`, ele);
-    console.log(axiosResp.data);
+    
     setRefreshData(axiosResp.data);
     refreshData ? getEventData() : getEventData();
+    return console.log(axiosResp.data);
   };
 
   const updateImage = async (e) => {
