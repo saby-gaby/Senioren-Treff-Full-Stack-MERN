@@ -8,7 +8,10 @@ export default function Search() {
   const formElement = useRef(null);
   const locationElement = useRef(null);
 
-  const defSearch = localStorage.getItem("defSearch").toLowerCase();
+  let defSearch;
+  if(isAuth){
+    defSearch = localStorage.getItem("defSearch").toLowerCase();
+  }
 
   const submitHandler = async (e) => {
     e.preventDefault();
