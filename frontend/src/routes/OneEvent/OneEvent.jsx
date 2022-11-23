@@ -87,7 +87,10 @@ export default function OneEvent() {
         Eventersteller: {eventData.eventOwner && eventData.eventOwner.userName}{" "}
       </p>
       {eventData.imageUrl ? (
-            <img src={"http://localhost:6001" + eventData.imageUrl} alt="" />
+            <img src={"http://localhost:6001" + eventData.imageUrl} alt="image not found" onError={({ currentTarget }) => {
+              currentTarget.onerror = null;
+              currentTarget.src= `http://localhost:6001${categoryImage()}`;
+            }} />
           ) : (
             <img src={"http://localhost:6001" + categoryImage()} alt="test" />
           )}

@@ -101,10 +101,10 @@ export default function UserProfil() {
                   <li key={i}>
                     <h4>{ele.eventTitle}</h4>
                     {ele.imageUrl ? (
-                      <img
-                        src={"http://localhost:6001" + ele.imageUrl}
-                        alt=""
-                      />
+                      <img src={"http://localhost:6001" + ele.imageUrl} alt="image not found" onError={({ currentTarget }) => {
+                        currentTarget.onerror = null;
+                        currentTarget.src= `http://localhost:6001${categoryImage()}`;
+                      }} />
                     ) : (
                       <img
                         src={"http://localhost:6001" + categoryImage()}
@@ -173,10 +173,10 @@ export default function UserProfil() {
                   <li key={i}>
                     <h4>{ele.eventTitle}</h4>
                     {ele.imageUrl ? (
-                      <img
-                        src={"http://localhost:6001" + ele.imageUrl}
-                        alt=""
-                      />
+                      <img src={"http://localhost:6001" + ele.imageUrl} alt="image not found" onError={({ currentTarget }) => {
+                        currentTarget.onerror = null;
+                        currentTarget.src= `http://localhost:6001${categoryImage()}`;
+                      }} />
                     ) : (
                       <img
                         src={"http://localhost:6001" + categoryImage()}
