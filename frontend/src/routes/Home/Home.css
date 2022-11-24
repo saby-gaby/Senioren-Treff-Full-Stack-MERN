@@ -1,1 +1,34 @@
+.Home {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  margin-top: 2rem;
+}
 
+.Home > .create {
+  width: 80%;
+  min-width: 400px;
+  max-width: 800px;
+  background-color: var(--beige-transparent-color);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 1.5rem;
+  color: var(--dark-green-color);
+}
+
+.Home > .create h2 {
+  max-width: 80%;
+  text-align: center;
+  font-size: 3rem;
+}
+
+@media screen and (max-width: 768px) {
+  .Home > .create h2 {
+    font-size: 1.5rem;
+  }
+}

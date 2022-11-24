@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <div className="Home">
       <Search />
-      <div>
+      <div className="create">
         <h2>Veranstaltung erstellen</h2>
         {isAuth ? (
           <NavLink to="/event-form" className="button-green">

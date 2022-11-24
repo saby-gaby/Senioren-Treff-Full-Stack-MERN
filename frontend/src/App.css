@@ -16,14 +16,26 @@
   display: flex;
 }
 
+.App{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 header {
+  width: 100%;
   background-color: #011b1080;
   padding: 0.5rem 1rem;
   min-width: max-content;
   max-height: 20vmin;
 }
 
+nav{ 
+  width: 100%;
+}
+
 nav > ul {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   list-style-type: none;
@@ -37,10 +49,13 @@ nav > ul {
 
 nav > ul li {
   width: max-content;
+  display: flex;
 }
 
 nav img {
   max-height: 18vmin;
+  display: flex;
+  justify-content: flex-start;
 }
 
 .navBtn {
@@ -50,11 +65,21 @@ nav img {
   width: max-content;
   font-size: 1.5rem;
   font-weight: bold;
-  padding: 1rem;
+  padding: 1rem 0.5rem;
   outline: 2px solid #004200;
   border-radius: 0.75rem;
 }
 
 .text {
   color: #f4e3d7;
+}
+
+main {
+  width: 100%;
+}
+
+@media screen and (max-width:768px) {
+  nav img {
+    height: 12vmin;
+  }
 }
