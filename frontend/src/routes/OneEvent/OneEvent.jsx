@@ -11,6 +11,8 @@ export default function OneEvent() {
   const { myEvent, setMyEvent } = useContext(SectionsContext);
 
   const [eventData, setEventData] = useState({});
+  const [eventCategories, setEventCategories] = useState(null)
+
   const getEventData = () => {
     const getEventById = async () => {
       const axiosResp = await axiosConfig.get(
@@ -18,6 +20,7 @@ export default function OneEvent() {
       );
       const data = axiosResp.data;
       setEventData(data);
+      setEventCategories(data.category.join(", "))
     };
     getEventById();
   };
@@ -81,7 +84,6 @@ export default function OneEvent() {
     }
     return image;
   };
-
   return (
     <div>
       <h3>{eventData.eventTitle}</h3>
@@ -101,7 +103,7 @@ export default function OneEvent() {
         <img src={"http://localhost:6001" + categoryImage()} alt="test" />
       )}
       <div>
-        <h4>{eventData.category}</h4>
+        <h4>{eventCategories}</h4>
         <p>
           {eventData.location} {new Date(eventData.date).toLocaleDateString()}{" "}
           {eventData.time} Uhr
