@@ -1,5 +1,4 @@
 import { Schema, model } from "mongoose";
-import UserModel from "./UserModel.js";
 
 const eventSchema = new Schema({
   eventTitle: {
@@ -50,6 +49,7 @@ const eventSchema = new Schema({
     {
       type: Schema.Types.ObjectId,
       ref: "user",
+      unique: true
     },
   ],
   eventOwner: {
