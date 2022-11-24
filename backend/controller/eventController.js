@@ -42,6 +42,7 @@ export const deleteEventById = async (req, res) => {
 
 export const createEvent = async (req, res) => {
   try {
+    req.body.category = JSON.parse(req.body.category);
     req.body.location = JSON.parse(req.body.location);
     req.body.location = req.body.location.map((city) =>
       city.trim().toLowerCase()
