@@ -41,19 +41,21 @@ const eventSchema = new Schema({
   createdAt: {
     type: Date,
     immutable: true,
-    default: () => new Date()
+    default: () => new Date(),
   },
   updatedAt: {
-    type: Date
+    type: Date,
   },
-  subscribers: [{
-    type: Schema.Types.ObjectId,
-    ref: "user"
-  }],
+  subscribers: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "user",
+    },
+  ],
   eventOwner: {
     type: Schema.Types.ObjectId,
-    ref: "user"
-  }
+    ref: "user",
+  },
 });
 
 eventSchema.pre(["save"], function (next) {
@@ -63,10 +65,9 @@ eventSchema.pre(["save"], function (next) {
 });
 
 eventSchema.pre(["updateOne", "findOneAndUpdate"], function (next) {
-  console.debug('updateOne aufgerufen');
-  next()
-})
-
+  console.debug("updateOne aufgerufen");
+  next();
+});
 
 const EventModel = model("event", eventSchema);
 

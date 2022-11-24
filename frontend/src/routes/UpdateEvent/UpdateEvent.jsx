@@ -18,7 +18,7 @@ export default function UpdateEvent() {
   const [editImage, setEditImage] = useState(false);
 
   const [eventTitle, setEventTitle] = useState("");
-  const [eventCategory, setEventCategory] = useState("");
+  const [eventCategory, setEventCategory] = useState({ categories: [] });
   const [eventLocation, setEventLocation] = useState("");
   const [eventDate, setEventDate] = useState("");
   const [eventTime, setEventTime] = useState("");
@@ -26,6 +26,16 @@ export default function UpdateEvent() {
   const [eventParticipants, setEventParticipants] = useState("");
   const [eventDescription, setEventDescription] = useState("");
   const [eventImage, setEventImage] = useState("");
+
+  const handleChange = (event) => {
+    const { value, checked } = event.target;
+    const { categories } = eventCategory;
+    if (checked) {
+      setEventCategory({ categories: [...categories, value] });
+    } else {
+      setEventCategory({ categories: categories.filter((e) => e !== value) });
+    }
+  };
 
   const getEventData = () => {
     const getEventById = async () => {
@@ -45,7 +55,7 @@ export default function UpdateEvent() {
 
   const updateEvent = async (ele) => {
     const axiosResp = await axiosConfig.patch(`/event/${id}`, ele);
-    
+
     setRefreshData(axiosResp.data);
     refreshData ? getEventData() : getEventData();
     return console.log(axiosResp.data);
@@ -104,12 +114,74 @@ export default function UpdateEvent() {
           {!editCategory ? (
             eventData.category
           ) : (
-            <input
-              type="text"
-              onChange={(e) => setEventCategory(e.target.value)}
-              id=""
-            />
-          )}{" "}
+            <>
+              <fieldset>
+                <legend>wähle deine Kategorien</legend>
+                <div>
+                  <input
+                    type="checkbox"
+                    id="sport"
+                    name="sport"
+                    value="sport"
+                    onChange={handleChange}
+                  />
+                  <label htmlFor="sport">Sport</label>
+                </div>
+
+                <div>
+                  <input
+                    type="checkbox"
+                    id="kurse"
+                    name="kurse"
+                    value="kurse"
+                    onChange={handleChange}
+                  />
+                  <label htmlFor="kurse">Kurse</label>
+                </div>
+
+                <div>
+                  <input
+                    type="checkbox"
+                    id="kultur"
+                    name="kultur"
+                    value="kultur"
+                    onChange={handleChange}
+                  />
+                  <label htmlFor="kultur">Kultur</label>
+                </div>
+                <div>
+                  <input
+                    type="checkbox"
+                    id="reisen"
+                    name="reisen"
+                    value="reisen"
+                    onChange={handleChange}
+                  />
+                  <label htmlFor="reisen">Reisen</label>
+                </div>
+                <div>
+                  <input
+                    type="checkbox"
+                    id="natur"
+                    name="natur"
+                    value="natur"
+                    onChange={handleChange}
+                  />
+                  <label htmlFor="natur">Natur</label>
+                </div>
+                <div>
+                  <input
+                    type="checkbox"
+                    id="spiele"
+                    name="spiele"
+                    value="spiele"
+                    onChange={handleChange}
+                  />
+                  <label htmlFor="spiele">Spiele</label>
+                </div>
+              </fieldset>
+            </>
+          )}
           {!editCategory ? (
             <EditOutlined
               onClick={() => {
@@ -120,7 +192,7 @@ export default function UpdateEvent() {
             <SaveOutlined
               onClick={() => {
                 setEditCategory(false);
-                const data = { category: eventCategory };
+                const data = { category: eventCategory.categories };
                 updateEvent(data);
               }}
             />

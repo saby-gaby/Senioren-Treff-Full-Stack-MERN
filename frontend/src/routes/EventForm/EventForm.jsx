@@ -5,7 +5,7 @@ import "./EventForm.css";
 export default function EventForm() {
   const [file, setFile] = useState(null);
   const [eventTitle, setEventTitle] = useState(null);
-  const [eventCategory, setCategory] = useState(null);
+  const [eventCategory, setEventCategory] = useState({ categories: [] });
   const [eventDate, setDate] = useState(null);
   const [eventTime, setTime] = useState(null);
   const [eventLocation, setLocation] = useState(null);
@@ -13,17 +13,28 @@ export default function EventForm() {
   const [eventPrice, setPrice] = useState(null);
   const [eventDescription, setDescription] = useState(null);
 
+  const handleChange = (event) => {
+    const { value, checked } = event.target;
+    const { categories } = eventCategory;
+    if (checked) {
+      setEventCategory({ categories: [...categories, value] });
+    } else {
+      setEventCategory({ categories: categories.filter((e) => e !== value) });
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const formData = new FormData(e.target);
-    console.log(formData);
+    console.debug(eventCategory);
     try {
       const response = await axiosConfig.post(
         "/event",
         {
           image: formData.get("image"),
           eventTitle: eventTitle,
-          category: eventCategory,
+          category: JSON.stringify(eventCategory.categories),
           date: eventDate,
           time: eventTime,
           location: JSON.stringify(eventLocation),
@@ -38,7 +49,8 @@ export default function EventForm() {
           },
         }
       );
-      console.log(response.data);
+
+      console.log("reponsData", response.data);
       alert("Event wurde erfolgreich erstellt!");
     } catch (error) {
       console.error(error);
@@ -66,24 +78,71 @@ export default function EventForm() {
             }}
           />
         </label>
-        <label>
-          Kategorie:
-          <select
-            name="category"
-            id="category"
-            onChange={(e) => {
-              setCategory(e.target.value);
-            }}
-          >
-            <option value="none">-----</option>
-            <option value="sport">Sport</option>
-            <option value="kurse">Kurse</option>
-            <option value="kultur">Kultur</option>
-            <option value="reisen">Reisen</option>
-            <option value="natur">Natur</option>
-            <option value="spiele">Spiele</option>
-          </select>
-        </label>
+        <fieldset>
+          <legend>Veranstaltungs - Kategorien: </legend>
+          <div>
+            <input
+              type="checkbox"
+              id="sport"
+              name="sport"
+              value="sport"
+              onChange={handleChange}
+            />
+            <label htmlFor="sport">Sport</label>
+          </div>
+
+          <div>
+            <input
+              type="checkbox"
+              id="kurse"
+              name="kurse"
+              value="kurse"
+              onChange={handleChange}
+            />
+            <label htmlFor="kurse">Kurse</label>
+          </div>
+
+          <div>
+            <input
+              type="checkbox"
+              id="kultur"
+              name="kultur"
+              value="kultur"
+              onChange={handleChange}
+            />
+            <label htmlFor="kultur">Kultur</label>
+          </div>
+          <div>
+            <input
+              type="checkbox"
+              id="reisen"
+              name="reisen"
+              value="reisen"
+              onChange={handleChange}
+            />
+            <label htmlFor="reisen">Reisen</label>
+          </div>
+          <div>
+            <input
+              type="checkbox"
+              id="natur"
+              name="natur"
+              value="natur"
+              onChange={handleChange}
+            />
+            <label htmlFor="natur">Natur</label>
+          </div>
+          <div>
+            <input
+              type="checkbox"
+              id="spiele"
+              name="spiele"
+              value="spiele"
+              onChange={handleChange}
+            />
+            <label htmlFor="spiele">Spiele</label>
+          </div>
+        </fieldset>
         <label>
           Ort:
           <input

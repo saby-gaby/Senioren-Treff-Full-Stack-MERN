@@ -18,7 +18,7 @@ const router = new Router();
 router
   .route("/event")
   .get(getAllEvents)
-  .post(isAuth, validator, imageUpload, eventValidationSchema, createEvent);
+  .post(isAuth, eventValidationSchema, validator, imageUpload, createEvent);
 
 router
   .route("/event/:id")
