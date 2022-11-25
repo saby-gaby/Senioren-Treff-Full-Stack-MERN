@@ -11,6 +11,7 @@ export default function UserProfil() {
   const [showMyEvents, setShowMyEvents] = useState(false);
   const [watchedEvents, setWatchedEvents] = useState(false);
   const [userDetails, setUserDetails] = useState(false);
+  const [bookedEvents, setBookedEvents] = useState(false);
 
   const userId = localStorage.getItem("userId");
 
@@ -151,11 +152,87 @@ export default function UserProfil() {
             </button>
           )}
         </div>
+        <div>
+          <h2>gebuchte Veranstaltungen:</h2>
+          {!bookedEvents ? (
+            <button
+              className="button-dark-green"
+              onClick={() => setBookedEvents(true)}
+            >
+              Ansehen
+            </button>
+          ) : (
+            <button
+              className="button-beige"
+              onClick={() => setBookedEvents(false)}
+            >
+              Zuklappen
+            </button>
+          )}
+        </div>
 
         {watchedEvents ? (
           <ul>
             {userData.watchedEvents &&
               userData.watchedEvents.map((ele, i) => {
+                const categoryImage = () => {
+                  let image;
+                  switch (ele.category[0]) {
+                    case "kultur":
+                      image = "/images/kultur.jpg";
+                      break;
+                    case "sport":
+                      image = "/images/sport.jpg";
+                      break;
+                    case "kurse":
+                      image = "/images/kurse.jpg";
+                      break;
+                    case "spiele":
+                      image = "/images/Würfel.jpg";
+                      break;
+                    case "reisen":
+                      image = "/images/reisen.jpeg";
+                      break;
+                    case "natur":
+                      image = "/images/natur.jpg";
+                      break;
+                    default:
+                      image = "/images/default.webp";
+                  }
+                  return image;
+                };
+
+                return (
+                  <li key={i}>
+                    <h4>{ele.eventTitle}</h4>
+                    {ele.imageUrl ? (
+                      <img
+                        src={"http://localhost:6001" + ele.imageUrl}
+                        alt="image not found"
+                        onError={({ currentTarget }) => {
+                          currentTarget.onerror = null;
+                          currentTarget.src = `http://localhost:6001${categoryImage()}`;
+                        }}
+                      />
+                    ) : (
+                      <img
+                        src={"http://localhost:6001" + categoryImage()}
+                        alt="test"
+                      />
+                    )}
+                    <NavLink to={`/event/${ele._id}`} className="button-green">
+                      Ansehen
+                    </NavLink>
+                  </li>
+                );
+              })}
+          </ul>
+        ) : null}
+
+        {bookedEvents ? (
+          <ul>
+            {userData.bookedEvents &&
+              userData.bookedEvents.map((ele, i) => {
                 const categoryImage = () => {
                   let image;
                   switch (ele.category[0]) {

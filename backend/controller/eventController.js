@@ -51,10 +51,10 @@ export const createEvent = async (req, res) => {
     const passedToken = req.cookies.jwt;
     const decodedToken = jwt.verify(passedToken, process.env.TOKEN_SECRET);
 
-    await UserModel.findOneAndUpdate(
-      { _id: decodedToken.userId },
-      { myEvents: newEvent._id }
-    );
+    const user = await UserModel.findById(decodedToken.userId);
+    user.myEvents.push(newEvent._id);
+    await user.save()
+
 
     res.status(201).send(newEvent);
   } catch (error) {
@@ -77,11 +77,13 @@ export const addSubscribers = async (req, res) => {
   try {
     const getEvent = await EventModel.findById(req.params.id);
     getEvent.subscribers.push(req.body.subscribers);
-    // await EventModel.updateOne(
-    //   { _id: req.params.id },
-    //   { subscribers: req.body.subscribers }
-    // );
     await getEvent.save();
+
+    const getUser = await UserModel.findById(req.body.subscribers);
+    getUser.bookedEvents.push(req.params.id);
+    await getUser.save();
+
+
     res.send(getEvent);
   } catch (error) {
     res.status(401).send(error.message);
