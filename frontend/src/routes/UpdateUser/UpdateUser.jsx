@@ -50,7 +50,7 @@ export default function UpdateUser() {
           {!editUserName ? (
             userData.userName
           ) : (
-            <input type="text" onChange={(e) => setUserName(e.target.value)} />
+            <input type="text" defaultValue={userData.userName} onChange={(e) => setUserName(e.target.value)} />
           )}{" "}
           {!editUserName ? (
             <EditOutlined
@@ -74,7 +74,7 @@ export default function UpdateUser() {
           {!editFirstName ? (
             userData.firstName
           ) : (
-            <input type="text" onChange={(e) => setFirstName(e.target.value)} />
+            <input type="text" defaultValue={userData.firstName} onChange={(e) => setFirstName(e.target.value)} />
           )}{" "}
           {!editFirstName ? (
             <EditOutlined
@@ -164,7 +164,7 @@ export default function UpdateUser() {
                 const data = { location: location };
                 updateUser(data);
                 getUserData();
-                localStorage.setItem("defSearch", data.location)
+                localStorage.setItem("defSearch", data.location.toLowerCase())
               }}
             />
           )}
