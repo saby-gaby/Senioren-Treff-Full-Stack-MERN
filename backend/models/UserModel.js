@@ -56,6 +56,12 @@ const userSchema = new Schema({
       ref: "event",
     },
   ],
+  bookedEvents: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "event",
+    },
+  ],
 });
 
 userSchema.pre(["save"], function (next) {

@@ -78,6 +78,12 @@ export const addSubscribers = async (req, res) => {
     const getEvent = await EventModel.findById(req.params.id);
     getEvent.subscribers.push(req.body.subscribers);
     await getEvent.save();
+
+    const getUser = await UserModel.findById(req.body.subscribers);
+    getUser.bookedEvents.push(req.params.id);
+    await getUser.save();
+
+
     res.send(getEvent);
   } catch (error) {
     res.status(401).send(error.message);

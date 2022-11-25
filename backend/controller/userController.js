@@ -74,7 +74,8 @@ export const getUserByID = async (req, res) => {
   try {
     const getUser = await UserModel.findById(req.params.id)
       .populate("myEvents")
-      .populate("watchedEvents");
+      .populate("watchedEvents")
+      .populate("bookedEvents");
 
     res.status(200).send(getUser);
   } catch (error) {
@@ -90,6 +91,7 @@ export const deleteUserByID = async (req, res) => {
     res.status(404).send(error.message);
   }
 };
+
 export const updateUserByID = async (req, res) => {
   try {
     const getUser = await UserModel.findById(req.params.id);
@@ -106,8 +108,6 @@ export const updateUserByID = async (req, res) => {
     res.status(404).send(error.message);
   }
 };
-
-// Event auf die Merkliste setzen
 
 export const addToWatchList = async (req, res) => {
   try {
