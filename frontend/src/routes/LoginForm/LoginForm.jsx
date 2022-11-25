@@ -18,7 +18,8 @@ function LoginForm() {
     const axiosResp = await axiosConfig.get(
       `http://localhost:6001/user/${respData}`
     );
-    return axiosResp.data.location;
+    const defSearch = axiosResp.data.location.toLowerCase()
+    return defSearch;
   };
 
 
@@ -32,11 +33,15 @@ function LoginForm() {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-
-    const data = {
-      userName: usernameEL.current.value,
-      password: passwordEl.current.value,
-    };
+    let data;
+    if(usernameEL.current.value && passwordEl.current.value){
+      data = {
+        userName: usernameEL.current.value,
+        password: passwordEl.current.value,
+      }
+      }else {
+        alert("bitte tragen sie username und passwort ein")
+      }
     try {
       setIsLoading(true);
       const axiosResp = await axiosConfig.post("/user/login", data);
