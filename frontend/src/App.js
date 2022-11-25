@@ -12,6 +12,7 @@ import UserProfile from "./routes/UserProfile/UserProfile";
 import Page404 from "./routes/Page404/Page404";
 import UpdateUser from "./routes/UpdateUser/UpdateUser";
 import UpdateEvent from "./routes/UpdateEvent/UpdateEvent";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   const { isAuth } = useContext(SectionsContext);
@@ -82,6 +83,7 @@ function App() {
           <Route path="/event-edit/:id" element={<UpdateEvent />} />
         </Routes>
       </main>
+      <Footer />
     </div>
   );
 }
