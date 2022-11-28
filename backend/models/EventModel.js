@@ -26,6 +26,7 @@ const eventSchema = new Schema({
     type: String,
     required: true,
   },
+
   price: {
     type: String,
     required: true,
@@ -49,7 +50,7 @@ const eventSchema = new Schema({
     {
       type: Schema.Types.ObjectId,
       ref: "user",
-      unique: true
+      unique: true,
     },
   ],
   eventOwner: {

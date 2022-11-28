@@ -11,7 +11,7 @@ export default function OneEvent() {
   const { myEvent, setMyEvent } = useContext(SectionsContext);
 
   const [eventData, setEventData] = useState({});
-  const [eventCategories, setEventCategories] = useState(null)
+  const [eventCategories, setEventCategories] = useState(null);
 
   const getEventData = () => {
     const getEventById = async () => {
@@ -20,7 +20,7 @@ export default function OneEvent() {
       );
       const data = axiosResp.data;
       setEventData(data);
-      setEventCategories(data.category.join(", "))
+      setEventCategories(data.category.join(", "));
     };
     getEventById();
   };
@@ -30,12 +30,30 @@ export default function OneEvent() {
   }, []);
 
   const handleSubscribeEvent = async () => {
-    try {
-      const response = await axiosConfig.patch(`/event/subscribe/${eventId}`, {
-        subscribers: localStorage.getItem("userId"),
-      });
+    let subsArr = [];
 
-      alert("Buchung erfolgreich!");
+    eventData.subscribers.map((ele, i) => {
+      subsArr.push(ele._id);
+    });
+    try {
+      if (
+        eventData.participants == "0" ||
+        subsArr.includes(localStorage.getItem("userId"))
+      ) {
+        if (subsArr.includes(localStorage.getItem("userId"))) {
+          alert("du hast die Veranstaltung schon gebucht");
+        } else {
+          alert("leider schon ausgebucht");
+        }
+      } else {
+        await axiosConfig.patch(`/event/subscribe/${eventId}`, {
+          subscribers: localStorage.getItem("userId"),
+        });
+        await axiosConfig.patch(`/event/${eventId}`, {
+          participants: parseInt(eventData.participants) - 1,
+        });
+        alert("Buchung erfolgreich!");
+      }
       getEventData();
     } catch (error) {
       console.log(error);
