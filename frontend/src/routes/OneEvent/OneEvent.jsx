@@ -2,25 +2,51 @@ import React, { useEffect, useState, useContext } from "react";
 import axiosConfig from "../../util/axiosConfig";
 import { NavLink, useParams } from "react-router-dom";
 import "./OneEvent.css";
-import { SectionsContext } from "../../context/sectionsContext";
+import { CloseCircleOutlined, CheckCircleOutlined, CheckOutlined, CloseOutlined } from "@ant-design/icons";
 
 export default function OneEvent() {
   const { id } = useParams();
   const eventId = id;
 
-  const { myEvent, setMyEvent } = useContext(SectionsContext);
-
+  // const { myEvent, setMyEvent } = useContext(SectionsContext);
+  const [myEvent, setMyEvent ] = useState(false)
   const [eventData, setEventData] = useState({});
-  const [eventCategories, setEventCategories] = useState(null)
+  const [eventCategories, setEventCategories] = useState(null);
+  const [isBooked, setIsBooked] = useState(false);
+  const [isWatched, setIsWatched] = useState(false)
 
   const getEventData = () => {
+    let subsArr = [];
     const getEventById = async () => {
       const axiosResp = await axiosConfig.get(
         `http://localhost:6001/event/${eventId}`
       );
       const data = axiosResp.data;
       setEventData(data);
-      setEventCategories(data.category.join(", "))
+      setEventCategories(data.category.join(", "));
+
+      data.subscribers.map((ele, i) => {
+        subsArr.push(ele._id);
+      });
+
+      let watchedArr = [];
+
+      const userData = await axiosConfig.get(
+        `/user/${localStorage.getItem("userId")}`);
+      
+      userData.data.watchedEvents.map((ele, i) => {
+        watchedArr.push(ele._id);
+      })
+
+      subsArr.includes(localStorage.getItem("userId"))
+        ? setIsBooked(true)
+        : setIsBooked(false);
+      
+      watchedArr.includes(eventId)
+        ? setIsWatched(true)
+        : setIsWatched(false);
+      
+      data.eventOwner._id  == localStorage.getItem("userId") ? setMyEvent(true) : setMyEvent(false)
     };
     getEventById();
   };
@@ -29,18 +55,88 @@ export default function OneEvent() {
     getEventData();
   }, []);
 
-  const handleSubscribeEvent = async () => {
-    try {
-      const response = await axiosConfig.patch(`/event/subscribe/${eventId}`, {
-        subscribers: localStorage.getItem("userId"),
-      });
+  // VA Buchen
 
-      alert("Buchung erfolgreich!");
+  const handleSubscribeEvent = async () => {
+    let subsArr = [];
+
+    eventData.subscribers.map((ele, i) => {
+      subsArr.push(ele._id);
+    });
+    try {
+      if (
+        eventData.participants == "0" ||
+        subsArr.includes(localStorage.getItem("userId"))
+      ) {
+        if (subsArr.includes(localStorage.getItem("userId"))) {
+          alert("du hast die Veranstaltung schon gebucht");
+        } else {
+          alert("leider schon ausgebucht");
+        }
+      } else {
+        await axiosConfig.patch(`/event/subscribe/${eventId}`, {
+          subscribers: localStorage.getItem("userId"),
+        });
+        await axiosConfig.patch(`/event/${eventId}`, {
+          participants: parseInt(eventData.participants) - 1,
+        });
+        alert("Buchung erfolgreich!");
+      }
       getEventData();
     } catch (error) {
       console.log(error);
     }
   };
+
+  // VA Stornieren
+
+  const handleUnsubscribe = async () => {
+    let subsArr = [];
+    eventData.subscribers.map((ele, i) => {
+      subsArr.push(ele._id);
+    });
+
+    try {
+      await axiosConfig.patch(`/event/${eventId}`, {
+        subscribers: subsArr.filter((e) => {
+          return e !== localStorage.getItem("userId");
+        }),
+        participants: parseInt(eventData.participants) - 1,
+      });
+      alert("Storno erfolgreich");
+      getEventData();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // VA nicht mehr Merken/ Beobachten
+
+  const handleUnwatchEvent = async () => {
+
+    try {
+      let watchedArr = [];
+      const response = await axiosConfig.get(
+        `/user/${localStorage.getItem("userId")}`);
+      
+      response.data.watchedEvents.map((ele, i) => {
+        watchedArr.push(ele._id);
+      })
+      
+      await axiosConfig.patch(`/user/${localStorage.getItem("userId")}`, {
+        watchedEvents: watchedArr.filter((e) => {
+          return e !== eventId;
+        }),
+      });
+      
+      alert("Event von der Merkliste entfernt.")
+      getEventData()
+    } catch (error) {
+      console.log(error);
+    } 
+  }
+
+  // VA Merken/ Beobachten
 
   const handleWatchEvent = async () => {
     try {
@@ -54,6 +150,7 @@ export default function OneEvent() {
       alert(
         `${eventData.eventTitle} zur Merkliste von ${response.data.userName} hinzugefügt`
       );
+      getEventData()
     } catch (error) {
       console.log(error);
     }
@@ -121,18 +218,25 @@ export default function OneEvent() {
             })}
         </ul>
       </div>
-      <button onClick={handleSubscribeEvent} className="button-green">
-        Buchen
-      </button>
-      <button onClick={handleWatchEvent} className="button-beige">
-        Merken
-      </button>
+      {!isBooked ? (
+        <button onClick={handleSubscribeEvent} className="button-green">
+          Buchen
+        </button>
+      ) : (
+        <button onClick={handleUnsubscribe} className="button-green">
+          Stornieren
+        </button>
+      )}
+      {!isWatched ? <button onClick={handleWatchEvent} className="button-beige">
+      auf meine Liste <CheckOutlined />
+      </button> :
+      <button onClick={handleUnwatchEvent} className="button-beige">
+      von Liste streichen <CloseOutlined />
+      </button>}
+
       {myEvent ? (
         <NavLink
           to={`/event-edit/${eventData._id}`}
-          onClick={() => {
-            setMyEvent(false);
-          }}
           className="button-green"
         >
           bearbeiten

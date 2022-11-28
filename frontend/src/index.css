@@ -16,7 +16,7 @@
   box-sizing: border-box;
 }
 
-body>*{
+body > * {
   width: 100%;
 }
 
@@ -82,7 +82,7 @@ body {
     font-weight: bolder;
   }
 
-  .button-beige{
+  .button-beige {
     padding: 0.25rem 0.5rem;
   }
 }
