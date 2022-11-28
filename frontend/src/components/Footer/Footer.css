@@ -1,9 +1,43 @@
-.footer {
-  margin-top: 1rem;
-  padding: 1rem;
-  background-color: var(--green-transparent-color);
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
+.Footer {
+  display: flex;
+  gap: 2.5rem;
+}
+
+.Footer a {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  text-decoration: none;
+  color: var(--beige-color);
+}
+
+.Footer a > img {
+  display: block;
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+}
+
+.Footer p {
+  font-size: 1.5rem;
+}
+
+.Copyright {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Copyright > h2 {
+  color: var(--beige-color);
+  margin: 0;
+  font-size: 3rem;
+}
+
+.Copyright > button {
+  background-color: var(--dark-green-color);
+  color: var(--beige-color);
+  margin-top: 15rem;
 }
