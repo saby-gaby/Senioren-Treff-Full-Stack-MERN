@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import axiosConfig from "../../util/axiosConfig";
 import { NavLink, useParams } from "react-router-dom";
 import "./OneEvent.css";
-import { SectionsContext } from "../../context/sectionsContext";
+import { CloseCircleOutlined, CheckCircleOutlined, CheckOutlined, CloseOutlined } from "@ant-design/icons";
 
 export default function OneEvent() {
   const { id } = useParams();
@@ -13,6 +13,7 @@ export default function OneEvent() {
   const [eventData, setEventData] = useState({});
   const [eventCategories, setEventCategories] = useState(null);
   const [isBooked, setIsBooked] = useState(false);
+  const [isWatched, setIsWatched] = useState(false)
 
   const getEventData = () => {
     let subsArr = [];
@@ -27,10 +28,23 @@ export default function OneEvent() {
       data.subscribers.map((ele, i) => {
         subsArr.push(ele._id);
       });
+
+      let watchedArr = [];
+
+      const userData = await axiosConfig.get(
+        `/user/${localStorage.getItem("userId")}`);
+      
+      userData.data.watchedEvents.map((ele, i) => {
+        watchedArr.push(ele._id);
+      })
+
       subsArr.includes(localStorage.getItem("userId"))
         ? setIsBooked(true)
         : setIsBooked(false);
       
+      watchedArr.includes(eventId)
+        ? setIsWatched(true)
+        : setIsWatched(false);
       
       data.eventOwner._id  == localStorage.getItem("userId") ? setMyEvent(true) : setMyEvent(false)
     };
@@ -96,6 +110,32 @@ export default function OneEvent() {
     }
   };
 
+  // VA nicht mehr Merken/ Beobachten
+
+  const handleUnwatchEvent = async () => {
+
+    try {
+      let watchedArr = [];
+      const response = await axiosConfig.get(
+        `/user/${localStorage.getItem("userId")}`);
+      
+      response.data.watchedEvents.map((ele, i) => {
+        watchedArr.push(ele._id);
+      })
+      
+      await axiosConfig.patch(`/user/${localStorage.getItem("userId")}`, {
+        watchedEvents: watchedArr.filter((e) => {
+          return e !== eventId;
+        }),
+      });
+      
+      alert("Event von der Merkliste entfernt.")
+      getEventData()
+    } catch (error) {
+      console.log(error);
+    } 
+  }
+
   // VA Merken/ Beobachten
 
   const handleWatchEvent = async () => {
@@ -110,6 +150,7 @@ export default function OneEvent() {
       alert(
         `${eventData.eventTitle} zur Merkliste von ${response.data.userName} hinzugefügt`
       );
+      getEventData()
     } catch (error) {
       console.log(error);
     }
@@ -186,9 +227,13 @@ export default function OneEvent() {
           Stornieren
         </button>
       )}
-      <button onClick={handleWatchEvent} className="button-beige">
-        Merken
-      </button>
+      {!isWatched ? <button onClick={handleWatchEvent} className="button-beige">
+      auf meine Liste <CheckOutlined />
+      </button> :
+      <button onClick={handleUnwatchEvent} className="button-beige">
+      von Liste streichen <CloseOutlined />
+      </button>}
+
       {myEvent ? (
         <NavLink
           to={`/event-edit/${eventData._id}`}
