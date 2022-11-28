@@ -12,8 +12,10 @@ export default function OneEvent() {
 
   const [eventData, setEventData] = useState({});
   const [eventCategories, setEventCategories] = useState(null);
+  const [isBooked, setIsBooked] = useState(false);
 
   const getEventData = () => {
+    let subsArr = [];
     const getEventById = async () => {
       const axiosResp = await axiosConfig.get(
         `http://localhost:6001/event/${eventId}`
@@ -21,6 +23,13 @@ export default function OneEvent() {
       const data = axiosResp.data;
       setEventData(data);
       setEventCategories(data.category.join(", "));
+
+      data.subscribers.map((ele, i) => {
+        subsArr.push(ele._id);
+      });
+      subsArr.includes(localStorage.getItem("userId"))
+        ? setIsBooked(true)
+        : setIsBooked(false);
     };
     getEventById();
   };
@@ -28,6 +37,8 @@ export default function OneEvent() {
   useEffect(() => {
     getEventData();
   }, []);
+
+  // VA Buchen
 
   const handleSubscribeEvent = async () => {
     let subsArr = [];
@@ -59,6 +70,30 @@ export default function OneEvent() {
       console.log(error);
     }
   };
+
+  // VA Stornieren
+
+  const handleUnsubscribe = async () => {
+    let subsArr = [];
+    eventData.subscribers.map((ele, i) => {
+      subsArr.push(ele._id);
+    });
+
+    try {
+      await axiosConfig.patch(`/event/${eventId}`, {
+        subscribers: subsArr.filter((e) => {
+          return e !== localStorage.getItem("userId");
+        }),
+        participants: parseInt(eventData.participants) - 1,
+      });
+      alert("Storno erfolgreich");
+      getEventData();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // VA Merken/ Beobachten
 
   const handleWatchEvent = async () => {
     try {
@@ -139,9 +174,15 @@ export default function OneEvent() {
             })}
         </ul>
       </div>
-      <button onClick={handleSubscribeEvent} className="button-green">
-        Buchen
-      </button>
+      {!isBooked ? (
+        <button onClick={handleSubscribeEvent} className="button-green">
+          Buchen
+        </button>
+      ) : (
+        <button onClick={handleUnsubscribe} className="button-green">
+          Stornieren
+        </button>
+      )}
       <button onClick={handleWatchEvent} className="button-beige">
         Merken
       </button>
