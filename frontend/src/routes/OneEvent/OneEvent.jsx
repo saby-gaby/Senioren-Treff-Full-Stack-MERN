@@ -8,8 +8,8 @@ export default function OneEvent() {
   const { id } = useParams();
   const eventId = id;
 
-  const { myEvent, setMyEvent } = useContext(SectionsContext);
-
+  // const { myEvent, setMyEvent } = useContext(SectionsContext);
+  const [myEvent, setMyEvent ] = useState(false)
   const [eventData, setEventData] = useState({});
   const [eventCategories, setEventCategories] = useState(null);
   const [isBooked, setIsBooked] = useState(false);
@@ -30,6 +30,9 @@ export default function OneEvent() {
       subsArr.includes(localStorage.getItem("userId"))
         ? setIsBooked(true)
         : setIsBooked(false);
+      
+      
+      data.eventOwner._id  == localStorage.getItem("userId") ? setMyEvent(true) : setMyEvent(false)
     };
     getEventById();
   };
@@ -189,9 +192,6 @@ export default function OneEvent() {
       {myEvent ? (
         <NavLink
           to={`/event-edit/${eventData._id}`}
-          onClick={() => {
-            setMyEvent(false);
-          }}
           className="button-green"
         >
           bearbeiten

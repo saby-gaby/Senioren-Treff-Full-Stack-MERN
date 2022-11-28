@@ -23,7 +23,6 @@ const SectionsProvider = ({ children }) => {
   const [eventLogin, setEventLogin] = useState(false);
   const [categoryArray, setCategoryArray] = useState();
   const [userData, setUserData] = useState({});
-  const [myEvent, setMyEvent] = useState(false);
 
   const logout = () => {
     localStorage.clear();
@@ -53,9 +52,7 @@ const SectionsProvider = ({ children }) => {
         setCategoryArray,
         userData,
         setUserData,
-        capitalize,
-        myEvent,
-        setMyEvent,
+        capitalize
       }}
     >
       {children}
