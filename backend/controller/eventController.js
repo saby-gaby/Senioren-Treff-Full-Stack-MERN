@@ -53,8 +53,7 @@ export const createEvent = async (req, res) => {
 
     const user = await UserModel.findById(decodedToken.userId);
     user.myEvents.push(newEvent._id);
-    await user.save()
-
+    await user.save();
 
     res.status(201).send(newEvent);
   } catch (error) {
@@ -82,7 +81,6 @@ export const addSubscribers = async (req, res) => {
     const getUser = await UserModel.findById(req.body.subscribers);
     getUser.bookedEvents.push(req.params.id);
     await getUser.save();
-
 
     res.send(getEvent);
   } catch (error) {
