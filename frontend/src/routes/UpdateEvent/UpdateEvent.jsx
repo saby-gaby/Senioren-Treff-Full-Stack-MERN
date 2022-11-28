@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useRef } from "react-router-dom";
+import { NavLink, useParams, useRef } from "react-router-dom";
 import axiosConfig from "../../util/axiosConfig";
 import { EditOutlined, SaveOutlined } from "@ant-design/icons";
 
@@ -26,6 +26,8 @@ export default function UpdateEvent() {
   const [eventParticipants, setEventParticipants] = useState("");
   const [eventDescription, setEventDescription] = useState("");
   const [eventImage, setEventImage] = useState("");
+  
+  const [editProgress, setEditProgress] = useState(false)
 
   const handleChange = (event) => {
     const { value, checked } = event.target;
@@ -44,7 +46,6 @@ export default function UpdateEvent() {
       );
       const data = axiosResp.data;
       setEventData(data);
-      console.log(data);
     };
     getEventById();
   };
@@ -79,7 +80,6 @@ export default function UpdateEvent() {
     setEditImage(false);
     setRefreshData(axiosResp.data);
     refreshData ? getEventData() : getEventData();
-    console.log(axiosResp);
   };
 
   return (
@@ -101,7 +101,8 @@ export default function UpdateEvent() {
             <EditOutlined onClick={() => setEditTitle(true)} />
           ) : (
             <SaveOutlined
-              onClick={() => {
+                onClick={() => {
+                  setEditProgress(true)
                 setEditTitle(false);
                 const data = { eventTitle: eventTitle };
                 updateEvent(data);
@@ -190,7 +191,8 @@ export default function UpdateEvent() {
             />
           ) : (
             <SaveOutlined
-              onClick={() => {
+                onClick={() => {
+                  setEditProgress(true)
                 setEditCategory(false);
                 const data = { category: eventCategory.categories };
                 updateEvent(data);
@@ -213,7 +215,8 @@ export default function UpdateEvent() {
             <EditOutlined onClick={() => setEditLocation(true)} />
           ) : (
             <SaveOutlined
-              onClick={() => {
+                onClick={() => {
+                  setEditProgress(true)
                 setEditLocation(false);
                 const data = { location: eventLocation };
                 updateEvent(data);
@@ -236,7 +239,8 @@ export default function UpdateEvent() {
             <EditOutlined onClick={() => setEditDate(true)} />
           ) : (
             <SaveOutlined
-              onClick={() => {
+                onClick={() => {
+                  setEditProgress(true)
                 setEditDate(false);
                 const data = { date: eventDate };
                 updateEvent(data);
@@ -259,7 +263,8 @@ export default function UpdateEvent() {
             <EditOutlined onClick={() => setEditTime(true)} />
           ) : (
             <SaveOutlined
-              onClick={() => {
+                onClick={() => {
+                  setEditProgress(true)
                 setEditTime(false);
                 const data = { time: eventTime };
                 updateEvent(data);
@@ -282,7 +287,8 @@ export default function UpdateEvent() {
             <EditOutlined onClick={() => setEditPrice(true)} />
           ) : (
             <SaveOutlined
-              onClick={() => {
+                onClick={() => {
+                  setEditProgress(true)
                 setEditPrice(false);
                 const data = { price: eventPrice };
                 updateEvent(data);
@@ -307,7 +313,8 @@ export default function UpdateEvent() {
             <EditOutlined onClick={() => setEditParticipants(true)} />
           ) : (
             <SaveOutlined
-              onClick={() => {
+                onClick={() => {
+                  setEditProgress(true)
                 setEditParticipants(false);
                 const data = { participants: eventParticipants };
                 updateEvent(data);
@@ -334,7 +341,8 @@ export default function UpdateEvent() {
             <EditOutlined onClick={() => setEditDescription(true)} />
           ) : (
             <SaveOutlined
-              onClick={() => {
+                onClick={() => {
+                  setEditProgress(true)
                 setEditDescription(false);
                 const data = { description: eventDescription };
                 updateEvent(data);
@@ -350,7 +358,7 @@ export default function UpdateEvent() {
             <>
               <form
                 action=""
-                onSubmit={updateImage}
+                  onSubmit={() => updateImage}
                 encType="multipart/form-data"
               >
                 <label>
@@ -364,14 +372,17 @@ export default function UpdateEvent() {
                 <label className="button-beige" htmlFor="image">
                   Dateien durchsuchen
                 </label>
-                <button type="submit">senden</button>
+                <button type="submit" >senden</button>
               </form>
             </>
           )}
           {!editImage ? (
-            <EditOutlined onClick={() => setEditImage(true)} />
+            <EditOutlined onClick={() => {
+              setEditImage(true)
+            }} />
           ) : null}
         </li>
+        <div>{!editProgress ? <NavLink  to={`/event/${eventData._id}`} className="button-green" >Abbrechen</NavLink> : <NavLink  to={`/event/${eventData._id}`} className="button-green">Fertig</NavLink> }</div>
       </ul>
     </div>
   );

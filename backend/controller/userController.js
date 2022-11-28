@@ -5,7 +5,6 @@ import bcrypt from "bcrypt";
 export const createUser = async (req, res) => {
   try {
     const hashedSaltyPassword = await bcrypt.hash(req.body.password, 14);
-
     const newUserData = await UserModel.create({
       userName: req.body.userName,
       firstName: req.body.firstName,
