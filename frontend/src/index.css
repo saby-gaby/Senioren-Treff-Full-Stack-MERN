@@ -16,7 +16,7 @@
   box-sizing: border-box;
 }
 
-body>*{
+body > * {
   width: 100%;
 }
 
@@ -31,6 +31,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-height: calc(max-content + 15rem);
 }
 
 .button-green {
@@ -82,7 +83,7 @@ body {
     font-weight: bolder;
   }
 
-  .button-beige{
+  .button-beige {
     padding: 0.25rem 0.5rem;
   }
 }
