@@ -1,1 +1,7 @@
+.swal-title {
+    color: var(--middle-green-color);
+}
 
+.swal-button, .swal-button--confirm{
+    background-color: var(--middle-green-color);
+}

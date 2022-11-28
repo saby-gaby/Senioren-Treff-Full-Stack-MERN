@@ -35,8 +35,23 @@ const SectionsProvider = ({ children }) => {
     navigate("/login");
   };
 
-  const capitalize = (term) =>
-    term[0].toUpperCase() + term.substring(1).toLowerCase();
+  const capitalize = (term) => {
+    if (term.length == 2) {
+      return term.toUpperCase();
+    } else if (term.includes(" ")) {
+      return term
+        .split(" ")
+        .map((name) => name[0].toUpperCase() + name.substring(1).toLowerCase())
+        .join(" ");
+    } else if (term.includes("-")) {
+      return term
+        .split("-")
+        .map((name) => name[0].toUpperCase() + name.substring(1).toLowerCase())
+        .join("-");
+    } else {
+      return term[0].toUpperCase() + term.substring(1).toLowerCase();
+    }
+  };
 
   return (
     <SectionsContext.Provider

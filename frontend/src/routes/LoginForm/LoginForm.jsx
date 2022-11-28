@@ -3,28 +3,26 @@ import axiosConfig from "../../util/axiosConfig.js";
 import { SectionsContext } from "../../context/sectionsContext";
 import { Navigate, NavLink } from "react-router-dom";
 import "./LoginForm.css";
+import swal from "sweetalert";
 
 function LoginForm() {
-  const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const { isAuth, setIsAuth, eventLogin, setStepOne } = useContext(SectionsContext);
+  const { isAuth, setIsAuth, eventLogin, setStepOne } =
+    useContext(SectionsContext);
 
   const formEl = useRef(null);
   const usernameEL = useRef(null);
   const passwordEl = useRef(null);
 
-
   const getUserData = async (respData) => {
     const axiosResp = await axiosConfig.get(
       `http://localhost:6001/user/${respData}`
     );
-    const defSearch = axiosResp.data.location.toLowerCase()
+    const defSearch = axiosResp.data.location.toLowerCase();
     return defSearch;
   };
 
-
-
-  const handleSuccessfulLogin = async(respData) => {
+  const handleSuccessfulLogin = async (respData) => {
     localStorage.setItem("defSearch", await getUserData(respData.userId));
     setIsAuth(true);
     localStorage.setItem("userName", respData.userName);
@@ -34,30 +32,34 @@ function LoginForm() {
   const submitHandler = async (e) => {
     e.preventDefault();
     let data;
-    if(usernameEL.current.value && passwordEl.current.value){
+    if (usernameEL.current.value && passwordEl.current.value) {
       data = {
         userName: usernameEL.current.value,
         password: passwordEl.current.value,
-      }
-      }else {
-        alert("bitte tragen sie username und passwort ein")
-      }
-    try {
-      setIsLoading(true);
-      const axiosResp = await axiosConfig.post("/user/login", data);
-      console.debug("axiosResp.data", axiosResp.data);
-      setIsLoading(false);
+      };
+      try {
+        setIsLoading(true);
+        const axiosResp = await axiosConfig.post("/user/login", data);
+        console.debug("axiosResp.data", axiosResp.data);
+        setIsLoading(false);
 
-      if (axiosResp.data.error) {
-        setError(axiosResp.data.error.message);
+        if (axiosResp.data.error) {
+          swal({
+            title: "Benutzername-Passwort-Kombination nicht korrekt",
+            text: "Nochmal versuchen?",
+          });
+          return;
+        }
+        handleSuccessfulLogin(axiosResp.data);
+      } catch (error) {
+        console.error("Error while sending with axios", error);
         return;
       }
-      setError(""); // Falls wir zuvor einen Fehler hatten, wird dieser entfernt
-      handleSuccessfulLogin(axiosResp.data);
-    } catch (error) {
-      console.error("Error while sending with axios", error);
-      setError(error);
-      return;
+    } else {
+      swal({
+        title: "Bitte tragen Sie Ihren Benutzername und Passwort ein",
+        button: "OK",
+      });
     }
 
     formEl.current.reset(); // Alle Felder vom Formular leer machen
@@ -92,9 +94,7 @@ function LoginForm() {
         </NavLink>
       </div>
 
-      {error && <p>Da ist etwas schief gelaufen: {error}</p>}
-
-      {isLoading && <p>Lade – bitte warten...</p>}
+      {isLoading && <p>Lade - bitte warten...</p>}
     </div>
   );
 }
