@@ -5,8 +5,7 @@ import axiosConfig from "../../util/axiosConfig";
 import Search from "../../components/Search/Search";
 
 export default function UserProfil() {
-  const { logout, isAuth, userData, setUserData, } =
-    useContext(SectionsContext);
+  const { logout, isAuth, userData, setUserData } = useContext(SectionsContext);
 
   const [showMyEvents, setShowMyEvents] = useState(false);
   const [watchedEvents, setWatchedEvents] = useState(false);
@@ -119,10 +118,7 @@ export default function UserProfil() {
                         alt="test"
                       />
                     )}
-                    <NavLink
-                      to={`/event/${ele._id}`}
-                      className="button-green"
-                    >
+                    <NavLink to={`/event/${ele._id}`} className="button-green">
                       Ansehen
                     </NavLink>
                   </li>
@@ -282,8 +278,6 @@ export default function UserProfil() {
               })}
           </ul>
         ) : null}
-
-
 
         <div>
           <h3>Meine Daten</h3>
