@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { SectionsContext } from "../../context/sectionsContext";
 import { NavLink, useParams } from "react-router-dom";
 import CategoryFilter from "../../components/CategoryFilter/CategoryFilter";
@@ -6,7 +6,8 @@ import "./SearchedEvents.css";
 
 export default function SearchedEvents() {
   const { searchedLocation } = useParams();
-  const { foundEvents, categoryArray, capitalize } = useContext(SectionsContext);  
+  const { foundEvents, categoryArray, capitalize } =
+    useContext(SectionsContext);
 
   const renderEvents = (dataArray) => {
     return dataArray.map((oneEvent, i) => {
@@ -36,20 +37,33 @@ export default function SearchedEvents() {
         }
         return image;
       };
-      
 
       return (
         <li key={i}>
-          <h3>{oneEvent.eventTitle}</h3>
+          <h3>
+            {oneEvent.eventTitle}{" "}
+            {new Date(oneEvent.date) < Date.now() ? (
+              <div>Veranstaltung schon vorbei :-/</div>
+            ) : null}{" "}
+          </h3>
           {oneEvent.imageUrl ? (
-            <img src={"http://localhost:6001" + oneEvent.imageUrl} alt="image not found" onError={({ currentTarget }) => {
-              currentTarget.onerror = null;
-              currentTarget.src= `http://localhost:6001${categoryImage()}`;
-            }} />
+            <img
+              src={"http://localhost:6001" + oneEvent.imageUrl}
+              alt="image not found"
+              onError={({ currentTarget }) => {
+                currentTarget.onerror = null;
+                currentTarget.src = `http://localhost:6001${categoryImage()}`;
+              }}
+            />
           ) : (
             <img src={"http://localhost:6001" + categoryImage()} alt="test" />
           )}
-
+          <div>
+            <h4>
+              {new Date(oneEvent.date).toLocaleDateString()} {"||"}{" "}
+              {oneEvent.time} Uhr
+            </h4>
+          </div>
           <NavLink to={`/event/${oneEvent._id}`} className="button-green">
             Ansehen
           </NavLink>

@@ -102,7 +102,12 @@ export default function UserProfil() {
 
                 return (
                   <li key={i}>
-                    <h4>{ele.eventTitle}</h4>
+                    <h4>
+                      {ele.eventTitle}
+                      {new Date(ele.date) < Date.now() ? (
+                        <div>Veranstaltung schon vorbei :-/</div>
+                      ) : null}{" "}
+                    </h4>
                     {ele.imageUrl ? (
                       <img
                         src={"http://localhost:6001" + ele.imageUrl}
@@ -118,6 +123,12 @@ export default function UserProfil() {
                         alt="test"
                       />
                     )}
+                    <div>
+                      <h4>
+                        {new Date(ele.date).toLocaleDateString()} {"||"}{" "}
+                        {ele.time} Uhr
+                      </h4>
+                    </div>
                     <NavLink to={`/event/${ele._id}`} className="button-green">
                       Ansehen
                     </NavLink>
@@ -178,7 +189,12 @@ export default function UserProfil() {
 
                 return (
                   <li key={i}>
-                    <h4>{ele.eventTitle}</h4>
+                    <h4>
+                      {ele.eventTitle}
+                      {new Date(ele.date) < Date.now() ? (
+                        <div>Veranstaltung schon vorbei :-/</div>
+                      ) : null}{" "}
+                    </h4>
                     {ele.imageUrl ? (
                       <img
                         src={"http://localhost:6001" + ele.imageUrl}
@@ -194,6 +210,12 @@ export default function UserProfil() {
                         alt="test"
                       />
                     )}
+                    <div>
+                      <h4>
+                        {new Date(ele.date).toLocaleDateString()} {"||"}{" "}
+                        {ele.time} Uhr
+                      </h4>
+                    </div>
                     <NavLink to={`/event/${ele._id}`} className="button-green">
                       Ansehen
                     </NavLink>
@@ -254,7 +276,12 @@ export default function UserProfil() {
 
                 return (
                   <li key={i}>
-                    <h4>{ele.eventTitle}</h4>
+                    <h4>
+                      {ele.eventTitle}
+                      {new Date(ele.date) < Date.now() ? (
+                        <div>Veranstaltung schon vorbei :-/</div>
+                      ) : null}{" "}
+                    </h4>
                     {ele.imageUrl ? (
                       <img
                         src={"http://localhost:6001" + ele.imageUrl}
@@ -270,6 +297,12 @@ export default function UserProfil() {
                         alt="test"
                       />
                     )}
+                    <div>
+                      <h4>
+                        {new Date(ele.date).toLocaleDateString()} {"||"}{" "}
+                        {ele.time} Uhr
+                      </h4>
+                    </div>
                     <NavLink to={`/event/${ele._id}`} className="button-green">
                       Ansehen
                     </NavLink>
