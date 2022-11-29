@@ -8,12 +8,13 @@ import {
   CheckOutlined,
   CloseOutlined,
 } from "@ant-design/icons";
+import { SectionsContext } from "../../context/sectionsContext";
 
 export default function OneEvent() {
   const { id } = useParams();
   const eventId = id;
 
-  // const { myEvent, setMyEvent } = useContext(SectionsContext);
+  const { navigate } = useContext(SectionsContext);
   const [myEvent, setMyEvent] = useState(false);
   const [eventData, setEventData] = useState({});
   const [eventCategories, setEventCategories] = useState(null);
@@ -78,7 +79,8 @@ export default function OneEvent() {
         axiosConfig.patch(`/user/${localStorage.getItem(`userId`)}`, {
           myEvents: myEventsArray.filter((e) => e !== eventId),
         });
-      }
+        navigate("/profile")
+      } 
     } catch (error) {
       console.log(error);
       alert("da ist etwas schief gelaufen");
@@ -294,15 +296,12 @@ export default function OneEvent() {
           <NavLink to={`/event-edit/${eventData._id}`} className="button-green">
             bearbeiten
           </NavLink>
-          <NavLink
-            to="/profile"
-            onClick={() => {
-              deleteEventById();
-            }}
+          <button 
+            onClick={deleteEventById}
             className="button-green"
           >
             Löschen
-          </NavLink>
+          </button>
         </>
       ) : null}
     </div>
