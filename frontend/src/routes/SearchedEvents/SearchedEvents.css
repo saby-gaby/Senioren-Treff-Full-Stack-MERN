@@ -1,32 +1,3 @@
-.selection {
-  display: flex;
-  border: 5px solid darkgreen;
-  max-height: 30vh;
-  max-width: 80vw;
-  flex-wrap: wrap;
-  flex-direction: column;
-  background-color: #f4e3d7;
-  border-radius: 10px;
-  align-items: center;
-  justify-content: center;
-}
-
-.box {
-  width: 45%;
-  height: 30%;
-  margin: 10px;
-  display: inline-block;
-  padding: 15px 25px;
-  font-size: 24px;
-  cursor: pointer;
-  text-align: center;
-  text-decoration: none;
-  outline: none;
-  color: #f4e3d7;
-  background-color: #4caf50;
-  border-radius: 10px;
-}
-
 button {
   font-size: 30px;
   cursor: pointer;

@@ -1,0 +1,33 @@
+.selection {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 40rem 40rem;
+  justify-content: center;
+  gap: 0.25rem;
+  margin-top: 2rem;
+}
+
+.selection button {
+  font-size: 2rem;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--beige-color);
+  color: var(--dark-green-color);
+  border: 2px solid var(--dark-green-color);
+  box-shadow: none;
+  border-radius: 1rem;
+  text-decoration: none;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+
+.selection button:hover {
+  background-color: var(--dark-green-color);
+  color: var(--beige-color);
+  font-weight: bolder;
+}
+
+@media screen and (max-width: 768px) {
+}

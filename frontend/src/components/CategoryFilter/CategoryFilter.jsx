@@ -2,11 +2,13 @@ import React, { useContext, useEffect, useState } from "react";
 import { SectionsContext } from "../../context/sectionsContext";
 import { useParams } from "react-router-dom";
 import axiosConfig from "../../util/axiosConfig";
+import "./CategoryFilter.css";
 
 export default function CategoryFilter() {
   const { searchedLocation } = useParams();
   const currLocation = searchedLocation;
-  const { foundEvents, setFoundEvents, setCategoryArray } = useContext(SectionsContext);
+  const { foundEvents, setFoundEvents, setCategoryArray } =
+    useContext(SectionsContext);
 
   const getSearchedEvents = async () => {
     try {
