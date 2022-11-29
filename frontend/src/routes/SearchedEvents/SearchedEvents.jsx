@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { SectionsContext } from "../../context/sectionsContext";
 import { NavLink, useParams } from "react-router-dom";
 import CategoryFilter from "../../components/CategoryFilter/CategoryFilter";
@@ -40,7 +40,12 @@ export default function SearchedEvents() {
 
       return (
         <li className="box" key={i}>
-          <h3>{oneEvent.eventTitle}</h3>
+          <h3>
+            {oneEvent.eventTitle}{" "}
+            {new Date(oneEvent.date) < Date.now() ? (
+              <div>Veranstaltung schon vorbei :-/</div>
+            ) : null}{" "}
+          </h3>
           {oneEvent.imageUrl ? (
             <img
               src={"http://localhost:6001" + oneEvent.imageUrl}
@@ -54,10 +59,14 @@ export default function SearchedEvents() {
             <img src={"http://localhost:6001" + categoryImage()} alt="test" />
           )}
           <div>
-            <NavLink to={`/event/${oneEvent._id}`} className="button-green">
-              Ansehen
-            </NavLink>
+            <h4>
+              {new Date(oneEvent.date).toLocaleDateString()} {"||"}{" "}
+              {oneEvent.time} Uhr
+            </h4>
           </div>
+          <NavLink to={`/event/${oneEvent._id}`} className="button-green">
+            Ansehen
+          </NavLink>
         </li>
       );
     });

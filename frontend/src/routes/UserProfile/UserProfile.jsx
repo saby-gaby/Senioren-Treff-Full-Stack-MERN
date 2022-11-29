@@ -5,8 +5,7 @@ import axiosConfig from "../../util/axiosConfig";
 import Search from "../../components/Search/Search";
 
 export default function UserProfil() {
-  const { logout, isAuth, userData, setUserData, } =
-    useContext(SectionsContext);
+  const { logout, isAuth, userData, setUserData } = useContext(SectionsContext);
 
   const [showMyEvents, setShowMyEvents] = useState(false);
   const [watchedEvents, setWatchedEvents] = useState(false);
@@ -103,7 +102,12 @@ export default function UserProfil() {
 
                 return (
                   <li key={i}>
-                    <h4>{ele.eventTitle}</h4>
+                    <h4>
+                      {ele.eventTitle}
+                      {new Date(ele.date) < Date.now() ? (
+                        <div>Veranstaltung schon vorbei :-/</div>
+                      ) : null}{" "}
+                    </h4>
                     {ele.imageUrl ? (
                       <img
                         src={"http://localhost:6001" + ele.imageUrl}
@@ -119,10 +123,13 @@ export default function UserProfil() {
                         alt="test"
                       />
                     )}
-                    <NavLink
-                      to={`/event/${ele._id}`}
-                      className="button-green"
-                    >
+                    <div>
+                      <h4>
+                        {new Date(ele.date).toLocaleDateString()} {"||"}{" "}
+                        {ele.time} Uhr
+                      </h4>
+                    </div>
+                    <NavLink to={`/event/${ele._id}`} className="button-green">
                       Ansehen
                     </NavLink>
                   </li>
@@ -182,7 +189,12 @@ export default function UserProfil() {
 
                 return (
                   <li key={i}>
-                    <h4>{ele.eventTitle}</h4>
+                    <h4>
+                      {ele.eventTitle}
+                      {new Date(ele.date) < Date.now() ? (
+                        <div>Veranstaltung schon vorbei :-/</div>
+                      ) : null}{" "}
+                    </h4>
                     {ele.imageUrl ? (
                       <img
                         src={"http://localhost:6001" + ele.imageUrl}
@@ -198,6 +210,12 @@ export default function UserProfil() {
                         alt="test"
                       />
                     )}
+                    <div>
+                      <h4>
+                        {new Date(ele.date).toLocaleDateString()} {"||"}{" "}
+                        {ele.time} Uhr
+                      </h4>
+                    </div>
                     <NavLink to={`/event/${ele._id}`} className="button-green">
                       Ansehen
                     </NavLink>
@@ -258,7 +276,12 @@ export default function UserProfil() {
 
                 return (
                   <li key={i}>
-                    <h4>{ele.eventTitle}</h4>
+                    <h4>
+                      {ele.eventTitle}
+                      {new Date(ele.date) < Date.now() ? (
+                        <div>Veranstaltung schon vorbei :-/</div>
+                      ) : null}{" "}
+                    </h4>
                     {ele.imageUrl ? (
                       <img
                         src={"http://localhost:6001" + ele.imageUrl}
@@ -274,6 +297,12 @@ export default function UserProfil() {
                         alt="test"
                       />
                     )}
+                    <div>
+                      <h4>
+                        {new Date(ele.date).toLocaleDateString()} {"||"}{" "}
+                        {ele.time} Uhr
+                      </h4>
+                    </div>
                     <NavLink to={`/event/${ele._id}`} className="button-green">
                       Ansehen
                     </NavLink>
@@ -282,8 +311,6 @@ export default function UserProfil() {
               })}
           </ul>
         ) : null}
-
-
 
         <div>
           <h3>Meine Daten</h3>

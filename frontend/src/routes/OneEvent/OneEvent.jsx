@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import axiosConfig from "../../util/axiosConfig";
-import { NavLink, useParams } from "react-router-dom";
+import { useNavigate, NavLink, useParams } from "react-router-dom";
 import "./OneEvent.css";
 import {
   CloseCircleOutlined,
@@ -19,6 +19,7 @@ export default function OneEvent() {
   const [eventCategories, setEventCategories] = useState(null);
   const [isBooked, setIsBooked] = useState(false);
   const [isWatched, setIsWatched] = useState(false);
+  const [isExpired, setIsExpired] = useState(false);
 
   const getEventData = () => {
     let subsArr = [];
@@ -53,8 +54,35 @@ export default function OneEvent() {
       data.eventOwner._id == localStorage.getItem("userId")
         ? setMyEvent(true)
         : setMyEvent(false);
+
+      new Date(data.date) < Date.now()
+        ? setIsExpired(true)
+        : setIsExpired(false);
     };
     getEventById();
+  };
+
+  const deleteEventById = async () => {
+    let myEventsArray = [];
+    try {
+      if (confirm("Diese Veranstaltung wirklich löschen?")) {
+        axiosConfig.delete(`/event/${eventId}`);
+
+        const userData = await axiosConfig.get(
+          `/user/${localStorage.getItem("userId")}`
+        );
+
+        userData.data.myEvents.map((ele, i) => {
+          myEventsArray.push(ele._id);
+        });
+        axiosConfig.patch(`/user/${localStorage.getItem(`userId`)}`, {
+          myEvents: myEventsArray.filter((e) => e !== eventId),
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      alert("da ist etwas schief gelaufen");
+    }
   };
 
   useEffect(() => {
@@ -110,19 +138,19 @@ export default function OneEvent() {
         participants: parseInt(eventData.participants) + 1,
       });
 
-      let bookedArr = []
-      const userData = await axiosConfig.get(`/user/${localStorage.getItem("userId")}`)
+      let bookedArr = [];
+      const userData = await axiosConfig.get(
+        `/user/${localStorage.getItem("userId")}`
+      );
       console.log(userData);
-      
+
       userData.data.bookedEvents.map((ele, i) => {
         bookedArr.push(ele._id);
       });
 
       await axiosConfig.patch(`/user/${localStorage.getItem("userId")}`, {
-        bookedEvents: bookedArr.filter((e) => e !== eventId)
-      })
-
-
+        bookedEvents: bookedArr.filter((e) => e !== eventId),
+      });
 
       alert("Storno erfolgreich");
       getEventData();
@@ -204,7 +232,10 @@ export default function OneEvent() {
   };
   return (
     <div>
-      <h3>{eventData.eventTitle}</h3>
+      <h3>
+        {eventData.eventTitle}{" "}
+        {isExpired ? <div>(Veranstaltung schon vorbei)</div> : null}
+      </h3>
       <p>
         Eventersteller: {eventData.eventOwner && eventData.eventOwner.userName}{" "}
       </p>
@@ -259,9 +290,20 @@ export default function OneEvent() {
       )}
 
       {myEvent ? (
-        <NavLink to={`/event-edit/${eventData._id}`} className="button-green">
-          bearbeiten
-        </NavLink>
+        <>
+          <NavLink to={`/event-edit/${eventData._id}`} className="button-green">
+            bearbeiten
+          </NavLink>
+          <NavLink
+            to="/profile"
+            onClick={() => {
+              deleteEventById();
+            }}
+            className="button-green"
+          >
+            Löschen
+          </NavLink>
+        </>
       ) : null}
     </div>
   );
