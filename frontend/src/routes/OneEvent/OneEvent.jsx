@@ -19,6 +19,7 @@ export default function OneEvent() {
   const [eventCategories, setEventCategories] = useState(null);
   const [isBooked, setIsBooked] = useState(false);
   const [isWatched, setIsWatched] = useState(false);
+  const [isExpired, setIsExpired] = useState(false);
 
   const getEventData = () => {
     let subsArr = [];
@@ -53,6 +54,10 @@ export default function OneEvent() {
       data.eventOwner._id == localStorage.getItem("userId")
         ? setMyEvent(true)
         : setMyEvent(false);
+
+      new Date(data.date) < Date.now()
+        ? setIsExpired(true)
+        : setIsExpired(false);
     };
     getEventById();
   };
@@ -227,7 +232,10 @@ export default function OneEvent() {
   };
   return (
     <div>
-      <h3>{eventData.eventTitle}</h3>
+      <h3>
+        {eventData.eventTitle}{" "}
+        {isExpired ? <div>(Veranstaltung schon vorbei)</div> : null}
+      </h3>
       <p>
         Eventersteller: {eventData.eventOwner && eventData.eventOwner.userName}{" "}
       </p>
