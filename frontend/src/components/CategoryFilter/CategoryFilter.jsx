@@ -11,7 +11,9 @@ export default function CategoryFilter() {
   const getSearchedEvents = async () => {
     try {
       const axiosResp = await axiosConfig.get(`/search/${currLocation}`);
-      setFoundEvents(axiosResp.data);
+      setFoundEvents(axiosResp.data.sort((a, b) => {
+        return new Date(a.date) - new Date(b.date)
+      }));
     } catch (error) {
       console.log(error);
     }
