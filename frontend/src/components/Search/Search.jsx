@@ -1,6 +1,7 @@
 import React, { useContext, useRef, useState } from "react";
 import axiosConfig from "../../util/axiosConfig";
 import { SectionsContext } from "../../context/sectionsContext";
+import swal from 'sweetalert';
 import "./Search.css";
 
 export default function Search() {
@@ -17,17 +18,21 @@ export default function Search() {
     e.preventDefault();
 
     const location = locationElement.current.value.toLowerCase();
-    console.log(defSearch);
 
     if (!location && !isAuth) {
-      alert("bitte gib eine Stadt ein");
+      swal({
+        title:"Bitte gib eine Stadt ein", 
+        text: "Nochmal probieren?"
+      })
     } else if (!location && isAuth) {
       try {
         const axiosResp = await axiosConfig.get(`/search/${defSearch}`);
         if (axiosResp.data[0]) {
           navigateToEvents(defSearch);
         } else {
-          alert(`keine Veranstaltungen in ${capitalize(defSearch)} gefunden`);
+          swal({
+            title: `Keine Veranstaltungen in ${capitalize(defSearch)} gefunden`,
+          }) 
         }
       } catch (error) {
         alert(error);
@@ -38,7 +43,9 @@ export default function Search() {
         if (axiosResp.data[0]) {
           navigateToEvents(location);
         } else {
-          alert(`keine Veranstaltungen in ${capitalize(location)} gefunden`);
+          swal({
+            title: `Keine Veranstaltungen in ${capitalize(location)} gefunden`,
+          }) 
         }
       } catch (error) {
         alert(error);
@@ -59,7 +66,8 @@ export default function Search() {
           <input
             ref={locationElement}
             type="text"
-            placeholder={isAuth ? capitalize(defSearch) : "Dein Ort"}
+            placeholder="Dein Ort"
+            defaultValue={isAuth ? capitalize(defSearch):null}
           />
           <input className="button-green" type="submit" value="Los geht's!" />
         </form>

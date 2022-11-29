@@ -3,6 +3,8 @@ import { Navigate, NavLink } from "react-router-dom";
 import axiosConfig from "../../util/axiosConfig.js";
 import { SectionsContext } from "../../context/sectionsContext.js";
 import "./RegisterForm.css";
+import GenderRadioBtn from "../../components/Gender/GenderRadioBtn.jsx";
+import { TextInput, MailInput, PasswordInput } from "../../components/Inputs/Inputs.jsx";
 
 export default function RegisterForm() {
   const [isError, setIsError] = useState(false);
@@ -44,7 +46,6 @@ export default function RegisterForm() {
       const axiosResp = await axiosConfig.post("/user", data);
       console.debug("axiosResp.data:", axiosResp.data);
       setIsLoading(false);
-
       if (axiosResp.data.error) {
         setIsError(true);
         setIsLoading(false);
@@ -60,17 +61,22 @@ export default function RegisterForm() {
     }
     setIsError(false);
     setHasRegistered(true);
-    formEl.current.reset();
+    logIn(data);
+  };
+
+  const logIn = async (data) => {
     try {
       const axiosResp = await axiosConfig.post("/user/login", data);
       console.log("successful logged in");
-      handleSuccessfulLogin(axiosResp.data);
+      handleSuccessfulLogin(axiosResp.data, data.location);
     } catch (error) {
       console.log("fehler beim login", error);
     }
   };
 
-  const handleSuccessfulLogin = (respData) => {
+  const handleSuccessfulLogin = (respData, location) => {
+    const locationLowercase = location.toLowerCase();
+    localStorage.setItem("defSearch", locationLowercase);
     setIsAuth(true);
     localStorage.setItem("userName", respData.userName);
     localStorage.setItem("userId", respData.userId);
@@ -78,54 +84,20 @@ export default function RegisterForm() {
 
   return (
     <div>
-      {}
-      RegisterForm
+      <h2>RegisterForm</h2>
       <form ref={formEl} method="POST" action="/user" onSubmit={submitHandler}>
-        {stepOne ? (
+        {stepOne && (
           <div>
-            <label htmlFor="">
-              {" "}
-              Benutzername:
-              <input
-                onChange={(e) => setUserName(e.target.value)}
-                type="text"
-                name="userName"
-                id="userName"
-                required
-              />
-            </label>
-            <label htmlFor="">
-              Vorname:
-              <input
-                onChange={(e) => setFirstName(e.target.value)}
-                type="text"
-                name="firstName"
-                id="firstName"
-                required
-              />
-            </label>
-            <label htmlFor="">
-              Nachname:
-              <input
-                onChange={(e) => setLastName(e.target.value)}
-                type="text"
-                name="lastName"
-                id="lastName"
-                required
-              />
-            </label>
-            <label htmlFor="">
-              Wohnort:
-              <input
-                onChange={(e) => setLocation(e.target.value)}
-                type="text"
-                name="location"
-                id="location"
-                required
-              />
-            </label>
+            <label htmlFor="userName">Benutzername: </label>
+            <TextInput labelValue="userName" stateFunc={setUserName} />
+            <label htmlFor="firstName">Vorname: </label>
+            <TextInput labelValue="firstName" stateFunc={setFirstName} />
+            <label htmlFor="lastName">Nachname: </label>
+            <TextInput labelValue="lastName" stateFunc={setLastName} />
+            <label htmlFor="location">Wohnort: </label>
+            <TextInput labelValue="location" stateFunc={setLocation} />
             <button
-              className="button"
+              className="button-green"
               onClick={() => {
                 setStepOne(false);
                 setStepTwo(true);
@@ -134,98 +106,60 @@ export default function RegisterForm() {
               Weiter
             </button>
           </div>
-        ) : (
-          ""
         )}
-        {stepTwo ? <div>
-          Geschlecht:
-          <label htmlFor="female">
-            <input
-              onClick={() => setGenderRadio("female")}
-              type="radio"
-              name="gender"
-              id="female"
-              value="female"
-            />
-            Weiblich
-          </label>
-          <label htmlFor="male">
-            <input
-              onClick={() => setGenderRadio("male")}
-              type="radio"
-              name="gender"
-              id="male"
-              value="male"
-            />
-            Männlich
-          </label>
-          <label htmlFor="diverse">
-            <input
-              onClick={() => setGenderRadio("diverse")}
-              type="radio"
-              name="gender"
-              id="diverse"
-              value="diverse"
-            />
-            Nicht binär
-          </label>
-          <label htmlFor="none">
-            <input
-              onClick={() => setGenderRadio("none")}
-              type="radio"
-              name="gender"
-              id="none"
-              value="none"
-            />
-            keine Angabe
-          </label>
-          <label htmlFor="">
-            eventuelle Einschränkung
-            <input
-              type="text"
-              name="disabilities"
-              id="disabilities"
-              onChange={(e)=>setDisabilities(e.target.value)}
-            />
-          </label>
-          <button className="button" onClick={() => {
-            setStepOne(true)
-            setStepTwo(false)
-          }}>Zurück</button>
-          <button className="button" onClick={() => {
-            setStepTwo(false)
-            setStepThree(true)
-          }}>Weiter</button>
-        </div> : ""}
-        {stepThree ? <div>
-          <label htmlFor="">
-            E-Mail Adresse:
-            <input onChange={(e)=>setEmail(e.target.value)} type="email" name="email" id="email" required />
-          </label>
-          <label htmlFor="">
-            Passwort:
-            <input
-              onChange={(e)=>setPassword(e.target.value)}
-              type="password"
-              name="password"
-              id="password"
-              required
-            />
-          </label>
-          <button className="button" onClick={() => {
-            setStepTwo(true)
-            setStepThree(false)
-          }}>Zurück</button>
-          <input className="button" type="submit" value="Registrieren" />
-        </div> : ""}
+        {stepTwo && (
+          <div>
+            <button
+              className="button-beige"
+              onClick={() => {
+                setStepOne(true);
+                setStepTwo(false);
+              }}
+            >
+              Zurück
+            </button>
+            Geschlecht:
+            <GenderRadioBtn gender="female" setGenderRadio={setGenderRadio} />
+            <GenderRadioBtn gender="male" setGenderRadio={setGenderRadio} />
+            <GenderRadioBtn gender="diverse" setGenderRadio={setGenderRadio} />
+            <GenderRadioBtn gender="none" setGenderRadio={setGenderRadio} />
+            <label htmlFor="disabilities">Eventuelle Einschränkung </label>
+            <TextInput labelValue="disabilities" stateFunc={setDisabilities} />
+            <button
+              className="button-green"
+              onClick={() => {
+                setStepTwo(false);
+                setStepThree(true);
+              }}
+            >
+              Weiter
+            </button>
+          </div>
+        )}
+        {stepThree && (
+          <div>
+            <button
+              className="button"
+              onClick={() => {
+                setStepTwo(true);
+                setStepThree(false);
+              }}
+            >
+              Zurück
+            </button>
+            <label htmlFor="email"> E-Mail Adresse:</label>
+            <MailInput labelValue="email" stateFunc={setEmail} />
+            <label htmlFor="password"> Passwort: </label>
+            <PasswordInput labelValue="password" stateFunc={setPassword} />
+            <input className="button-green" type="submit" value="Registrieren" />
+          </div>
+        )}
       </form>
-      <p>{isError ? <strong>Es ist ein Fehler aufgetreten.</strong> : null}</p>
+      <p>{isError && <strong>Es ist ein Fehler aufgetreten.</strong>}</p>
       <p>
-        {hasRegistered ? (
-          <>
-            <strong>Sie haben sich erfolgreich registriert.</strong>
-          </>
-        ) : null}
+        {hasRegistered && (
+          <strong>Sie haben sich erfolgreich registriert.</strong>
+        )}
         {isAuth && <Navigate to="/profile" />}
       </p>
       <p>{isLoading ? <strong>Lade – bitte warten...</strong> : null}</p>
