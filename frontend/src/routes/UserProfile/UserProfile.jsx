@@ -21,7 +21,7 @@ export default function UserProfil() {
     const data = axiosResp.data;
     setUserData(data);
   };
-
+  
   useEffect(() => {
     getUserData();
   }, []);

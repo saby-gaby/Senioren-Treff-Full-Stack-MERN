@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import axiosConfig from "../../util/axiosConfig";
-import { useNavigate, NavLink, useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import "./OneEvent.css";
 import {
   CloseCircleOutlined,
@@ -14,7 +14,7 @@ export default function OneEvent() {
   const { id } = useParams();
   const eventId = id;
 
-  const { navigate } = useContext(SectionsContext);
+  const { navigate, isAuth } = useContext(SectionsContext);
   const [myEvent, setMyEvent] = useState(false);
   const [eventData, setEventData] = useState({});
   const [eventCategories, setEventCategories] = useState(null);
@@ -100,23 +100,28 @@ export default function OneEvent() {
       subsArr.push(ele._id);
     });
     try {
-      if (
-        eventData.participants == "0" ||
-        subsArr.includes(localStorage.getItem("userId"))
-      ) {
-        if (subsArr.includes(localStorage.getItem("userId"))) {
-          alert("du hast die Veranstaltung schon gebucht");
+      if (isAuth) {
+        if (
+          eventData.participants == "0" ||
+          subsArr.includes(localStorage.getItem("userId"))
+        ) {
+          if (subsArr.includes(localStorage.getItem("userId"))) {
+            alert("du hast die Veranstaltung schon gebucht");
+          } else {
+            alert("leider schon ausgebucht");
+          }
         } else {
-          alert("leider schon ausgebucht");
-        }
+          await axiosConfig.patch(`/event/subscribe/${eventId}`, {
+            subscribers: localStorage.getItem("userId"),
+          });
+          await axiosConfig.patch(`/event/${eventId}`, {
+            participants: parseInt(eventData.participants) - 1,
+          });
+          alert("Buchung erfolgreich!");
+        } 
       } else {
-        await axiosConfig.patch(`/event/subscribe/${eventId}`, {
-          subscribers: localStorage.getItem("userId"),
-        });
-        await axiosConfig.patch(`/event/${eventId}`, {
-          participants: parseInt(eventData.participants) - 1,
-        });
-        alert("Buchung erfolgreich!");
+        alert("Du musst angemeldet sein, um eine Veranstaltung zu buchen.")
+        navigate("/login")
       }
       getEventData();
     } catch (error) {
@@ -191,16 +196,20 @@ export default function OneEvent() {
 
   const handleWatchEvent = async () => {
     try {
-      const response = await axiosConfig.patch(
+      if (isAuth) {const response = await axiosConfig.patch(
         `/user/watchedEvents/${localStorage.getItem("userId")}`,
         {
           watchedEvents: eventId,
         }
       );
 
-      alert(
-        `${eventData.eventTitle} zur Merkliste von ${response.data.userName} hinzugefügt`
-      );
+        alert(
+          `${eventData.eventTitle} zur Merkliste von ${response.data.userName} hinzugefügt`
+        );
+      } else {
+        alert("Du musst angemeldet sein, um eine Veranstaltung auf die Merkliste zu setzen.")
+        navigate("/login")
+      }
       getEventData();
     } catch (error) {
       console.log(error);
