@@ -19,6 +19,8 @@
   text-align: center;
   margin-top: 2rem;
   width: 100%;
+  border: 2px solid var(--middle-green-color);
+  border-bottom: none;
 }
 
 .box h3 {
@@ -42,16 +44,13 @@
 .SearchedEvents ul {
   width: 100%;
   list-style-type: none;
-  display: flex;
-  flex-direction: column;
+  display: block;
   gap: 1rem;
-  justify-content: center;
   background-color: var(--beige-transparent-color);
-  align-items: center;
-  padding-top: 5rem;
   padding-bottom: 1rem;
-  height: 700px;
-  overflow-y: auto;
+  max-height: 700px;
+  overflow-y: scroll;
+  border: 2px solid var(--middle-green-color);
 }
 
 .box {
@@ -61,6 +60,8 @@
   background-color: var(--beige-transparent-color);
   display: grid;
   grid-template-columns: 50% 50%;
+  margin: 1rem auto;
+  box-shadow: 0 0 1rem var(--dark-green-color);
 }
 
 .box > div {
