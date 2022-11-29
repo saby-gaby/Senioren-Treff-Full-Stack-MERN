@@ -27,6 +27,7 @@
   background-color: var(--dark-green-color);
   color: var(--beige-color);
   font-weight: bolder;
+  border: 2px solid var(--beige-color);
 }
 
 @media screen and (max-width: 768px) {
