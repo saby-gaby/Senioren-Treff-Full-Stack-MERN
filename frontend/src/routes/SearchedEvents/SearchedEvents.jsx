@@ -58,15 +58,15 @@ export default function SearchedEvents() {
           ) : (
             <img src={"http://localhost:6001" + categoryImage()} alt="test" />
           )}
+          <h4>
+            {new Date(oneEvent.date).toLocaleDateString()} {"||"}{" "}
+            {oneEvent.time} Uhr
+          </h4>
           <div>
-            <h4>
-              {new Date(oneEvent.date).toLocaleDateString()} {"||"}{" "}
-              {oneEvent.time} Uhr
-            </h4>
+            <NavLink to={`/event/${oneEvent._id}`} className="button-green">
+              Ansehen
+            </NavLink>
           </div>
-          <NavLink to={`/event/${oneEvent._id}`} className="button-green">
-            Ansehen
-          </NavLink>
         </li>
       );
     });

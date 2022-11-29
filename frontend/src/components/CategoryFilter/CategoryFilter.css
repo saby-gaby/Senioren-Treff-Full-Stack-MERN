@@ -1,7 +1,7 @@
 .selection {
   width: 100%;
   display: grid;
-  grid-template-columns: 40rem 40rem;
+  grid-template-columns: 45% 45%;
   justify-content: center;
   gap: 0.25rem;
   margin-top: 2rem;
