@@ -39,7 +39,7 @@ export default function SearchedEvents() {
       };
 
       return (
-        <li key={i}>
+        <li className="box" key={i}>
           <h3>
             {oneEvent.eventTitle}{" "}
             {new Date(oneEvent.date) < Date.now() ? (
@@ -75,7 +75,7 @@ export default function SearchedEvents() {
   return (
     <div className="SearchedEvents">
       <CategoryFilter />
-      <div>
+      <div className="FoundEvents">
         <h2>Vorschläge für dich in {capitalize(searchedLocation)}</h2>
         <ul>
           {foundEvents && !categoryArray && renderEvents(foundEvents)}
