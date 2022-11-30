@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import { SectionsContext } from "../../context/sectionsContext";
 import axiosConfig from "../../util/axiosConfig";
 import Search from "../../components/Search/Search";
+import "./UserProfil.css";
 
 export default function UserProfil() {
   const { logout, isAuth, userData, setUserData } = useContext(SectionsContext);
@@ -70,72 +71,79 @@ export default function UserProfil() {
         </div>
 
         {showMyEvents ? (
-          <ul>
-            {userData.myEvents &&
-              userData.myEvents.map((ele, i) => {
-                const categoryImage = () => {
-                  let image;
-                  switch (ele.category[0]) {
-                    case "kultur":
-                      image = "/images/kultur.jpg";
-                      break;
-                    case "sport":
-                      image = "/images/sport.jpg";
-                      break;
-                    case "kurse":
-                      image = "/images/kurse.jpg";
-                      break;
-                    case "spiele":
-                      image = "/images/Würfel.jpg";
-                      break;
-                    case "reisen":
-                      image = "/images/reisen.jpeg";
-                      break;
-                    case "natur":
-                      image = "/images/natur.jpg";
-                      break;
-                    default:
-                      image = "/images/default.webp";
-                  }
-                  return image;
-                };
+          <div className="RaisedEvents">
+            <div className="ShowEvents">
+              <ul>
+                {userData.myEvents &&
+                  userData.myEvents.map((ele, i) => {
+                    const categoryImage = () => {
+                      let image;
+                      switch (ele.category[0]) {
+                        case "kultur":
+                          image = "/images/kultur.jpg";
+                          break;
+                        case "sport":
+                          image = "/images/sport.jpg";
+                          break;
+                        case "kurse":
+                          image = "/images/kurse.jpg";
+                          break;
+                        case "spiele":
+                          image = "/images/Würfel.jpg";
+                          break;
+                        case "reisen":
+                          image = "/images/reisen.jpeg";
+                          break;
+                        case "natur":
+                          image = "/images/natur.jpg";
+                          break;
+                        default:
+                          image = "/images/default.webp";
+                      }
+                      return image;
+                    };
 
-                return (
-                  <li key={i}>
-                    <h4>{ele.eventTitle}</h4>
-                    {new Date(ele.date) < Date.now() ? (
-                      <div className="expired">
-                        Veranstaltung schon vorbei :-/
-                      </div>
-                    ) : null}{" "}
-                    {ele.imageUrl ? (
-                      <img
-                        src={"http://localhost:6001" + ele.imageUrl}
-                        alt="image not found"
-                        onError={({ currentTarget }) => {
-                          currentTarget.onerror = null;
-                          currentTarget.src = `http://localhost:6001${categoryImage()}`;
-                        }}
-                      />
-                    ) : (
-                      <img
-                        src={"http://localhost:6001" + categoryImage()}
-                        alt="test"
-                      />
-                    )}
-                    <div>
-                      <h4>
-                        {new Date(ele.date).toLocaleDateString()} {"||"}{" "}
-                        {ele.time} Uhr
-                      </h4>
-                    </div>
-                    <NavLink to={`/event/${ele._id}`} className="button-green">
-                      Ansehen
-                    </NavLink>
-                  </li>
-                );
-              })}
-          </ul>
+                    return (
+                      <li className="box" key={i}>
+                        <h3>{ele.eventTitle}</h3>
+                        {new Date(ele.date) < Date.now() ? (
+                          <div className="expired">
+                            Veranstaltung schon vorbei :-/
+                          </div>
+                        ) : null}{" "}
+                        {ele.imageUrl ? (
+                          <img
+                            src={"http://localhost:6001" + ele.imageUrl}
+                            alt="image not found"
+                            onError={({ currentTarget }) => {
+                              currentTarget.onerror = null;
+                              currentTarget.src = `http://localhost:6001${categoryImage()}`;
+                            }}
+                          />
+                        ) : (
+                          <img
+                            src={"http://localhost:6001" + categoryImage()}
+                            alt="test"
+                          />
+                        )}
+                        <h4>
+                          {new Date(ele.date).toLocaleDateString()} {"||"}{" "}
+                          {ele.time} Uhr
+                        </h4>
+                        <div>
+                          <NavLink
+                            to={`/event/${ele._id}`}
+                            className="button-green"
+                          >
+                            Ansehen
+                          </NavLink>
+                        </div>
+                      </li>
+                    );
+                  })}
+              </ul>
+            </div>
+          </div>
         ) : null}
         <div>
           <h2>gebuchte Veranstaltungen:</h2>
@@ -157,72 +165,79 @@ export default function UserProfil() {
         </div>
 
         {bookedEvents ? (
-          <ul>
-            {userData.bookedEvents &&
-              userData.bookedEvents.map((ele, i) => {
-                const categoryImage = () => {
-                  let image;
-                  switch (ele.category[0]) {
-                    case "kultur":
-                      image = "/images/kultur.jpg";
-                      break;
-                    case "sport":
-                      image = "/images/sport.jpg";
-                      break;
-                    case "kurse":
-                      image = "/images/kurse.jpg";
-                      break;
-                    case "spiele":
-                      image = "/images/Würfel.jpg";
-                      break;
-                    case "reisen":
-                      image = "/images/reisen.jpeg";
-                      break;
-                    case "natur":
-                      image = "/images/natur.jpg";
-                      break;
-                    default:
-                      image = "/images/default.webp";
-                  }
-                  return image;
-                };
+          <div className="RaisedEvents">
+            <div className="ShowEvents">
+              <ul>
+                {userData.bookedEvents &&
+                  userData.bookedEvents.map((ele, i) => {
+                    const categoryImage = () => {
+                      let image;
+                      switch (ele.category[0]) {
+                        case "kultur":
+                          image = "/images/kultur.jpg";
+                          break;
+                        case "sport":
+                          image = "/images/sport.jpg";
+                          break;
+                        case "kurse":
+                          image = "/images/kurse.jpg";
+                          break;
+                        case "spiele":
+                          image = "/images/Würfel.jpg";
+                          break;
+                        case "reisen":
+                          image = "/images/reisen.jpeg";
+                          break;
+                        case "natur":
+                          image = "/images/natur.jpg";
+                          break;
+                        default:
+                          image = "/images/default.webp";
+                      }
+                      return image;
+                    };
 
-                return (
-                  <li key={i}>
-                    <h4>{ele.eventTitle}</h4>
-                    {new Date(ele.date) < Date.now() ? (
-                      <div className="expired">
-                        Veranstaltung schon vorbei :-/
-                      </div>
-                    ) : null}{" "}
-                    {ele.imageUrl ? (
-                      <img
-                        src={"http://localhost:6001" + ele.imageUrl}
-                        alt="image not found"
-                        onError={({ currentTarget }) => {
-                          currentTarget.onerror = null;
-                          currentTarget.src = `http://localhost:6001${categoryImage()}`;
-                        }}
-                      />
-                    ) : (
-                      <img
-                        src={"http://localhost:6001" + categoryImage()}
-                        alt="test"
-                      />
-                    )}
-                    <div>
-                      <h4>
-                        {new Date(ele.date).toLocaleDateString()} {"||"}{" "}
-                        {ele.time} Uhr
-                      </h4>
-                    </div>
-                    <NavLink to={`/event/${ele._id}`} className="button-green">
-                      Ansehen
-                    </NavLink>
-                  </li>
-                );
-              })}
-          </ul>
+                    return (
+                      <li className="box" key={i}>
+                        <h3>{ele.eventTitle}</h3>
+                        {new Date(ele.date) < Date.now() ? (
+                          <div className="expired">
+                            Veranstaltung schon vorbei :-/
+                          </div>
+                        ) : null}{" "}
+                        {ele.imageUrl ? (
+                          <img
+                            src={"http://localhost:6001" + ele.imageUrl}
+                            alt="image not found"
+                            onError={({ currentTarget }) => {
+                              currentTarget.onerror = null;
+                              currentTarget.src = `http://localhost:6001${categoryImage()}`;
+                            }}
+                          />
+                        ) : (
+                          <img
+                            src={"http://localhost:6001" + categoryImage()}
+                            alt="test"
+                          />
+                        )}
+                        <h4>
+                          {new Date(ele.date).toLocaleDateString()} {"||"}{" "}
+                          {ele.time} Uhr
+                        </h4>
+                        <div>
+                          <NavLink
+                            to={`/event/${ele._id}`}
+                            className="button-green"
+                          >
+                            Ansehen
+                          </NavLink>
+                        </div>
+                      </li>
+                    );
+                  })}
+              </ul>
+            </div>
+          </div>
         ) : null}
 
         <div>
@@ -244,72 +259,79 @@ export default function UserProfil() {
           )}
         </div>
         {watchedEvents ? (
-          <ul>
-            {userData.watchedEvents &&
-              userData.watchedEvents.map((ele, i) => {
-                const categoryImage = () => {
-                  let image;
-                  switch (ele.category[0]) {
-                    case "kultur":
-                      image = "/images/kultur.jpg";
-                      break;
-                    case "sport":
-                      image = "/images/sport.jpg";
-                      break;
-                    case "kurse":
-                      image = "/images/kurse.jpg";
-                      break;
-                    case "spiele":
-                      image = "/images/Würfel.jpg";
-                      break;
-                    case "reisen":
-                      image = "/images/reisen.jpeg";
-                      break;
-                    case "natur":
-                      image = "/images/natur.jpg";
-                      break;
-                    default:
-                      image = "/images/default.webp";
-                  }
-                  return image;
-                };
+          <div className="RaisedEvents">
+            <div className="ShowEvents">
+              <ul>
+                {userData.watchedEvents &&
+                  userData.watchedEvents.map((ele, i) => {
+                    const categoryImage = () => {
+                      let image;
+                      switch (ele.category[0]) {
+                        case "kultur":
+                          image = "/images/kultur.jpg";
+                          break;
+                        case "sport":
+                          image = "/images/sport.jpg";
+                          break;
+                        case "kurse":
+                          image = "/images/kurse.jpg";
+                          break;
+                        case "spiele":
+                          image = "/images/Würfel.jpg";
+                          break;
+                        case "reisen":
+                          image = "/images/reisen.jpeg";
+                          break;
+                        case "natur":
+                          image = "/images/natur.jpg";
+                          break;
+                        default:
+                          image = "/images/default.webp";
+                      }
+                      return image;
+                    };
 
-                return (
-                  <li key={i}>
-                    <h4>{ele.eventTitle}</h4>
-                    {new Date(ele.date) < Date.now() ? (
-                      <div className="expired">
-                        Veranstaltung schon vorbei :-/
-                      </div>
-                    ) : null}{" "}
-                    {ele.imageUrl ? (
-                      <img
-                        src={"http://localhost:6001" + ele.imageUrl}
-                        alt="image not found"
-                        onError={({ currentTarget }) => {
-                          currentTarget.onerror = null;
-                          currentTarget.src = `http://localhost:6001${categoryImage()}`;
-                        }}
-                      />
-                    ) : (
-                      <img
-                        src={"http://localhost:6001" + categoryImage()}
-                        alt="test"
-                      />
-                    )}
-                    <div>
-                      <h4>
-                        {new Date(ele.date).toLocaleDateString()} {"||"}{" "}
-                        {ele.time} Uhr
-                      </h4>
-                    </div>
-                    <NavLink to={`/event/${ele._id}`} className="button-green">
-                      Ansehen
-                    </NavLink>
-                  </li>
-                );
-              })}
-          </ul>
+                    return (
+                      <li className="box" key={i}>
+                        <h3>{ele.eventTitle}</h3>
+                        {new Date(ele.date) < Date.now() ? (
+                          <div className="expired">
+                            Veranstaltung schon vorbei :-/
+                          </div>
+                        ) : null}{" "}
+                        {ele.imageUrl ? (
+                          <img
+                            src={"http://localhost:6001" + ele.imageUrl}
+                            alt="image not found"
+                            onError={({ currentTarget }) => {
+                              currentTarget.onerror = null;
+                              currentTarget.src = `http://localhost:6001${categoryImage()}`;
+                            }}
+                          />
+                        ) : (
+                          <img
+                            src={"http://localhost:6001" + categoryImage()}
+                            alt="test"
+                          />
+                        )}
+                        <h4>
+                          {new Date(ele.date).toLocaleDateString()} {"||"}{" "}
+                          {ele.time} Uhr
+                        </h4>
+                        <div>
+                          <NavLink
+                            to={`/event/${ele._id}`}
+                            className="button-green"
+                          >
+                            Ansehen
+                          </NavLink>
+                        </div>
+                      </li>
+                    );
+                  })}
+              </ul>
+            </div>
+          </div>
         ) : null}
 
         <div>
