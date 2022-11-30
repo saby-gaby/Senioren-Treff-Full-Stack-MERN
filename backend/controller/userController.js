@@ -136,3 +136,12 @@ export const getUserByUsername = async (req, res) => {
     res.status(204).send(false);
   }
 };
+
+export const getUserByEmail = async (req, res) => {
+  try {
+    const user = await UserModel.findOne({ email: req.params.email });
+    res.status(200).send(user.email);
+  } catch (error) {
+    res.status(204).send(false);
+  }
+};

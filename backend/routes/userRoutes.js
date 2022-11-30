@@ -7,7 +7,7 @@ import {
   userLogin,
   userLogout,
   addToWatchList,
-  getUserByUsername
+  getUserByUsername,getUserByEmail
 } from "../controller/userController.js";
 import { userValidationSchema } from "../models/userValidationModel.js";
 import { validator } from "../middleware/validator.js";
@@ -24,6 +24,7 @@ router
 router.route("/user/login").post(userLogin);
 router.route("/user/logout").post(userLogout);
 router.route("/user/username/:username").get(getUserByUsername);
+router.route("/user/email/:email").get(getUserByEmail);
 
 router.route("/user/watchedEvents/:id").patch(isAuth, addToWatchList);
 
