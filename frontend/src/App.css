@@ -28,6 +28,7 @@ header {
   padding: 0.5rem 1rem;
   min-width: max-content;
   max-height: 20vmin;
+  position: fixed;
 }
 
 nav {
@@ -75,6 +76,7 @@ nav img {
 }
 
 main {
+  margin-top: 20vh;
   width: 100%;
 }
 

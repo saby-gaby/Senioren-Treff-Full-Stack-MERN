@@ -13,6 +13,7 @@ import Page404 from "./routes/Page404/Page404";
 import UpdateUser from "./routes/UpdateUser/UpdateUser";
 import UpdateEvent from "./routes/UpdateEvent/UpdateEvent";
 import Footer from "./components/Footer/Footer";
+import { autoLogout } from "./util/AutoLogout";
 
 function App() {
   const { isAuth } = useContext(SectionsContext);
@@ -22,6 +23,10 @@ function App() {
   useEffect(() => {
     console.log(location.pathname);
   }, [location]);
+
+  useEffect(() => {
+    autoLogout()
+  }, !isAuth)
 
   return (
     <div className="App">
@@ -58,6 +63,7 @@ function App() {
           </ul>
         </nav>
       </header>
+      <main>
       <div className="workNav">
         <NavLink to="/">Home</NavLink>
         <NavLink to="/login">Login</NavLink>
@@ -66,7 +72,6 @@ function App() {
         <NavLink to="/event-form">Event-Form</NavLink>
         <NavLink to="/events">Events</NavLink>
       </div>
-      <main>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<LoginForm />} />
