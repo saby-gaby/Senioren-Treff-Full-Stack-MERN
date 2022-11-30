@@ -98,7 +98,10 @@ export const updateUserByID = async (req, res) => {
     if (req.body.password) {
       const hashedSaltyPassword = await bcrypt.hash(req.body.password, 14);
 
-      await UserModel.updateOne({ _id: req.params.id }, {password: hashedSaltyPassword})
+      await UserModel.updateOne(
+        { _id: req.params.id },
+        { password: hashedSaltyPassword }
+      );
     } else {
       await UserModel.updateOne({ _id: req.params.id }, req.body);
     }
@@ -122,5 +125,23 @@ export const addToWatchList = async (req, res) => {
     res.send(getUser);
   } catch (error) {
     res.status(401).send(error.message);
+  }
+};
+
+export const getUserByUsername = async (req, res) => {
+  try {
+    const user = await UserModel.findOne({ userName: req.params.username });
+    res.status(200).send(user.userName);
+  } catch (error) {
+    res.status(204).send(false);
+  }
+};
+
+export const getUserByEmail = async (req, res) => {
+  try {
+    const user = await UserModel.findOne({ email: req.params.email });
+    res.status(200).send(user.email);
+  } catch (error) {
+    res.status(204).send(false);
   }
 };

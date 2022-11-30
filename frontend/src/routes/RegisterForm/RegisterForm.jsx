@@ -4,13 +4,24 @@ import axiosConfig from "../../util/axiosConfig.js";
 import { SectionsContext } from "../../context/sectionsContext.js";
 import "./RegisterForm.css";
 import GenderRadioBtn from "../../components/Gender/GenderRadioBtn.jsx";
-import { TextInput, MailInput, PasswordInput } from "../../components/Inputs/Inputs.jsx";
+import {
+  TextInput,
+  MailInput,
+  PasswordInput,
+} from "../../components/Inputs/Inputs.jsx";
+import {
+  NextBtnToStepTwo,
+  NextBtnToThree,
+  SubmitBtn,
+  ResetBtn,
+} from "../../components/NextBtnRegister/NextBtnRegister.jsx";
+import swal from "sweetalert";
 
 export default function RegisterForm() {
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [hasRegistered, setHasRegistered] = useState(false);
-  const { isAuth, navigate, setIsAuth } = useContext(SectionsContext);
+  const { isAuth, setIsAuth } = useContext(SectionsContext);
 
   const [stepOne, setStepOne] = useState(true);
   const [stepTwo, setStepTwo] = useState(false);
@@ -20,15 +31,39 @@ export default function RegisterForm() {
   const [userName, setUserName] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [genderRadio, setGenderRadio] = useState("");
+  const [genderRadio, setGenderRadio] = useState("none");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [location, setLocation] = useState("");
   const [disabilities, setDisabilities] = useState("");
+  
+  const props = {
+    userName: userName,
+    setUserName: setUserName,
+    firstName: firstName,
+    setFirstName: setFirstName,
+    lastName: lastName,
+    setLastName: setLastName,
+    location: location,
+    setLocation: setLocation,
+    genderRadio: genderRadio,
+    setGenderRadio: setGenderRadio,
+    disabilities: disabilities,
+    setDisabilities: setDisabilities,
+    password: password,
+    setPassword: setPassword,
+    email: email,
+    setEmail: setEmail,
+    stepOne: stepOne,
+    setOne: setStepOne,
+    stepTwo: stepTwo,
+    setTwo: setStepTwo,
+    stepThree: stepThree,
+    setThree: setStepThree,
+  };
 
-  const submitHandler = async (e) => {
-    e.preventDefault();
-
+  const submitHandler = async () => {
+    /*  e.preventDefault(); */
     const data = {
       userName: userName,
       firstName: firstName,
@@ -53,10 +88,19 @@ export default function RegisterForm() {
         return;
       }
     } catch (error) {
+      for (const err of error.response.data.errors) {
+        if (err.msg === "Invalid value" && err.param === "password") {
+          swal({
+            title:
+              "Ihr Passwort muss mindestens 8 Zeichen lang sein und eine Zahl, einen Groß- und einen Kleinbuchstaben enthalten.",
+          });
+        } else {
+          setIsError(true);
+          setIsLoading(false);
+          setHasRegistered(false);
+        }
+      }
       console.error("Error while sending with axios", error);
-      setIsError(true);
-      setIsLoading(false);
-      setHasRegistered(false);
       return;
     }
     setIsError(false);
@@ -70,7 +114,7 @@ export default function RegisterForm() {
       console.log("successful logged in");
       handleSuccessfulLogin(axiosResp.data, data.location);
     } catch (error) {
-      console.log("fehler beim login", error);
+      console.log("Fehler beim login", error);
     }
   };
 
@@ -85,73 +129,51 @@ export default function RegisterForm() {
   return (
     <div>
       <h2>RegisterForm</h2>
-      <form ref={formEl} method="POST" action="/user" onSubmit={submitHandler}>
+      <form ref={formEl} method="POST" action="/user">
         {stepOne && (
           <div>
-            <label htmlFor="userName">Benutzername: </label>
+            <label htmlFor="userName">
+              Benutzername:<sup>*</sup>
+            </label>
             <TextInput labelValue="userName" stateFunc={setUserName} />
-            <label htmlFor="firstName">Vorname: </label>
+            <label htmlFor="firstName">
+              Vorname:<sup>*</sup>
+            </label>
             <TextInput labelValue="firstName" stateFunc={setFirstName} />
-            <label htmlFor="lastName">Nachname: </label>
+            <label htmlFor="lastName">
+              Nachname:<sup>*</sup>
+            </label>
             <TextInput labelValue="lastName" stateFunc={setLastName} />
-            <label htmlFor="location">Wohnort: </label>
+            <label htmlFor="location">
+              Wohnort:<sup>*</sup>
+            </label>
             <TextInput labelValue="location" stateFunc={setLocation} />
-            <button
-              className="button-green"
-              onClick={() => {
-                setStepOne(false);
-                setStepTwo(true);
-              }}
-            >
-              Weiter
-            </button>
+            <NextBtnToStepTwo props={props} />
           </div>
         )}
         {stepTwo && (
           <div>
-            <button
-              className="button-beige"
-              onClick={() => {
-                setStepOne(true);
-                setStepTwo(false);
-              }}
-            >
-              Zurück
-            </button>
-            Geschlecht:
-            <GenderRadioBtn gender="female" setGenderRadio={setGenderRadio} />
-            <GenderRadioBtn gender="male" setGenderRadio={setGenderRadio} />
-            <GenderRadioBtn gender="diverse" setGenderRadio={setGenderRadio} />
-            <GenderRadioBtn gender="none" setGenderRadio={setGenderRadio} />
+            <h3>
+              Geschlecht:<sup>*</sup>
+            </h3>
+            <GenderRadioBtn gender="female" props={props} />
+            <GenderRadioBtn gender="male" props={props} />
+            <GenderRadioBtn gender="diverse" props={props} />
+            <GenderRadioBtn gender="none" props={props} />
             <label htmlFor="disabilities">Eventuelle Einschränkung </label>
             <TextInput labelValue="disabilities" stateFunc={setDisabilities} />
-            <button
-              className="button-green"
-              onClick={() => {
-                setStepTwo(false);
-                setStepThree(true);
-              }}
-            >
-              Weiter
-            </button>
+            <NextBtnToThree props={props} />
+            <ResetBtn props={props} />
           </div>
         )}
         {stepThree && (
           <div>
-            <button
-              className="button"
-              onClick={() => {
-                setStepTwo(true);
-                setStepThree(false);
-              }}
-            >
-              Zurück
-            </button>
             <label htmlFor="email"> E-Mail Adresse:</label>
             <MailInput labelValue="email" stateFunc={setEmail} />
             <label htmlFor="password"> Passwort: </label>
             <PasswordInput labelValue="password" stateFunc={setPassword} />
-            <input className="button-green" type="submit" value="Registrieren" />
+            <SubmitBtn props={props} submitHandler={submitHandler} />
+            <ResetBtn props={props} />
           </div>
         )}
       </form>
