@@ -61,6 +61,7 @@
 }
 
 .box {
+  position: relative;
   height: 250px;
   width: 95%;
   border-radius: 1rem;
@@ -79,6 +80,21 @@
   grid-row: 3 / 4;
   justify-content: center;
   width: 100%;
+}
+.box > .expired {
+  position: absolute;
+  padding: 50px 25px;
+  width: max-content;
+  height: 50px;
+  top: -70px;
+  right: 160px;
+  color: var(--beige-color);
+  background-color: var(--dark-transparent-color);
+  border-radius: 1rem;
+  z-index: 1;
+  transform: rotate(-20deg);
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 
 .box > div > .button-green:hover {
