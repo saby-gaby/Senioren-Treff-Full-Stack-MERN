@@ -60,8 +60,7 @@ export default function SearchedEvents() {
           )}
           <div>
             <h4>
-              {new Date(oneEvent.date).toLocaleDateString()} {"||"}{" "}
-              {oneEvent.time} Uhr
+              {new Date(oneEvent.date).toLocaleDateString()} || {oneEvent.time} Uhr
             </h4>
           </div>
           <NavLink to={`/event/${oneEvent._id}`} className="button-green">

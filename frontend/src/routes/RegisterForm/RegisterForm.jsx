@@ -4,7 +4,15 @@ import axiosConfig from "../../util/axiosConfig.js";
 import { SectionsContext } from "../../context/sectionsContext.js";
 import "./RegisterForm.css";
 import GenderRadioBtn from "../../components/Gender/GenderRadioBtn.jsx";
-import { TextInput, MailInput, PasswordInput } from "../../components/Inputs/Inputs.jsx";
+import {
+  TextInput,
+  MailInput,
+  PasswordInput,
+} from "../../components/Inputs/Inputs.jsx";
+import {
+  NextBtnToStepTwo,
+  NextBtnToThree,
+} from "../../components/NextBtnRegister/NextBtnRegister.jsx";
 
 export default function RegisterForm() {
   const [isError, setIsError] = useState(false);
@@ -20,7 +28,7 @@ export default function RegisterForm() {
   const [userName, setUserName] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [genderRadio, setGenderRadio] = useState("");
+  const [genderRadio, setGenderRadio] = useState("none");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [location, setLocation] = useState("");
@@ -88,15 +96,31 @@ export default function RegisterForm() {
       <form ref={formEl} method="POST" action="/user" onSubmit={submitHandler}>
         {stepOne && (
           <div>
-            <label htmlFor="userName">Benutzername: </label>
+            <label htmlFor="userName">
+              Benutzername:<sup>*</sup> 
+            </label>
             <TextInput labelValue="userName" stateFunc={setUserName} />
-            <label htmlFor="firstName">Vorname: </label>
+            <label htmlFor="firstName">
+              Vorname:<sup>*</sup> 
+            </label>
             <TextInput labelValue="firstName" stateFunc={setFirstName} />
-            <label htmlFor="lastName">Nachname: </label>
+            <label htmlFor="lastName">
+              Nachname:<sup>*</sup> 
+            </label>
             <TextInput labelValue="lastName" stateFunc={setLastName} />
-            <label htmlFor="location">Wohnort: </label>
+            <label htmlFor="location">
+              Wohnort:<sup>*</sup> 
+            </label>
             <TextInput labelValue="location" stateFunc={setLocation} />
-            <button
+            <NextBtnToStepTwo
+              userName={userName}
+              firstName={firstName}
+              lastName={lastName}
+              location={location}
+              setOne={setStepOne}
+              setTwo={setStepTwo}
+            />
+            {/* <button
               className="button-green"
               onClick={() => {
                 setStepOne(false);
@@ -104,12 +128,12 @@ export default function RegisterForm() {
               }}
             >
               Weiter
-            </button>
+            </button> */}
           </div>
         )}
         {stepTwo && (
           <div>
-            <button
+            {/* <button
               className="button-beige"
               onClick={() => {
                 setStepOne(true);
@@ -117,15 +141,21 @@ export default function RegisterForm() {
               }}
             >
               Zurück
-            </button>
-            Geschlecht:
-            <GenderRadioBtn gender="female" setGenderRadio={setGenderRadio} />
-            <GenderRadioBtn gender="male" setGenderRadio={setGenderRadio} />
-            <GenderRadioBtn gender="diverse" setGenderRadio={setGenderRadio} />
-            <GenderRadioBtn gender="none" setGenderRadio={setGenderRadio} />
+            </button> */}
+            <h3>Geschlecht:<sup>*</sup></h3>
+            <GenderRadioBtn gender="female" setGenderRadio={setGenderRadio} genderRadio={genderRadio} />
+            <GenderRadioBtn gender="male" setGenderRadio={setGenderRadio} genderRadio={genderRadio} />
+            <GenderRadioBtn gender="diverse" setGenderRadio={setGenderRadio} genderRadio={genderRadio} />
+            <GenderRadioBtn gender="none" setGenderRadio={setGenderRadio} genderRadio={genderRadio} />
             <label htmlFor="disabilities">Eventuelle Einschränkung </label>
             <TextInput labelValue="disabilities" stateFunc={setDisabilities} />
-            <button
+            <NextBtnToThree
+              genderRadio={genderRadio}
+              setTwo={setStepTwo}
+              setThree={setStepThree}
+              disabilities={disabilities}
+            />
+            {/* <button
               className="button-green"
               onClick={() => {
                 setStepTwo(false);
@@ -133,12 +163,12 @@ export default function RegisterForm() {
               }}
             >
               Weiter
-            </button>
+            </button> */}
           </div>
         )}
         {stepThree && (
           <div>
-            <button
+            {/* <button
               className="button"
               onClick={() => {
                 setStepTwo(true);
@@ -146,12 +176,16 @@ export default function RegisterForm() {
               }}
             >
               Zurück
-            </button>
+            </button> */}
             <label htmlFor="email"> E-Mail Adresse:</label>
             <MailInput labelValue="email" stateFunc={setEmail} />
             <label htmlFor="password"> Passwort: </label>
             <PasswordInput labelValue="password" stateFunc={setPassword} />
-            <input className="button-green" type="submit" value="Registrieren" />
+            <input
+              className="button-green"
+              type="submit"
+              value="Registrieren"
+            />
           </div>
         )}
       </form>
