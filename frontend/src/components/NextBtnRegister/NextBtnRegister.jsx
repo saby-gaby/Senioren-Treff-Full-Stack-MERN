@@ -73,7 +73,7 @@ const NextBtnToThree = ({ props }) => {
   );
 };
 
-const SubmitBtn = ({ props }) => {
+const SubmitBtn = ({submitHandler, props }) => {
   const validateDataStepThree = async (e) => {
     e.preventDefault();
     const validateEmail = async () => {
