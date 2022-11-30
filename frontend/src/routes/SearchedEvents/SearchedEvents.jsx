@@ -40,12 +40,10 @@ export default function SearchedEvents() {
 
       return (
         <li className="box" key={i}>
-          <h3>
-            {oneEvent.eventTitle}{" "}
-            {new Date(oneEvent.date) < Date.now() ? (
-              <div>Veranstaltung schon vorbei :-/</div>
-            ) : null}{" "}
-          </h3>
+          <h3>{oneEvent.eventTitle} </h3>
+          {new Date(oneEvent.date) < Date.now() ? (
+            <div className="expired">Veranstaltung schon vorbei</div>
+          ) : null}{" "}
           {oneEvent.imageUrl ? (
             <img
               src={"http://localhost:6001" + oneEvent.imageUrl}
@@ -58,14 +56,15 @@ export default function SearchedEvents() {
           ) : (
             <img src={"http://localhost:6001" + categoryImage()} alt="test" />
           )}
+          <h4>
+            {new Date(oneEvent.date).toLocaleDateString()} {"||"}{" "}
+            {oneEvent.time} Uhr
+          </h4>
           <div>
-            <h4>
-              {new Date(oneEvent.date).toLocaleDateString()} || {oneEvent.time} Uhr
-            </h4>
+            <NavLink to={`/event/${oneEvent._id}`} className="button-green">
+              Ansehen
+            </NavLink>
           </div>
-          <NavLink to={`/event/${oneEvent._id}`} className="button-green">
-            Ansehen
-          </NavLink>
         </li>
       );
     });
