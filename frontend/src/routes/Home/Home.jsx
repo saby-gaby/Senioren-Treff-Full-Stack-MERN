@@ -3,6 +3,7 @@ import { SectionsContext } from "../../context/sectionsContext";
 import { NavLink } from "react-router-dom";
 import "./Home.css";
 import Search from "../../components/Search/Search";
+import swal from "sweetalert";
 
 export default function Home() {
   const { isAuth, setEventLogin } = useContext(SectionsContext);
@@ -20,7 +21,13 @@ export default function Home() {
           <NavLink
             to="/login"
             className="button-green"
-            onClick={() => setEventLogin(true)}
+              onClick={() => {
+                swal({
+                  title: "Du musst angemeldet sein, um eine Veranstaltung zu erstellen.",
+                  button: "OK",
+                });
+                setEventLogin(true)
+              }}
           >
             Erstellen
           </NavLink>

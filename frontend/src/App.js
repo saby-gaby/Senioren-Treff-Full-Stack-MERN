@@ -24,9 +24,11 @@ function App() {
     console.log(location.pathname);
   }, [location]);
 
-  useEffect(() => {
-    autoLogout();
-  }, !isAuth);
+
+  // useEffect(() => {
+  //   autoLogout()
+  // }, !isAuth)
+
 
   return (
     <div className="App">

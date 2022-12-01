@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import axiosConfig from "../../util/axiosConfig.js";
 import "./EventForm.css";
 import { SectionsContext } from "../../context/sectionsContext.js";
+import swal from "sweetalert";
 
 export default function EventForm() {
   const [file, setFile] = useState(null);
@@ -55,11 +56,19 @@ export default function EventForm() {
       );
 
       console.log("reponsData", response.data);
-      alert("Event wurde erfolgreich erstellt!");
-      navigate(`/event/${response._id}`);
+
+      swal({
+        title: "Event wurde erfolgreich erstellt!",
+        button: "OK",
+      });
+      navigate(`/event/${response._id}`)
+
     } catch (error) {
       console.error(error);
-      alert("Es ist ein Fehler aufgetreten");
+      swal({
+        title: "Es ist ein Fehler aufgetreten",
+        button: "OK",
+      });
     }
   };
 
