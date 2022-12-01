@@ -1,0 +1,24 @@
+.RegisterForm input[type="text"],
+.RegisterForm input[type="password"], 
+.RegisterForm input[type="email"]{
+  width: 300px;
+  height: 2.5rem;
+  background-color: var(--beige-transparent-color);
+  border-color: var(--middle-green-color);
+  border-radius: 0.75rem;
+  font-size: 2rem;
+  padding-left: 0.5rem;
+}
+
+.RegisterForm input[type="text"]:focus,
+.RegisterForm input[type="password"]:focus, 
+.RegisterForm input[type="email"]:focus {
+  background-color: var(--beige-color);
+  border: none;
+  outline: 3px solid var(--middle-green-color);
+}
+
+#disabilities {
+    height: 3rem;
+    width: 100%;
+  }

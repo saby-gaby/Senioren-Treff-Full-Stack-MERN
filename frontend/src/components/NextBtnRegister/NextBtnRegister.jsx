@@ -1,6 +1,7 @@
 import React from "react";
 import axiosConfig from "../../util/axiosConfig";
 import swal from "sweetalert";
+import "./NextBtnRegister.css"
 
 function NextBtnToStepTwo({ props }) {
   const uniqueUserName = async () => {
@@ -45,9 +46,9 @@ function NextBtnToStepTwo({ props }) {
       props.setTwo(true);
     }
   };
-
+  
   return (
-    <span className="button-green" onClick={validateInput}>
+    <span className="button-green" onClick={validateInput} id="nextBtnToStepTwo">
       Weiter
     </span>
   );
@@ -67,7 +68,7 @@ const NextBtnToThree = ({ props }) => {
     }
   };
   return (
-    <span className="button-green" onClick={setThreeTrue}>
+    <span className="button-green" onClick={setThreeTrue} id="nextBtnToThree">
       Weiter
     </span>
   );
@@ -107,6 +108,7 @@ const SubmitBtn = ({submitHandler, props }) => {
       className="button-green"
       type="submit"
       value="Registrieren"
+      id="submitBtn"
     />
   );
 };
@@ -124,10 +126,9 @@ const ResetBtn = ({ props }) => {
     if (props.password !== "") props.setPassword("");
     if (props.location !== "") props.setLocation("");
     if (props.disabilities !== "") props.setDisabilities("");
-    props.formEl.reset();
   };
   return (
-    <span onClick={resetAll} className="button-beige">
+    <span onClick={resetAll} className="button-beige resetBtn">
       Reset
     </span>
   );
