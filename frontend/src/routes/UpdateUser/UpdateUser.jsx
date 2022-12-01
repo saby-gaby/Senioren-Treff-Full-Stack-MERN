@@ -3,6 +3,7 @@ import { SectionsContext } from "../../context/sectionsContext";
 import { useContext } from "react";
 import { EditOutlined, SaveOutlined } from "@ant-design/icons";
 import axiosConfig from "../../util/axiosConfig";
+import swal from "sweetalert";
 
 export default function UpdateUser() {
   const { userData, setUserData, navigate } = useContext(SectionsContext);
@@ -66,17 +67,29 @@ export default function UpdateUser() {
               onClick={() => {
                 setEditUserName(false);
                 if (!userName) {
-                  alert("Benutzername unverändert");
+                  swal({ title: "Benutzername unverändert!" });
                 } else {
-                  if (confirm(`Benutzername ändern? ${userName}`)) {
-                    const data = { userName: userName };
-                    updateUser(data);
-                    alert("Benutzername erfolgreich geändert!");
-                  } else {
-                    alert("Benutzername ändern abgebrochen.");
-                  }
+                  swal({
+                    title: "Benutzername ändern?",
+                    text: userName,
+                    icon: "warning",
+                    buttons: ["Nein, nicht ändern!", "Ja, ändern!"],
+                    dangerMode: true,
+                  }).then((isConfirm) => {
+                    if (isConfirm) {
+                      swal({
+                        title: "Benutzername erfolgreich geändert!!",
+                        text: userName,
+                        icon: "success",
+                      }).then(() => {
+                        const data = { userName: userName };
+                        updateUser(data);
+                      });
+                    } else {
+                      swal({ title: "Benutzername ändern abgebrochen." });
+                    }
+                  });
                 }
-
                 getUserData();
               }}
             />
@@ -104,15 +117,28 @@ export default function UpdateUser() {
               onClick={() => {
                 setEditFirstName(false);
                 if (!firstName) {
-                  alert("Vorname unverändert");
+                  swal({ title: "Vorname unverändert!" });
                 } else {
-                  if (confirm(`Vorname ändern? ${firstName}`)) {
-                    const data = { firstName: firstName };
-                    updateUser(data);
-                    alert("Vorname erfolgreich geändert!");
-                  } else {
-                    alert("Vorname ändern abgebrochen.");
-                  }
+                  swal({
+                    title: "Vorname ändern?",
+                    text: firstName,
+                    icon: "warning",
+                    buttons: ["Nein, nicht ändern!", "Ja, ändern!"],
+                    dangerMode: true,
+                  }).then((isConfirm) => {
+                    if (isConfirm) {
+                      swal({
+                        title: "Vorname erfolgreich geändert!!",
+                        text: firstName,
+                        icon: "success",
+                      }).then(() => {
+                        const data = { firstName: firstName };
+                        updateUser(data);
+                      });
+                    } else {
+                      swal({ title: "Vorname ändern abgebrochen." });
+                    }
+                  });
                 }
                 getUserData();
               }}
@@ -141,15 +167,28 @@ export default function UpdateUser() {
               onClick={() => {
                 setEditLastName(false);
                 if (!lastName) {
-                  alert("Nachname unverändert");
+                  swal({ title: "Nachname unverändert!" });
                 } else {
-                  if (confirm(`Nachname ändern? ${lastName}`)) {
-                    const data = { lastName: lastName };
-                    updateUser(data);
-                    alert("Nachname erfolgreich geändert!");
-                  } else {
-                    alert("Nachname ändern abgebrochen.");
-                  }
+                  swal({
+                    title: "Nachname ändern?",
+                    text: lastName,
+                    icon: "warning",
+                    buttons: ["Nein, nicht ändern!", "Ja, ändern!"],
+                    dangerMode: true,
+                  }).then((isConfirm) => {
+                    if (isConfirm) {
+                      swal({
+                        title: "Nachname erfolgreich geändert!!",
+                        text: lastName,
+                        icon: "success",
+                      }).then(() => {
+                        const data = { lastName: lastName };
+                        updateUser(data);
+                      });
+                    } else {
+                      swal({ title: "Nachname ändern abgebrochen." });
+                    }
+                  });
                 }
                 getUserData();
               }}
@@ -178,15 +217,28 @@ export default function UpdateUser() {
               onClick={() => {
                 setEditDisabilities(false);
                 if (!disabilities) {
-                  alert("Einschränkungen unverändert");
+                  swal({ title: "Einschränkungen unverändert!" });
                 } else {
-                  if (confirm(`Einschränkungen ändern? ${disabilities}`)) {
-                    const data = { disabilities: disabilities };
-                    updateUser(data);
-                    alert("Einschränkungen erfolgreich geändert!");
-                  } else {
-                    alert("Einschränkungen ändern abgebrochen.");
-                  }
+                  swal({
+                    title: "Einschränkungen ändern?",
+                    text: disabilities,
+                    icon: "warning",
+                    buttons: ["Nein, nicht ändern!", "Ja, ändern!"],
+                    dangerMode: true,
+                  }).then((isConfirm) => {
+                    if (isConfirm) {
+                      swal({
+                        title: "Einschränkungen erfolgreich geändert!!",
+                        text: disabilities,
+                        icon: "success",
+                      }).then(() => {
+                        const data = { disabilities: disabilities };
+                        updateUser(data);
+                      });
+                    } else {
+                      swal({ title: "Einschränkungen ändern abgebrochen." });
+                    }
+                  });
                 }
                 getUserData();
               }}
@@ -215,19 +267,28 @@ export default function UpdateUser() {
               onClick={() => {
                 setEditLocation(false);
                 if (!location) {
-                  alert("Wohnort unverändert");
+                  swal({ title: "Wohnort unverändert!" });
                 } else {
-                  if (confirm(`Wohnort ändern? ${location}`)) {
-                    const data = { location: location };
-                    updateUser(data);
-                    alert("Wohnort erfolgreich geändert!");
-                    localStorage.setItem(
-                      "defSearch",
-                      data.location.toLowerCase()
-                    );
-                  } else {
-                    alert("Wohnort ändern abgebrochen.");
-                  }
+                  swal({
+                    title: "Wohnort ändern?",
+                    text: location,
+                    icon: "warning",
+                    buttons: ["Nein, nicht ändern!", "Ja, ändern!"],
+                    dangerMode: true,
+                  }).then((isConfirm) => {
+                    if (isConfirm) {
+                      swal({
+                        title: "Wohnort erfolgreich geändert!!",
+                        text: location,
+                        icon: "success",
+                      }).then(() => {
+                        const data = { location: location };
+                        updateUser(data);
+                      });
+                    } else {
+                      swal({ title: "Wohnort ändern abgebrochen." });
+                    }
+                  });
                 }
                 getUserData();
               }}
@@ -256,17 +317,29 @@ export default function UpdateUser() {
               onClick={() => {
                 setEditEmail(false);
                 if (!email) {
-                  alert("Email unverändert");
+                  swal({ title: "Email unverändert!" });
                 } else {
-                  if (confirm(`Email ändern? ${email}`)) {
-                    const data = { email: email };
-                    updateUser(data);
-                    alert("Email erfolgreich geändert!");
-                  } else {
-                    alert("Email ändern abgebrochen.");
-                  }
+                  swal({
+                    title: "Email ändern?",
+                    text: email,
+                    icon: "warning",
+                    buttons: ["Nein, nicht ändern!", "Ja, ändern!"],
+                    dangerMode: true,
+                  }).then((isConfirm) => {
+                    if (isConfirm) {
+                      swal({
+                        title: "Email erfolgreich geändert!!",
+                        text: email,
+                        icon: "success",
+                      }).then(() => {
+                        const data = { email: email };
+                        updateUser(data);
+                      });
+                    } else {
+                      swal({ title: "Email ändern abgebrochen." });
+                    }
+                  });
                 }
-
                 getUserData();
               }}
             />
@@ -293,15 +366,26 @@ export default function UpdateUser() {
               onClick={() => {
                 setEditPassword(false);
                 if (!password) {
-                  alert("Passwort unverändert");
+                  swal({ title: "Passwort unverändert!" });
                 } else {
-                  if (confirm(`Passwort ändern?`)) {
-                    const data = { password: password };
-                    updateUser(data);
-                    alert("Passwort erfolgreich geändert!");
-                  } else {
-                    alert("Passwort ändern abgebrochen.");
-                  }
+                  swal({
+                    title: "Passwort ändern?",
+                    icon: "warning",
+                    buttons: ["Nein, nicht ändern!", "Ja, ändern!"],
+                    dangerMode: true,
+                  }).then((isConfirm) => {
+                    if (isConfirm) {
+                      swal({
+                        title: "Passwort erfolgreich geändert!!",
+                        icon: "success",
+                      }).then(() => {
+                        const data = { password: password };
+                        updateUser(data);
+                      });
+                    } else {
+                      swal({ title: "Passwort ändern abgebrochen." });
+                    }
+                  });
                 }
                 getUserData();
               }}
