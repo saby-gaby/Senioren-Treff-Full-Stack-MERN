@@ -25,8 +25,8 @@ function App() {
   }, [location]);
 
   useEffect(() => {
-    autoLogout()
-  }, !isAuth)
+    autoLogout();
+  }, !isAuth);
 
   return (
     <div className="App">
@@ -64,14 +64,14 @@ function App() {
         </nav>
       </header>
       <main>
-      <div className="workNav">
+        {/* <div className="workNav">
         <NavLink to="/">Home</NavLink>
         <NavLink to="/login">Login</NavLink>
         <NavLink to="/register">Register</NavLink>
         <NavLink to="/profile">Profile</NavLink>
         <NavLink to="/event-form">Event-Form</NavLink>
         <NavLink to="/events">Events</NavLink>
-      </div>
+      </div> */}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<LoginForm />} />

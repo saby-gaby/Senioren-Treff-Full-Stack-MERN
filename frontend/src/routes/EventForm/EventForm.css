@@ -8,3 +8,113 @@ input[type="file"] {
   background-color: #f4e3d7;
   color: #3e8e41;
 }
+
+h1 {
+  background-color: var(--dark-transparent-color);
+  color: var(--beige-color);
+  text-align: center;
+  font-size: 3rem;
+  margin-top: 5vh;
+  margin-bottom: 5vh;
+}
+
+#formWrapper {
+  background-color: var(--beige-transparent-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 5vh 5vw;
+  padding: 5vh 5vw;
+  border-radius: 1rem;
+  width: 90%;
+}
+label {
+  display: block;
+  font-size: 1.5rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+input {
+  display: block;
+  width: 100%;
+  font-size: 1.5rem;
+  border-radius: 0.5rem;
+  background-color: var(--beige-color);
+  padding-left: 00.75rem;
+  font-family: "Poppins", "Kanit";
+  border-color: var(--middle-green-color);
+  color: var(--dark-green-color);
+}
+
+input::placeholder {
+  padding-left: 0.2rem;
+  font-family: "Poppins", "Kanit";
+  color: var(--dark-transparent-color);
+}
+
+textarea {
+  display: block;
+  border-radius: 0.5rem;
+  box-shadow: inset 0px 0px 1.5px 1.5px;
+  border-color: var(--middle-green-color);
+  color: var(--dark-green-color);
+  padding-top: 0.75rem;
+  padding-left: 0.75rem;
+  font-family: "Poppins", "Kanit";
+  background-color: var(--beige-color);
+  width: 100%;
+}
+textarea::placeholder {
+  color: var(--dark-transparent-color);
+  padding-top: 0.2rem;
+  padding-left: 0.2rem;
+  font-family: "Poppins", "Kanit";
+  font-size: 1.5rem;
+}
+legend {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.button-beige {
+  width: max-content;
+}
+#categoryChecks {
+  width: 100%;
+  display: grid;
+  border: none;
+  padding: 1rem;
+  border-radius: 1rem;
+  box-shadow: inset 0px 0px 1.5px 1.5px var(--dark-green-color);
+  grid-template-rows: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+#categoryChecks > .checks {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+}
+.checks #categoryChecks > .checks > label {
+  padding-left: 2.5rem;
+}
+.checked {
+  background-color: var(--dark-green-color);
+}
+input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  height: 1.5rem;
+  width: 1.5rem;
+  top: 1.25rem;
+  background-color: var(--beige-color);
+}
+
+#upload label {
+  display: inline-block;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+#upload label:last-child {
+  margin-left: 1rem;
+}
