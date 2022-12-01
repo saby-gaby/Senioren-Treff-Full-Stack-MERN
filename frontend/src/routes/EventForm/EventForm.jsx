@@ -74,7 +74,7 @@ export default function EventForm() {
 
   return (
     <>
-      <h1>Veranstaltung erstellen</h1>
+      <h1 id="eventFormH1">Veranstaltung erstellen</h1>
       <div id="formWrapper">
         <form
           className="center"
