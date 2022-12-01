@@ -66,30 +66,37 @@ export default function OneEvent() {
 
   const deleteEventById = async () => {
     let myEventsArray = [];
-    try {
-      if (confirm("Diese Veranstaltung wirklich löschen?")) {
-        axiosConfig.delete(`/event/${eventId}`);
+    swal({
+      title: "Diese Veranstaltung wirklich löschen?",
+      icon: "warning",
+      buttons: ["Nein, nicht löschen!", "Ja, löschen!"],
+      dangerMode: true,
+    }).then((isConfirm) => {
+      if (isConfirm) {
+        swal({
+          title: "Veranstaltung erfolgreich gelöscht!",
+          icon: "success",
+        }).then(async () => {
+          axiosConfig.delete(`/event/${eventId}`);
 
-        const userData = await axiosConfig.get(
-          `/user/${localStorage.getItem("userId")}`
-        );
-
-        userData.data.myEvents.map((ele, i) => {
-          myEventsArray.push(ele._id);
+          const userData = await axiosConfig.get(
+            `/user/${localStorage.getItem("userId")}`
+          );
+          userData.data.myEvents.map((ele, i) => {
+            myEventsArray.push(ele._id);
+          });
+          axiosConfig.patch(`/user/${localStorage.getItem(`userId`)}`, {
+            myEvents: myEventsArray.filter((e) => e !== eventId),
+          });
+          navigate("/profile")
         });
-        axiosConfig.patch(`/user/${localStorage.getItem(`userId`)}`, {
-          myEvents: myEventsArray.filter((e) => e !== eventId),
+      } else {
+        swal({
+          title: "Veranstaltung löschen abgebrochen.",
         });
-        navigate("/profile")
-      } 
-    } catch (error) {
-      console.log(error);
-      swal({
-        title: "da ist etwas schief gelaufen",
-        button: "OK",
-      });
-    }
-  };
+      }
+    })
+  }
 
   useEffect(() => {
     getEventData();
