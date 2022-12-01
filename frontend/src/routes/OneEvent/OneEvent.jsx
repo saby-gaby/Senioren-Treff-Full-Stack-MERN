@@ -9,6 +9,7 @@ import {
   CloseOutlined,
 } from "@ant-design/icons";
 import { SectionsContext } from "../../context/sectionsContext";
+import swal from "sweetalert";
 
 export default function OneEvent() {
   const { id } = useParams();
@@ -83,7 +84,10 @@ export default function OneEvent() {
       } 
     } catch (error) {
       console.log(error);
-      alert("da ist etwas schief gelaufen");
+      swal({
+        title: "da ist etwas schief gelaufen",
+        button: "OK",
+      });
     }
   };
 
@@ -106,9 +110,15 @@ export default function OneEvent() {
           subsArr.includes(localStorage.getItem("userId"))
         ) {
           if (subsArr.includes(localStorage.getItem("userId"))) {
-            alert("du hast die Veranstaltung schon gebucht");
+            swal({
+              title: "du hast die Veranstaltung schon gebucht",
+              button: "OK",
+            });
           } else {
-            alert("leider schon ausgebucht");
+            swal({
+              title: "leider schon ausgebucht",
+              button: "OK",
+            });
           }
         } else {
           await axiosConfig.patch(`/event/subscribe/${eventId}`, {
@@ -117,10 +127,16 @@ export default function OneEvent() {
           await axiosConfig.patch(`/event/${eventId}`, {
             participants: parseInt(eventData.participants) - 1,
           });
-          alert("Buchung erfolgreich!");
+          swal({
+            title: "Buchung erfolgreich!",
+            button: "OK",
+          });
         } 
       } else {
-        alert("Du musst angemeldet sein, um eine Veranstaltung zu buchen.")
+        swal({
+          title: "Du musst angemeldet sein, um eine Veranstaltung zu buchen.",
+          button: "OK",
+        });
         navigate("/login")
       }
       getEventData();
@@ -159,7 +175,10 @@ export default function OneEvent() {
         bookedEvents: bookedArr.filter((e) => e !== eventId),
       });
 
-      alert("Storno erfolgreich");
+      swal({
+        title: "Storno erfolgreich",
+        button: "OK",
+      });
       getEventData();
     } catch (error) {
       console.log(error);
@@ -185,7 +204,10 @@ export default function OneEvent() {
         }),
       });
 
-      alert("Event von der Merkliste entfernt.");
+      swal({
+        title: "Event von der Merkliste entfernt.",
+        button: "OK",
+      });
       getEventData();
     } catch (error) {
       console.log(error);
@@ -202,12 +224,15 @@ export default function OneEvent() {
           watchedEvents: eventId,
         }
       );
-
-        alert(
-          `${eventData.eventTitle} zur Merkliste von ${response.data.userName} hinzugefügt`
-        );
+        swal({
+          title: `${eventData.eventTitle} zur Merkliste von ${response.data.userName} hinzugefügt`,
+          button: "OK",
+        });
       } else {
-        alert("Du musst angemeldet sein, um eine Veranstaltung auf die Merkliste zu setzen.")
+        swal({
+          title: "Du musst angemeldet sein, um eine Veranstaltung auf die Merkliste zu setzen.",
+          button: "OK",
+        });
         navigate("/login")
       }
       getEventData();
