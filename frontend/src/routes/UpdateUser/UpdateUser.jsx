@@ -29,8 +29,7 @@ export default function UpdateUser() {
       `http://localhost:6001/user/${userId}`
     );
     const data = axiosResp.data;
-    setUserData(data); /* 
-    localStorage.setItem("defSearch", data.location); */
+    setUserData(data);
   };
 
   const updateUser = async (data) => {
@@ -66,13 +65,18 @@ export default function UpdateUser() {
             <SaveOutlined
               onClick={() => {
                 setEditUserName(false);
-                if (confirm(`Benutzername ändern? ${userName}`)) {
-                  const data = { userName: userName };
-                  updateUser(data);
-                  alert("Benutzername erfolgreich geändert!");
+                if (!userName) {
+                  alert("Benutzername unverändert");
                 } else {
-                  alert("Benutzername ändern abgebrochen.");
+                  if (confirm(`Benutzername ändern? ${userName}`)) {
+                    const data = { userName: userName };
+                    updateUser(data);
+                    alert("Benutzername erfolgreich geändert!");
+                  } else {
+                    alert("Benutzername ändern abgebrochen.");
+                  }
                 }
+
                 getUserData();
               }}
             />
@@ -99,12 +103,16 @@ export default function UpdateUser() {
             <SaveOutlined
               onClick={() => {
                 setEditFirstName(false);
-                if (confirm(`Vorname ändern? ${firstName}`)) {
-                  const data = { firstName: firstName };
-                  updateUser(data);
-                  alert("Vorname erfolgreich geändert!");
+                if (!firstName) {
+                  alert("Vorname unverändert");
                 } else {
-                  alert("Vorname ändern abgebrochen.");
+                  if (confirm(`Vorname ändern? ${firstName}`)) {
+                    const data = { firstName: firstName };
+                    updateUser(data);
+                    alert("Vorname erfolgreich geändert!");
+                  } else {
+                    alert("Vorname ändern abgebrochen.");
+                  }
                 }
                 getUserData();
               }}
@@ -132,12 +140,16 @@ export default function UpdateUser() {
             <SaveOutlined
               onClick={() => {
                 setEditLastName(false);
-                if (confirm(`Nachname ändern? ${lastName}`)) {
-                  const data = { lastName: lastName };
-                  updateUser(data);
-                  alert("Nachname erfolgreich geändert!");
+                if (!lastName) {
+                  alert("Nachname unverändert");
                 } else {
-                  alert("Nachname ändern abgebrochen.");
+                  if (confirm(`Nachname ändern? ${lastName}`)) {
+                    const data = { lastName: lastName };
+                    updateUser(data);
+                    alert("Nachname erfolgreich geändert!");
+                  } else {
+                    alert("Nachname ändern abgebrochen.");
+                  }
                 }
                 getUserData();
               }}
@@ -165,14 +177,17 @@ export default function UpdateUser() {
             <SaveOutlined
               onClick={() => {
                 setEditDisabilities(false);
-                if (confirm(`Einschränkungen ändern? ${disabilities}`)) {
-                  const data = { disabilities: disabilities };
-                  updateUser(data);
-                  alert("Einschränkungen erfolgreich geändert!");
+                if (!disabilities) {
+                  alert("Einschränkungen unverändert");
                 } else {
-                  alert("Einschränkungen ändern abgebrochen.");
+                  if (confirm(`Einschränkungen ändern? ${disabilities}`)) {
+                    const data = { disabilities: disabilities };
+                    updateUser(data);
+                    alert("Einschränkungen erfolgreich geändert!");
+                  } else {
+                    alert("Einschränkungen ändern abgebrochen.");
+                  }
                 }
-
                 getUserData();
               }}
             />
@@ -199,16 +214,22 @@ export default function UpdateUser() {
             <SaveOutlined
               onClick={() => {
                 setEditLocation(false);
-                if (confirm(`Wohnort ändern? ${location}`)) {
-                  const data = { location: location };
-                  updateUser(data);
-                  alert("Wohnort erfolgreich geändert!");
+                if (!location) {
+                  alert("Wohnort unverändert");
                 } else {
-                  alert("Wohnort ändern abgebrochen.");
+                  if (confirm(`Wohnort ändern? ${location}`)) {
+                    const data = { location: location };
+                    updateUser(data);
+                    alert("Wohnort erfolgreich geändert!");
+                    localStorage.setItem(
+                      "defSearch",
+                      data.location.toLowerCase()
+                    );
+                  } else {
+                    alert("Wohnort ändern abgebrochen.");
+                  }
                 }
-
                 getUserData();
-                localStorage.setItem("defSearch", data.location.toLowerCase());
               }}
             />
           )}
@@ -234,12 +255,16 @@ export default function UpdateUser() {
             <SaveOutlined
               onClick={() => {
                 setEditEmail(false);
-                if (confirm(`Email ändern? ${email}`)) {
-                  const data = { email: email };
-                  updateUser(data);
-                  alert("Email erfolgreich geändert!");
+                if (!email) {
+                  alert("Email unverändert");
                 } else {
-                  alert("Email ändern abgebrochen.");
+                  if (confirm(`Email ändern? ${email}`)) {
+                    const data = { email: email };
+                    updateUser(data);
+                    alert("Email erfolgreich geändert!");
+                  } else {
+                    alert("Email ändern abgebrochen.");
+                  }
                 }
 
                 getUserData();
@@ -267,14 +292,17 @@ export default function UpdateUser() {
             <SaveOutlined
               onClick={() => {
                 setEditPassword(false);
-                if (confirm(`Passwort ändern?`)) {
-                  const data = { password: password };
-                  updateUser(data);
-                  alert("Passwort erfolgreich geändert!");
+                if (!password) {
+                  alert("Passwort unverändert");
                 } else {
-                  alert("Passwort ändern abgebrochen.");
+                  if (confirm(`Passwort ändern?`)) {
+                    const data = { password: password };
+                    updateUser(data);
+                    alert("Passwort erfolgreich geändert!");
+                  } else {
+                    alert("Passwort ändern abgebrochen.");
+                  }
                 }
-
                 getUserData();
               }}
             />
