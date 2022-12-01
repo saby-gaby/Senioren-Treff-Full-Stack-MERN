@@ -3,6 +3,8 @@ import { SectionsContext } from "../../context/sectionsContext";
 import { useParams } from "react-router-dom";
 import axiosConfig from "../../util/axiosConfig";
 import "./CategoryFilter.css";
+import swal from "sweetalert";
+
 
 export default function CategoryFilter() {
   const { searchedLocation } = useParams();
@@ -27,7 +29,10 @@ export default function CategoryFilter() {
     if (array[0]) {
       setCategoryArray(array);
     } else {
-      alert("keine treffer");
+      swal({
+        title: "keine Treffer",
+        button: "OK",
+      });
     }
   };
 
