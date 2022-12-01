@@ -26,8 +26,8 @@ export default function UpdateEvent() {
   const [eventParticipants, setEventParticipants] = useState("");
   const [eventDescription, setEventDescription] = useState("");
   const [eventImage, setEventImage] = useState("");
-  
-  const [editProgress, setEditProgress] = useState(false)
+
+  const [editProgress, setEditProgress] = useState(false);
 
   const handleChange = (event) => {
     const { value, checked } = event.target;
@@ -93,6 +93,7 @@ export default function UpdateEvent() {
           ) : (
             <input
               type="text"
+              defaultValue={eventData.eventTitle}
               onChange={(e) => setEventTitle(e.target.value)}
               id=""
             />
@@ -101,8 +102,8 @@ export default function UpdateEvent() {
             <EditOutlined onClick={() => setEditTitle(true)} />
           ) : (
             <SaveOutlined
-                onClick={() => {
-                  setEditProgress(true)
+              onClick={() => {
+                setEditProgress(true);
                 setEditTitle(false);
                 const data = { eventTitle: eventTitle };
                 updateEvent(data);
@@ -191,8 +192,8 @@ export default function UpdateEvent() {
             />
           ) : (
             <SaveOutlined
-                onClick={() => {
-                  setEditProgress(true)
+              onClick={() => {
+                setEditProgress(true);
                 setEditCategory(false);
                 const data = { category: eventCategory.categories };
                 updateEvent(data);
@@ -207,6 +208,7 @@ export default function UpdateEvent() {
           ) : (
             <input
               type="text"
+              defaultValue={eventData.location}
               onChange={(e) => setEventLocation(e.target.value)}
               id=""
             />
@@ -215,8 +217,8 @@ export default function UpdateEvent() {
             <EditOutlined onClick={() => setEditLocation(true)} />
           ) : (
             <SaveOutlined
-                onClick={() => {
-                  setEditProgress(true)
+              onClick={() => {
+                setEditProgress(true);
                 setEditLocation(false);
                 const data = { location: eventLocation };
                 updateEvent(data);
@@ -239,8 +241,8 @@ export default function UpdateEvent() {
             <EditOutlined onClick={() => setEditDate(true)} />
           ) : (
             <SaveOutlined
-                onClick={() => {
-                  setEditProgress(true)
+              onClick={() => {
+                setEditProgress(true);
                 setEditDate(false);
                 const data = { date: eventDate };
                 updateEvent(data);
@@ -255,6 +257,7 @@ export default function UpdateEvent() {
           ) : (
             <input
               type="time"
+              defaultValue={eventData.time}
               onChange={(e) => setEventTime(e.target.value)}
               id=""
             />
@@ -263,8 +266,8 @@ export default function UpdateEvent() {
             <EditOutlined onClick={() => setEditTime(true)} />
           ) : (
             <SaveOutlined
-                onClick={() => {
-                  setEditProgress(true)
+              onClick={() => {
+                setEditProgress(true);
                 setEditTime(false);
                 const data = { time: eventTime };
                 updateEvent(data);
@@ -279,6 +282,7 @@ export default function UpdateEvent() {
           ) : (
             <input
               type="currency"
+              defaultValue={eventData.price}
               onChange={(e) => setEventPrice(e.target.value)}
               id=""
             />
@@ -287,8 +291,8 @@ export default function UpdateEvent() {
             <EditOutlined onClick={() => setEditPrice(true)} />
           ) : (
             <SaveOutlined
-                onClick={() => {
-                  setEditProgress(true)
+              onClick={() => {
+                setEditProgress(true);
                 setEditPrice(false);
                 const data = { price: eventPrice };
                 updateEvent(data);
@@ -305,6 +309,7 @@ export default function UpdateEvent() {
               type="number"
               min="1"
               max="99"
+              defaultValue={eventData.participants}
               onChange={(e) => setEventParticipants(e.target.value)}
               id=""
             />
@@ -313,8 +318,8 @@ export default function UpdateEvent() {
             <EditOutlined onClick={() => setEditParticipants(true)} />
           ) : (
             <SaveOutlined
-                onClick={() => {
-                  setEditProgress(true)
+              onClick={() => {
+                setEditProgress(true);
                 setEditParticipants(false);
                 const data = { participants: eventParticipants };
                 updateEvent(data);
@@ -332,6 +337,7 @@ export default function UpdateEvent() {
               id="description"
               cols="30"
               rows="10"
+              defaultValue={eventData.description}
               onChange={(e) => {
                 setEventDescription(e.target.value);
               }}
@@ -341,8 +347,8 @@ export default function UpdateEvent() {
             <EditOutlined onClick={() => setEditDescription(true)} />
           ) : (
             <SaveOutlined
-                onClick={() => {
-                  setEditProgress(true)
+              onClick={() => {
+                setEditProgress(true);
                 setEditDescription(false);
                 const data = { description: eventDescription };
                 updateEvent(data);
@@ -358,7 +364,7 @@ export default function UpdateEvent() {
             <>
               <form
                 action=""
-                  onSubmit={() => updateImage}
+                onSubmit={() => updateImage}
                 encType="multipart/form-data"
               >
                 <label>
@@ -372,17 +378,29 @@ export default function UpdateEvent() {
                 <label className="button-beige" htmlFor="image">
                   Dateien durchsuchen
                 </label>
-                <button type="submit" >senden</button>
+                <button type="submit">senden</button>
               </form>
             </>
           )}
           {!editImage ? (
-            <EditOutlined onClick={() => {
-              setEditImage(true)
-            }} />
+            <EditOutlined
+              onClick={() => {
+                setEditImage(true);
+              }}
+            />
           ) : null}
         </li>
-        <div>{!editProgress ? <NavLink  to={`/event/${eventData._id}`} className="button-green" >Abbrechen</NavLink> : <NavLink  to={`/event/${eventData._id}`} className="button-green">Fertig</NavLink> }</div>
+        <div>
+          {!editProgress ? (
+            <NavLink to={`/event/${eventData._id}`} className="button-green">
+              Abbrechen
+            </NavLink>
+          ) : (
+            <NavLink to={`/event/${eventData._id}`} className="button-green">
+              Fertig
+            </NavLink>
+          )}
+        </div>
       </ul>
     </div>
   );

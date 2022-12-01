@@ -66,13 +66,13 @@ export default function UpdateUser() {
             <SaveOutlined
               onClick={() => {
                 setEditUserName(false);
-                  if (confirm(`Benutzername ändern? ${userName}`)) {
-                    const data = { userName: userName };
-                    updateUser(data);
-                    alert("Benutzername erfolgreich geändert!")
-                  } else {
-                    alert("Benutzername ändern abgebrochen.")
-                  }
+                if (confirm(`Benutzername ändern? ${userName}`)) {
+                  const data = { userName: userName };
+                  updateUser(data);
+                  alert("Benutzername erfolgreich geändert!");
+                } else {
+                  alert("Benutzername ändern abgebrochen.");
+                }
                 getUserData();
               }}
             />
@@ -98,14 +98,14 @@ export default function UpdateUser() {
           ) : (
             <SaveOutlined
               onClick={() => {
-                  setEditFirstName(false);
-                  if (confirm(`Vorname ändern? ${firstName}`)) {
-                    const data = { firstName: firstName };
+                setEditFirstName(false);
+                if (confirm(`Vorname ändern? ${firstName}`)) {
+                  const data = { firstName: firstName };
                   updateUser(data);
-                    alert("Vorname erfolgreich geändert!")
-                  } else {
-                    alert("Vorname ändern abgebrochen.")
-                  }
+                  alert("Vorname erfolgreich geändert!");
+                } else {
+                  alert("Vorname ändern abgebrochen.");
+                }
                 getUserData();
               }}
             />
@@ -116,7 +116,11 @@ export default function UpdateUser() {
           {!editLastName ? (
             userData.lastName
           ) : (
-            <input type="text" defaultValue={userData.lastName} onChange={(e) => setLastName(e.target.value)} />
+            <input
+              type="text"
+              defaultValue={userData.lastName}
+              onChange={(e) => setLastName(e.target.value)}
+            />
           )}
           {!editLastName ? (
             <EditOutlined
@@ -127,14 +131,14 @@ export default function UpdateUser() {
           ) : (
             <SaveOutlined
               onClick={() => {
-                  setEditLastName(false);
-                  if (confirm(`Nachname ändern? ${lastName}`)) {
-                    const data = { lastName: lastName };
-                updateUser(data);
-                    alert("Nachname erfolgreich geändert!")
-                  } else {
-                    alert("Nachname ändern abgebrochen.")
-                  }
+                setEditLastName(false);
+                if (confirm(`Nachname ändern? ${lastName}`)) {
+                  const data = { lastName: lastName };
+                  updateUser(data);
+                  alert("Nachname erfolgreich geändert!");
+                } else {
+                  alert("Nachname ändern abgebrochen.");
+                }
                 getUserData();
               }}
             />
@@ -146,8 +150,8 @@ export default function UpdateUser() {
             userData.disabilities
           ) : (
             <input
-                type="text"
-                defaultValue={userData.disabilities}
+              type="text"
+              defaultValue={userData.disabilities}
               onChange={(e) => setDisabilities(e.target.value)}
             />
           )}
@@ -160,15 +164,15 @@ export default function UpdateUser() {
           ) : (
             <SaveOutlined
               onClick={() => {
-                  setEditDisabilities(false);
-                  if (confirm(`Einschränkungen ändern? ${disabilities}`)) {
-                    const data = { disabilities: disabilities };
-                updateUser(data);
-                    alert("Einschränkungen erfolgreich geändert!")
-                  } else {
-                    alert("Einschränkungen ändern abgebrochen.")
-                  }
-              
+                setEditDisabilities(false);
+                if (confirm(`Einschränkungen ändern? ${disabilities}`)) {
+                  const data = { disabilities: disabilities };
+                  updateUser(data);
+                  alert("Einschränkungen erfolgreich geändert!");
+                } else {
+                  alert("Einschränkungen ändern abgebrochen.");
+                }
+
                 getUserData();
               }}
             />
@@ -179,7 +183,11 @@ export default function UpdateUser() {
           {!editLocation ? (
             userData.location
           ) : (
-            <input type="text" defaultValue={userData.location} onChange={(e) => setLocation(e.target.value)} />
+            <input
+              type="text"
+              defaultValue={userData.location}
+              onChange={(e) => setLocation(e.target.value)}
+            />
           )}
           {!editLocation ? (
             <EditOutlined
@@ -190,15 +198,15 @@ export default function UpdateUser() {
           ) : (
             <SaveOutlined
               onClick={() => {
-                  setEditLocation(false);
-                  if (confirm(`Wohnort ändern? ${location}`)) {
-                    const data = { location: location };
-                updateUser(data);
-                    alert("Wohnort erfolgreich geändert!")
-                  } else {
-                    alert("Wohnort ändern abgebrochen.")
-                  }
-                
+                setEditLocation(false);
+                if (confirm(`Wohnort ändern? ${location}`)) {
+                  const data = { location: location };
+                  updateUser(data);
+                  alert("Wohnort erfolgreich geändert!");
+                } else {
+                  alert("Wohnort ändern abgebrochen.");
+                }
+
                 getUserData();
                 localStorage.setItem("defSearch", data.location.toLowerCase());
               }}
@@ -210,7 +218,11 @@ export default function UpdateUser() {
           {!editEmail ? (
             userData.email
           ) : (
-            <input type="text" defaultValue={userData.email} onChange={(e) => setEmail(e.target.value)} />
+            <input
+              type="text"
+              defaultValue={userData.email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
           )}{" "}
           {!editEmail ? (
             <EditOutlined
@@ -221,15 +233,15 @@ export default function UpdateUser() {
           ) : (
             <SaveOutlined
               onClick={() => {
-                  setEditEmail(false);
-                  if (confirm(`Email ändern? ${email}`)) {
-                    const data = { email: email };
-                    updateUser(data);
-                    alert("Email erfolgreich geändert!")
-                  } else {
-                    alert("Email ändern abgebrochen.")
-                  }
-                
+                setEditEmail(false);
+                if (confirm(`Email ändern? ${email}`)) {
+                  const data = { email: email };
+                  updateUser(data);
+                  alert("Email erfolgreich geändert!");
+                } else {
+                  alert("Email ändern abgebrochen.");
+                }
+
                 getUserData();
               }}
             />
@@ -258,18 +270,20 @@ export default function UpdateUser() {
                 if (confirm(`Passwort ändern?`)) {
                   const data = { password: password };
                   updateUser(data);
-                  alert("Passwort erfolgreich geändert!")
+                  alert("Passwort erfolgreich geändert!");
                 } else {
-                  alert("Passwort ändern abgebrochen.")
+                  alert("Passwort ändern abgebrochen.");
                 }
-                
+
                 getUserData();
               }}
             />
           )}
         </li>
       </ul>
-      <button onClick={()=> navigate("/profile")} className="button-green">Fertig</button>
+      <button onClick={() => navigate("/profile")} className="button-green">
+        Fertig
+      </button>
     </>
   );
 }
