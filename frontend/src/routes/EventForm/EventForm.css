@@ -74,6 +74,7 @@ textarea::placeholder {
 legend {
   font-size: 1.5rem;
   font-weight: bold;
+  padding-top: 2rem;
 }
 .button-beige {
   width: max-content;
@@ -98,9 +99,7 @@ legend {
 .checks #categoryChecks > .checks > label {
   padding-left: 2.5rem;
 }
-.checked {
-  background-color: var(--dark-green-color);
-}
+
 input[type="checkbox"] {
   position: absolute;
   opacity: 0;
