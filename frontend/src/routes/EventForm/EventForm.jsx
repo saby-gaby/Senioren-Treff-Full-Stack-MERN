@@ -14,7 +14,9 @@ export default function EventForm() {
   const [eventParticipants, setParticipants] = useState(null);
   const [eventPrice, setPrice] = useState(null);
   const [eventDescription, setDescription] = useState(null);
-  const {navigate} = useContext(SectionsContext)
+  const { navigate } = useContext(SectionsContext);
+
+  const [checkedSpiele, setCheckedSpiele] = useState(false);
 
   const handleChange = (event) => {
     const { value, checked } = event.target;
@@ -54,11 +56,13 @@ export default function EventForm() {
       );
 
       console.log("reponsData", response.data);
+
       swal({
         title: "Event wurde erfolgreich erstellt!",
         button: "OK",
       });
       navigate(`/event/${response._id}`)
+
     } catch (error) {
       console.error(error);
       swal({
@@ -69,176 +73,200 @@ export default function EventForm() {
   };
 
   return (
-    <div>
-      <form
-        className="center"
-        onSubmit={handleSubmit}
-        encType="multipart/form-data"
-        id="eventForm"
-      >
-        <label>
-          Titel:
-          <input
-            type="text"
-            id="eventTitle"
-            name="eventTitle"
-            placeholder="Event Name"
-            onChange={(e) => {
-              setEventTitle(e.target.value);
-            }}
-          />
-        </label>
-        <fieldset>
-          <legend>Veranstaltungs - Kategorien: </legend>
-          <div>
+    <>
+      <h1>Veranstaltung erstellen</h1>
+      <div id="formWrapper">
+        <form
+          className="center"
+          onSubmit={handleSubmit}
+          encType="multipart/form-data"
+          id="eventForm"
+        >
+          <label>
+            Titel:
             <input
-              type="checkbox"
-              id="sport"
-              name="sport"
-              value="sport"
-              onChange={handleChange}
+              type="text"
+              id="eventTitle"
+              name="eventTitle"
+              placeholder="Event Name"
+              onChange={(e) => {
+                setEventTitle(e.target.value);
+              }}
             />
-            <label htmlFor="sport">Sport</label>
-          </div>
+          </label>
+          <fieldset id="categoryChecks">
+            <legend>Veranstaltungs - Kategorien: </legend>
+            <div className="checks">
+              <label htmlFor="sport" className="button-green">
+                <input
+                  type="checkbox"
+                  id="sport"
+                  name="sport"
+                  value="sport"
+                  onChange={handleChange}
+                />
+                Sport
+              </label>
+            </div>
 
-          <div>
-            <input
-              type="checkbox"
-              id="kurse"
-              name="kurse"
-              value="kurse"
-              onChange={handleChange}
-            />
-            <label htmlFor="kurse">Kurse</label>
-          </div>
+            <div className="checks">
+              <label htmlFor="kurse" className="button-green">
+                <input
+                  type="checkbox"
+                  id="kurse"
+                  name="kurse"
+                  value="kurse"
+                  onChange={handleChange}
+                />
+                Kurse
+              </label>
+            </div>
 
-          <div>
+            <div className="checks">
+              <label htmlFor="kultur" className="button-green">
+                <input
+                  type="checkbox"
+                  id="kultur"
+                  name="kultur"
+                  value="kultur"
+                  onChange={handleChange}
+                />
+                Kultur
+              </label>
+            </div>
+            <div className="checks">
+              <label htmlFor="reisen" className="button-green">
+                <input
+                  type="checkbox"
+                  id="reisen"
+                  name="reisen"
+                  value="reisen"
+                  onChange={handleChange}
+                />
+                Reisen
+              </label>
+            </div>
+            <div className="checks">
+              <label htmlFor="natur" className="button-green">
+                <input
+                  type="checkbox"
+                  id="natur"
+                  name="natur"
+                  value="natur"
+                  onChange={handleChange}
+                />{" "}
+                Natur
+              </label>
+            </div>
+            <div className="checks">
+              <label
+                htmlFor="spiele"
+                className={
+                  checkedSpiele ? `button-green checked` : `button-green `
+                }
+              >
+                <input
+                  type="checkbox"
+                  id="spiele"
+                  name="spiele"
+                  value="spiele"
+                  onChange={handleChange}
+                />{" "}
+                Spiele
+              </label>
+            </div>
+          </fieldset>
+          <label>
+            Ort:
             <input
-              type="checkbox"
-              id="kultur"
-              name="kultur"
-              value="kultur"
-              onChange={handleChange}
+              type="text"
+              name="location"
+              id="location"
+              placeholder="mein Ort"
+              onChange={(e) => {
+                const valuesArray = e.target.value.split(",");
+                setLocation(valuesArray);
+              }}
             />
-            <label htmlFor="kultur">Kultur</label>
-          </div>
-          <div>
+          </label>
+          <label>
+            Datum:
             <input
-              type="checkbox"
-              id="reisen"
-              name="reisen"
-              value="reisen"
-              onChange={handleChange}
+              type="date"
+              name="date"
+              id="date"
+              onChange={(e) => {
+                setDate(e.target.value);
+              }}
             />
-            <label htmlFor="reisen">Reisen</label>
-          </div>
-          <div>
+          </label>
+          <label>
+            Uhrzeit:
             <input
-              type="checkbox"
-              id="natur"
-              name="natur"
-              value="natur"
-              onChange={handleChange}
+              type="time"
+              name="time"
+              id="time"
+              placeholder="Veranstaltungsbeginn"
+              onChange={(e) => {
+                setTime(e.target.value);
+              }}
             />
-            <label htmlFor="natur">Natur</label>
-          </div>
-          <div>
+          </label>
+          <label>
+            Anzahl Personen:
             <input
-              type="checkbox"
-              id="spiele"
-              name="spiele"
-              value="spiele"
-              onChange={handleChange}
+              type="number"
+              min="1"
+              max="99"
+              name="participants"
+              id="participants"
+              onChange={(e) => {
+                setParticipants(e.target.value);
+              }}
             />
-            <label htmlFor="spiele">Spiele</label>
+          </label>
+          <label>
+            Beschreibung:
+            <textarea
+              name="description"
+              id="description"
+              cols="45"
+              rows="25"
+              placeholder="Beschreibung..."
+              onChange={(e) => {
+                setDescription(e.target.value);
+              }}
+            ></textarea>
+          </label>
+          <div id="upload">
+            <label>
+              Foto hochladen:
+              <input
+                type="file"
+                name="image"
+                id="image"
+                onChange={(e) => setFile(e.target.files[0])}
+              />
+            </label>
+            <label className="button-beige" htmlFor="image">
+              Dateien durchsuchen
+            </label>
           </div>
-        </fieldset>
-        <label>
-          Ort:
-          <input
-            type="text"
-            name="location"
-            id="location"
-            placeholder="mein Ort"
-            onChange={(e) => {
-              const valuesArray = e.target.value.split(",");
-              setLocation(valuesArray);
-            }}
-          />
-        </label>
-        <label>
-          Datum:
-          <input
-            type="date"
-            name="date"
-            id="date"
-            onChange={(e) => {
-              setDate(e.target.value);
-            }}
-          />
-        </label>
-        <label>
-          Uhrzeit:
-          <input
-            type="time"
-            name="time"
-            id="time"
-            placeholder="Veranstaltungsbeginn"
-            onChange={(e) => {
-              setTime(e.target.value);
-            }}
-          />
-        </label>
-        <label>
-          Anzahl Personen:
-          <input
-            type="number"
-            min="1"
-            max="99"
-            name="participants"
-            id="participants"
-            onChange={(e) => {
-              setParticipants(e.target.value);
-            }}
-          />
-        </label>
-        <label>
-          Beschreibung:
-          <textarea
-            name="description"
-            id="description"
-            cols="30"
-            rows="10"
-            onChange={(e) => {
-              setDescription(e.target.value);
-            }}
-          ></textarea>
-        </label>
-        <label>
-          Foto hochladen:
-          <input
-            type="file"
-            name="image"
-            id="image"
-            onChange={(e) => setFile(e.target.files[0])}
-          />
-        </label>
-        <label className="button-beige" htmlFor="image">
-          Dateien durchsuchen
-        </label>
-        <label>
-          Preis pro Person:
-          <input
-            type="currency"
-            name="price"
-            currency="EUR"
-            onChange={(e) => {
-              setPrice(e.target.value);
-            }}
-          />
-        </label>
-        <input className="button-green" type="submit" value="Erstellen" />
-      </form>
-    </div>
+          <label>
+            Preis pro Person:
+            <input
+              type="currency"
+              name="price"
+              currency="EUR"
+              placeholder="in EUR"
+              onChange={(e) => {
+                setPrice(e.target.value);
+              }}
+            />
+          </label>
+          <input className="button-green" type="submit" value="Erstellen" />
+        </form>
+      </div>
+    </>
   );
 }
