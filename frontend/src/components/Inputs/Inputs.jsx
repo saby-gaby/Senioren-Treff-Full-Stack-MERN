@@ -1,4 +1,5 @@
 import React from "react";
+import "./Inputs.css";
 
 function TextInput({ labelValue, stateFunc }) {
   const setInputValue = (e) => stateFunc(e.target.value);
