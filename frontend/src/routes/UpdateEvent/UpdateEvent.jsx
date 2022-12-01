@@ -62,8 +62,7 @@ export default function UpdateEvent() {
     return console.log(axiosResp.data);
   };
 
-  const updateImage = async (e) => {
-    e.preventDefault();
+  const updateImage = async () => {
     const formData = new FormData(e.target);
     console.log(formData);
     const axiosResp = await axiosConfig.patch(
@@ -103,10 +102,19 @@ export default function UpdateEvent() {
           ) : (
             <SaveOutlined
               onClick={() => {
-                setEditProgress(true);
+                if (!eventTitle) {
+                  alert("Veranstaltungstitel unverändert");
+                } else {
+                  if (confirm(`Veranstaltungstitel ändern? ${eventTitle}`)) {
+                    const data = { eventTitle: eventTitle };
+                    updateEvent(data);
+                    setEditProgress(true);
+                    alert("Veranstaltungstitel erfolgreich geändert!");
+                  } else {
+                    alert("Veranstaltungstitel ändern abgebrochen.");
+                  }
+                }
                 setEditTitle(false);
-                const data = { eventTitle: eventTitle };
-                updateEvent(data);
               }}
             />
           )}
@@ -218,10 +226,19 @@ export default function UpdateEvent() {
           ) : (
             <SaveOutlined
               onClick={() => {
-                setEditProgress(true);
+                if (!eventLocation) {
+                  alert("Ort unverändert");
+                } else {
+                  if (confirm(`Ort ändern? ${eventLocation}`)) {
+                    setEditProgress(true);
+                    const data = { location: eventLocation };
+                    updateEvent(data);
+                    alert("Ort erfolgreich geändert!");
+                  } else {
+                    alert("Ort ändern abgebrochen.");
+                  }
+                }
                 setEditLocation(false);
-                const data = { location: eventLocation };
-                updateEvent(data);
               }}
             />
           )}
@@ -242,10 +259,19 @@ export default function UpdateEvent() {
           ) : (
             <SaveOutlined
               onClick={() => {
-                setEditProgress(true);
+                if (!eventDate) {
+                  alert("Datum unverändert");
+                } else {
+                  if (confirm(`Datum ändern? ${eventDate}`)) {
+                    setEditProgress(true);
+                    const data = { date: eventDate };
+                    updateEvent(data);
+                    alert("Datum erfolgreich geändert!");
+                  } else {
+                    alert("Datum ändern abgebrochen.");
+                  }
+                }
                 setEditDate(false);
-                const data = { date: eventDate };
-                updateEvent(data);
               }}
             />
           )}
@@ -267,10 +293,19 @@ export default function UpdateEvent() {
           ) : (
             <SaveOutlined
               onClick={() => {
-                setEditProgress(true);
+                if (!eventTime) {
+                  alert("Uhrzeit unverändert");
+                } else {
+                  if (confirm(`Uhrzeit ändern? ${eventTime}`)) {
+                    setEditProgress(true);
+                    const data = { time: eventTime };
+                    updateEvent(data);
+                    alert("Uhrzeit erfolgreich geändert!");
+                  } else {
+                    alert("Uhrzeit ändern abgebrochen.");
+                  }
+                }
                 setEditTime(false);
-                const data = { time: eventTime };
-                updateEvent(data);
               }}
             />
           )}
@@ -292,10 +327,19 @@ export default function UpdateEvent() {
           ) : (
             <SaveOutlined
               onClick={() => {
-                setEditProgress(true);
+                if (!eventPrice) {
+                  alert("Preis unverändert");
+                } else {
+                  if (confirm(`Preis ändern? ${eventPrice}`)) {
+                    setEditProgress(true);
+                    const data = { price: eventPrice };
+                    updateEvent(data);
+                    alert("Preis erfolgreich geändert!");
+                  } else {
+                    alert("Preis ändern abgebrochen.");
+                  }
+                }
                 setEditPrice(false);
-                const data = { price: eventPrice };
-                updateEvent(data);
               }}
             />
           )}
@@ -319,10 +363,19 @@ export default function UpdateEvent() {
           ) : (
             <SaveOutlined
               onClick={() => {
-                setEditProgress(true);
+                if (!eventParticipants) {
+                  alert("Teilnehmerzahl unverändert");
+                } else {
+                  if (confirm(`Teilnehmerzahl ändern? ${eventParticipants}`)) {
+                    setEditProgress(true);
+                    const data = { participants: eventParticipants };
+                    updateEvent(data);
+                    alert("Teilnehmerzahl erfolgreich geändert!");
+                  } else {
+                    alert("Teilnehmerzahl ändern abgebrochen.");
+                  }
+                }
                 setEditParticipants(false);
-                const data = { participants: eventParticipants };
-                updateEvent(data);
               }}
             />
           )}
@@ -348,10 +401,19 @@ export default function UpdateEvent() {
           ) : (
             <SaveOutlined
               onClick={() => {
-                setEditProgress(true);
+                if (!eventDescription) {
+                  alert("Beschreibung unverändert");
+                } else {
+                  if (confirm(`Beschreibung ändern? ${eventDescription}`)) {
+                    setEditProgress(true);
+                    const data = { description: eventDescription };
+                    updateEvent(data);
+                    alert("Beschreibung erfolgreich geändert!");
+                  } else {
+                    alert("Beschreibung ändern abgebrochen.");
+                  }
+                }
                 setEditDescription(false);
-                const data = { description: eventDescription };
-                updateEvent(data);
               }}
             />
           )}
@@ -364,7 +426,18 @@ export default function UpdateEvent() {
             <>
               <form
                 action=""
-                onSubmit={() => updateImage}
+                onSubmit={() => {
+                  if (!eventImage) {
+                    alert("Bild unverändert");
+                  } else {
+                    if (confirm(`Bild ändern? ${eventImage.name}`)) {
+                      updateImage();
+                      alert("Bild erfolgreich geändert!");
+                    } else {
+                      alert("Bild ändern abgebrochen.");
+                    }
+                  }
+                }}
                 encType="multipart/form-data"
               >
                 <label>
@@ -378,7 +451,9 @@ export default function UpdateEvent() {
                 <label className="button-beige" htmlFor="image">
                   Dateien durchsuchen
                 </label>
-                <button type="submit">senden</button>
+                <button type="submit" className="button-green">
+                  Bild Speichern
+                </button>
               </form>
             </>
           )}
