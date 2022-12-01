@@ -62,7 +62,8 @@ export default function UpdateEvent() {
     return console.log(axiosResp.data);
   };
 
-  const updateImage = async () => {
+  const updateImage = async (e) => {
+    e.preventDefault();
     const formData = new FormData(e.target);
     console.log(formData);
     const axiosResp = await axiosConfig.patch(
@@ -103,16 +104,31 @@ export default function UpdateEvent() {
             <SaveOutlined
               onClick={() => {
                 if (!eventTitle) {
-                  alert("Veranstaltungstitel unverändert");
+                  swal({ title: "Titel unverändert!" });
                 } else {
-                  if (confirm(`Veranstaltungstitel ändern? ${eventTitle}`)) {
-                    const data = { eventTitle: eventTitle };
-                    updateEvent(data);
-                    setEditProgress(true);
-                    alert("Veranstaltungstitel erfolgreich geändert!");
-                  } else {
-                    alert("Veranstaltungstitel ändern abgebrochen.");
-                  }
+                  swal({
+                    title: "Titel ändern?",
+                    text: eventTitle,
+                    icon: "warning",
+                    buttons: ["Nein, nicht ändern!", "Ja, ändern!"],
+                    dangerMode: true,
+                  }).then((isConfirm) => {
+                    if (isConfirm) {
+                      swal({
+                        title: "Titel erfolgreich geändert!!",
+                        text: eventTitle,
+                        icon: "success",
+                      }).then(() => {
+                        const data = { eventTitle: eventTitle };
+                        updateEvent(data);
+                        setEditProgress(true);
+                      });
+                    } else {
+                      swal({
+                        title: "Titel ändern abgebrochen.",
+                      });
+                    }
+                  });
                 }
                 setEditTitle(false);
               }}
@@ -227,16 +243,31 @@ export default function UpdateEvent() {
             <SaveOutlined
               onClick={() => {
                 if (!eventLocation) {
-                  alert("Ort unverändert");
+                  swal({ title: "Ort unverändert!" });
                 } else {
-                  if (confirm(`Ort ändern? ${eventLocation}`)) {
-                    setEditProgress(true);
-                    const data = { location: eventLocation };
-                    updateEvent(data);
-                    alert("Ort erfolgreich geändert!");
-                  } else {
-                    alert("Ort ändern abgebrochen.");
-                  }
+                  swal({
+                    title: "Ort ändern?",
+                    text: eventLocation,
+                    icon: "warning",
+                    buttons: ["Nein, nicht ändern!", "Ja, ändern!"],
+                    dangerMode: true,
+                  }).then((isConfirm) => {
+                    if (isConfirm) {
+                      swal({
+                        title: "Ort erfolgreich geändert!!",
+                        text: eventLocation,
+                        icon: "success",
+                      }).then(() => {
+                        const data = { Location: eventLocation };
+                        updateEvent(data);
+                        setEditProgress(true);
+                      });
+                    } else {
+                      swal({
+                        title: "Ort ändern abgebrochen.",
+                      });
+                    }
+                  });
                 }
                 setEditLocation(false);
               }}
@@ -260,16 +291,31 @@ export default function UpdateEvent() {
             <SaveOutlined
               onClick={() => {
                 if (!eventDate) {
-                  alert("Datum unverändert");
+                  swal({ title: "Datum unverändert!" });
                 } else {
-                  if (confirm(`Datum ändern? ${eventDate}`)) {
-                    setEditProgress(true);
-                    const data = { date: eventDate };
-                    updateEvent(data);
-                    alert("Datum erfolgreich geändert!");
-                  } else {
-                    alert("Datum ändern abgebrochen.");
-                  }
+                  swal({
+                    title: "Datum ändern?",
+                    text: eventDate,
+                    icon: "warning",
+                    buttons: ["Nein, nicht ändern!", "Ja, ändern!"],
+                    dangerMode: true,
+                  }).then((isConfirm) => {
+                    if (isConfirm) {
+                      swal({
+                        title: "Datum erfolgreich geändert!!",
+                        text: eventDate,
+                        icon: "success",
+                      }).then(() => {
+                        const data = { date: eventDate };
+                        updateEvent(data);
+                        setEditProgress(true);
+                      });
+                    } else {
+                      swal({
+                        title: "Datum ändern abgebrochen.",
+                      });
+                    }
+                  });
                 }
                 setEditDate(false);
               }}
@@ -294,16 +340,31 @@ export default function UpdateEvent() {
             <SaveOutlined
               onClick={() => {
                 if (!eventTime) {
-                  alert("Uhrzeit unverändert");
+                  swal({ title: "Uhrzeit unverändert!" });
                 } else {
-                  if (confirm(`Uhrzeit ändern? ${eventTime}`)) {
-                    setEditProgress(true);
-                    const data = { time: eventTime };
-                    updateEvent(data);
-                    alert("Uhrzeit erfolgreich geändert!");
-                  } else {
-                    alert("Uhrzeit ändern abgebrochen.");
-                  }
+                  swal({
+                    title: "Uhrzeit ändern?",
+                    text: eventTime,
+                    icon: "warning",
+                    buttons: ["Nein, nicht ändern!", "Ja, ändern!"],
+                    dangerMode: true,
+                  }).then((isConfirm) => {
+                    if (isConfirm) {
+                      swal({
+                        title: "Uhrzeit erfolgreich geändert!!",
+                        text: eventTime,
+                        icon: "success",
+                      }).then(() => {
+                        const data = { time: eventTime };
+                        updateEvent(data);
+                        setEditProgress(true);
+                      });
+                    } else {
+                      swal({
+                        title: "Uhrzeit ändern abgebrochen.",
+                      });
+                    }
+                  });
                 }
                 setEditTime(false);
               }}
@@ -328,16 +389,31 @@ export default function UpdateEvent() {
             <SaveOutlined
               onClick={() => {
                 if (!eventPrice) {
-                  alert("Preis unverändert");
+                  swal({ title: "Preis unverändert!" });
                 } else {
-                  if (confirm(`Preis ändern? ${eventPrice}`)) {
-                    setEditProgress(true);
-                    const data = { price: eventPrice };
-                    updateEvent(data);
-                    alert("Preis erfolgreich geändert!");
-                  } else {
-                    alert("Preis ändern abgebrochen.");
-                  }
+                  swal({
+                    title: "Preis ändern?",
+                    text: eventPrice,
+                    icon: "warning",
+                    buttons: ["Nein, nicht ändern!", "Ja, ändern!"],
+                    dangerMode: true,
+                  }).then((isConfirm) => {
+                    if (isConfirm) {
+                      swal({
+                        title: "Preis erfolgreich geändert!!",
+                        text: eventPrice,
+                        icon: "success",
+                      }).then(() => {
+                        const data = { price: eventPrice };
+                        updateEvent(data);
+                        setEditProgress(true);
+                      });
+                    } else {
+                      swal({
+                        title: "Preis ändern abgebrochen.",
+                      });
+                    }
+                  });
                 }
                 setEditPrice(false);
               }}
@@ -364,16 +440,31 @@ export default function UpdateEvent() {
             <SaveOutlined
               onClick={() => {
                 if (!eventParticipants) {
-                  alert("Teilnehmerzahl unverändert");
+                  swal({ title: "Teilnehmerzahl unverändert!" });
                 } else {
-                  if (confirm(`Teilnehmerzahl ändern? ${eventParticipants}`)) {
-                    setEditProgress(true);
-                    const data = { participants: eventParticipants };
-                    updateEvent(data);
-                    alert("Teilnehmerzahl erfolgreich geändert!");
-                  } else {
-                    alert("Teilnehmerzahl ändern abgebrochen.");
-                  }
+                  swal({
+                    title: "Teilnehmerzahl ändern?",
+                    text: eventParticipants,
+                    icon: "warning",
+                    buttons: ["Nein, nicht ändern!", "Ja, ändern!"],
+                    dangerMode: true,
+                  }).then((isConfirm) => {
+                    if (isConfirm) {
+                      swal({
+                        title: "Teilnehmerzahl erfolgreich geändert!!",
+                        text: eventParticipants,
+                        icon: "success",
+                      }).then(() => {
+                        const data = { participants: eventParticipants };
+                        updateEvent(data);
+                        setEditProgress(true);
+                      });
+                    } else {
+                      swal({
+                        title: "Teilnehmerzahl ändern abgebrochen.",
+                      });
+                    }
+                  });
                 }
                 setEditParticipants(false);
               }}
@@ -402,16 +493,31 @@ export default function UpdateEvent() {
             <SaveOutlined
               onClick={() => {
                 if (!eventDescription) {
-                  alert("Beschreibung unverändert");
+                  swal({ title: "Beschreibung unverändert!" });
                 } else {
-                  if (confirm(`Beschreibung ändern? ${eventDescription}`)) {
-                    setEditProgress(true);
-                    const data = { description: eventDescription };
-                    updateEvent(data);
-                    alert("Beschreibung erfolgreich geändert!");
-                  } else {
-                    alert("Beschreibung ändern abgebrochen.");
-                  }
+                  swal({
+                    title: "Beschreibung ändern?",
+                    text: eventDescription,
+                    icon: "warning",
+                    buttons: ["Nein, nicht ändern!", "Ja, ändern!"],
+                    dangerMode: true,
+                  }).then((isConfirm) => {
+                    if (isConfirm) {
+                      swal({
+                        title: "Beschreibung erfolgreich geändert!!",
+                        text: eventDescription,
+                        icon: "success",
+                      }).then(() => {
+                        const data = { description: eventDescription };
+                        updateEvent(data);
+                        setEditProgress(true);
+                      });
+                    } else {
+                      swal({
+                        title: "Beschreibung ändern abgebrochen.",
+                      });
+                    }
+                  });
                 }
                 setEditDescription(false);
               }}
@@ -426,16 +532,37 @@ export default function UpdateEvent() {
             <>
               <form
                 action=""
-                onSubmit={() => {
+                onSubmit={(e) => {
+                  e.preventDefault();
                   if (!eventImage) {
-                    alert("Bild unverändert");
+                    swal({ title: "Bild unverändert!" }).then(() => {
+                      location.reload();
+                    });
                   } else {
-                    if (confirm(`Bild ändern? ${eventImage.name}`)) {
-                      updateImage();
-                      alert("Bild erfolgreich geändert!");
-                    } else {
-                      alert("Bild ändern abgebrochen.");
-                    }
+                    swal({
+                      title: "Bild ändern?",
+                      text: eventImage.name,
+                      icon: "warning",
+                      buttons: ["Nein, nicht ändern!", "Ja, ändern!"],
+                      dangerMode: true,
+                    }).then((isConfirm) => {
+                      if (isConfirm) {
+                        swal({
+                          title: "Bild erfolgreich geändert!!",
+                          text: eventImage.name,
+                          icon: "success",
+                        }).then(() => {
+                          updateImage(e);
+                          setEditProgress(true);
+                        });
+                      } else {
+                        swal({
+                          title: "Bild ändern abgebrochen.",
+                        }).then(() => {
+                          location.reload();
+                        });
+                      }
+                    });
                   }
                 }}
                 encType="multipart/form-data"
