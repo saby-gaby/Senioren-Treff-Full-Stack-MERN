@@ -17,6 +17,7 @@
 .RegisterForm .radio > label {
   display: flex;
   justify-content: center;
+  width: 100%;
 }
 
 .RegisterForm .checked {
