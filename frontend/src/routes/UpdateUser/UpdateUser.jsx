@@ -3,9 +3,10 @@ import { SectionsContext } from "../../context/sectionsContext";
 import { useContext } from "react";
 import { EditOutlined, SaveOutlined } from "@ant-design/icons";
 import axiosConfig from "../../util/axiosConfig";
+import swal from "sweetalert";
 
 export default function UpdateUser() {
-  const { userData, setUserData } = useContext(SectionsContext);
+  const { userData, setUserData, navigate } = useContext(SectionsContext);
   const userId = localStorage.getItem("userId");
 
   const [editUserName, setEditUserName] = useState(false);
@@ -29,8 +30,7 @@ export default function UpdateUser() {
       `http://localhost:6001/user/${userId}`
     );
     const data = axiosResp.data;
-    setUserData(data);/* 
-    localStorage.setItem("defSearch", data.location); */
+    setUserData(data);
   };
 
   const updateUser = async (data) => {
@@ -50,7 +50,11 @@ export default function UpdateUser() {
           {!editUserName ? (
             userData.userName
           ) : (
-            <input type="text" defaultValue={userData.userName} onChange={(e) => setUserName(e.target.value)} />
+            <input
+              type="text"
+              defaultValue={userData.userName}
+              onChange={(e) => setUserName(e.target.value)}
+            />
           )}{" "}
           {!editUserName ? (
             <EditOutlined
@@ -62,8 +66,30 @@ export default function UpdateUser() {
             <SaveOutlined
               onClick={() => {
                 setEditUserName(false);
-                const data = { userName: userName };
-                updateUser(data);
+                if (!userName) {
+                  swal({ title: "Benutzername unverändert!" });
+                } else {
+                  swal({
+                    title: "Benutzername ändern?",
+                    text: userName,
+                    icon: "warning",
+                    buttons: ["Nein, nicht ändern!", "Ja, ändern!"],
+                    dangerMode: true,
+                  }).then((isConfirm) => {
+                    if (isConfirm) {
+                      swal({
+                        title: "Benutzername erfolgreich geändert!!",
+                        text: userName,
+                        icon: "success",
+                      }).then(() => {
+                        const data = { userName: userName };
+                        updateUser(data);
+                      });
+                    } else {
+                      swal({ title: "Benutzername ändern abgebrochen." });
+                    }
+                  });
+                }
                 getUserData();
               }}
             />
@@ -74,7 +100,11 @@ export default function UpdateUser() {
           {!editFirstName ? (
             userData.firstName
           ) : (
-            <input type="text" defaultValue={userData.firstName} onChange={(e) => setFirstName(e.target.value)} />
+            <input
+              type="text"
+              defaultValue={userData.firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+            />
           )}{" "}
           {!editFirstName ? (
             <EditOutlined
@@ -86,8 +116,30 @@ export default function UpdateUser() {
             <SaveOutlined
               onClick={() => {
                 setEditFirstName(false);
-                const data = { firstName: firstName };
-                updateUser(data);
+                if (!firstName) {
+                  swal({ title: "Vorname unverändert!" });
+                } else {
+                  swal({
+                    title: "Vorname ändern?",
+                    text: firstName,
+                    icon: "warning",
+                    buttons: ["Nein, nicht ändern!", "Ja, ändern!"],
+                    dangerMode: true,
+                  }).then((isConfirm) => {
+                    if (isConfirm) {
+                      swal({
+                        title: "Vorname erfolgreich geändert!!",
+                        text: firstName,
+                        icon: "success",
+                      }).then(() => {
+                        const data = { firstName: firstName };
+                        updateUser(data);
+                      });
+                    } else {
+                      swal({ title: "Vorname ändern abgebrochen." });
+                    }
+                  });
+                }
                 getUserData();
               }}
             />
@@ -98,7 +150,11 @@ export default function UpdateUser() {
           {!editLastName ? (
             userData.lastName
           ) : (
-            <input type="text" onChange={(e) => setLastName(e.target.value)} />
+            <input
+              type="text"
+              defaultValue={userData.lastName}
+              onChange={(e) => setLastName(e.target.value)}
+            />
           )}
           {!editLastName ? (
             <EditOutlined
@@ -110,8 +166,30 @@ export default function UpdateUser() {
             <SaveOutlined
               onClick={() => {
                 setEditLastName(false);
-                const data = { lastName: lastName };
-                updateUser(data);
+                if (!lastName) {
+                  swal({ title: "Nachname unverändert!" });
+                } else {
+                  swal({
+                    title: "Nachname ändern?",
+                    text: lastName,
+                    icon: "warning",
+                    buttons: ["Nein, nicht ändern!", "Ja, ändern!"],
+                    dangerMode: true,
+                  }).then((isConfirm) => {
+                    if (isConfirm) {
+                      swal({
+                        title: "Nachname erfolgreich geändert!!",
+                        text: lastName,
+                        icon: "success",
+                      }).then(() => {
+                        const data = { lastName: lastName };
+                        updateUser(data);
+                      });
+                    } else {
+                      swal({ title: "Nachname ändern abgebrochen." });
+                    }
+                  });
+                }
                 getUserData();
               }}
             />
@@ -124,6 +202,7 @@ export default function UpdateUser() {
           ) : (
             <input
               type="text"
+              defaultValue={userData.disabilities}
               onChange={(e) => setDisabilities(e.target.value)}
             />
           )}
@@ -137,8 +216,30 @@ export default function UpdateUser() {
             <SaveOutlined
               onClick={() => {
                 setEditDisabilities(false);
-                const data = { disabilities: disabilities };
-                updateUser(data);
+                if (!disabilities) {
+                  swal({ title: "Einschränkungen unverändert!" });
+                } else {
+                  swal({
+                    title: "Einschränkungen ändern?",
+                    text: disabilities,
+                    icon: "warning",
+                    buttons: ["Nein, nicht ändern!", "Ja, ändern!"],
+                    dangerMode: true,
+                  }).then((isConfirm) => {
+                    if (isConfirm) {
+                      swal({
+                        title: "Einschränkungen erfolgreich geändert!!",
+                        text: disabilities,
+                        icon: "success",
+                      }).then(() => {
+                        const data = { disabilities: disabilities };
+                        updateUser(data);
+                      });
+                    } else {
+                      swal({ title: "Einschränkungen ändern abgebrochen." });
+                    }
+                  });
+                }
                 getUserData();
               }}
             />
@@ -149,7 +250,11 @@ export default function UpdateUser() {
           {!editLocation ? (
             userData.location
           ) : (
-            <input type="text" onChange={(e) => setLocation(e.target.value)} />
+            <input
+              type="text"
+              defaultValue={userData.location}
+              onChange={(e) => setLocation(e.target.value)}
+            />
           )}
           {!editLocation ? (
             <EditOutlined
@@ -161,10 +266,31 @@ export default function UpdateUser() {
             <SaveOutlined
               onClick={() => {
                 setEditLocation(false);
-                const data = { location: location };
-                updateUser(data);
+                if (!location) {
+                  swal({ title: "Wohnort unverändert!" });
+                } else {
+                  swal({
+                    title: "Wohnort ändern?",
+                    text: location,
+                    icon: "warning",
+                    buttons: ["Nein, nicht ändern!", "Ja, ändern!"],
+                    dangerMode: true,
+                  }).then((isConfirm) => {
+                    if (isConfirm) {
+                      swal({
+                        title: "Wohnort erfolgreich geändert!!",
+                        text: location,
+                        icon: "success",
+                      }).then(() => {
+                        const data = { location: location };
+                        updateUser(data);
+                      });
+                    } else {
+                      swal({ title: "Wohnort ändern abgebrochen." });
+                    }
+                  });
+                }
                 getUserData();
-                localStorage.setItem("defSearch", data.location.toLowerCase())
               }}
             />
           )}
@@ -174,7 +300,11 @@ export default function UpdateUser() {
           {!editEmail ? (
             userData.email
           ) : (
-            <input type="text" onChange={(e) => setEmail(e.target.value)} />
+            <input
+              type="text"
+              defaultValue={userData.email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
           )}{" "}
           {!editEmail ? (
             <EditOutlined
@@ -186,8 +316,30 @@ export default function UpdateUser() {
             <SaveOutlined
               onClick={() => {
                 setEditEmail(false);
-                const data = { email: email };
-                updateUser(data);
+                if (!email) {
+                  swal({ title: "Email unverändert!" });
+                } else {
+                  swal({
+                    title: "Email ändern?",
+                    text: email,
+                    icon: "warning",
+                    buttons: ["Nein, nicht ändern!", "Ja, ändern!"],
+                    dangerMode: true,
+                  }).then((isConfirm) => {
+                    if (isConfirm) {
+                      swal({
+                        title: "Email erfolgreich geändert!!",
+                        text: email,
+                        icon: "success",
+                      }).then(() => {
+                        const data = { email: email };
+                        updateUser(data);
+                      });
+                    } else {
+                      swal({ title: "Email ändern abgebrochen." });
+                    }
+                  });
+                }
                 getUserData();
               }}
             />
@@ -213,14 +365,37 @@ export default function UpdateUser() {
             <SaveOutlined
               onClick={() => {
                 setEditPassword(false);
-                const data = { password: password };
-                updateUser(data);
+                if (!password) {
+                  swal({ title: "Passwort unverändert!" });
+                } else {
+                  swal({
+                    title: "Passwort ändern?",
+                    icon: "warning",
+                    buttons: ["Nein, nicht ändern!", "Ja, ändern!"],
+                    dangerMode: true,
+                  }).then((isConfirm) => {
+                    if (isConfirm) {
+                      swal({
+                        title: "Passwort erfolgreich geändert!!",
+                        icon: "success",
+                      }).then(() => {
+                        const data = { password: password };
+                        updateUser(data);
+                      });
+                    } else {
+                      swal({ title: "Passwort ändern abgebrochen." });
+                    }
+                  });
+                }
                 getUserData();
               }}
             />
           )}
         </li>
       </ul>
+      <button onClick={() => navigate("/profile")} className="button-green">
+        Fertig
+      </button>
     </>
   );
 }
