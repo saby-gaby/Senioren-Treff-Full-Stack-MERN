@@ -103,15 +103,15 @@ export default function EventForm() {
             <div className="checks">
               <label
                 htmlFor="sport"
-                className={sport ? "checked" : "button-beige"}
+                className={sport ? "button-dark-green" : "button-beige"}
               >
                 <input
                   type="checkbox"
                   id="sport"
                   name="sport"
                   value="sport"
-                  onChange={() => {
-                    handleChange();
+                  onChange={(e) => {
+                    handleChange(e);
                     setSport(!sport);
                   }}
                 />
@@ -120,50 +120,74 @@ export default function EventForm() {
             </div>
 
             <div className="checks">
-              <label htmlFor="kurse" className="button-green">
+              <label
+                htmlFor="kurse"
+                className={kurse ? "button-dark-green" : "button-beige"}
+              >
                 <input
                   type="checkbox"
                   id="kurse"
                   name="kurse"
                   value="kurse"
-                  onChange={handleChange}
+                  onChange={(e) => {
+                    handleChange(e);
+                    setKurse(!kurse);
+                  }}
                 />
                 Kurse
               </label>
             </div>
 
             <div className="checks">
-              <label htmlFor="kultur" className="button-green">
+              <label
+                htmlFor="kultur"
+                className={kultur ? "button-dark-green" : "button-beige"}
+              >
                 <input
                   type="checkbox"
                   id="kultur"
                   name="kultur"
                   value="kultur"
-                  onChange={handleChange}
+                  onChange={(e) => {
+                    handleChange(e);
+                    setKultur(!kultur);
+                  }}
                 />
                 Kultur
               </label>
             </div>
             <div className="checks">
-              <label htmlFor="reisen" className="button-green">
+              <label
+                htmlFor="reisen"
+                className={reisen ? "button-dark-green" : "button-beige"}
+              >
                 <input
                   type="checkbox"
                   id="reisen"
                   name="reisen"
                   value="reisen"
-                  onChange={handleChange}
+                  onChange={(e) => {
+                    handleChange(e);
+                    setReisen(!reisen);
+                  }}
                 />
                 Reisen
               </label>
             </div>
             <div className="checks">
-              <label htmlFor="natur" className="button-green">
+              <label
+                htmlFor="natur"
+                className={natur ? "button-dark-green" : "button-beige"}
+              >
                 <input
                   type="checkbox"
                   id="natur"
                   name="natur"
                   value="natur"
-                  onChange={handleChange}
+                  onChange={(e) => {
+                    handleChange(e);
+                    setNatur(!natur);
+                  }}
                 />{" "}
                 Natur
               </label>
@@ -171,15 +195,15 @@ export default function EventForm() {
             <div className="checks">
               <label
                 htmlFor="spiele"
-                className={spiele ? `checked` : `button-beige `}
+                className={spiele ? `button-dark-green` : `button-beige`}
               >
                 <input
                   type="checkbox"
                   id="spiele"
                   name="spiele"
                   value="spiele"
-                  onChange={() => {
-                    handleChange();
+                  onChange={(e) => {
+                    handleChange(e);
                     setSpiele(!spiele);
                   }}
                 />{" "}
