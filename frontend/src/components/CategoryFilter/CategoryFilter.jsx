@@ -32,7 +32,7 @@ export default function CategoryFilter() {
       swal({
         title: "keine Treffer",
         button: "OK",
-      });
+      }); 
     }
   };
 
