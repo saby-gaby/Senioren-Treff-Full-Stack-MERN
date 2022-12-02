@@ -4,6 +4,7 @@ import axiosConfig from "../../util/axiosConfig.js";
 import { SectionsContext } from "../../context/sectionsContext.js";
 import "./RegisterForm.css";
 import GenderRadioBtn from "../../components/Gender/GenderRadioBtn.jsx";
+import "./RegisterForm.css"
 import {
   TextInput,
   MailInput,
@@ -36,7 +37,7 @@ export default function RegisterForm() {
   const [password, setPassword] = useState("");
   const [location, setLocation] = useState("");
   const [disabilities, setDisabilities] = useState("");
-  
+
   const props = {
     userName: userName,
     setUserName: setUserName,
@@ -127,67 +128,103 @@ export default function RegisterForm() {
   };
 
   return (
-    <div>
+    <div className="RegisterForm">
       <h2>RegisterForm</h2>
       <form ref={formEl} method="POST" action="/user">
         {stepOne && (
-          <div>
-            <label htmlFor="userName">
-              Benutzername:<sup>*</sup>
-            </label>
-            <TextInput labelValue="userName" stateFunc={setUserName} />
-            <label htmlFor="firstName">
-              Vorname:<sup>*</sup>
-            </label>
-            <TextInput labelValue="firstName" stateFunc={setFirstName} />
-            <label htmlFor="lastName">
-              Nachname:<sup>*</sup>
-            </label>
-            <TextInput labelValue="lastName" stateFunc={setLastName} />
-            <label htmlFor="location">
-              Wohnort:<sup>*</sup>
-            </label>
-            <TextInput labelValue="location" stateFunc={setLocation} />
-            <NextBtnToStepTwo props={props} />
-          </div>
+          <>
+            <div id="stepOne">
+              <label htmlFor="userName">
+                <div>
+                  Benutzername:<sup id="infoUsername">*</sup>
+                </div>
+                <TextInput labelValue="userName" stateFunc={setUserName} />
+              </label>
+              <label htmlFor="firstName">
+                <div>
+                  Vorname:<sup id="infoFirstName" hover-text="Pflichtfeld: Ihren Vornamen">*</sup>
+                </div>
+                <TextInput labelValue="firstName" stateFunc={setFirstName} />
+              </label>
+              <label htmlFor="lastName">
+                <div>
+                  Nachname:<sup id="infoLastName">*</sup>
+                </div>
+                <TextInput labelValue="lastName" stateFunc={setLastName} />
+              </label>
+              <label htmlFor="location">
+                <div>
+                  Wohnort:<sup id="infoLocation">*</sup>
+                </div>
+                <TextInput labelValue="location" stateFunc={setLocation} />
+              </label>
+              <NextBtnToStepTwo props={props} />
+            </div>
+          </>
         )}
         {stepTwo && (
-          <div>
-            <h3>
-              Geschlecht:<sup>*</sup>
-            </h3>
-            <GenderRadioBtn gender="female" props={props} />
-            <GenderRadioBtn gender="male" props={props} />
-            <GenderRadioBtn gender="diverse" props={props} />
-            <GenderRadioBtn gender="none" props={props} />
-            <label htmlFor="disabilities">Eventuelle Einschränkung </label>
-            <TextInput labelValue="disabilities" stateFunc={setDisabilities} />
+          <div id="stepTwo">
+            <div className="gender">
+              <h3>
+                Geschlecht:
+              </h3>
+              <div className="radio">
+                <GenderRadioBtn gender="female" props={props} />
+                <GenderRadioBtn gender="male" props={props} />
+                <GenderRadioBtn gender="diverse" props={props} />
+                <GenderRadioBtn gender="none" props={props} />
+              </div>
+            </div>
+            <div className="disabilities">
+              <label htmlFor="disabilities"><h3>Eventuelle Einschränkung</h3></label>
+              <TextInput
+                labelValue="disabilities"
+                stateFunc={setDisabilities}
+              />
+            </div>
             <NextBtnToThree props={props} />
-            <ResetBtn props={props} />
           </div>
         )}
         {stepThree && (
-          <div>
-            <label htmlFor="email"> E-Mail Adresse:</label>
-            <MailInput labelValue="email" stateFunc={setEmail} />
-            <label htmlFor="password"> Passwort: </label>
-            <PasswordInput labelValue="password" stateFunc={setPassword} />
+          <div id="stepThree">
+            <label htmlFor="email">
+              <div>
+                E-Mail Adresse:<sup id="infoEmail">*</sup>
+              </div>
+              <MailInput labelValue="email" stateFunc={setEmail} />
+            </label>
+            <label htmlFor="password">
+              <div>
+                Passwort:<sup id="infoPsw">*</sup>
+              </div>
+              <PasswordInput labelValue="password" stateFunc={setPassword} />
+            </label>
             <SubmitBtn props={props} submitHandler={submitHandler} />
-            <ResetBtn props={props} />
           </div>
         )}
       </form>
-      <p>{isError && <strong>Es ist ein Fehler aufgetreten.</strong>}</p>
-      <p>
+      <div>
+        {isError && (
+          <p>
+            <strong>Es ist ein Fehler aufgetreten.</strong>
+          </p>
+        )}
         {hasRegistered && (
-          <strong>Sie haben sich erfolgreich registriert.</strong>
+          <p>
+            <strong>Sie haben sich erfolgreich registriert.</strong>
+          </p>
         )}
         {isAuth && <Navigate to="/profile" />}
-      </p>
-      <p>{isLoading ? <strong>Lade – bitte warten...</strong> : null}</p>
-      <NavLink to={"/login"} className="button-green">
-        bereits registriert?
-      </NavLink>
+        {isLoading ? (
+          <p>
+            <strong>Lade – bitte warten...</strong>
+          </p>
+        ) : null}
+        {(stepTwo || stepThree) && <ResetBtn props={props} />}
+        <NavLink to={"/login"} className="button-beige">
+          bereits registriert
+        </NavLink>
+      </div>
     </div>
   );
 }

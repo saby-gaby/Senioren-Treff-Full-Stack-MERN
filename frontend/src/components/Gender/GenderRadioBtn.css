@@ -1,0 +1,33 @@
+#female,
+#male,
+#diverse,
+#none {
+  position: fixed;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.RegisterForm .radio {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 45% 55%;
+  gap: 1rem;
+}
+
+.RegisterForm .radio > label {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.RegisterForm .checked {
+  font-size: 2rem;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--dark-green-color);
+  color: var(--beige-color);
+  border: 2px solid var(--beige-color);
+  box-shadow: none;
+  border-radius: 1rem;
+  text-decoration: none;
+  cursor: pointer;
+}

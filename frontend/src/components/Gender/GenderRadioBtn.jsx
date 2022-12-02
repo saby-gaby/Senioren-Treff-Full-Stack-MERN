@@ -1,4 +1,5 @@
 import React from "react";
+import "./GenderRadioBtn.css"
 
 export default function GenderRadioBtn({ props, gender }) {
   const genderLabelValue = (gender) => {
@@ -19,7 +20,7 @@ export default function GenderRadioBtn({ props, gender }) {
 
   return (
     <>
-      <label htmlFor={gender} className={gender===props.genderRadio?"checked":null}>
+      <label htmlFor={gender} className={gender===props.genderRadio?"checked":"button-beige"}>
         <input
           onClick={(e) => props.setGenderRadio(e.target.value)}
           type="radio"
