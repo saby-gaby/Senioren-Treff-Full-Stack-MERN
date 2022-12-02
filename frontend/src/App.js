@@ -24,10 +24,10 @@ function App() {
     console.log(location.pathname);
   }, [location]);
 
+  let autoLog = autoLogout()
 
-  // useEffect(() => {
-  //   autoLogout()
-  // }, !isAuth)
+  useEffect(() => {
+  }, [autoLog])
 
 
   return (
