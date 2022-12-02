@@ -16,7 +16,7 @@ function NextBtnToStepTwo({ props }) {
   const validateInput = async () => {
     let userExists;
 
-    if (props.userName.length > 0) {
+    if (props.userName.length > 0 && props.userName.length>3) {
       userExists = await uniqueUserName();
     }
 
@@ -29,7 +29,7 @@ function NextBtnToStepTwo({ props }) {
       });
     } else if (
       props.userName.length > 20 ||
-      (userName.length < 4 && userName.length > 0)
+      (props.userName.length < 4 && props.userName.length > 0)
     ) {
       swal({
         title: "Benutzername",
@@ -95,8 +95,6 @@ const SubmitBtn = ({submitHandler, props }) => {
         titel: "E-Mail Adresse bereits vergeben",
         text: "Probieren Sie andere E-Mail",
       });
-    } else if (props.password.length === 0) {
-      swal({ title: "Passwort", text: " ist ein Pflichtfeld" });
     } else {
       submitHandler();
     }

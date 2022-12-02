@@ -90,12 +90,17 @@ export default function RegisterForm() {
       }
     } catch (error) {
       for (const err of error.response.data.errors) {
-        if (err.msg === "Invalid value" && err.param === "password") {
+        if (err.msg === "Invalid value" && err.param === "email"){
           swal({
             title:
-              "Ihr Passwort muss mindestens 8 Zeichen lang sein und eine Zahl, einen Groß- und einen Kleinbuchstaben enthalten.",
+              "Tragen Sie eine valide Email Adresse",
+          }); break;
+        } else if (err.msg === "Invalid value" && err.param === "password") {
+          swal({
+            title:
+              "Passwort ist ein Pflichtfeld! ", text:"Ihr Passwort muss mindestens 8 Zeichen lang sein und eine Zahl, einen Groß- und einen Kleinbuchstaben enthalten."
           });
-        } else {
+        }  else {
           setIsError(true);
           setIsLoading(false);
           setHasRegistered(false);
