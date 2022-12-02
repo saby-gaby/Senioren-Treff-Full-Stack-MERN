@@ -16,7 +16,12 @@ export default function EventForm() {
   const [eventDescription, setDescription] = useState(null);
   const { navigate } = useContext(SectionsContext);
 
-  const [checkedSpiele, setCheckedSpiele] = useState(false);
+  const [spiele, setSpiele] = useState(false);
+  const [reisen, setReisen] = useState(false);
+  const [sport, setSport] = useState(false);
+  const [kultur, setKultur] = useState(false);
+  const [kurse, setKurse] = useState(false);
+  const [natur, setNatur] = useState(false);
 
   const handleChange = (event) => {
     const { value, checked } = event.target;
@@ -61,8 +66,7 @@ export default function EventForm() {
         title: "Event wurde erfolgreich erstellt!",
         button: "OK",
       });
-      navigate(`/event/${response._id}`)
-
+      navigate(`/event/${response._id}`);
     } catch (error) {
       console.error(error);
       swal({
@@ -74,7 +78,7 @@ export default function EventForm() {
 
   return (
     <>
-      <h1>Veranstaltung erstellen</h1>
+      <h1 id="eventFormH1">Veranstaltung erstellen</h1>
       <div id="formWrapper">
         <form
           className="center"
@@ -97,13 +101,19 @@ export default function EventForm() {
           <fieldset id="categoryChecks">
             <legend>Veranstaltungs - Kategorien: </legend>
             <div className="checks">
-              <label htmlFor="sport" className="button-green">
+              <label
+                htmlFor="sport"
+                className={sport ? "checked" : "button-beige"}
+              >
                 <input
                   type="checkbox"
                   id="sport"
                   name="sport"
                   value="sport"
-                  onChange={handleChange}
+                  onChange={() => {
+                    handleChange();
+                    setSport(!sport);
+                  }}
                 />
                 Sport
               </label>
@@ -161,16 +171,17 @@ export default function EventForm() {
             <div className="checks">
               <label
                 htmlFor="spiele"
-                className={
-                  checkedSpiele ? `button-green checked` : `button-green `
-                }
+                className={spiele ? `checked` : `button-beige `}
               >
                 <input
                   type="checkbox"
                   id="spiele"
                   name="spiele"
                   value="spiele"
-                  onChange={handleChange}
+                  onChange={() => {
+                    handleChange();
+                    setSpiele(!spiele);
+                  }}
                 />{" "}
                 Spiele
               </label>
