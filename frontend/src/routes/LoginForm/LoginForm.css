@@ -1,7 +1,68 @@
-.swal-title {
-    color: var(--middle-green-color);
+.LoginForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
 }
 
-.swal-button, .swal-button--confirm{
-    background-color: var(--middle-green-color);
+.LoginForm > h2 {
+  width: 100%;
+  font-size: 3rem;
+  text-align: center;
+  padding: 0.25rem 0;
+  margin-bottom: 1.5rem;
+  color: var(--beige-color);
+  background-color: var(--dark-transparent-color);
 }
+
+.LoginForm > h2:last-of-type {
+  margin-top: 5rem;
+}
+
+.LoginForm form,
+.toRegister {
+  background-color: var(--beige-transparent-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+  min-width: 400px;
+  max-width: 800px;
+  padding: 1.5rem 1rem;
+  border-radius: 1.5rem;
+}
+
+.LoginForm form  label > input{
+    height: 2.5rem;
+    background-color: var(--beige-transparent-color);
+    border-color: var(--middle-green-color);
+    border-radius: 0.75rem;
+    font-size: 2rem;
+    padding-left: 0.5rem;
+}
+
+.LoginForm form > input{
+    margin-top: 2rem;
+}
+
+.LoginForm form  label > input:focus{
+    background-color: var(--beige-color);
+  border: none;
+  outline: 3px solid var(--middle-green-color);
+}
+
+.LoginForm form  label > input::placeholder{
+    color: var(--dark-transparent-color);
+}
+
+.LoginForm label {
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+    font-size: 2rem;
+    margin-top: 1rem;
+}
+
+.LoginForm label:last-of-type{
+    margin-top: 1rem;
+} 

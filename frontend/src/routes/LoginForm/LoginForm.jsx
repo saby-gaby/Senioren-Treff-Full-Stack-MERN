@@ -66,28 +66,31 @@ function LoginForm() {
   };
 
   return (
-    <div>
+    <div className="LoginForm">
       {isAuth && eventLogin && <Navigate to="/event-form" replace={true} />}
       {isAuth && !eventLogin ? (
         <Navigate to="/profile" replace={true} />
       ) : (
-        <form ref={formEl} method="post" onSubmit={submitHandler}>
+        <>
           <h2>Anmelden</h2>
-          <label htmlFor="username"> Nutzername:</label>
-          <input type="text" name="username" id="username" ref={usernameEL} />
-          <label htmlFor="password">Passwort:</label>
-          <input
-            type="password"
-            name="password"
-            id="password"
-            ref={passwordEl}
-          />
-          <input className="button-green" type="submit" value="einloggen" />
-        </form>
+          <form ref={formEl} method="post" onSubmit={submitHandler}>
+            <label htmlFor="username">Benutzername:
+            <input type="text" name="username" id="username" ref={usernameEL} placeholder="dein Benutzername" /></label>
+            <label htmlFor="password">Passwort:
+            <input
+              type="password"
+              name="password"
+              id="password"
+              ref={passwordEl}
+              placeholder="dein Passwort"
+            /></label>
+            <input className="button-green" type="submit" value="Anmelden" />
+          </form>
+        </>
       )}
 
       <h2>Sie haben noch kein Konto?</h2>
-      <div>
+      <div className="toRegister">
         <p>als neuer Benutzer</p>
         <NavLink to={"/register"} className="button-green">
           Registrieren
