@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { SectionsContext } from "../../context/sectionsContext";
 import { useContext } from "react";
 import { EditOutlined, SaveOutlined } from "@ant-design/icons";
@@ -9,6 +9,7 @@ export default function UpdateUser() {
   const { userData, setUserData, navigate } = useContext(SectionsContext);
   const userId = localStorage.getItem("userId");
 
+  const [refreshData, setRefreshData] = useState({});
   const [editUserName, setEditUserName] = useState(false);
   const [editFirstName, setEditFirstName] = useState(false);
   const [editLastName, setEditLastName] = useState(false);
@@ -25,20 +26,28 @@ export default function UpdateUser() {
   const [location, setLocation] = useState("");
   const [disabilities, setDisabilities] = useState("");
 
-  const getUserData = async () => {
+  const getUserData = () => {
+    const getUserbyId = async () => {
     const axiosResp = await axiosConfig.get(
       `http://localhost:6001/user/${userId}`
     );
     const data = axiosResp.data;
     setUserData(data);
-  };
+    };
+    getUserbyId()
+  }
+
+  useEffect(() => {
+    getUserData();
+  }, []);
 
   const updateUser = async (data) => {
     const axiosResp = await axiosConfig.patch(
       `/user/${localStorage.getItem("userId")}`,
       data
     );
-    console.log(axiosResp);
+    setRefreshData(axiosResp.data);
+    refreshData ? getUserData() : getUserData();
   };
 
   return (
