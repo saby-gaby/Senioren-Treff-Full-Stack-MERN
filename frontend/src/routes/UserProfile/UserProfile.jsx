@@ -52,7 +52,7 @@ export default function UserProfil() {
       <h2>
         {userData.gender === "female" && <img src="oma.svg" />}
         {userData.gender === "male" && <img src="opa.svg" />}Herzlich willkommen{" "}
-        {userData.firstName}
+        {userData.gender==="diverse"?<span className="rainbow">{userData.firstName}</span> : userData.firstName}
       </h2>
       <div>
         <div>
