@@ -92,7 +92,7 @@ const SubmitBtn = ({submitHandler, props }) => {
 
     if (emailExists) {
       swal({
-        titel: "E-Mail Adresse bereits vergeben",
+        title: "E-Mail Adresse bereits vergeben",
         text: "Probieren Sie andere E-Mail",
       });
     } else {

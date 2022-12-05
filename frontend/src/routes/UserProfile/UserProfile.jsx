@@ -48,8 +48,12 @@ export default function UserProfil() {
   };
 
   return (
-    <div>
-      <h2>Herzlich willkommen {userData.userName}</h2>
+    <div className="UserProfile">
+      <h2>
+        {userData.gender === "female" && <img src="oma.svg" />}
+        {userData.gender === "male" && <img src="opa.svg" />}Herzlich willkommen{" "}
+        {userData.firstName}
+      </h2>
       <div>
         <div>
           <h2>Meine erstellten Events:</h2>

@@ -76,6 +76,14 @@ body {
   cursor: pointer;
 }
 
+.swal-title {
+  color: var(--middle-green-color);
+}
+
+.swal-button, .swal-button--confirm{
+  background-color: var(--middle-green-color);
+}
+
 @media screen and (max-width: 768px) {
   .button-green,
   .button-dark-green,
@@ -84,7 +92,8 @@ body {
     font-weight: bolder;
   }
 
-  .button-beige {
+  .button-beige, 
+  .button-dark-green {
     padding: 0.25rem 0.5rem;
   }
 }
