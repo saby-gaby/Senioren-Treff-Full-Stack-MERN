@@ -65,8 +65,9 @@ export default function EventForm() {
       swal({
         title: "Event wurde erfolgreich erstellt!",
         button: "OK",
+      }).then(() => {
+        navigate(`/event/${response.data._id}`);
       });
-      navigate(`/event/${response._id}`);
     } catch (error) {
       console.error(error);
       swal({
