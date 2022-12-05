@@ -88,15 +88,15 @@ export default function OneEvent() {
           axiosConfig.patch(`/user/${localStorage.getItem(`userId`)}`, {
             myEvents: myEventsArray.filter((e) => e !== eventId),
           });
-          navigate("/profile")
+          navigate("/profile");
         });
       } else {
         swal({
           title: "Veranstaltung löschen abgebrochen.",
         });
       }
-    })
-  }
+    });
+  };
 
   useEffect(() => {
     getEventData();
@@ -138,13 +138,13 @@ export default function OneEvent() {
             title: "Buchung erfolgreich!",
             button: "OK",
           });
-        } 
+        }
       } else {
         swal({
           title: "Du musst angemeldet sein, um eine Veranstaltung zu buchen.",
           button: "OK",
         });
-        navigate("/login")
+        navigate("/login");
       }
       getEventData();
     } catch (error) {
@@ -225,22 +225,24 @@ export default function OneEvent() {
 
   const handleWatchEvent = async () => {
     try {
-      if (isAuth) {const response = await axiosConfig.patch(
-        `/user/watchedEvents/${localStorage.getItem("userId")}`,
-        {
-          watchedEvents: eventId,
-        }
-      );
+      if (isAuth) {
+        const response = await axiosConfig.patch(
+          `/user/watchedEvents/${localStorage.getItem("userId")}`,
+          {
+            watchedEvents: eventId,
+          }
+        );
         swal({
           title: `${eventData.eventTitle} zur Merkliste von ${response.data.userName} hinzugefügt`,
           button: "OK",
         });
       } else {
         swal({
-          title: "Du musst angemeldet sein, um eine Veranstaltung auf die Merkliste zu setzen.",
+          title:
+            "Du musst angemeldet sein, um eine Veranstaltung auf die Merkliste zu setzen.",
           button: "OK",
         });
-        navigate("/login")
+        navigate("/login");
       }
       getEventData();
     } catch (error) {
@@ -274,14 +276,12 @@ export default function OneEvent() {
     return image;
   };
   return (
-    <div>
-      <h3>
-        {eventData.eventTitle}{" "}
-        {isExpired ? <div>(Veranstaltung schon vorbei)</div> : null}
-      </h3>
-      <p>
-        Eventersteller: {eventData.eventOwner && eventData.eventOwner.userName}{" "}
-      </p>
+    <div id="oneEvent">
+      <h1>{eventData.eventTitle} </h1>
+      {isExpired ? (
+        <div className="expired">Veranstaltung schon vorbei</div>
+      ) : null}
+
       {eventData.imageUrl ? (
         <img
           src={"http://localhost:6001" + eventData.imageUrl}
@@ -294,57 +294,82 @@ export default function OneEvent() {
       ) : (
         <img src={"http://localhost:6001" + categoryImage()} alt="test" />
       )}
-      <div>
-        <h4>{eventCategories}</h4>
-        <p>
-          {eventData.location} {new Date(eventData.date).toLocaleDateString()}{" "}
-          {eventData.time} Uhr
-        </p>
-        <p>{eventData.price} €</p>
-        <p>Teilnehmerzahl: {eventData.participants}</p>
-        <div>
-          <h4>Beschreibung</h4>
+      <div id="eventData">
+        <div id="details">
+          <div>
+            <h5>Veranstaltung von:</h5>
+            <p>@{eventData.eventOwner && eventData.eventOwner.userName} </p>
+          </div>
+          <div>
+            <p>{eventCategories}</p>
+            <p>
+              {eventData.location}{" "}
+              {new Date(eventData.date).toLocaleDateString()} {eventData.time}{" "}
+              Uhr
+            </p>
+            <p>{eventData.price} € / pro Person</p>
+            <div>
+              <h5>Teilnehmerzahl: </h5>
+              <p>{eventData.participants}</p>
+            </div>
+          </div>
+        </div>
+        <div id="description">
+          <h5>Beschreibung</h5>
           <p>{eventData.description}</p>
         </div>
-        <ul>
-          {eventData.subscribers &&
-            eventData.subscribers.map((ele, i) => {
-              return <li key={i}>{ele.userName}</li>;
-            })}
-        </ul>
+        <div id="participants">
+          <h5>Teilnehmer:innen</h5>
+          <ul>
+            {eventData.subscribers &&
+              eventData.subscribers.map((ele, i) => {
+                return <li key={i}>{ele.userName}</li>;
+              })}
+          </ul>
+        </div>
       </div>
-      {!isBooked ? (
-        <button onClick={handleSubscribeEvent} className="button-green">
-          Buchen
-        </button>
-      ) : (
-        <button onClick={handleUnsubscribe} className="button-green">
-          Stornieren
-        </button>
-      )}
-      {!isWatched ? (
-        <button onClick={handleWatchEvent} className="button-beige">
-          auf meine Liste <CheckOutlined />
-        </button>
-      ) : (
-        <button onClick={handleUnwatchEvent} className="button-beige">
-          von Liste streichen <CloseOutlined />
-        </button>
-      )}
-
-      {myEvent ? (
-        <>
-          <NavLink to={`/event-edit/${eventData._id}`} className="button-green">
-            bearbeiten
-          </NavLink>
-          <button 
-            onClick={deleteEventById}
-            className="button-green"
+      <div id="btn">
+        {!isBooked ? (
+          <button
+            onClick={handleSubscribeEvent}
+            className="button-green btnBooked"
           >
-            Löschen
+            Buchen
           </button>
-        </>
-      ) : null}
+        ) : (
+          <button
+            onClick={handleUnsubscribe}
+            className="button-green btnBooked"
+          >
+            Stornieren
+          </button>
+        )}
+        <div>
+          {!isWatched ? (
+            <button onClick={handleWatchEvent} className="button-beige">
+              auf meine Liste <CheckOutlined />
+            </button>
+          ) : (
+            <button onClick={handleUnwatchEvent} className="button-beige">
+              von Liste streichen <CloseOutlined />
+            </button>
+          )}
+
+          {myEvent ? (
+            <>
+              <NavLink
+                to={`/event-edit/${eventData._id}`}
+                className="button-beige"
+              >
+                bearbeiten
+              </NavLink>
+              <button onClick={deleteEventById} className="button-beige">
+                Löschen
+              </button>
+            </>
+          ) : null}
+        </div>
+      </div>
     </div>
   );
 }
