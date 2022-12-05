@@ -17,6 +17,7 @@ export default function UpdateUser() {
   const [editLocation, setEditLocation] = useState(false);
   const [editEmail, setEditEmail] = useState(false);
   const [editPassword, setEditPassword] = useState(false);
+  const [editGender, setEditGender] = useState(false);
 
   const [userName, setUserName] = useState("");
   const [firstName, setFirstName] = useState("");
@@ -25,17 +26,19 @@ export default function UpdateUser() {
   const [password, setPassword] = useState("");
   const [location, setLocation] = useState("");
   const [disabilities, setDisabilities] = useState("");
+  const [gender, setGender] = useState("");
+  const [genderName, setGenderName] = useState("");
 
   const getUserData = () => {
     const getUserbyId = async () => {
-    const axiosResp = await axiosConfig.get(
-      `http://localhost:6001/user/${userId}`
-    );
-    const data = axiosResp.data;
-    setUserData(data);
+      const axiosResp = await axiosConfig.get(
+        `http://localhost:6001/user/${userId}`
+      );
+      const data = axiosResp.data;
+      setUserData(data);
     };
-    getUserbyId()
-  }
+    getUserbyId();
+  };
 
   useEffect(() => {
     getUserData();
@@ -196,6 +199,76 @@ export default function UpdateUser() {
                       });
                     } else {
                       swal({ title: "Nachname ändern abgebrochen." });
+                    }
+                  });
+                }
+                getUserData();
+              }}
+            />
+          )}
+        </li>
+        <li>
+          Geschlecht:{" "}
+          {!editGender ? (
+            userData.gender
+          ) : (
+            <select
+              defaultValue={userData.gender}
+              onChange={(e) => {
+                setGender(e.target.value);
+                switch (e.target.value) {
+                  case "female":
+                    setGenderName("Weiblich");
+                    break;
+                  case "male":
+                    setGenderName("Männlich");
+                    break;
+                  case "diverse":
+                    setGenderName("Nicht binär");
+                    break;
+                  default:
+                    setGenderName("keine Angabe");
+                }
+              }}
+            >
+              <option value="">-----</option>
+              <option value="female">Frau</option>
+              <option value="male">Mann</option>
+              <option value="diverse">nicht binär</option>
+              <option value="none">keine Angabe</option>
+            </select>
+          )}{" "}
+          {!editGender ? (
+            <EditOutlined
+              onClick={() => {
+                setEditGender(true);
+              }}
+            />
+          ) : (
+            <SaveOutlined
+              onClick={() => {
+                setEditGender(false);
+                if (!gender) {
+                  swal({ title: "Geschlecht unverändert!" });
+                } else {
+                  swal({
+                    title: "Geschlecht ändern?",
+                    text: genderName,
+                    icon: "warning",
+                    buttons: ["Nein, nicht ändern!", "Ja, ändern!"],
+                    dangerMode: true,
+                  }).then((isConfirm) => {
+                    if (isConfirm) {
+                      swal({
+                        title: "Geschlecht erfolgreich geändert!!",
+                        text: genderName,
+                        icon: "success",
+                      }).then(() => {
+                        const data = { gender: gender };
+                        updateUser(data);
+                      });
+                    } else {
+                      swal({ title: "Geschlecht ändern abgebrochen." });
                     }
                   });
                 }
