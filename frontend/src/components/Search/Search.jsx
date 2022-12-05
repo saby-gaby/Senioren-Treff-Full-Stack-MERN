@@ -55,6 +55,7 @@ export default function Search() {
 
   const navigateToEvents = (path) => {
     navigate(`/events/${path}`);
+    location.reload()
   };
 
   return (
