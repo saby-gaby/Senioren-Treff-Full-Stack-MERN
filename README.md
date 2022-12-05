@@ -51,6 +51,7 @@ In back- & front folder type in this command:
 - [x] _node_
 - [x] _mongoose_
 - [x] _axios_
+- [x] _express_
 
 ---
 
