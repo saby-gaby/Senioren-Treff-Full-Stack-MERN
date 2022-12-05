@@ -20,7 +20,7 @@ export default function GenderRadioBtn({ props, gender }) {
 
   return (
     <>
-      <label htmlFor={gender} className={gender===props.genderRadio?"checked":"button-beige"}>
+      <label htmlFor={gender} className={gender===props.genderRadio?"button-dark-green":"button-beige"}>
         <input
           onClick={(e) => props.setGenderRadio(e.target.value)}
           type="radio"
