@@ -208,6 +208,76 @@ export default function UpdateUser() {
           )}
         </li>
         <li>
+          Geschlecht:{" "}
+          {!editGender ? (
+            userData.gender
+          ) : (
+            <select
+              defaultValue={userData.gender}
+              onChange={(e) => {
+                setGender(e.target.value);
+                switch (e.target.value) {
+                  case "female":
+                    setGenderName("Weiblich");
+                    break;
+                  case "male":
+                    setGenderName("Männlich");
+                    break;
+                  case "diverse":
+                    setGenderName("Nicht binär");
+                    break;
+                  default:
+                    setGenderName("keine Angabe");
+                }
+              }}
+            >
+              <option value="">-----</option>
+              <option value="female">Frau</option>
+              <option value="male">Mann</option>
+              <option value="diverse">nicht binär</option>
+              <option value="none">keine Angabe</option>
+            </select>
+          )}{" "}
+          {!editGender ? (
+            <EditOutlined
+              onClick={() => {
+                setEditGender(true);
+              }}
+            />
+          ) : (
+            <SaveOutlined
+              onClick={() => {
+                setEditGender(false);
+                if (!gender) {
+                  swal({ title: "Geschlecht unverändert!" });
+                } else {
+                  swal({
+                    title: "Geschlecht ändern?",
+                    text: genderName,
+                    icon: "warning",
+                    buttons: ["Nein, nicht ändern!", "Ja, ändern!"],
+                    dangerMode: true,
+                  }).then((isConfirm) => {
+                    if (isConfirm) {
+                      swal({
+                        title: "Geschlecht erfolgreich geändert!!",
+                        text: genderName,
+                        icon: "success",
+                      }).then(() => {
+                        const data = { gender: gender };
+                        updateUser(data);
+                      });
+                    } else {
+                      swal({ title: "Geschlecht ändern abgebrochen." });
+                    }
+                  });
+                }
+                getUserData();
+              }}
+            />
+          )}
+        </li>
+        <li>
           Einschränkungen:{" "}
           {!editDisabilities ? (
             userData.disabilities
@@ -299,77 +369,6 @@ export default function UpdateUser() {
                       });
                     } else {
                       swal({ title: "Wohnort ändern abgebrochen." });
-                    }
-                  });
-                }
-                getUserData();
-              }}
-            />
-          )}
-        </li>
-        <li>
-          Geschlecht:{" "}
-          {!editGender ? (
-            userData.gender
-          ) : (
-            <select
-              defaultValue={userData.gender}
-                onChange={(e) => {
-                  setGender(e.target.value)
-                    switch (e.target.value) {
-                        case "female":
-                          setGenderName("Weiblich");
-                          break;
-                        case "male":
-                          setGenderName("Männlich");
-                          break;
-                        case "diverse":
-                          setGenderName("Nicht binär");
-                          break;
-                        default:
-                          setGenderName("keine Angabe");
-                    }
-                }}
-            >
-              <option value="">-----</option>
-              <option value="female">Frau</option>
-              <option value="male">Mann</option>
-              <option value="diverse">nicht binär</option>
-              <option value="none">keine Angabe</option>
-            </select>
-          )}{" "}
-          {!editGender ? (
-            <EditOutlined
-              onClick={() => {
-                setEditGender(true);
-              }}
-            />
-          ) : (
-            <SaveOutlined
-              onClick={() => {
-                setEditGender(false);
-                if (!gender) {
-                  swal({ title: "Geschlecht unverändert!" });
-                  
-                } else {
-                  swal({
-                    title: "Geschlecht ändern?",
-                    text: genderName,
-                    icon: "warning",
-                    buttons: ["Nein, nicht ändern!", "Ja, ändern!"],
-                    dangerMode: true,
-                  }).then((isConfirm) => {
-                    if (isConfirm) {
-                      swal({
-                        title: "Geschlecht erfolgreich geändert!!",
-                        text: gender,
-                        icon: "success",
-                      }).then(() => {
-                        const data = { gender: gender };
-                        updateUser(data);
-                      });
-                    } else {
-                      swal({ title: "Geschlecht ändern abgebrochen." });
                     }
                   });
                 }

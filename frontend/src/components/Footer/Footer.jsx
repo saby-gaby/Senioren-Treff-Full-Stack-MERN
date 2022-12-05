@@ -18,19 +18,19 @@ export default function Footer() {
           <div className="Footer">
             <a href="https://github.com/saby-gaby" target="_blank">
               <p>Sabina</p>
-              <img src="Sabina.jpeg" alt="" />
+              <img src="http://localhost:3000/Sabina.jpeg" alt="" />
             </a>
             <a href="https://github.com/Holledrums" target="_blank">
               <p>Holger</p>
-              <img src="Holger.jpeg" alt="" />
+              <img src="http://localhost:3000/Holger.jpeg" alt="" />
             </a>
             <a href="https://github.com/Tom-Necke" target="_blank">
               <p>Tom</p>
-              <img src="Tom.jpeg" alt="" />
+              <img src="http://localhost:3000/Tom.jpeg" alt="" />
             </a>
             <a href="https://github.com/DennisPiecha" target="_blank">
               <p>Dennis</p>
-              <img src="Dennis.jpeg" alt="" />
+              <img src="http://localhost:3000/Dennis.jpeg" alt="" />
             </a>
           </div>
         </>
