@@ -14,6 +14,7 @@ import UpdateUser from "./routes/UpdateUser/UpdateUser";
 import UpdateEvent from "./routes/UpdateEvent/UpdateEvent";
 import Footer from "./components/Footer/Footer";
 import { autoLogout } from "./util/AutoLogout";
+import ScrollToTop from "../src/util/scrollUp";
 
 function App() {
   const { isAuth } = useContext(SectionsContext);
@@ -74,6 +75,7 @@ function App() {
         <NavLink to="/event-form">Event-Form</NavLink>
         <NavLink to="/events">Events</NavLink>
       </div> */}
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<LoginForm />} />
