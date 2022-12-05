@@ -37,7 +37,7 @@ function App() {
           <ul className={location.pathname === "/login" ? "logo-center" : null}>
             <li>
               <NavLink to="/">
-                <img src="logo.svg" />
+                <img src="http://localhost:3000/logo.svg" />
               </NavLink>
             </li>
             {location.pathname !== "/login" && (
