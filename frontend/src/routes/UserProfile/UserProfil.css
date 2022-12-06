@@ -9,7 +9,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 700px;
+  width: 100%;
 }
 
 .box h3 {
@@ -46,7 +46,7 @@
   background-color: var(--beige-transparent-color);
   padding-bottom: 1rem;
   max-height: 700px;
-  overflow-y: scroll;
+  overflow-y: auto;
   border: 2px solid var(--middle-green-color);
 }
 
@@ -92,13 +92,13 @@
   font-weight: bolder;
 }
 
-.UserProfile {
+#UserProfile {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.UserProfile > h2{
+#UserProfile > h2 {
   background-color: var(--dark-transparent-color);
   color: var(--beige-color);
   width: 100%;
@@ -106,8 +106,66 @@
   align-items: center;
   justify-content: space-evenly;
   gap: 1rem;
+  margin-bottom: 2rem;
 }
 
-.UserProfile > h2 > img {
+#UserProfile > h2 > img {
   height: 10rem;
+}
+
+#UserProfile .Search > div {
+  width: 100%;
+}
+
+#eventbox {
+  display: flex;
+  flex-direction: row;
+  background-color: var(--beige-transparent-color);
+  gap: 3rem;
+  width: 100%;
+  border-radius: 0.75rem;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  margin-top: 3rem;
+  justify-content: space-between;
+}
+
+#eventbox h4 {
+  color: var(--dark-green-color);
+  font-size: 2rem;
+  margin-left: 2rem;
+}
+#eventbox button {
+  margin-right: 2rem;
+}
+
+#details {
+  width: 100%;
+  padding: 0;
+}
+
+#details ul {
+  width: 100%;
+  list-style-type: none;
+  background-color: var(--beige-transparent-color);
+  padding-bottom: 2rem;
+  border-radius: 1rem;
+}
+
+#details ul li {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  padding: 0 2rem 0 2rem;
+  font-size: 2rem;
+}
+
+#details ul li:last-child {
+  justify-content: center;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+#vorletztesDiv {
+  margin: 2rem 0;
 }
