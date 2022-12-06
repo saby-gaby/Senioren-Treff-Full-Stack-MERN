@@ -271,7 +271,7 @@ export default function OneEvent() {
         image = "/images/natur.jpg";
         break;
       default:
-        image = "/images/default.webp";
+        image = "/images/default-senioren.jpg";
     }
     return image;
   };
