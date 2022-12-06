@@ -366,7 +366,6 @@ export default function UpdateUser() {
                       }).then(() => {
                         const data = { location: location };
                         updateUser(data);
-                        localStorage.setItem("defSearch", location);
                       });
                       localStorage.setItem("defSearch", location.toLowerCase())
                     } else {
