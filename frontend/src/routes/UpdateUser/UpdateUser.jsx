@@ -368,6 +368,7 @@ export default function UpdateUser() {
                         updateUser(data);
                         localStorage.setItem("defSearch", location);
                       });
+                      localStorage.setItem("defSearch", location.toLowerCase())
                     } else {
                       swal({ title: "Wohnort ändern abgebrochen." });
                     }
