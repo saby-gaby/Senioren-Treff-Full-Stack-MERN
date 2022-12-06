@@ -48,15 +48,16 @@ export default function UserProfil() {
   };
 
   return (
-    <div className="UserProfile">
+    <div id="UserProfile">
       <h2>
         {userData.gender === "female" && <img src="oma.svg" />}
-        {userData.gender === "male" && <img src="opa.svg" />}Herzlich willkommen{" "}
+        {userData.gender === "male" && <img src="opa.svg" />}Willkommen{" "}
         {userData.firstName}
       </h2>
       <div>
-        <div>
-          <h2>Meine erstellten Events:</h2>
+        <Search />
+        <div id="eventbox">
+          <h4>Eigene Veranstaltungen</h4>
           {!showMyEvents ? (
             <button
               className="button-dark-green"
@@ -149,8 +150,8 @@ export default function UserProfil() {
             </div>
           </div>
         ) : null}
-        <div>
-          <h2>gebuchte Veranstaltungen:</h2>
+        <div id="eventbox">
+          <h4>Gebuchte Veranstaltungen</h4>
           {!bookedEvents ? (
             <button
               className="button-dark-green"
@@ -244,8 +245,8 @@ export default function UserProfil() {
           </div>
         ) : null}
 
-        <div>
-          <h2>Meine Merkliste:</h2>
+        <div id="eventbox">
+          <h4>Meine Merkliste</h4>
           {!watchedEvents ? (
             <button
               className="button-dark-green"
@@ -338,8 +339,8 @@ export default function UserProfil() {
           </div>
         ) : null}
 
-        <div>
-          <h3>Meine Daten</h3>
+        <div id="eventbox">
+          <h4>Meine Daten</h4>
           {!userDetails ? (
             <button
               className="button-dark-green"
@@ -358,34 +359,52 @@ export default function UserProfil() {
         </div>
 
         {userDetails ? (
-          <ul>
-            <li>Benutzername: {userData.userName}</li>
-            <li>Vorname: {userData.firstName}</li>
-            <li>Nachname: {userData.lastName}</li>
-            <li>Geschlecht: {findGender()}</li>
-            <li>
-              Einschränkungen:{" "}
-              {userData.disabilities
-                ? userData.disabilities
-                : "keine Einschränkungen"}
-            </li>
-            <li>Email: {userData.email}</li>
+          <div id="details">
+            <ul>
+              <li>
+                <h5>Benutzername:</h5> <p>{userData.userName}</p>
+              </li>
+              <li>
+                <h5>Vorname:</h5> <p>{userData.firstName}</p>
+              </li>
+              <li>
+                <h5>Nachname:</h5> <p>{userData.lastName}</p>
+              </li>
+              <li>
+                <h5>Geschlecht: </h5>
+                <p>{findGender()}</p>
+              </li>
+              <li>
+                <h5> Einschränkungen:</h5>{" "}
+                <p>
+                  {userData.disabilities
+                    ? userData.disabilities
+                    : "keine Einschränkungen"}
+                </p>
+              </li>
+              <li>
+                <h5>Email:</h5>
+                <p> {userData.email}</p>
+              </li>
 
-            <li>Wohnort: {userData.location}</li>
-            <li>
-              <NavLink to={`/user/edit`} className="button-green">
-                Profil bearbeiten
-              </NavLink>
-            </li>
-          </ul>
+              <li>
+                <h5>Wohnort:</h5> <p>{userData.location}</p>
+              </li>
+              <li>
+                <NavLink to={`/user/edit`} className="button-green">
+                  Profil bearbeiten
+                </NavLink>
+              </li>
+            </ul>
+          </div>
         ) : null}
       </div>
-      <div>
-        <NavLink to={`/event-form`} className="button-green ">
+      <div id="vorletztesDiv">
+        <NavLink to={`/event-form`} className="button-beige ">
           Eigene Veranstaltung Erstellen
         </NavLink>
       </div>
-      <Search />
+
       <div>
         <button className="button-green" onClick={logout}>
           Abmelden
