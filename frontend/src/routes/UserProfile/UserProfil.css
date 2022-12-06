@@ -139,12 +139,12 @@
   margin-right: 2rem;
 }
 
-#details {
+#dataUser {
   width: 100%;
   padding: 0;
 }
 
-#details ul {
+#dataUser ul {
   width: 100%;
   list-style-type: none;
   background-color: var(--beige-transparent-color);
@@ -152,7 +152,7 @@
   border-radius: 1rem;
 }
 
-#details ul li {
+#dataUser ul li {
   display: flex;
   gap: 1rem;
   justify-content: space-between;
@@ -160,7 +160,7 @@
   font-size: 2rem;
 }
 
-#details ul li:last-child {
+#dataUser ul li:last-child {
   justify-content: center;
   margin-top: 2rem;
   margin-bottom: 2rem;
