@@ -359,7 +359,7 @@ export default function UserProfil() {
         </div>
 
         {userDetails ? (
-          <div id="details">
+          <div id="dataUser">
             <ul>
               <li>
                 <h5>Benutzername:</h5> <p>{userData.userName}</p>
