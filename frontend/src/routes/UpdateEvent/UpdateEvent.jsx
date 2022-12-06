@@ -217,10 +217,31 @@ export default function UpdateEvent() {
           ) : (
             <SaveOutlined
               onClick={() => {
-                setEditProgress(true);
+                swal({
+                  title: "Kategorie ändern?",
+                  text: eventCategory.categories.join(", "),
+                  icon: "warning",
+                  buttons: ["Nein, nicht ändern!", "Ja, ändern!"],
+                  dangerMode: true,
+                }).then((isConfirm) => {
+                  if (isConfirm) {
+                    swal({
+                      title: "Kategorie erfolgreich geändert!!",
+                      text: eventCategory.categories.join(", "),
+                      icon: "success",
+                    }).then(() => {
+                      const data = { category: eventCategory.categories };
+                      updateEvent(data);
+                      setEditProgress(true);
+                      location.reload();
+                    });
+                  } else {
+                    swal({
+                      title: "Kategorie ändern abgebrochen.",
+                    });
+                  }
+                });
                 setEditCategory(false);
-                const data = { category: eventCategory.categories };
-                updateEvent(data);
               }}
             />
           )}
