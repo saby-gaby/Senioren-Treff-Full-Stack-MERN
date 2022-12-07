@@ -6,6 +6,7 @@ import Search from "../../components/Search/Search";
 import RainbowEffect from "../../components/DiverseEffect/RainbowEffect";
 import "./UserProfil.css";
 
+
 export default function UserProfil() {
   const { logout, isAuth, userData, setUserData } = useContext(SectionsContext);
 

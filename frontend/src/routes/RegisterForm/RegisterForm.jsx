@@ -22,7 +22,7 @@ export default function RegisterForm() {
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [hasRegistered, setHasRegistered] = useState(false);
-  const { isAuth, setIsAuth } = useContext(SectionsContext);
+  const { isAuth, setIsAuth, eventLogin, backToEvent, interestedEvent  } = useContext(SectionsContext);
 
   const [stepOne, setStepOne] = useState(true);
   const [stepTwo, setStepTwo] = useState(false);
@@ -219,7 +219,10 @@ export default function RegisterForm() {
             <strong>Sie haben sich erfolgreich registriert.</strong>
           </p>
         )}
-        {isAuth && <Navigate to="/profile" />}
+
+        {isAuth && eventLogin && <Navigate to="/event-form" replace={true} />}
+        {isAuth && backToEvent && <Navigate to={`/event/${interestedEvent}`} replace={true} />}
+        {isAuth && !eventLogin && !backToEvent && <Navigate to="/profile" />}
         {isLoading ? (
           <p>
             <strong>Lade – bitte warten...</strong>

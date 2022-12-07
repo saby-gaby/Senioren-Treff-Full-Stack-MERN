@@ -7,7 +7,7 @@ import swal from "sweetalert";
 
 function LoginForm() {
   const [isLoading, setIsLoading] = useState(false);
-  const { isAuth, setIsAuth, eventLogin, setStepOne } =
+  const { isAuth, setIsAuth, eventLogin, setStepOne, backToEvent, interestedEvent } =
     useContext(SectionsContext);
 
   const formEl = useRef(null);
@@ -64,11 +64,12 @@ function LoginForm() {
 
     formEl.current.reset(); // Alle Felder vom Formular leer machen
   };
-
+  
   return (
     <div className="LoginForm">
       {isAuth && eventLogin && <Navigate to="/event-form" replace={true} />}
-      {isAuth && !eventLogin ? (
+      {isAuth && backToEvent && <Navigate to={`/event/${interestedEvent}`} replace={true} />}
+      {isAuth && !eventLogin && !backToEvent ? (
         <Navigate to="/profile" replace={true} />
       ) : (
         <>

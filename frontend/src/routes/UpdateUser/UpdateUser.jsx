@@ -33,6 +33,26 @@ export default function UpdateUser() {
   const [editInputName, setEditInputName] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
+  const genderRender = () => {
+    let gender;
+    switch (userData.gender) {
+      case "female":
+        gender = "weiblich"
+        break;
+      case "male":
+        gender = "männlich"
+        break;
+      case "diverse":
+        gender = "nicht Binär"
+        break;
+      case "none":
+        gender = "keine Angabe"
+        break;
+    }
+
+    return gender;
+  }
+
   const getUserData = () => {
     const getUserById = async () => {
       const axiosResp = await axiosConfig.get(
@@ -86,7 +106,7 @@ export default function UpdateUser() {
   const updateUser = async (data) => {
     try {
       const axiosResp = await axiosConfig.patch(
-        `/user/${localStorage.getItem("userId")}`,
+        `/user/edit/${localStorage.getItem("userId")}`,
         data
       );
       setRefreshData(axiosResp.data);
@@ -117,6 +137,30 @@ export default function UpdateUser() {
       setEditEmail(false);
       setEditPassword(false);
       setEditGender(false);
+      console.log(error);
+    }
+  };
+
+  const updateUserPassword = async (data) => {
+    try {
+      const axiosResp = await axiosConfig.patch(
+        `/user/password/${localStorage.getItem("userId")}`,
+        data
+      );
+      setRefreshData(axiosResp.data);
+      swal({
+        title: `${editInputName} erfolgreich geändert!!`,
+        icon: "success",
+      });
+      refreshData ? getUserData() : getUserData();
+      setEditPassword(false);
+    } catch (error) {
+      swal({
+        title: "Da ist ein Fehler aufgetreten.",
+        text: errorMessage,
+        icon: "error",
+      });
+      setEditPassword(false);
       console.log(error);
     }
   };
@@ -168,7 +212,7 @@ export default function UpdateUser() {
                             gender: userData.gender,
                             disabilities: userData.disabilities,
                             email: userData.email,
-                            location: userData.location,
+                            location: userData.location
                           };
                           updateUser(data);
                         } else {
@@ -305,7 +349,7 @@ export default function UpdateUser() {
           <span className="col1">Geschlecht: </span>
           <span className="col2">
             {!editGender ? (
-              userData.gender
+              genderRender()
             ) : (
               <select
                 defaultValue={userData.gender}
@@ -609,7 +653,7 @@ export default function UpdateUser() {
                           location: userData.location,
                           password: password,
                         };
-                        updateUser(data);
+                        updateUserPassword(data);
                       } else {
                         swal({ title: "Passwort ändern abgebrochen." });
                         setEditPassword(false);
