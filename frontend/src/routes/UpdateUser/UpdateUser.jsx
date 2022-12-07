@@ -37,21 +37,21 @@ export default function UpdateUser() {
     let gender;
     switch (userData.gender) {
       case "female":
-        gender = "weiblich"
+        gender = "weiblich";
         break;
       case "male":
-        gender = "männlich"
+        gender = "männlich";
         break;
       case "diverse":
-        gender = "nicht Binär"
+        gender = "nicht Binär";
         break;
       case "none":
-        gender = "keine Angabe"
+        gender = "keine Angabe";
         break;
     }
 
     return gender;
-  }
+  };
 
   const getUserData = () => {
     const getUserById = async () => {
@@ -212,7 +212,7 @@ export default function UpdateUser() {
                             gender: userData.gender,
                             disabilities: userData.disabilities,
                             email: userData.email,
-                            location: userData.location
+                            location: userData.location,
                           };
                           updateUser(data);
                         } else {

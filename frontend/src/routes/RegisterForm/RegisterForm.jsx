@@ -4,7 +4,7 @@ import axiosConfig from "../../util/axiosConfig.js";
 import { SectionsContext } from "../../context/sectionsContext.js";
 import "./RegisterForm.css";
 import GenderRadioBtn from "../../components/Gender/GenderRadioBtn.jsx";
-import "./RegisterForm.css"
+import "./RegisterForm.css";
 import {
   TextInput,
   MailInput,
@@ -22,7 +22,8 @@ export default function RegisterForm() {
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [hasRegistered, setHasRegistered] = useState(false);
-  const { isAuth, setIsAuth, eventLogin, backToEvent, interestedEvent  } = useContext(SectionsContext);
+  const { isAuth, setIsAuth, eventLogin, backToEvent, interestedEvent } =
+    useContext(SectionsContext);
 
   const [stepOne, setStepOne] = useState(true);
   const [stepTwo, setStepTwo] = useState(false);
@@ -90,17 +91,17 @@ export default function RegisterForm() {
       }
     } catch (error) {
       for (const err of error.response.data.errors) {
-        if (err.msg === "Invalid value" && err.param === "email"){
+        if (err.msg === "Invalid value" && err.param === "email") {
           swal({
-            title:
-              "Tragen Sie eine valide Email Adresse",
-          }); break;
+            title: "Tragen Sie eine valide Email Adresse",
+          });
+          break;
         } else if (err.msg === "Invalid value" && err.param === "password") {
           swal({
-            title:
-              "Passwort ist ein Pflichtfeld! ", text:"Ihr Passwort muss mindestens 8 Zeichen lang sein und eine Zahl, einen Groß- und einen Kleinbuchstaben enthalten."
+            title: "Passwort ist ein Pflichtfeld! ",
+            text: "Ihr Passwort muss mindestens 8 Zeichen lang sein und eine Zahl, einen Groß- und einen Kleinbuchstaben enthalten.",
           });
-        }  else {
+        } else {
           setIsError(true);
           setIsLoading(false);
           setHasRegistered(false);
@@ -147,7 +148,13 @@ export default function RegisterForm() {
               </label>
               <label htmlFor="firstName">
                 <div>
-                  Vorname:<sup id="infoFirstName" hover-text="Pflichtfeld: Ihren Vornamen">*</sup>
+                  Vorname:
+                  <sup
+                    id="infoFirstName"
+                    hover-text="Pflichtfeld: Ihren Vornamen"
+                  >
+                    *
+                  </sup>
                 </div>
                 <TextInput labelValue="firstName" stateFunc={setFirstName} />
               </label>
@@ -170,9 +177,7 @@ export default function RegisterForm() {
         {stepTwo && (
           <div id="stepTwo">
             <div className="gender">
-              <h3>
-                Geschlecht:
-              </h3>
+              <h3>Geschlecht:</h3>
               <div className="radio">
                 <GenderRadioBtn gender="female" props={props} />
                 <GenderRadioBtn gender="male" props={props} />
@@ -181,7 +186,9 @@ export default function RegisterForm() {
               </div>
             </div>
             <div className="disabilities">
-              <label htmlFor="disabilities"><h3>Eventuelle Einschränkung</h3></label>
+              <label htmlFor="disabilities">
+                <h3>Eventuelle Einschränkung</h3>
+              </label>
               <TextInput
                 labelValue="disabilities"
                 stateFunc={setDisabilities}
@@ -221,7 +228,9 @@ export default function RegisterForm() {
         )}
 
         {isAuth && eventLogin && <Navigate to="/event-form" replace={true} />}
-        {isAuth && backToEvent && <Navigate to={`/event/${interestedEvent}`} replace={true} />}
+        {isAuth && backToEvent && (
+          <Navigate to={`/event/${interestedEvent}`} replace={true} />
+        )}
         {isAuth && !eventLogin && !backToEvent && <Navigate to="/profile" />}
         {isLoading ? (
           <p>

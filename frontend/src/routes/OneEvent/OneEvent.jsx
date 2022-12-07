@@ -15,7 +15,8 @@ export default function OneEvent() {
   const { id } = useParams();
   const eventId = id;
 
-  const { navigate, isAuth, setBackToEvent, setInterestedEvent } = useContext(SectionsContext);
+  const { navigate, isAuth, setBackToEvent, setInterestedEvent } =
+    useContext(SectionsContext);
   const [myEvent, setMyEvent] = useState(false);
   const [eventData, setEventData] = useState({});
   const [eventCategories, setEventCategories] = useState(null);
@@ -100,7 +101,7 @@ export default function OneEvent() {
 
   useEffect(() => {
     getEventData();
-    setBackToEvent(false)
+    setBackToEvent(false);
   }, []);
 
   // VA Buchen
@@ -141,8 +142,8 @@ export default function OneEvent() {
           });
         }
       } else {
-        setBackToEvent(true)
-        setInterestedEvent(eventId)
+        setBackToEvent(true);
+        setInterestedEvent(eventId);
         swal({
           title: "Du musst angemeldet sein, um eine Veranstaltung zu buchen.",
           button: "OK",
@@ -240,8 +241,8 @@ export default function OneEvent() {
           button: "OK",
         });
       } else {
-        setBackToEvent(true)
-        setInterestedEvent(eventId)
+        setBackToEvent(true);
+        setInterestedEvent(eventId);
         swal({
           title:
             "Du musst angemeldet sein, um eine Veranstaltung auf die Merkliste zu setzen.",

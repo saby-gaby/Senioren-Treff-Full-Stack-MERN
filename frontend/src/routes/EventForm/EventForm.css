@@ -12,6 +12,10 @@ textarea {
   width: 100%;
 }
 
+input[type="file"] {
+  display: none;
+}
+
 #formWrapper {
   background-color: var(--beige-transparent-color);
   display: flex;
