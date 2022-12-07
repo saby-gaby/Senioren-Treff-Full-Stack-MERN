@@ -12,7 +12,7 @@ export default function Footer() {
     <div className="Copyright">
       <button onClick={handleClick}>Copyright &copy; by us</button>
       {isShown && (
-        <>
+        <div className="footer-team">
           <h2>Our Team</h2>
 
           <div className="Footer">
@@ -33,7 +33,7 @@ export default function Footer() {
               <img src="http://localhost:3000/Dennis.jpeg" alt="" />
             </a>
           </div>
-        </>
+        </div>
       )}
     </div>
   );
