@@ -53,7 +53,6 @@ export default function UpdateUser() {
     setRefreshData(axiosResp.data);
     refreshData ? getUserData() : getUserData();
   };
-
   return (
     <div className="UpdateUser">
       <h1>Benutzerdaten Aktualisieren</h1>
@@ -97,7 +96,15 @@ export default function UpdateUser() {
                             text: userName,
                             icon: "success",
                           }).then(() => {
-                            const data = { userName: userName };
+                            const data = {
+                              userName: userName,
+                              firstName: userData.firstName,
+                              lastName: userData.lastName,
+                              gender: userData.gender,
+                              disabilities: userData.disabilities,
+                              email: userData.email,
+                              location: userData.location,
+                            };
                             updateUser(data);
                           });
                         } else {
@@ -151,7 +158,15 @@ export default function UpdateUser() {
                           text: firstName,
                           icon: "success",
                         }).then(() => {
-                          const data = { firstName: firstName };
+                          const data = {
+                            userName: userData.userName,
+                            firstName: firstName,
+                            lastName: userData.lastName,
+                            gender: userData.gender,
+                            disabilities: userData.disabilities,
+                            email: userData.email,
+                            location: userData.location,
+                          };
                           updateUser(data);
                         });
                       } else {
@@ -204,7 +219,15 @@ export default function UpdateUser() {
                             text: lastName,
                             icon: "success",
                           }).then(() => {
-                            const data = { lastName: lastName };
+                            const data = {
+                              userName: userData.userName,
+                              firstName: userData.firstName,
+                              lastName: lastName,
+                              gender: userData.gender,
+                              disabilities: userData.disabilities,
+                              email: userData.email,
+                              location: userData.location,
+                            };
                             updateUser(data);
                           });
                         } else {
@@ -278,7 +301,15 @@ export default function UpdateUser() {
                             text: genderName,
                             icon: "success",
                           }).then(() => {
-                            const data = { gender: gender };
+                            const data = {
+                              userName: userData.userName,
+                              firstName: userData.firstName,
+                              lastName: userData.lastName,
+                              gender: gender,
+                              disabilities: userData.disabilities,
+                              email: userData.email,
+                              location: userData.location,
+                            };
                             updateUser(data);
                           });
                         } else {
@@ -333,7 +364,15 @@ export default function UpdateUser() {
                             text: disabilities,
                             icon: "success",
                           }).then(() => {
-                            const data = { disabilities: disabilities };
+                            const data = {
+                              userName: userData.userName,
+                              firstName: userData.firstName,
+                              lastName: userData.lastName,
+                              gender: userData.gender,
+                              disabilities: disabilities,
+                              email: userData.email,
+                              location: userData.location,
+                            };
                             updateUser(data);
                           });
                         } else {
@@ -389,7 +428,15 @@ export default function UpdateUser() {
                             text: location,
                             icon: "success",
                           }).then(() => {
-                            const data = { location: location };
+                            const data = {
+                              userName: userData.userName,
+                              firstName: userData.firstName,
+                              lastName: userData.lastName,
+                              gender: userData.gender,
+                              disabilities: userData.disabilities,
+                              email: userData.email,
+                              location: location,
+                            };
                             updateUser(data);
                           });
                           localStorage.setItem(
@@ -447,7 +494,15 @@ export default function UpdateUser() {
                             text: email,
                             icon: "success",
                           }).then(() => {
-                            const data = { email: email };
+                            const data = {
+                              userName: userData.userName,
+                              firstName: userData.firstName,
+                              lastName: userData.lastName,
+                              gender: userData.gender,
+                              disabilities: userData.disabilities,
+                              email: email,
+                              location: userData.location,
+                            };
                             updateUser(data);
                           });
                         } else {
@@ -499,7 +554,16 @@ export default function UpdateUser() {
                           title: "Passwort erfolgreich geändert!!",
                           icon: "success",
                         }).then(() => {
-                          const data = { password: password };
+                          const data = {
+                            userName: userData.userName,
+                            firstName: userData.firstName,
+                            lastName: userData.lastName,
+                            gender: userData.gender,
+                            disabilities: userData.disabilities,
+                            email: userData.email,
+                            location: userData.location,
+                            password: password
+                          };
                           updateUser(data);
                         });
                       } else {
