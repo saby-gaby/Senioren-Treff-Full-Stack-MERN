@@ -70,15 +70,16 @@ export default function UpdateUser() {
                 onChange={(e) => setUserName(e.target.value)}
               />
             )}
-            <span className="col3">
               {!editUserName ? (
                 <EditOutlined
+                  className="edit-icon"
                   onClick={() => {
                     setEditUserName(true);
                   }}
                 />
               ) : (
                 <SaveOutlined
+                  className="save-icon"
                   onClick={() => {
                     setEditUserName(false);
                     if (!userName) {
@@ -109,7 +110,6 @@ export default function UpdateUser() {
                   }}
                 />
               )}
-            </span>
           </span>
         </li>
         <li>
@@ -124,45 +124,46 @@ export default function UpdateUser() {
                 onChange={(e) => setFirstName(e.target.value)}
               />
             )}
-            <span className="col3"></span>
-            {!editFirstName ? (
-              <EditOutlined
-                onClick={() => {
-                  setEditFirstName(true);
-                }}
-              />
-            ) : (
-              <SaveOutlined
-                onClick={() => {
-                  setEditFirstName(false);
-                  if (!firstName) {
-                    swal({ title: "Vorname unverändert!" });
-                  } else {
-                    swal({
-                      title: "Vorname ändern?",
-                      text: firstName,
-                      icon: "warning",
-                      buttons: ["Nein, nicht ändern!", "Ja, ändern!"],
-                      dangerMode: true,
-                    }).then((isConfirm) => {
-                      if (isConfirm) {
-                        swal({
-                          title: "Vorname erfolgreich geändert!!",
-                          text: firstName,
-                          icon: "success",
-                        }).then(() => {
-                          const data = { firstName: firstName };
-                          updateUser(data);
-                        });
-                      } else {
-                        swal({ title: "Vorname ändern abgebrochen." });
-                      }
-                    });
-                  }
-                  getUserData();
-                }}
-              />
-            )}
+              {!editFirstName ? (
+                <EditOutlined
+                  className="edit-icon"
+                  onClick={() => {
+                    setEditFirstName(true);
+                  }}
+                />
+              ) : (
+                <SaveOutlined
+                  className="save-icon"
+                  onClick={() => {
+                    setEditFirstName(false);
+                    if (!firstName) {
+                      swal({ title: "Vorname unverändert!" });
+                    } else {
+                      swal({
+                        title: "Vorname ändern?",
+                        text: firstName,
+                        icon: "warning",
+                        buttons: ["Nein, nicht ändern!", "Ja, ändern!"],
+                        dangerMode: true,
+                      }).then((isConfirm) => {
+                        if (isConfirm) {
+                          swal({
+                            title: "Vorname erfolgreich geändert!!",
+                            text: firstName,
+                            icon: "success",
+                          }).then(() => {
+                            const data = { firstName: firstName };
+                            updateUser(data);
+                          });
+                        } else {
+                          swal({ title: "Vorname ändern abgebrochen." });
+                        }
+                      });
+                    }
+                    getUserData();
+                  }}
+                />
+              )}
           </span>
         </li>
         <li>
@@ -177,15 +178,16 @@ export default function UpdateUser() {
                 onChange={(e) => setLastName(e.target.value)}
               />
             )}
-            <span className="col3">
               {!editLastName ? (
                 <EditOutlined
+                  className="edit-icon"
                   onClick={() => {
                     setEditLastName(true);
                   }}
                 />
               ) : (
                 <SaveOutlined
+                  className="save-icon"
                   onClick={() => {
                     setEditLastName(false);
                     if (!lastName) {
@@ -216,7 +218,6 @@ export default function UpdateUser() {
                   }}
                 />
               )}
-            </span>
           </span>
         </li>
         <li>
@@ -251,15 +252,16 @@ export default function UpdateUser() {
                 <option value="none">keine Angabe</option>
               </select>
             )}
-            <span className="col3">
               {!editGender ? (
                 <EditOutlined
+                  className="edit-icon"
                   onClick={() => {
                     setEditGender(true);
                   }}
                 />
               ) : (
                 <SaveOutlined
+                  className="save-icon"
                   onClick={() => {
                     setEditGender(false);
                     if (!gender) {
@@ -290,7 +292,6 @@ export default function UpdateUser() {
                   }}
                 />
               )}
-            </span>
           </span>
         </li>
         <li>
@@ -306,15 +307,16 @@ export default function UpdateUser() {
                 className="col2"
               />
             )}
-            <span className="col3">
               {!editDisabilities ? (
                 <EditOutlined
+                  className="edit-icon"
                   onClick={() => {
                     setEditDisabilities(true);
                   }}
                 />
               ) : (
                 <SaveOutlined
+                  className="save-icon"
                   onClick={() => {
                     setEditDisabilities(false);
                     if (!disabilities) {
@@ -347,7 +349,6 @@ export default function UpdateUser() {
                   }}
                 />
               )}
-            </span>
           </span>
         </li>
         <li>
@@ -362,15 +363,16 @@ export default function UpdateUser() {
                 onChange={(e) => setLocation(e.target.value)}
               />
             )}
-            <span className="col3">
               {!editLocation ? (
                 <EditOutlined
+                  className="edit-icon"
                   onClick={() => {
                     setEditLocation(true);
                   }}
                 />
               ) : (
                 <SaveOutlined
+                  className="save-icon"
                   onClick={() => {
                     setEditLocation(false);
                     if (!location) {
@@ -405,7 +407,6 @@ export default function UpdateUser() {
                   }}
                 />
               )}
-            </span>
           </span>
         </li>
         <li>
@@ -420,15 +421,16 @@ export default function UpdateUser() {
                 onChange={(e) => setEmail(e.target.value)}
               />
             )}
-            <span className="col3">
               {!editEmail ? (
                 <EditOutlined
+                  className="edit-icon"
                   onClick={() => {
                     setEditEmail(true);
                   }}
                 />
               ) : (
                 <SaveOutlined
+                  className="save-icon"
                   onClick={() => {
                     setEditEmail(false);
                     if (!email) {
@@ -459,30 +461,30 @@ export default function UpdateUser() {
                   }}
                 />
               )}
-            </span>
           </span>
         </li>
         <li>
           <span className="col1">Passwort</span>
-          {!editPassword ? (
-            <button
-              className="button-dark-green col1"
-              onClick={() => {
-                setEditPassword(true);
-              }}
-            >
-              Ändern
-            </button>
-          ) : (
-            <input
-              type="password"
-              className="col1"
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          )}
           <span className="col2">
+            {!editPassword ? (
+              <button
+                className="button-dark-green col1"
+                onClick={() => {
+                  setEditPassword(true);
+                }}
+              >
+                Passwort ändern
+              </button>
+            ) : (
+              <input
+                type="password"
+                className="col1"
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            )}
             {!editPassword ? null : (
               <SaveOutlined
+                className="save-icon"
                 onClick={() => {
                   setEditPassword(false);
                   if (!password) {

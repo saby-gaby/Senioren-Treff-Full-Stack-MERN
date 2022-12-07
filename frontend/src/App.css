@@ -76,12 +76,24 @@ nav img {
 }
 
 main {
-  margin-top: 20vh;
+  margin-top: calc(20vmin + 2rem);
   width: 100%;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
+  header{
+    max-width: 100vw;
+  }
+
   nav img {
     height: 12vmin;
+  }
+
+  .navBtn {
+    padding: 0.25rem 0.5rem;
+  }
+
+  main {
+    margin-top: calc(20vmin + 1rem);
   }
 }

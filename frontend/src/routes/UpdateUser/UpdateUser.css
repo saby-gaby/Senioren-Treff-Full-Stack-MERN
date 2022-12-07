@@ -1,40 +1,156 @@
 .UpdateUser {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
 }
 
 .UpdateUser h1 {
-    font-size: 1.5em;
-    width: 100%;
-    text-align: center;
-    color: var(--beige-color);
-    background-color: var(--dark-transparent-color);
+  font-size: 3rem;
+  width: 100%;
+  text-align: center;
+  color: var(--beige-color);
+  background-color: var(--dark-transparent-color);
 }
 
-.UpdateUser ul{
-    font-size: 1.5rem;
-    list-style-type: none;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    width: 90%;
-    background-color: var(--beige-transparent-color);
-    border-radius: 2rem;
-    padding:1.5rem 0rem 2rem 1rem;
+.UpdateUser ul {
+  font-size: 1.75rem;
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.25rem;
+  width: 90%;
+  background-color: var(--beige-transparent-color);
+  border-radius: 2rem;
+  padding: 1.5rem 0rem 2rem 1rem;
 }
 
 .UpdateUser ul li {
-    width: 100%;
-    display: grid;
-    grid-template-columns: 35% 60%;
-    gap: 1rem;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 35% 60%;
+  gap: 1rem;
 }
 
-.UpdateUser ul li span:last-child{
+.UpdateUser .col2 {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+}
+
+.UpdateUser ul li span .button-dark-green {
+  font-size: 1.75rem;
+  padding: 0.25rem 1rem;
+}
+
+.UpdateUser ul > .button-green {
+  margin: 1.5rem auto 0 auto;
+}
+
+.UpdateUser .col2 input,
+.UpdateUser .col2 select {
+  font-size: 1.75rem;
+  color: var(--dark-green-color);
+  border-radius: 0.5rem;
+  border-color: var(--dark-green-color) var(--middle-green-color)
+    var(--middle-green-color) var(--dark-green-color);
+}
+
+.UpdateUser .col2 select {
+  border-width: 2px;
+  font-family: "Poppins";
+}
+
+.UpdateUser .col2 select option:checked,
+.UpdateUser .col2 select option:hover {
+  background-color: var(--middle-green-color);
+  color: var(--beige-color);
+}
+
+.UpdateUser .col2 input:focus {
+  border: none;
+  outline: 3px solid var(--middle-green-color);
+}
+
+.UpdateUser .save-icon,
+.UpdateUser .edit-icon {
+  color: var(--middle-green-color);
+  text-align: start;
+}
+
+.UpdateUser .save-icon:after {
+  content: "Speichern";
+}
+
+.UpdateUser .edit-icon:after {
+  content: "Ändern";
+}
+
+.UpdateUser .save-icon:after,
+.UpdateUser .edit-icon:after {
+  color: var(--beige-color);
+  text-shadow: 0 0 0.25rem var(--middle-green-color);
+  font-weight: bold;
+  text-align: center;
+  transform: translate(-75%, -1.5rem);
+  z-index: 1;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.UpdateUser .save-icon:hover::after,
+.UpdateUser .edit-icon:hover::after {
+  opacity: 1;
+  visibility: visible;
+}
+
+@media screen and (max-width: 767px) {
+   .UpdateUser h1 {
+    font-size: 2rem;
+  }
+
+  .UpdateUser ul {
+    width: 95%;
+    padding-left: 0.5rem;
+    font-size: 1.25rem;
+    gap: 1.5rem;
+  }
+  .UpdateUser ul li {
+    width: 100%;
     display: flex;
-    justify-content: flex-start;
+    flex-direction: column;
     align-items: center;
-    gap: 1rem;
+    justify-content: center;
+    gap: 0;
+    flex-wrap: wrap;
+    overflow-x: auto;
+      overflow-y: hidden;
+}
+
+  .UpdateUser .col2 span:last-child {
+    width: 1em;
+  }
+
+  .UpdateUser .col2 input,
+  .UpdateUser .col2 select {
+    width: 250px;
+  }
+
+  .UpdateUser .col1{
+    font-weight: bold;
+  }
+}
+
+@media screen and (min-width: 1366px) {
+.UpdateUser h1{
+    font-size: 5rem;
+}
+
+    .UpdateUser ul{
+        width: 900px;
+        font-size: 2rem;
+    }
 }
