@@ -2,6 +2,7 @@ import { createContext, useState } from "react";
 import axiosConfig from "../util/axiosConfig";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
+import swal from "sweetalert";
 
 const SectionsContext = createContext();
 
@@ -23,6 +24,8 @@ const SectionsProvider = ({ children }) => {
   const [eventLogin, setEventLogin] = useState(false);
   const [categoryArray, setCategoryArray] = useState();
   const [userData, setUserData] = useState({});
+  const [backToEvent, setBackToEvent] = useState(false);
+  const [interestedEvent, setInterestedEvent] = useState(null);
 
   const logout = () => {
     localStorage.clear();
@@ -30,6 +33,10 @@ const SectionsProvider = ({ children }) => {
     setEventLogin(false);
     axiosConfig.post("/user/logout").then((res) => {
       console.log(res.data);
+    });
+    swal({
+      title: `Du hast dich erfolgreich abgemeldet`,
+      icon: "success",
     });
     navigate("/login");
   };
@@ -67,7 +74,11 @@ const SectionsProvider = ({ children }) => {
         setCategoryArray,
         userData,
         setUserData,
-        capitalize
+        capitalize,
+        backToEvent,
+        setBackToEvent,
+        interestedEvent,
+        setInterestedEvent
       }}
     >
       {children}
