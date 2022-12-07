@@ -10,6 +10,7 @@ import {
   getUserByUsername,getUserByEmail
 } from "../controller/userController.js";
 import { userValidationSchema } from "../models/userValidationModel.js";
+import { updateUserValidationSchema } from "../models/updateUserValidationSchema.js";
 import { validator } from "../middleware/validator.js";
 import isAuth from "../middleware/is-auth.js";
 
@@ -20,7 +21,7 @@ router
   .route("/user/:id")
   .get(getUserByID)
   .delete(isAuth, deleteUserByID)
-  .patch(isAuth, updateUserByID);
+  .patch(isAuth, updateUserValidationSchema, validator, updateUserByID);
 router.route("/user/login").post(userLogin);
 router.route("/user/logout").post(userLogout);
 router.route("/user/username/:username").get(getUserByUsername);
