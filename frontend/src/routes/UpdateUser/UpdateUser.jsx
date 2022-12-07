@@ -181,9 +181,9 @@ export default function UpdateUser() {
                 onChange={(e) => setUserName(e.target.value)}
               />
             )}
-            <span className="col3">
               {!editUserName ? (
                 <EditOutlined
+                  className="edit-icon"
                   onClick={() => {
                     setEditUserName(true);
                     setEditInputName("Benutzername");
@@ -192,6 +192,7 @@ export default function UpdateUser() {
                 />
               ) : (
                 <SaveOutlined
+                  className="save-icon"
                   onClick={() => {
                     if (!userName) {
                       swal({ title: "Benutzername unverändert!" });
@@ -225,7 +226,6 @@ export default function UpdateUser() {
                   }}
                 />
               )}
-            </span>
           </span>
         </li>
         <li>
@@ -240,7 +240,6 @@ export default function UpdateUser() {
                 onChange={(e) => setFirstName(e.target.value)}
               />
             )}
-            <span className="col3"></span>
             {!editFirstName ? (
               <EditOutlined
                 onClick={() => {
@@ -298,9 +297,9 @@ export default function UpdateUser() {
                 onChange={(e) => setLastName(e.target.value)}
               />
             )}
-            <span className="col3">
               {!editLastName ? (
                 <EditOutlined
+                  className="edit-icon"
                   onClick={() => {
                     setEditLastName(true);
                     setEditInputName("Nachname");
@@ -309,6 +308,7 @@ export default function UpdateUser() {
                 />
               ) : (
                 <SaveOutlined
+                  className="save-icon"
                   onClick={() => {
                     if (!lastName) {
                       swal({ title: "Nachname unverändert!" });
@@ -342,7 +342,6 @@ export default function UpdateUser() {
                   }}
                 />
               )}
-            </span>
           </span>
         </li>
         <li>
@@ -377,9 +376,9 @@ export default function UpdateUser() {
                 <option value="none">keine Angabe</option>
               </select>
             )}
-            <span className="col3">
               {!editGender ? (
                 <EditOutlined
+                  className="edit-icon"
                   onClick={() => {
                     setEditGender(true);
                     setEditInputName("Geschlecht");
@@ -388,6 +387,7 @@ export default function UpdateUser() {
                 />
               ) : (
                 <SaveOutlined
+                  className="save-icon"
                   onClick={() => {
                     if (!gender) {
                       swal({ title: "Geschlecht unverändert!" });
@@ -421,7 +421,6 @@ export default function UpdateUser() {
                   }}
                 />
               )}
-            </span>
           </span>
         </li>
         <li>
@@ -437,9 +436,9 @@ export default function UpdateUser() {
                 className="col2"
               />
             )}
-            <span className="col3">
               {!editDisabilities ? (
                 <EditOutlined
+                  className="edit-icon"
                   onClick={() => {
                     setEditDisabilities(true);
                     setEditInputName("Einschränkungen");
@@ -448,6 +447,7 @@ export default function UpdateUser() {
                 />
               ) : (
                 <SaveOutlined
+                  className="save-icon"
                   onClick={() => {
                     if (!disabilities) {
                       swal({ title: "Einschränkungen unverändert!" });
@@ -483,7 +483,6 @@ export default function UpdateUser() {
                   }}
                 />
               )}
-            </span>
           </span>
         </li>
         <li>
@@ -498,9 +497,9 @@ export default function UpdateUser() {
                 onChange={(e) => setLocation(e.target.value)}
               />
             )}
-            <span className="col3">
               {!editLocation ? (
                 <EditOutlined
+                  className="edit-icon"
                   onClick={() => {
                     setEditLocation(true);
                     setEditInputName("Wohnort");
@@ -509,6 +508,7 @@ export default function UpdateUser() {
                 />
               ) : (
                 <SaveOutlined
+                  className="save-icon"
                   onClick={() => {
                     if (!location) {
                       swal({ title: "Wohnort unverändert!" });
@@ -546,7 +546,6 @@ export default function UpdateUser() {
                   }}
                 />
               )}
-            </span>
           </span>
         </li>
         <li>
@@ -561,9 +560,9 @@ export default function UpdateUser() {
                 onChange={(e) => setEmail(e.target.value)}
               />
             )}
-            <span className="col3">
               {!editEmail ? (
                 <EditOutlined
+                  className="edit-icon"
                   onClick={() => {
                     setEditEmail(true);
                     setEditInputName("Email");
@@ -572,6 +571,7 @@ export default function UpdateUser() {
                 />
               ) : (
                 <SaveOutlined
+                  className="save-icon"
                   onClick={() => {
                     if (!email) {
                       swal({ title: "Email unverändert!" });
@@ -605,11 +605,11 @@ export default function UpdateUser() {
                   }}
                 />
               )}
-            </span>
           </span>
         </li>
         <li>
           <span className="col1">Passwort</span>
+          <span className="col2">
           {!editPassword ? (
             <button
               className="button-dark-green col1"
@@ -619,7 +619,7 @@ export default function UpdateUser() {
                 handleErrorMessage("Passwort");
               }}
             >
-              Ändern
+              Passwort ändern
             </button>
           ) : (
             <input
@@ -628,9 +628,10 @@ export default function UpdateUser() {
               onChange={(e) => setPassword(e.target.value)}
             />
           )}
-          <span className="col2">
+            
             {!editPassword ? null : (
               <SaveOutlined
+                className="save-icon"
                 onClick={() => {
                   if (!password) {
                     swal({ title: "Passwort unverändert!" });

@@ -54,9 +54,10 @@ nav > ul li {
 }
 
 nav img {
-  max-height: 18vmin;
+  height: 18vmin;
   display: flex;
   justify-content: flex-start;
+  transition: height 1s ease-in;
 }
 
 .navBtn {
@@ -69,6 +70,7 @@ nav img {
   padding: 1rem 0.5rem;
   outline: 2px solid #004200;
   border-radius: 0.75rem;
+  transition: font-size 1s ease-in, padding 1s ease-in;
 }
 
 .text {
@@ -76,12 +78,29 @@ nav img {
 }
 
 main {
-  margin-top: 20vh;
+  margin-top: calc(20vmin + 2rem);
   width: 100%;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
+
   nav img {
     height: 12vmin;
+  }
+
+  .navBtn {
+    font-size: 1rem;
+    padding: 0.5rem;
+  }
+
+  main {
+    margin-top: calc(20vmin + 1rem);
+  }
+}
+
+@media screen and (min-width:1024px){
+  header{
+    padding-left: 5rem;
+    padding-right: 5rem;
   }
 }

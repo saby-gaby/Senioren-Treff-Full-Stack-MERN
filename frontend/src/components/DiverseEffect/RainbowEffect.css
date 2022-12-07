@@ -3,7 +3,7 @@
     color: red;
 }
 
-.RainbowEffect text{
+.RainbowEffect span{
     background: linear-gradient(80deg,
     rgba(255, 0, 0, 1) 0%,
     rgba(255, 154, 0, 1) 10%,

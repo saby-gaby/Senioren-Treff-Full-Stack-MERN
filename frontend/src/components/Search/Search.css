@@ -6,8 +6,6 @@
 
 .Search > div {
   width: 80%;
-  min-width: 400px;
-  max-width: 800px;
   background-color: var(--beige-transparent-color);
   padding: 1rem;
   display: flex;
@@ -16,16 +14,19 @@
   gap: 0.5rem;
   border-radius: 1.5rem;
   color: var(--dark-green-color);
+  transition: width 1s ease-in;
 }
 
 .Search h1 {
   max-width: 80%;
   text-align: center;
   font-size: 3rem;
+  transition: font-size 1s ease-in;
 }
 
 .Search p {
   font-size: 2rem;
+  transition: font-size 1s ease-in;
 }
 
 .Search form {
@@ -39,11 +40,15 @@
 .Search form input:first-child {
   height: 3rem;
   width: 100%;
+  max-width: 400px;
   background-color: var(--beige-color);
   border-color: var(--middle-green-color);
   border-radius: 0.75rem;
   font-size: 2rem;
   padding-left: 0.5rem;
+  transition: height 1s ease-in;
+  transition: font-size 1s ease-in;
+  transition: max-width 1s ease-in;
 }
 
 .Search form input:first-child::placeholder {
@@ -56,11 +61,28 @@
   outline: 3px solid var(--middle-green-color);
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:767px) {
   .Search h1{
     font-size: 1.5rem;
   }
+
   .Search p {
     font-size: 1.25rem;
+  }
+
+  .Search form input:first-child {
+    max-width: 250px;
+    height: 2.5rem;
+    font-size: 1.25rem;
+  }
+
+  .Search > div {
+    width: 95%;
+  }
+}
+
+@media screen and (min-width:1024px){
+  .Search > div {
+    width: 900px;
   }
 }

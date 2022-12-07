@@ -101,16 +101,21 @@
 #UserProfile > h2 {
   background-color: var(--dark-transparent-color);
   color: var(--beige-color);
+  text-align: center;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 1rem;
   margin-bottom: 2rem;
+  padding: 0.5rem 0;
+  transition: font-size 1s ease-in;
 }
 
 #UserProfile > h2 > img {
-  height: 10rem;
+  height: 7rem;
+  margin-left: 1rem;
+  transition: height 1s ease-in, margin-left 1s ease-in;
 }
 
 #UserProfile .Search > div {
@@ -168,4 +173,15 @@
 
 #vorletztesDiv {
   margin: 2rem 0;
+}
+
+@media screen and (max-width: 767px) {
+  #UserProfile h2 {
+    font-size: 2rem;
+  }
+  
+  #UserProfile > h2 > img {
+    height: 4rem;
+    margin-left: 0.5rem;
+  }
 }

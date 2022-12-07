@@ -33,6 +33,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  transition: font-size 1s ease-in;
 }
 
 .button-green {
@@ -45,6 +46,9 @@ body {
   border-radius: 1rem;
   text-decoration: none;
   cursor: pointer;
+  transition: font-weight 1s ease-in;
+  transition: font-size 1s ease-in;
+
 }
 
 .button-green:hover {
@@ -62,6 +66,9 @@ body {
   border-radius: 1rem;
   text-decoration: none;
   cursor: pointer;
+  transition: font-weight 1s ease-in;
+  transition: font-size 1s ease-in;
+  transition: padding 1s ease-in;
 }
 
 .button-beige {
@@ -74,6 +81,9 @@ body {
   border-radius: 1rem;
   text-decoration: none;
   cursor: pointer;
+  transition: font-weight 1s ease-in;
+  transition: font-size 1s ease-in;
+  transition: padding 1s ease-in;
 }
 
 .swal-title {
@@ -84,7 +94,12 @@ body {
   background-color: var(--middle-green-color);
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
+
+  body {
+    font-size: 2rem;
+  }
+
   .button-green,
   .button-dark-green,
   .button-beige {
