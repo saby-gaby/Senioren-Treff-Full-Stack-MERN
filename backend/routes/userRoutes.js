@@ -7,7 +7,8 @@ import {
   userLogin,
   userLogout,
   addToWatchList,
-  getUserByUsername,getUserByEmail
+  getUserByUsername,
+  getUserByEmail,
 } from "../controller/userController.js";
 import { userValidationSchema } from "../models/userValidationModel.js";
 import { updateUserValidationSchema } from "../models/updateUserValidationSchema.js";
@@ -21,7 +22,11 @@ router
   .route("/user/:id")
   .get(getUserByID)
   .delete(isAuth, deleteUserByID)
+  .patch(isAuth, updateUserByID);
+router
+  .route("/user/edit/:id")
   .patch(isAuth, updateUserValidationSchema, validator, updateUserByID);
+router.route("/user/password/:id").patch(isAuth, userValidationSchema, validator, updateUserByID);
 router.route("/user/login").post(userLogin);
 router.route("/user/logout").post(userLogout);
 router.route("/user/username/:username").get(getUserByUsername);
