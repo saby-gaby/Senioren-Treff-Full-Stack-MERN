@@ -1,6 +1,7 @@
 .Footer {
   display: flex;
   gap: 2.5rem;
+  transition:  gap 1s ease-in;
 }
 
 .Footer a {
@@ -17,10 +18,12 @@
   display: block;
   height: 2em;
   border-radius: 50%;
+  transition: height 1s ease-in;
 }
 
 .Footer p {
   font-size: 1.5rem;
+  transition: font-size 1s ease-in;
 }
 
 .Copyright {
@@ -82,10 +85,11 @@
 
   .footer-team h2{
     font-size: 2rem;
+    transition: font-size 1s ease-in;
   }
 
   .Footer a > img {
-    height: 1.25em;
+    height: 2em;
   }
 
   .footer-team {
