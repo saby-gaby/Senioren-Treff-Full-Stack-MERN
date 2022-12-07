@@ -40,6 +40,7 @@
   background-color: var(--dark-green-color);
   color: var(--beige-color);
   margin-top: 15rem;
+  position: absolute;
 }
 
 .footer-team {
@@ -51,9 +52,9 @@
 
 @keyframes float-up {
   from {
-    transform: translateY(0%)
+    transform: translateY(100%)
   }
   to{
-    transform: translateY(-120%)
+    transform: translateY(10%)
   }
 }
