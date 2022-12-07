@@ -4,6 +4,7 @@ import { useContext } from "react";
 import { EditOutlined, SaveOutlined } from "@ant-design/icons";
 import axiosConfig from "../../util/axiosConfig";
 import swal from "sweetalert";
+import "./UpdateUser.css";
 
 export default function UpdateUser() {
   const { userData, setUserData, navigate } = useContext(SectionsContext);
@@ -54,431 +55,468 @@ export default function UpdateUser() {
   };
 
   return (
-    <>
+    <div className="UpdateUser">
       <h1>Benutzerdaten Aktualisieren</h1>
       <ul>
         <li>
-          Benutzername:{" "}
-          {!editUserName ? (
-            userData.userName
-          ) : (
-            <input
-              type="text"
-              defaultValue={userData.userName}
-              onChange={(e) => setUserName(e.target.value)}
-            />
-          )}{" "}
-          {!editUserName ? (
-            <EditOutlined
-              onClick={() => {
-                setEditUserName(true);
-              }}
-            />
-          ) : (
-            <SaveOutlined
-              onClick={() => {
-                setEditUserName(false);
-                if (!userName) {
-                  swal({ title: "Benutzername unverändert!" });
-                } else {
-                  swal({
-                    title: "Benutzername ändern?",
-                    text: userName,
-                    icon: "warning",
-                    buttons: ["Nein, nicht ändern!", "Ja, ändern!"],
-                    dangerMode: true,
-                  }).then((isConfirm) => {
-                    if (isConfirm) {
+          <span className="col1">Benutzername: </span>
+          <span className="col2">
+            {!editUserName ? (
+              userData.userName
+            ) : (
+              <input
+                type="text"
+                defaultValue={userData.userName}
+                onChange={(e) => setUserName(e.target.value)}
+              />
+            )}
+            <span className="col3">
+              {!editUserName ? (
+                <EditOutlined
+                  onClick={() => {
+                    setEditUserName(true);
+                  }}
+                />
+              ) : (
+                <SaveOutlined
+                  onClick={() => {
+                    setEditUserName(false);
+                    if (!userName) {
+                      swal({ title: "Benutzername unverändert!" });
+                    } else {
                       swal({
-                        title: "Benutzername erfolgreich geändert!!",
+                        title: "Benutzername ändern?",
                         text: userName,
-                        icon: "success",
-                      }).then(() => {
-                        const data = { userName: userName };
-                        updateUser(data);
+                        icon: "warning",
+                        buttons: ["Nein, nicht ändern!", "Ja, ändern!"],
+                        dangerMode: true,
+                      }).then((isConfirm) => {
+                        if (isConfirm) {
+                          swal({
+                            title: "Benutzername erfolgreich geändert!!",
+                            text: userName,
+                            icon: "success",
+                          }).then(() => {
+                            const data = { userName: userName };
+                            updateUser(data);
+                          });
+                        } else {
+                          swal({ title: "Benutzername ändern abgebrochen." });
+                        }
                       });
-                    } else {
-                      swal({ title: "Benutzername ändern abgebrochen." });
                     }
-                  });
-                }
-                getUserData();
-              }}
-            />
-          )}
+                    getUserData();
+                  }}
+                />
+              )}
+            </span>
+          </span>
         </li>
         <li>
-          Vorname:{" "}
-          {!editFirstName ? (
-            userData.firstName
-          ) : (
-            <input
-              type="text"
-              defaultValue={userData.firstName}
-              onChange={(e) => setFirstName(e.target.value)}
-            />
-          )}{" "}
-          {!editFirstName ? (
-            <EditOutlined
-              onClick={() => {
-                setEditFirstName(true);
-              }}
-            />
-          ) : (
-            <SaveOutlined
-              onClick={() => {
-                setEditFirstName(false);
-                if (!firstName) {
-                  swal({ title: "Vorname unverändert!" });
-                } else {
-                  swal({
-                    title: "Vorname ändern?",
-                    text: firstName,
-                    icon: "warning",
-                    buttons: ["Nein, nicht ändern!", "Ja, ändern!"],
-                    dangerMode: true,
-                  }).then((isConfirm) => {
-                    if (isConfirm) {
-                      swal({
-                        title: "Vorname erfolgreich geändert!!",
-                        text: firstName,
-                        icon: "success",
-                      }).then(() => {
-                        const data = { firstName: firstName };
-                        updateUser(data);
-                      });
-                    } else {
-                      swal({ title: "Vorname ändern abgebrochen." });
-                    }
-                  });
-                }
-                getUserData();
-              }}
-            />
-          )}
+          <span className="col1">Vorname: </span>
+          <span className="col2">
+            {!editFirstName ? (
+              userData.firstName
+            ) : (
+              <input
+                type="text"
+                defaultValue={userData.firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+              />
+            )}
+            <span className="col3"></span>
+            {!editFirstName ? (
+              <EditOutlined
+                onClick={() => {
+                  setEditFirstName(true);
+                }}
+              />
+            ) : (
+              <SaveOutlined
+                onClick={() => {
+                  setEditFirstName(false);
+                  if (!firstName) {
+                    swal({ title: "Vorname unverändert!" });
+                  } else {
+                    swal({
+                      title: "Vorname ändern?",
+                      text: firstName,
+                      icon: "warning",
+                      buttons: ["Nein, nicht ändern!", "Ja, ändern!"],
+                      dangerMode: true,
+                    }).then((isConfirm) => {
+                      if (isConfirm) {
+                        swal({
+                          title: "Vorname erfolgreich geändert!!",
+                          text: firstName,
+                          icon: "success",
+                        }).then(() => {
+                          const data = { firstName: firstName };
+                          updateUser(data);
+                        });
+                      } else {
+                        swal({ title: "Vorname ändern abgebrochen." });
+                      }
+                    });
+                  }
+                  getUserData();
+                }}
+              />
+            )}
+          </span>
         </li>
         <li>
-          Nachname:{" "}
-          {!editLastName ? (
-            userData.lastName
-          ) : (
-            <input
-              type="text"
-              defaultValue={userData.lastName}
-              onChange={(e) => setLastName(e.target.value)}
-            />
-          )}
-          {!editLastName ? (
-            <EditOutlined
-              onClick={() => {
-                setEditLastName(true);
-              }}
-            />
-          ) : (
-            <SaveOutlined
-              onClick={() => {
-                setEditLastName(false);
-                if (!lastName) {
-                  swal({ title: "Nachname unverändert!" });
-                } else {
-                  swal({
-                    title: "Nachname ändern?",
-                    text: lastName,
-                    icon: "warning",
-                    buttons: ["Nein, nicht ändern!", "Ja, ändern!"],
-                    dangerMode: true,
-                  }).then((isConfirm) => {
-                    if (isConfirm) {
+          <span className="col1">Nachname: </span>
+          <span className="col2">
+            {!editLastName ? (
+              userData.lastName
+            ) : (
+              <input
+                type="text"
+                defaultValue={userData.lastName}
+                onChange={(e) => setLastName(e.target.value)}
+              />
+            )}
+            <span className="col3">
+              {!editLastName ? (
+                <EditOutlined
+                  onClick={() => {
+                    setEditLastName(true);
+                  }}
+                />
+              ) : (
+                <SaveOutlined
+                  onClick={() => {
+                    setEditLastName(false);
+                    if (!lastName) {
+                      swal({ title: "Nachname unverändert!" });
+                    } else {
                       swal({
-                        title: "Nachname erfolgreich geändert!!",
+                        title: "Nachname ändern?",
                         text: lastName,
-                        icon: "success",
-                      }).then(() => {
-                        const data = { lastName: lastName };
-                        updateUser(data);
+                        icon: "warning",
+                        buttons: ["Nein, nicht ändern!", "Ja, ändern!"],
+                        dangerMode: true,
+                      }).then((isConfirm) => {
+                        if (isConfirm) {
+                          swal({
+                            title: "Nachname erfolgreich geändert!!",
+                            text: lastName,
+                            icon: "success",
+                          }).then(() => {
+                            const data = { lastName: lastName };
+                            updateUser(data);
+                          });
+                        } else {
+                          swal({ title: "Nachname ändern abgebrochen." });
+                        }
                       });
-                    } else {
-                      swal({ title: "Nachname ändern abgebrochen." });
                     }
-                  });
-                }
-                getUserData();
-              }}
-            />
-          )}
+                    getUserData();
+                  }}
+                />
+              )}
+            </span>
+          </span>
         </li>
         <li>
-          Geschlecht:{" "}
-          {!editGender ? (
-            userData.gender
-          ) : (
-            <select
-              defaultValue={userData.gender}
-              onChange={(e) => {
-                setGender(e.target.value);
-                switch (e.target.value) {
-                  case "female":
-                    setGenderName("Weiblich");
-                    break;
-                  case "male":
-                    setGenderName("Männlich");
-                    break;
-                  case "diverse":
-                    setGenderName("Nicht binär");
-                    break;
-                  default:
-                    setGenderName("keine Angabe");
-                }
-              }}
-            >
-              <option value="">-----</option>
-              <option value="female">Frau</option>
-              <option value="male">Mann</option>
-              <option value="diverse">nicht binär</option>
-              <option value="none">keine Angabe</option>
-            </select>
-          )}{" "}
-          {!editGender ? (
-            <EditOutlined
-              onClick={() => {
-                setEditGender(true);
-              }}
-            />
-          ) : (
-            <SaveOutlined
-              onClick={() => {
-                setEditGender(false);
-                if (!gender) {
-                  swal({ title: "Geschlecht unverändert!" });
-                } else {
-                  swal({
-                    title: "Geschlecht ändern?",
-                    text: genderName,
-                    icon: "warning",
-                    buttons: ["Nein, nicht ändern!", "Ja, ändern!"],
-                    dangerMode: true,
-                  }).then((isConfirm) => {
-                    if (isConfirm) {
+          <span className="col1">Geschlecht: </span>
+          <span className="col2">
+            {!editGender ? (
+              userData.gender
+            ) : (
+              <select
+                defaultValue={userData.gender}
+                onChange={(e) => {
+                  setGender(e.target.value);
+                  switch (e.target.value) {
+                    case "female":
+                      setGenderName("Weiblich");
+                      break;
+                    case "male":
+                      setGenderName("Männlich");
+                      break;
+                    case "diverse":
+                      setGenderName("Nicht binär");
+                      break;
+                    default:
+                      setGenderName("keine Angabe");
+                  }
+                }}
+              >
+                <option value="">-----</option>
+                <option value="female">Frau</option>
+                <option value="male">Mann</option>
+                <option value="diverse">nicht binär</option>
+                <option value="none">keine Angabe</option>
+              </select>
+            )}
+            <span className="col3">
+              {!editGender ? (
+                <EditOutlined
+                  onClick={() => {
+                    setEditGender(true);
+                  }}
+                />
+              ) : (
+                <SaveOutlined
+                  onClick={() => {
+                    setEditGender(false);
+                    if (!gender) {
+                      swal({ title: "Geschlecht unverändert!" });
+                    } else {
                       swal({
-                        title: "Geschlecht erfolgreich geändert!!",
+                        title: "Geschlecht ändern?",
                         text: genderName,
-                        icon: "success",
-                      }).then(() => {
-                        const data = { gender: gender };
-                        updateUser(data);
+                        icon: "warning",
+                        buttons: ["Nein, nicht ändern!", "Ja, ändern!"],
+                        dangerMode: true,
+                      }).then((isConfirm) => {
+                        if (isConfirm) {
+                          swal({
+                            title: "Geschlecht erfolgreich geändert!!",
+                            text: genderName,
+                            icon: "success",
+                          }).then(() => {
+                            const data = { gender: gender };
+                            updateUser(data);
+                          });
+                        } else {
+                          swal({ title: "Geschlecht ändern abgebrochen." });
+                        }
                       });
-                    } else {
-                      swal({ title: "Geschlecht ändern abgebrochen." });
                     }
-                  });
-                }
-                getUserData();
-              }}
-            />
-          )}
+                    getUserData();
+                  }}
+                />
+              )}
+            </span>
+          </span>
         </li>
         <li>
-          Einschränkungen:{" "}
-          {!editDisabilities ? (
-            userData.disabilities
-          ) : (
-            <input
-              type="text"
-              defaultValue={userData.disabilities}
-              onChange={(e) => setDisabilities(e.target.value)}
-            />
-          )}
-          {!editDisabilities ? (
-            <EditOutlined
-              onClick={() => {
-                setEditDisabilities(true);
-              }}
-            />
-          ) : (
-            <SaveOutlined
-              onClick={() => {
-                setEditDisabilities(false);
-                if (!disabilities) {
-                  swal({ title: "Einschränkungen unverändert!" });
-                } else {
-                  swal({
-                    title: "Einschränkungen ändern?",
-                    text: disabilities,
-                    icon: "warning",
-                    buttons: ["Nein, nicht ändern!", "Ja, ändern!"],
-                    dangerMode: true,
-                  }).then((isConfirm) => {
-                    if (isConfirm) {
+          <span className="col1">Einschränkungen: </span>
+          <span className="col2">
+            {!editDisabilities ? (
+              userData.disabilities
+            ) : (
+              <input
+                type="text"
+                defaultValue={userData.disabilities}
+                onChange={(e) => setDisabilities(e.target.value)}
+                className="col2"
+              />
+            )}
+            <span className="col3">
+              {!editDisabilities ? (
+                <EditOutlined
+                  onClick={() => {
+                    setEditDisabilities(true);
+                  }}
+                />
+              ) : (
+                <SaveOutlined
+                  onClick={() => {
+                    setEditDisabilities(false);
+                    if (!disabilities) {
+                      swal({ title: "Einschränkungen unverändert!" });
+                    } else {
                       swal({
-                        title: "Einschränkungen erfolgreich geändert!!",
+                        title: "Einschränkungen ändern?",
                         text: disabilities,
-                        icon: "success",
-                      }).then(() => {
-                        const data = { disabilities: disabilities };
-                        updateUser(data);
+                        icon: "warning",
+                        buttons: ["Nein, nicht ändern!", "Ja, ändern!"],
+                        dangerMode: true,
+                      }).then((isConfirm) => {
+                        if (isConfirm) {
+                          swal({
+                            title: "Einschränkungen erfolgreich geändert!!",
+                            text: disabilities,
+                            icon: "success",
+                          }).then(() => {
+                            const data = { disabilities: disabilities };
+                            updateUser(data);
+                          });
+                        } else {
+                          swal({
+                            title: "Einschränkungen ändern abgebrochen.",
+                          });
+                        }
                       });
-                    } else {
-                      swal({ title: "Einschränkungen ändern abgebrochen." });
                     }
-                  });
-                }
-                getUserData();
-              }}
-            />
-          )}
+                    getUserData();
+                  }}
+                />
+              )}
+            </span>
+          </span>
         </li>
         <li>
-          Wohnort:{" "}
-          {!editLocation ? (
-            userData.location
-          ) : (
-            <input
-              type="text"
-              defaultValue={userData.location}
-              onChange={(e) => setLocation(e.target.value)}
-            />
-          )}
-          {!editLocation ? (
-            <EditOutlined
-              onClick={() => {
-                setEditLocation(true);
-              }}
-            />
-          ) : (
-            <SaveOutlined
-              onClick={() => {
-                setEditLocation(false);
-                if (!location) {
-                  swal({ title: "Wohnort unverändert!" });
-                } else {
-                  swal({
-                    title: "Wohnort ändern?",
-                    text: location,
-                    icon: "warning",
-                    buttons: ["Nein, nicht ändern!", "Ja, ändern!"],
-                    dangerMode: true,
-                  }).then((isConfirm) => {
-                    if (isConfirm) {
+          <span className="col1">Wohnort: </span>
+          <span className="col2">
+            {!editLocation ? (
+              userData.location
+            ) : (
+              <input
+                type="text"
+                defaultValue={userData.location}
+                onChange={(e) => setLocation(e.target.value)}
+              />
+            )}
+            <span className="col3">
+              {!editLocation ? (
+                <EditOutlined
+                  onClick={() => {
+                    setEditLocation(true);
+                  }}
+                />
+              ) : (
+                <SaveOutlined
+                  onClick={() => {
+                    setEditLocation(false);
+                    if (!location) {
+                      swal({ title: "Wohnort unverändert!" });
+                    } else {
                       swal({
-                        title: "Wohnort erfolgreich geändert!!",
+                        title: "Wohnort ändern?",
                         text: location,
-                        icon: "success",
-                      }).then(() => {
-                        const data = { location: location };
-                        updateUser(data);
+                        icon: "warning",
+                        buttons: ["Nein, nicht ändern!", "Ja, ändern!"],
+                        dangerMode: true,
+                      }).then((isConfirm) => {
+                        if (isConfirm) {
+                          swal({
+                            title: "Wohnort erfolgreich geändert!!",
+                            text: location,
+                            icon: "success",
+                          }).then(() => {
+                            const data = { location: location };
+                            updateUser(data);
+                          });
+                          localStorage.setItem(
+                            "defSearch",
+                            location.toLowerCase()
+                          );
+                        } else {
+                          swal({ title: "Wohnort ändern abgebrochen." });
+                        }
                       });
-                      localStorage.setItem("defSearch", location.toLowerCase())
-                    } else {
-                      swal({ title: "Wohnort ändern abgebrochen." });
                     }
-                  });
-                }
-                getUserData();
-              }}
-            />
-          )}
+                    getUserData();
+                  }}
+                />
+              )}
+            </span>
+          </span>
         </li>
         <li>
-          Email:{" "}
-          {!editEmail ? (
-            userData.email
-          ) : (
-            <input
-              type="text"
-              defaultValue={userData.email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          )}{" "}
-          {!editEmail ? (
-            <EditOutlined
-              onClick={() => {
-                setEditEmail(true);
-              }}
-            />
-          ) : (
-            <SaveOutlined
-              onClick={() => {
-                setEditEmail(false);
-                if (!email) {
-                  swal({ title: "Email unverändert!" });
-                } else {
-                  swal({
-                    title: "Email ändern?",
-                    text: email,
-                    icon: "warning",
-                    buttons: ["Nein, nicht ändern!", "Ja, ändern!"],
-                    dangerMode: true,
-                  }).then((isConfirm) => {
-                    if (isConfirm) {
+          <span className="col1">Email: </span>
+          <span className="col2">
+            {!editEmail ? (
+              userData.email
+            ) : (
+              <input
+                type="text"
+                defaultValue={userData.email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            )}
+            <span className="col3">
+              {!editEmail ? (
+                <EditOutlined
+                  onClick={() => {
+                    setEditEmail(true);
+                  }}
+                />
+              ) : (
+                <SaveOutlined
+                  onClick={() => {
+                    setEditEmail(false);
+                    if (!email) {
+                      swal({ title: "Email unverändert!" });
+                    } else {
                       swal({
-                        title: "Email erfolgreich geändert!!",
+                        title: "Email ändern?",
                         text: email,
-                        icon: "success",
-                      }).then(() => {
-                        const data = { email: email };
-                        updateUser(data);
+                        icon: "warning",
+                        buttons: ["Nein, nicht ändern!", "Ja, ändern!"],
+                        dangerMode: true,
+                      }).then((isConfirm) => {
+                        if (isConfirm) {
+                          swal({
+                            title: "Email erfolgreich geändert!!",
+                            text: email,
+                            icon: "success",
+                          }).then(() => {
+                            const data = { email: email };
+                            updateUser(data);
+                          });
+                        } else {
+                          swal({ title: "Email ändern abgebrochen." });
+                        }
                       });
-                    } else {
-                      swal({ title: "Email ändern abgebrochen." });
                     }
-                  });
-                }
-                getUserData();
-              }}
-            />
-          )}
+                    getUserData();
+                  }}
+                />
+              )}
+            </span>
+          </span>
         </li>
         <li>
+          <span className="col1">Passwort</span>
           {!editPassword ? (
             <button
-              className="button-green"
+              className="button-dark-green col1"
               onClick={() => {
                 setEditPassword(true);
               }}
             >
-              Passwort ändern
+              Ändern
             </button>
           ) : (
             <input
               type="password"
+              className="col1"
               onChange={(e) => setPassword(e.target.value)}
             />
           )}
-          {!editPassword ? null : (
-            <SaveOutlined
-              onClick={() => {
-                setEditPassword(false);
-                if (!password) {
-                  swal({ title: "Passwort unverändert!" });
-                } else {
-                  swal({
-                    title: "Passwort ändern?",
-                    icon: "warning",
-                    buttons: ["Nein, nicht ändern!", "Ja, ändern!"],
-                    dangerMode: true,
-                  }).then((isConfirm) => {
-                    if (isConfirm) {
-                      swal({
-                        title: "Passwort erfolgreich geändert!!",
-                        icon: "success",
-                      }).then(() => {
-                        const data = { password: password };
-                        updateUser(data);
-                      });
-                    } else {
-                      swal({ title: "Passwort ändern abgebrochen." });
-                    }
-                  });
-                }
-                getUserData();
-              }}
-            />
-          )}
+          <span className="col2">
+            {!editPassword ? null : (
+              <SaveOutlined
+                onClick={() => {
+                  setEditPassword(false);
+                  if (!password) {
+                    swal({ title: "Passwort unverändert!" });
+                  } else {
+                    swal({
+                      title: "Passwort ändern?",
+                      icon: "warning",
+                      buttons: ["Nein, nicht ändern!", "Ja, ändern!"],
+                      dangerMode: true,
+                    }).then((isConfirm) => {
+                      if (isConfirm) {
+                        swal({
+                          title: "Passwort erfolgreich geändert!!",
+                          icon: "success",
+                        }).then(() => {
+                          const data = { password: password };
+                          updateUser(data);
+                        });
+                      } else {
+                        swal({ title: "Passwort ändern abgebrochen." });
+                      }
+                    });
+                  }
+                  getUserData();
+                }}
+              />
+            )}
+          </span>
         </li>
+        <button onClick={() => navigate("/profile")} className="button-green">
+          Fertig
+        </button>
       </ul>
-      <button onClick={() => navigate("/profile")} className="button-green">
-        Fertig
-      </button>
-    </>
+    </div>
   );
 }
