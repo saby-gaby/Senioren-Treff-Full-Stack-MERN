@@ -28,8 +28,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: absolute;
-  bottom: 0;
 }
 
 .Copyright h2 {
@@ -42,9 +40,6 @@
   background-color: var(--dark-green-color);
   color: var(--beige-color);
   margin-top: 15rem;
-  width: max-content;
-  position: absolute;
-  bottom: 0;
 }
 
 .footer-team {
@@ -56,9 +51,9 @@
 
 @keyframes float-up {
   from {
-    transform: translateY(120%)
+    transform: translateY(0%)
   }
   to{
-    transform: translateY(-2rem)
+    transform: translateY(-120%)
   }
 }
