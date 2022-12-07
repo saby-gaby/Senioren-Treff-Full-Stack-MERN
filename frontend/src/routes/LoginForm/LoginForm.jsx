@@ -7,8 +7,14 @@ import swal from "sweetalert";
 
 function LoginForm() {
   const [isLoading, setIsLoading] = useState(false);
-  const { isAuth, setIsAuth, eventLogin, setStepOne, backToEvent, interestedEvent } =
-    useContext(SectionsContext);
+  const {
+    isAuth,
+    setIsAuth,
+    eventLogin,
+    setStepOne,
+    backToEvent,
+    interestedEvent,
+  } = useContext(SectionsContext);
 
   const formEl = useRef(null);
   const usernameEL = useRef(null);
@@ -64,27 +70,39 @@ function LoginForm() {
 
     formEl.current.reset(); // Alle Felder vom Formular leer machen
   };
-  
+
   return (
     <div className="LoginForm">
       {isAuth && eventLogin && <Navigate to="/event-form" replace={true} />}
-      {isAuth && backToEvent && <Navigate to={`/event/${interestedEvent}`} replace={true} />}
+      {isAuth && backToEvent && (
+        <Navigate to={`/event/${interestedEvent}`} replace={true} />
+      )}
       {isAuth && !eventLogin && !backToEvent ? (
         <Navigate to="/profile" replace={true} />
       ) : (
         <>
           <h2>Anmelden</h2>
           <form ref={formEl} method="post" onSubmit={submitHandler}>
-            <label htmlFor="username">Benutzername:
-            <input type="text" name="username" id="username" ref={usernameEL} placeholder="dein Benutzername" /></label>
-            <label htmlFor="password">Passwort:
-            <input
-              type="password"
-              name="password"
-              id="password"
-              ref={passwordEl}
-              placeholder="dein Passwort"
-            /></label>
+            <label htmlFor="username">
+              Benutzername:
+              <input
+                type="text"
+                name="username"
+                id="username"
+                ref={usernameEL}
+                placeholder="dein Benutzername"
+              />
+            </label>
+            <label htmlFor="password">
+              Passwort:
+              <input
+                type="password"
+                name="password"
+                id="password"
+                ref={passwordEl}
+                placeholder="dein Passwort"
+              />
+            </label>
             <input className="button-green" type="submit" value="Anmelden" />
           </form>
         </>

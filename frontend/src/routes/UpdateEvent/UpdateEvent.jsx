@@ -279,7 +279,7 @@ export default function UpdateEvent() {
                         text: eventLocation,
                         icon: "success",
                       }).then(() => {
-                        const data = { Location: eventLocation };
+                        const data = { location: eventLocation };
                         updateEvent(data);
                         setEditProgress(true);
                       });

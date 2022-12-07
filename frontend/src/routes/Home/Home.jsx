@@ -21,13 +21,14 @@ export default function Home() {
           <NavLink
             to="/login"
             className="button-green"
-              onClick={() => {
-                swal({
-                  title: "Du musst angemeldet sein, um eine Veranstaltung zu erstellen.",
-                  button: "OK",
-                });
-                setEventLogin(true)
-              }}
+            onClick={() => {
+              swal({
+                title:
+                  "Du musst angemeldet sein, um eine Veranstaltung zu erstellen.",
+                button: "OK",
+              });
+              setEventLogin(true);
+            }}
           >
             Erstellen
           </NavLink>

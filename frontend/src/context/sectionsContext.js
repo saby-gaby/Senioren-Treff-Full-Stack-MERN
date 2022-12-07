@@ -78,7 +78,7 @@ const SectionsProvider = ({ children }) => {
         backToEvent,
         setBackToEvent,
         interestedEvent,
-        setInterestedEvent
+        setInterestedEvent,
       }}
     >
       {children}

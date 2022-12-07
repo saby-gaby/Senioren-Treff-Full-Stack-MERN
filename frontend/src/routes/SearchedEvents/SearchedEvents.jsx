@@ -3,6 +3,7 @@ import { SectionsContext } from "../../context/sectionsContext";
 import { NavLink, useParams } from "react-router-dom";
 import CategoryFilter from "../../components/CategoryFilter/CategoryFilter";
 import "./SearchedEvents.css";
+import Search from "../../components/Search/Search";
 
 export default function SearchedEvents() {
   const { searchedLocation } = useParams();

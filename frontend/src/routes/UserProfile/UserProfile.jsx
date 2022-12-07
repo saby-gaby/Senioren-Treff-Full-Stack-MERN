@@ -6,7 +6,6 @@ import Search from "../../components/Search/Search";
 import RainbowEffect from "../../components/DiverseEffect/RainbowEffect";
 import "./UserProfil.css";
 
-
 export default function UserProfil() {
   const { logout, isAuth, userData, setUserData } = useContext(SectionsContext);
 
@@ -54,7 +53,11 @@ export default function UserProfil() {
       <h2>
         {userData.gender === "female" && <img src="oma.svg" />}
         {userData.gender === "male" && <img src="opa.svg" />}Willkommen{" "}
-        {userData.gender==="diverse"?<RainbowEffect name={userData.firstName} />:userData.firstName}
+        {userData.gender === "diverse" ? (
+          <RainbowEffect name={userData.firstName} />
+        ) : (
+          userData.firstName
+        )}
       </h2>
       <div>
         <Search />
