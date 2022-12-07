@@ -78,7 +78,7 @@ export default function EventForm() {
   };
 
   return (
-    <>
+    <div className="EventForm">
       <h1 id="eventFormH1">Veranstaltung erstellen</h1>
       <div id="formWrapper">
         <form
@@ -300,9 +300,9 @@ export default function EventForm() {
               }}
             />
           </label>
-          <input className="button-green" type="submit" value="Erstellen" />
+          <input id="Green-Special" type="submit" value="Erstellen" />
         </form>
       </div>
-    </>
+    </div>
   );
 }
