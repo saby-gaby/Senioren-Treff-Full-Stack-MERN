@@ -11,6 +11,7 @@
   text-align: center;
   color: var(--beige-color);
   background-color: var(--dark-transparent-color);
+  transition: font-size 1s ease-in;
 }
 
 .UpdateUser ul {
@@ -24,6 +25,8 @@
   background-color: var(--beige-transparent-color);
   border-radius: 2rem;
   padding: 1.5rem 0rem 2rem 1rem;
+  transition: width 1s ease-in;
+  transition: font-size 1s ease-in;
 }
 
 .UpdateUser ul li {

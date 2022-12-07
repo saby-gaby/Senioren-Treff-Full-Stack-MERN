@@ -1,10 +1,11 @@
 .RegisterForm h2 {
   font-size: 3rem;
   text-align: center;
-  padding: 0.25rem 0;
+  padding: 0.25rem 1rem;
   margin-bottom: 1.5rem;
   color: var(--beige-color);
   background-color: var(--dark-transparent-color);
+  transition: font-size 1s ease-in;
 }
 
 .RegisterForm form {
@@ -33,10 +34,9 @@
   align-items: center;
   gap: 0.5rem;
   width: 80%;
-  min-width: 400px;
-  max-width: 800px;
   padding: 1.5rem 1rem;
   border-radius: 1.5rem;
+  transition: width 1s ease-in;
 }
 
 #stepTwo {
@@ -53,7 +53,12 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  width: 95%;
+  width: 100%;
+  transition: font-size 1s ease-in, width 1s ease-in, margin-left 1s ease-in;
+}
+
+#stepThree > label {
+  transition: font-size 1s ease-in, width 1s ease-in, margin-left 1s ease-in;
 }
 
 .RegisterForm .disabilities {
@@ -147,31 +152,88 @@
   visibility: visible;
 }
 
+@media screen and (max-width: 767px) {
+  .RegisterForm h2 {
+    font-size: 2.25rem;
+  }
+  
+  #stepOne,
+  #stepTwo,
+  #stepThree {
+    width: 95%;
+  }
+  
+  #stepOne > label,
+  #stepThree > label {
+    font-size: 1.75rem;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 2rem;
+    width: 100%;
+  }
+  
+  #stepOne > label input[type="text"],
+  #stepTwo input[type="text"],
+  #stepThree input[type="password"],
+  #stepThree input[type="email"] {
+    font-size: 1.5rem;
+    margin-top: -0.5rem;
+    width: 90%;
+    transition: font-size 1s ease-in,margin-top 1s ease-in, width 1s ease-in;
+  }
+  
+  
+  #stepTwo .radio {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  #stepTwo .checked {
+    font-size: 1.25rem;
+    transition: font-size 1s ease-in;
+  }
+  
+  #stepTwo h3 {
+    font-size: 2rem;
+    text-align: center;
+    transition: font-size 1s ease-in;
+  }
+  
+  #infoUsername:before,
+  #infoFirstName:before,
+  #infoLastName:before,
+  #infoLocation::before,
+  #infoEmail:before,
+  #infoPsw:before,
+  #infoUsername:after,
+  #infoFirstName:after,
+  #infoLastName:after,
+  #infoLocation:after,
+  #infoEmail:after,
+  #infoPsw:after {
+    transform: translateX(-90px);
+  }
+  
+  .RegisterForm > div:last-child {
+    margin-left: 2.5%;
+    transition: margin-left 1s ease-in;
+  }
+}
+/* 
 @media screen and (min-width: 1000px) {
   .RegisterForm > div:last-child {
     margin-left: calc((100vw - 800px) / 2);
   }
-}
+} */
 
-@media screen and (max-width:767px) {
-
-  #stepOne > label{
-    flex-direction: column;
-    align-items: flex-start;
-    width: max-content;
+@media screen and (min-width:1024px){
+  #stepOne,
+  #stepTwo,
+  #stepThree {
+    width: 900px;
   }
 
-  #stepTwo .radio{
-    display: flex;
-    flex-direction: column;
-  }
-
-  #stepTwo .checked {
-    font-size: 1.25rem;
-  }
-
-  #stepTwo h3 {
-    font-size: 2rem;
-    text-align: center;
+  .RegisterForm > div:last-child{
+    margin-left: calc((100vw - 900px) / 2);
   }
 }
