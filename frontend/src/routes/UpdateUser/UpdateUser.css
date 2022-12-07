@@ -1,0 +1,40 @@
+.UpdateUser {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+}
+
+.UpdateUser h1 {
+    font-size: 1.5em;
+    width: 100%;
+    text-align: center;
+    color: var(--beige-color);
+    background-color: var(--dark-transparent-color);
+}
+
+.UpdateUser ul{
+    font-size: 1.5rem;
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 90%;
+    background-color: var(--beige-transparent-color);
+    border-radius: 2rem;
+    padding:1.5rem 0rem 2rem 1rem;
+}
+
+.UpdateUser ul li {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 35% 60%;
+    gap: 1rem;
+}
+
+.UpdateUser ul li span:last-child{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+}
