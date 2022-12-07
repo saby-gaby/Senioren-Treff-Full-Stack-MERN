@@ -30,29 +30,97 @@ export default function UpdateUser() {
   const [gender, setGender] = useState("");
   const [genderName, setGenderName] = useState("");
 
+  const [editInputName, setEditInputName] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+
   const getUserData = () => {
-    const getUserbyId = async () => {
+    const getUserById = async () => {
       const axiosResp = await axiosConfig.get(
         `http://localhost:6001/user/${userId}`
       );
       const data = axiosResp.data;
       setUserData(data);
     };
-    getUserbyId();
+    getUserById();
   };
 
   useEffect(() => {
     getUserData();
   }, []);
 
-  const updateUser = async (data) => {
-    const axiosResp = await axiosConfig.patch(
-      `/user/${localStorage.getItem("userId")}`,
-      data
-    );
-    setRefreshData(axiosResp.data);
-    refreshData ? getUserData() : getUserData();
+  const handleErrorMessage = (data) => {
+    switch (data) {
+      case "Benutzername":
+        setErrorMessage(
+          "Ihr Benutzername muss zwischen 4 und 20 Zeichen lang sein"
+        );
+        break;
+      case "Email":
+        setErrorMessage("Geben Sie bitte eine gültige Email-Adresse ein");
+        break;
+      case "Passwort":
+        setErrorMessage(
+          "Ihr Passwort muss mindestens 8 Zeichen lang sein und eine Zahl, einen Groß- und einen Kleinbuchstaben enthalten."
+        );
+        break;
+      case "Einschränkungen":
+        setErrorMessage(
+          "Einschränkungen dürfen nicht mehr als 250 Zeichen sein."
+        );
+        break;
+      case "Vorname":
+        setErrorMessage("Bitte geben Sie Ihren Vornamen ein");
+        break;
+      case "Nachname":
+        setErrorMessage("Bitte geben Sie ihren Nachnamen ein");
+        break;
+      case "Wohnort":
+        setErrorMessage("Bitte geben Sie Ihre Stadt ein");
+        break;
+      default:
+        setErrorMessage("");
+        break;
+    }
   };
+
+  const updateUser = async (data) => {
+    try {
+      const axiosResp = await axiosConfig.patch(
+        `/user/${localStorage.getItem("userId")}`,
+        data
+      );
+      setRefreshData(axiosResp.data);
+      swal({
+        title: `${editInputName} erfolgreich geändert!!`,
+        icon: "success",
+      });
+      refreshData ? getUserData() : getUserData();
+      setEditUserName(false);
+      setEditFirstName(false);
+      setEditLastName(false);
+      setEditDisabilities(false);
+      setEditLocation(false);
+      setEditEmail(false);
+      setEditPassword(false);
+      setEditGender(false);
+    } catch (error) {
+      swal({
+        title: "Da ist ein Fehler aufgetreten.",
+        text: errorMessage,
+        icon: "error",
+      });
+      setEditUserName(false);
+      setEditFirstName(false);
+      setEditLastName(false);
+      setEditDisabilities(false);
+      setEditLocation(false);
+      setEditEmail(false);
+      setEditPassword(false);
+      setEditGender(false);
+      console.log(error);
+    }
+  };
+
   return (
     <div className="UpdateUser">
       <h1>Benutzerdaten Aktualisieren</h1>
@@ -74,14 +142,16 @@ export default function UpdateUser() {
                 <EditOutlined
                   onClick={() => {
                     setEditUserName(true);
+                    setEditInputName("Benutzername");
+                    handleErrorMessage("Benutzername");
                   }}
                 />
               ) : (
                 <SaveOutlined
                   onClick={() => {
-                    setEditUserName(false);
                     if (!userName) {
                       swal({ title: "Benutzername unverändert!" });
+                      setEditUserName(false);
                     } else {
                       swal({
                         title: "Benutzername ändern?",
@@ -91,24 +161,19 @@ export default function UpdateUser() {
                         dangerMode: true,
                       }).then((isConfirm) => {
                         if (isConfirm) {
-                          swal({
-                            title: "Benutzername erfolgreich geändert!!",
-                            text: userName,
-                            icon: "success",
-                          }).then(() => {
-                            const data = {
-                              userName: userName,
-                              firstName: userData.firstName,
-                              lastName: userData.lastName,
-                              gender: userData.gender,
-                              disabilities: userData.disabilities,
-                              email: userData.email,
-                              location: userData.location,
-                            };
-                            updateUser(data);
-                          });
+                          const data = {
+                            userName: userName,
+                            firstName: userData.firstName,
+                            lastName: userData.lastName,
+                            gender: userData.gender,
+                            disabilities: userData.disabilities,
+                            email: userData.email,
+                            location: userData.location,
+                          };
+                          updateUser(data);
                         } else {
                           swal({ title: "Benutzername ändern abgebrochen." });
+                          setEditUserName(false);
                         }
                       });
                     }
@@ -136,14 +201,16 @@ export default function UpdateUser() {
               <EditOutlined
                 onClick={() => {
                   setEditFirstName(true);
+                  setEditInputName("Vorname");
+                  handleErrorMessage("Vorname");
                 }}
               />
             ) : (
               <SaveOutlined
                 onClick={() => {
-                  setEditFirstName(false);
                   if (!firstName) {
                     swal({ title: "Vorname unverändert!" });
+                    setEditFirstName(false);
                   } else {
                     swal({
                       title: "Vorname ändern?",
@@ -153,24 +220,19 @@ export default function UpdateUser() {
                       dangerMode: true,
                     }).then((isConfirm) => {
                       if (isConfirm) {
-                        swal({
-                          title: "Vorname erfolgreich geändert!!",
-                          text: firstName,
-                          icon: "success",
-                        }).then(() => {
-                          const data = {
-                            userName: userData.userName,
-                            firstName: firstName,
-                            lastName: userData.lastName,
-                            gender: userData.gender,
-                            disabilities: userData.disabilities,
-                            email: userData.email,
-                            location: userData.location,
-                          };
-                          updateUser(data);
-                        });
+                        const data = {
+                          userName: userData.userName,
+                          firstName: firstName,
+                          lastName: userData.lastName,
+                          gender: userData.gender,
+                          disabilities: userData.disabilities,
+                          email: userData.email,
+                          location: userData.location,
+                        };
+                        updateUser(data);
                       } else {
                         swal({ title: "Vorname ändern abgebrochen." });
+                        setEditFirstName(false);
                       }
                     });
                   }
@@ -197,14 +259,16 @@ export default function UpdateUser() {
                 <EditOutlined
                   onClick={() => {
                     setEditLastName(true);
+                    setEditInputName("Nachname");
+                    handleErrorMessage("Nachname");
                   }}
                 />
               ) : (
                 <SaveOutlined
                   onClick={() => {
-                    setEditLastName(false);
                     if (!lastName) {
                       swal({ title: "Nachname unverändert!" });
+                      setEditLastName(false);
                     } else {
                       swal({
                         title: "Nachname ändern?",
@@ -214,24 +278,19 @@ export default function UpdateUser() {
                         dangerMode: true,
                       }).then((isConfirm) => {
                         if (isConfirm) {
-                          swal({
-                            title: "Nachname erfolgreich geändert!!",
-                            text: lastName,
-                            icon: "success",
-                          }).then(() => {
-                            const data = {
-                              userName: userData.userName,
-                              firstName: userData.firstName,
-                              lastName: lastName,
-                              gender: userData.gender,
-                              disabilities: userData.disabilities,
-                              email: userData.email,
-                              location: userData.location,
-                            };
-                            updateUser(data);
-                          });
+                          const data = {
+                            userName: userData.userName,
+                            firstName: userData.firstName,
+                            lastName: lastName,
+                            gender: userData.gender,
+                            disabilities: userData.disabilities,
+                            email: userData.email,
+                            location: userData.location,
+                          };
+                          updateUser(data);
                         } else {
                           swal({ title: "Nachname ändern abgebrochen." });
+                          setEditLastName(false);
                         }
                       });
                     }
@@ -279,14 +338,16 @@ export default function UpdateUser() {
                 <EditOutlined
                   onClick={() => {
                     setEditGender(true);
+                    setEditInputName("Geschlecht");
+                    handleErrorMessage("Geschlecht");
                   }}
                 />
               ) : (
                 <SaveOutlined
                   onClick={() => {
-                    setEditGender(false);
                     if (!gender) {
                       swal({ title: "Geschlecht unverändert!" });
+                      setEditGender(false);
                     } else {
                       swal({
                         title: "Geschlecht ändern?",
@@ -296,24 +357,19 @@ export default function UpdateUser() {
                         dangerMode: true,
                       }).then((isConfirm) => {
                         if (isConfirm) {
-                          swal({
-                            title: "Geschlecht erfolgreich geändert!!",
-                            text: genderName,
-                            icon: "success",
-                          }).then(() => {
-                            const data = {
-                              userName: userData.userName,
-                              firstName: userData.firstName,
-                              lastName: userData.lastName,
-                              gender: gender,
-                              disabilities: userData.disabilities,
-                              email: userData.email,
-                              location: userData.location,
-                            };
-                            updateUser(data);
-                          });
+                          const data = {
+                            userName: userData.userName,
+                            firstName: userData.firstName,
+                            lastName: userData.lastName,
+                            gender: gender,
+                            disabilities: userData.disabilities,
+                            email: userData.email,
+                            location: userData.location,
+                          };
+                          updateUser(data);
                         } else {
                           swal({ title: "Geschlecht ändern abgebrochen." });
+                          setEditGender(false);
                         }
                       });
                     }
@@ -342,14 +398,16 @@ export default function UpdateUser() {
                 <EditOutlined
                   onClick={() => {
                     setEditDisabilities(true);
+                    setEditInputName("Einschränkungen");
+                    handleErrorMessage("Einschränkungen");
                   }}
                 />
               ) : (
                 <SaveOutlined
                   onClick={() => {
-                    setEditDisabilities(false);
                     if (!disabilities) {
                       swal({ title: "Einschränkungen unverändert!" });
+                      setEditDisabilities(false);
                     } else {
                       swal({
                         title: "Einschränkungen ändern?",
@@ -359,26 +417,21 @@ export default function UpdateUser() {
                         dangerMode: true,
                       }).then((isConfirm) => {
                         if (isConfirm) {
-                          swal({
-                            title: "Einschränkungen erfolgreich geändert!!",
-                            text: disabilities,
-                            icon: "success",
-                          }).then(() => {
-                            const data = {
-                              userName: userData.userName,
-                              firstName: userData.firstName,
-                              lastName: userData.lastName,
-                              gender: userData.gender,
-                              disabilities: disabilities,
-                              email: userData.email,
-                              location: userData.location,
-                            };
-                            updateUser(data);
-                          });
+                          const data = {
+                            userName: userData.userName,
+                            firstName: userData.firstName,
+                            lastName: userData.lastName,
+                            gender: userData.gender,
+                            disabilities: disabilities,
+                            email: userData.email,
+                            location: userData.location,
+                          };
+                          updateUser(data);
                         } else {
                           swal({
                             title: "Einschränkungen ändern abgebrochen.",
                           });
+                          setEditDisabilities(false);
                         }
                       });
                     }
@@ -406,14 +459,16 @@ export default function UpdateUser() {
                 <EditOutlined
                   onClick={() => {
                     setEditLocation(true);
+                    setEditInputName("Wohnort");
+                    handleErrorMessage("Wohnort");
                   }}
                 />
               ) : (
                 <SaveOutlined
                   onClick={() => {
-                    setEditLocation(false);
                     if (!location) {
                       swal({ title: "Wohnort unverändert!" });
+                      setEditLocation(false);
                     } else {
                       swal({
                         title: "Wohnort ändern?",
@@ -423,28 +478,23 @@ export default function UpdateUser() {
                         dangerMode: true,
                       }).then((isConfirm) => {
                         if (isConfirm) {
-                          swal({
-                            title: "Wohnort erfolgreich geändert!!",
-                            text: location,
-                            icon: "success",
-                          }).then(() => {
-                            const data = {
-                              userName: userData.userName,
-                              firstName: userData.firstName,
-                              lastName: userData.lastName,
-                              gender: userData.gender,
-                              disabilities: userData.disabilities,
-                              email: userData.email,
-                              location: location,
-                            };
-                            updateUser(data);
-                          });
+                          const data = {
+                            userName: userData.userName,
+                            firstName: userData.firstName,
+                            lastName: userData.lastName,
+                            gender: userData.gender,
+                            disabilities: userData.disabilities,
+                            email: userData.email,
+                            location: location,
+                          };
+                          updateUser(data);
                           localStorage.setItem(
                             "defSearch",
                             location.toLowerCase()
                           );
                         } else {
                           swal({ title: "Wohnort ändern abgebrochen." });
+                          setEditLocation(false);
                         }
                       });
                     }
@@ -472,14 +522,16 @@ export default function UpdateUser() {
                 <EditOutlined
                   onClick={() => {
                     setEditEmail(true);
+                    setEditInputName("Email");
+                    handleErrorMessage("Email");
                   }}
                 />
               ) : (
                 <SaveOutlined
                   onClick={() => {
-                    setEditEmail(false);
                     if (!email) {
                       swal({ title: "Email unverändert!" });
+                      setEditEmail(false);
                     } else {
                       swal({
                         title: "Email ändern?",
@@ -489,24 +541,19 @@ export default function UpdateUser() {
                         dangerMode: true,
                       }).then((isConfirm) => {
                         if (isConfirm) {
-                          swal({
-                            title: "Email erfolgreich geändert!!",
-                            text: email,
-                            icon: "success",
-                          }).then(() => {
-                            const data = {
-                              userName: userData.userName,
-                              firstName: userData.firstName,
-                              lastName: userData.lastName,
-                              gender: userData.gender,
-                              disabilities: userData.disabilities,
-                              email: email,
-                              location: userData.location,
-                            };
-                            updateUser(data);
-                          });
+                          const data = {
+                            userName: userData.userName,
+                            firstName: userData.firstName,
+                            lastName: userData.lastName,
+                            gender: userData.gender,
+                            disabilities: userData.disabilities,
+                            email: email,
+                            location: userData.location,
+                          };
+                          updateUser(data);
                         } else {
                           swal({ title: "Email ändern abgebrochen." });
+                          setEditEmail(false);
                         }
                       });
                     }
@@ -524,6 +571,8 @@ export default function UpdateUser() {
               className="button-dark-green col1"
               onClick={() => {
                 setEditPassword(true);
+                setEditInputName("Passwort");
+                handleErrorMessage("Passwort");
               }}
             >
               Ändern
@@ -539,9 +588,9 @@ export default function UpdateUser() {
             {!editPassword ? null : (
               <SaveOutlined
                 onClick={() => {
-                  setEditPassword(false);
                   if (!password) {
                     swal({ title: "Passwort unverändert!" });
+                    setEditPassword(false);
                   } else {
                     swal({
                       title: "Passwort ändern?",
@@ -550,24 +599,20 @@ export default function UpdateUser() {
                       dangerMode: true,
                     }).then((isConfirm) => {
                       if (isConfirm) {
-                        swal({
-                          title: "Passwort erfolgreich geändert!!",
-                          icon: "success",
-                        }).then(() => {
-                          const data = {
-                            userName: userData.userName,
-                            firstName: userData.firstName,
-                            lastName: userData.lastName,
-                            gender: userData.gender,
-                            disabilities: userData.disabilities,
-                            email: userData.email,
-                            location: userData.location,
-                            password: password
-                          };
-                          updateUser(data);
-                        });
+                        const data = {
+                          userName: userData.userName,
+                          firstName: userData.firstName,
+                          lastName: userData.lastName,
+                          gender: userData.gender,
+                          disabilities: userData.disabilities,
+                          email: userData.email,
+                          location: userData.location,
+                          password: password,
+                        };
+                        updateUser(data);
                       } else {
                         swal({ title: "Passwort ändern abgebrochen." });
+                        setEditPassword(false);
                       }
                     });
                   }
