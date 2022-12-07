@@ -4,7 +4,7 @@ import "./RainbowEffect.css";
 export default function RainbowEffect({ name }) {
   return (
     <div className="RainbowEffect">
-      <text>{name}</text>
+      <span>{name}</span>
     </div>
   );
 }
