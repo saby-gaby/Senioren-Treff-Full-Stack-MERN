@@ -10,6 +10,7 @@
   flex-direction: column;
   align-items: center;
   width: 700px;
+  transition: width 1s ease-in;
 }
 
 .SearchedEvents h2 {
@@ -21,13 +22,15 @@
   width: 100%;
   border: 2px solid var(--middle-green-color);
   border-bottom: none;
+  transition: font-size 1s ease-in;
 }
 
-.box h3 {
+.SearchedEvents .box h3 {
   font-size: 1.5rem;
   grid-column: 2 / 3;
   grid-row: 1 / 2;
   margin-top: 1.5rem;
+  transition: margin-top 1s ease-in, line-height 1s ease-in;
 }
 
 .box h4 {
@@ -36,16 +39,15 @@
   font-size: 1rem;
 }
 
-.box img {
+.SearchedEvents .box img {
   width: 300px;
-  height: 85%;
-  margin-left: 1rem;
+  height: 100%;
   grid-column: 1 / 2;
   grid-row: 1 / 4;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  margin: 0;
   border-radius: 0.75rem;
   object-fit: cover;
+  transition: width 1s ease-in, height 1s ease-in;
 }
 
 .SearchedEvents ul {
@@ -55,12 +57,13 @@
   gap: 1rem;
   background-color: var(--beige-transparent-color);
   padding-bottom: 1rem;
-  max-height: 700px;
+  max-height: 800px;
   overflow-y: scroll;
   border: 2px solid var(--middle-green-color);
+  transition: max-height 1s ease-in;
 }
 
-.box {
+.SearchedEvents .box {
   position: relative;
   height: 250px;
   width: 95%;
@@ -71,6 +74,8 @@
   margin: 1rem auto;
   box-shadow: 0 0 1rem var(--dark-green-color);
   column-gap: 1rem;
+  padding: 1rem;
+  transition:  padding 1s ease-in, column-gap 1s ease-in, height 1s ease-in, grid-template-columns 1s ease-in;
 }
 
 .box > div {
@@ -100,4 +105,35 @@
 .box > div > .button-green:hover {
   background-color: var(--dark-green-color);
   font-weight: bolder;
+}
+
+@media screen and (max-width: 767px) {
+  .FoundEvents {
+    width: 95%;
+  }
+
+  .SearchedEvents h2 {
+    font-size: 1.75rem;
+  }
+
+  .SearchedEvents .box {
+    padding: 0.5rem;
+    column-gap: 0.25rem;
+    height: 200px;
+    grid-template-columns: 40% 60%;
+  }
+
+  .SearchedEvents .box h3 {
+    margin-top: 0;
+    line-height: 1.75rem;
+  }
+
+  .SearchedEvents .box > img {
+    width: 100% !important;
+    height: 100%;
+  }
+
+  .SearchedEvents ul {
+    max-height: 650px;
+  }
 }
