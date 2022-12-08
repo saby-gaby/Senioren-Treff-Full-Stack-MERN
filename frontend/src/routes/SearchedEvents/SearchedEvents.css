@@ -101,7 +101,7 @@
   transform: rotate(-20deg);
   font-size: 1.5rem;
   font-weight: bold;
-  transition: padding 1s ease-in, bottom 1s ease-in, right 1s ease-in, transform 1s ease-in, font-size 1s ease-in, width 1s ease-in;
+  transition: padding 1s ease-in, bottom 1s ease-in, right 1s ease-in, font-size 1s ease-in, width 1s ease-in;
 }
 
 .box > div > .button-green:hover {
@@ -144,7 +144,6 @@
     width: 100% !important;
     bottom: -30%;
     right: 0% !important;
-    transform: rotate(-20deg) !important;
     font-size: 1rem !important;
   }
 }
