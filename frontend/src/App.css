@@ -29,6 +29,7 @@ header {
   min-width: max-content;
   max-height: 20vmin;
   position: fixed;
+  transition: padding-left 1s ease-in, padding-right 1s ease-in;
 }
 
 nav {
@@ -67,7 +68,7 @@ nav img {
   width: max-content;
   font-size: 1.5rem;
   font-weight: bold;
-  padding: 1rem 0.5rem;
+  padding: 1rem;
   outline: 2px solid #004200;
   border-radius: 0.75rem;
   transition: font-size 1s ease-in, padding 1s ease-in;

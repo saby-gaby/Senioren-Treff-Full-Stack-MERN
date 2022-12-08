@@ -107,6 +107,7 @@ body {
     font-weight: bolder;
   }
 
+  .button-green,
   .button-beige, 
   .button-dark-green {
     padding: 0.25rem 0.5rem;
