@@ -75,7 +75,8 @@
   box-shadow: 0 0 1rem var(--dark-green-color);
   column-gap: 1rem;
   padding: 1rem;
-  transition:  padding 1s ease-in, column-gap 1s ease-in, height 1s ease-in, grid-template-columns 1s ease-in;
+  transition: padding 1s ease-in, column-gap 1s ease-in, height 1s ease-in,
+    grid-template-columns 1s ease-in;
 }
 
 .box > div {
@@ -100,6 +101,7 @@
   transform: rotate(-20deg);
   font-size: 1.5rem;
   font-weight: bold;
+  transition: padding 1s ease-in, bottom 1s ease-in, right 1s ease-in, transform 1s ease-in, font-size 1s ease-in, width 1s ease-in;
 }
 
 .box > div > .button-green:hover {
@@ -135,5 +137,14 @@
 
   .SearchedEvents ul {
     max-height: 650px;
+  }
+
+  .box > .expired {
+    padding: 20px 20px !important;
+    width: 100% !important;
+    bottom: -30%;
+    right: 0% !important;
+    transform: rotate(-20deg) !important;
+    font-size: 1rem !important;
   }
 }
