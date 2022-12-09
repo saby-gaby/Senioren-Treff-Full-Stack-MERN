@@ -255,32 +255,13 @@ export default function OneEvent() {
       console.log(error);
     }
   };
-  const categoryImage = () => {
-    let image;
-    switch (eventData.category) {
-      case "kultur":
-        image = "/images/kultur.jpg";
-        break;
-      case "sport":
-        image = "/images/sport.jpg";
-        break;
-      case "kurse":
-        image = "/images/kurse.jpg";
-        break;
-      case "spiele":
-        image = "/images/Würfel.jpg";
-        break;
-      case "reisen":
-        image = "/images/reisen.jpeg";
-        break;
-      case "natur":
-        image = "/images/natur.jpg";
-        break;
-      default:
-        image = "/images/default-senioren.jpg";
-    }
-    return image;
-  };
+  const [awaitImage, setAwaitImage] = useState(false);
+
+  setTimeout(() => {
+    setAwaitImage(true);
+  }, 1000);
+  console.log(awaitImage);
+
   return (
     <div id="oneEvent">
       <h1>{eventData.eventTitle} </h1>
@@ -294,11 +275,15 @@ export default function OneEvent() {
           alt="image not found"
           onError={({ currentTarget }) => {
             currentTarget.onerror = null;
-            currentTarget.src = `http://localhost:6001${categoryImage()}`;
+            currentTarget.src = `http://localhost:6001/images/default-senioren.jpg`;
           }}
         />
       ) : (
-        <img src={"http://localhost:6001" + categoryImage()} alt="test" />
+        awaitImage ?
+        <img
+          src={"http://localhost:6001/images/default-senioren.jpg"}
+          alt="test"
+        /> : null
       )}
       <div id="eventData">
         <div id="details">
