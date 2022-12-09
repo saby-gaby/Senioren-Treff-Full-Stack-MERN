@@ -81,9 +81,7 @@ export default function UserProfil() {
         </div>
 
         {showMyEvents ? (
-          <div className="RaisedEvents">
-            <div className="ShowEvents">
-              <ul>
+              <ul className="ShowEvents">
                 {userData.myEvents &&
                   userData.myEvents.map((ele, i) => {
                     const categoryImage = () => {
@@ -118,7 +116,7 @@ export default function UserProfil() {
                         <h3>{ele.eventTitle}</h3>
                         {new Date(ele.date) < Date.now() ? (
                           <div className="expired">
-                            Veranstaltung schon vorbei :-/
+                            Veranstaltung schon vorbei
                           </div>
                         ) : null}{" "}
                         {ele.imageUrl ? (
@@ -152,8 +150,6 @@ export default function UserProfil() {
                     );
                   })}
               </ul>
-            </div>
-          </div>
         ) : null}
         <div id="eventbox">
           <h4>Gebuchte Veranstaltungen</h4>
@@ -175,9 +171,7 @@ export default function UserProfil() {
         </div>
 
         {bookedEvents ? (
-          <div className="RaisedEvents">
-            <div className="ShowEvents">
-              <ul>
+              <ul className="ShowEvents">
                 {userData.bookedEvents &&
                   userData.bookedEvents.map((ele, i) => {
                     const categoryImage = () => {
@@ -212,7 +206,7 @@ export default function UserProfil() {
                         <h3>{ele.eventTitle}</h3>
                         {new Date(ele.date) < Date.now() ? (
                           <div className="expired">
-                            Veranstaltung schon vorbei :-/
+                            Veranstaltung schon vorbei
                           </div>
                         ) : null}{" "}
                         {ele.imageUrl ? (
@@ -246,10 +240,7 @@ export default function UserProfil() {
                     );
                   })}
               </ul>
-            </div>
-          </div>
         ) : null}
-
         <div id="eventbox">
           <h4>Meine Merkliste</h4>
           {!watchedEvents ? (
@@ -269,9 +260,7 @@ export default function UserProfil() {
           )}
         </div>
         {watchedEvents ? (
-          <div className="RaisedEvents">
-            <div className="ShowEvents">
-              <ul>
+              <ul className="ShowEvents">
                 {userData.watchedEvents &&
                   userData.watchedEvents.map((ele, i) => {
                     const categoryImage = () => {
@@ -306,7 +295,7 @@ export default function UserProfil() {
                         <h3>{ele.eventTitle}</h3>
                         {new Date(ele.date) < Date.now() ? (
                           <div className="expired">
-                            Veranstaltung schon vorbei :-/
+                            Veranstaltung schon vorbei
                           </div>
                         ) : null}{" "}
                         {ele.imageUrl ? (
@@ -340,8 +329,6 @@ export default function UserProfil() {
                     );
                   })}
               </ul>
-            </div>
-          </div>
         ) : null}
 
         <div id="eventbox">
@@ -403,18 +390,19 @@ export default function UserProfil() {
             </ul>
           </div>
         ) : null}
-      </div>
       <div id="vorletztesDiv">
-        <NavLink to={`/event-form`} className="button-beige ">
-          Eigene Veranstaltung Erstellen
+        <h4>Eigene Veranstaltung Erstellen</h4>
+        <NavLink to={`/event-form`} className="button-green ">
+          Hier
         </NavLink>
       </div>
-
-      <div>
+      <div id="abmelden">
         <button className="button-green" onClick={logout}>
           Abmelden
         </button>
       </div>
+      </div>
+
     </div>
   );
 }

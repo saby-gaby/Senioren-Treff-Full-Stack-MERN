@@ -242,6 +242,7 @@ export default function UpdateUser() {
             )}
             {!editFirstName ? (
               <EditOutlined
+              className="edit-icon"
                 onClick={() => {
                   setEditFirstName(true);
                   setEditInputName("Vorname");
@@ -250,6 +251,7 @@ export default function UpdateUser() {
               />
             ) : (
               <SaveOutlined
+              className="save-icon"
                 onClick={() => {
                   if (!firstName) {
                     swal({ title: "Vorname unverändert!" });

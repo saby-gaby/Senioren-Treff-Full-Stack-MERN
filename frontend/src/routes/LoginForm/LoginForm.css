@@ -18,6 +18,7 @@
 
 .LoginForm > h2:last-of-type {
   margin-top: 5rem;
+  transition: margin-top 1s ease-in;
 }
 
 .LoginForm form,
@@ -27,8 +28,6 @@
   flex-direction: column;
   align-items: center;
   width: 80%;
-  /* min-width: 400px;
-  max-width: 800px; */
   padding: 1.5rem 1rem;
   border-radius: 1.5rem;
   transition: width 1s ease-in;
@@ -84,6 +83,10 @@
 @media screen and (max-width: 767px) {
   .LoginForm > h2 {
     font-size: 2rem;
+  }
+
+  .LoginForm > h2:last-of-type{
+    margin-top: 1.5rem;
   }
 
   .LoginForm form,
