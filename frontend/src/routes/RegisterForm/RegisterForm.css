@@ -219,12 +219,6 @@
     transition: margin-left 1s ease-in;
   }
 }
-/* 
-@media screen and (min-width: 1000px) {
-  .RegisterForm > div:last-child {
-    margin-left: calc((100vw - 800px) / 2);
-  }
-} */
 
 @media screen and (min-width:1024px){
   #stepOne,
