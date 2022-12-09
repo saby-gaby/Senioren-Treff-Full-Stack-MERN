@@ -40,7 +40,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  transition: padding 1s ease-in;
+  transition: padding 1s ease-in, margin-top 1s ease-in;
 }
 
 #abmelden {
@@ -184,6 +184,10 @@
   #eventbox,
   #vorletztesDiv {
     padding: 0.5rem 0.75rem;
+  }
+  
+  #eventbox{
+    margin-top: 1.75rem;
   }
 
   #abmelden {
