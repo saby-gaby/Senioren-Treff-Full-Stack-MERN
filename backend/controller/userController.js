@@ -82,6 +82,19 @@ export const getUserByID = async (req, res) => {
   }
 };
 
+export const getUserInfo = async (req, res) => {
+  try {
+    const getUser = await UserModel.find({userName: req.params.username})
+      .populate("myEvents")
+      .populate("watchedEvents")
+      .populate("bookedEvents");
+
+    res.status(200).send(getUser);
+  } catch (error) {
+    res.status(404).send(error.message);
+  }
+};
+
 export const deleteUserByID = async (req, res) => {
   try {
     const deleteUser = await UserModel.deleteOne({ _id: req.params.id });

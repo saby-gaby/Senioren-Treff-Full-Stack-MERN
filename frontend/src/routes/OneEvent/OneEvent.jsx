@@ -260,7 +260,6 @@ export default function OneEvent() {
   setTimeout(() => {
     setAwaitImage(true);
   }, 1000);
-  console.log(awaitImage);
 
   return (
     <div id="oneEvent">
@@ -289,7 +288,7 @@ export default function OneEvent() {
         <div id="details">
           <div>
             <h5>Veranstaltung von:</h5>
-            <p>@{eventData.eventOwner && eventData.eventOwner.userName} </p>
+            <NavLink to={`/user/${eventData.eventOwner && eventData.eventOwner.userName}`}><p>@{eventData.eventOwner && eventData.eventOwner.userName} </p></NavLink>
           </div>
           <div>
             <p>{eventCategories}</p>
