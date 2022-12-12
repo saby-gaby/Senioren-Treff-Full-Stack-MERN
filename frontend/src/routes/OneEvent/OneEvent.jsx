@@ -15,7 +15,7 @@ export default function OneEvent() {
   const { id } = useParams();
   const eventId = id;
 
-  const { navigate, isAuth, setBackToEvent, setInterestedEvent } =
+  const { navigate, isAuth, setBackToEvent, setInterestedEvent, capitalize } =
     useContext(SectionsContext);
   const [myEvent, setMyEvent] = useState(false);
   const [eventData, setEventData] = useState({});
@@ -23,6 +23,7 @@ export default function OneEvent() {
   const [isBooked, setIsBooked] = useState(false);
   const [isWatched, setIsWatched] = useState(false);
   const [isExpired, setIsExpired] = useState(false);
+  const [capitalisedLocations, setCapitalisedLocations] = useState([]);
 
   const getEventData = () => {
     let subsArr = [];
@@ -37,6 +38,13 @@ export default function OneEvent() {
       data.subscribers.map((ele, i) => {
         subsArr.push(ele._id);
       });
+
+      // Kapitalisieren Location-Array
+      let arr = [];
+      data.location.forEach((loc) => {
+        arr.push(capitalize(loc));
+      });
+      setCapitalisedLocations(arr);
 
       let watchedArr = [];
 
@@ -264,7 +272,7 @@ export default function OneEvent() {
   return (
     <div id="oneEvent">
       <h1>{eventData.eventTitle} </h1>
-      {isExpired ? (
+      {new Date(eventData.date) < Date.now() ? (
         <div className="expired">Veranstaltung schon vorbei</div>
       ) : null}
 
@@ -277,40 +285,49 @@ export default function OneEvent() {
             currentTarget.src = `http://localhost:6001/images/default-senioren.jpg`;
           }}
         />
-      ) : (
-        awaitImage ?
+      ) : awaitImage ? (
         <img
           src={"http://localhost:6001/images/default-senioren.jpg"}
           alt="test"
-        /> : null
-      )}
+        />
+      ) : null}
       <div id="eventData">
-        <div id="details">
-          <div>
-            <h5>Veranstaltung von:</h5>
+        <ul id="details">
+          <li>
+            <h5>Veranstaltung von: </h5>
             <NavLink to={`/user/${eventData.eventOwner && eventData.eventOwner.userName}`}><p>@{eventData.eventOwner && eventData.eventOwner.userName} </p></NavLink>
-          </div>
-          <div>
+          </li>
+          <li>
+            <h5>Kategorie: </h5>
             <p>{eventCategories}</p>
+          </li>
+          <li>
+            <h5>Wo: </h5>
+            <p>{capitalisedLocations.join(", ")}</p>
+          </li>
+          <li>
+            <h5>Wann: </h5>
             <p>
-              {eventData.location}{" "}
-              {new Date(eventData.date).toLocaleDateString()} {eventData.time}{" "}
+              {new Date(eventData.date).toLocaleDateString()} {eventData.time}
               Uhr
             </p>
+          </li>
+          <li>
+            <h5>Preis: </h5>
             <p>{eventData.price} € / pro Person</p>
-            <div>
-              <h5>Teilnehmerzahl: </h5>
-              <p>{eventData.participants}</p>
-            </div>
-          </div>
-        </div>
+          </li>
+          <li>
+            <h5>Verfügbare Plätze: </h5>
+            <p>{eventData.participants}</p>
+          </li>
+        </ul>
         <div id="description">
           <h5>Beschreibung</h5>
           <p>{eventData.description}</p>
         </div>
         <div id="participants">
-          <h5>Teilnehmer:innen</h5>
-          <ul>
+          <h5>Teilnehmer:innen: </h5>
+          <ul id="subscribers">
             {eventData.subscribers &&
               eventData.subscribers.map((ele, i) => {
                 return <li key={i}>{ele.userName}</li>;
@@ -322,14 +339,18 @@ export default function OneEvent() {
         {!isBooked ? (
           <button
             onClick={handleSubscribeEvent}
+            id={isExpired ? "disabled":null}
             className="button-green btnBooked"
+            disabled={isExpired ? true : false}
           >
             Buchen
           </button>
         ) : (
           <button
             onClick={handleUnsubscribe}
+            id={isExpired ? "disabled":null}
             className="button-green btnBooked"
+            disabled={isExpired ? true : false}
           >
             Stornieren
           </button>
@@ -337,11 +358,11 @@ export default function OneEvent() {
         <div>
           {!isWatched ? (
             <button onClick={handleWatchEvent} className="button-beige">
-              auf meine Liste <CheckOutlined />
+              Merken <CheckOutlined />
             </button>
           ) : (
             <button onClick={handleUnwatchEvent} className="button-beige">
-              von Liste streichen <CloseOutlined />
+              Vergessen <CloseOutlined />
             </button>
           )}
 
@@ -351,7 +372,7 @@ export default function OneEvent() {
                 to={`/event-edit/${eventData._id}`}
                 className="button-beige"
               >
-                bearbeiten
+                Bearbeiten
               </NavLink>
               <button onClick={deleteEventById} className="button-beige">
                 Löschen

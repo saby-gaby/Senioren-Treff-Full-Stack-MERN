@@ -23,6 +23,11 @@
   align-items: flex-start;
   gap: 1rem;
   margin-left: 10%;
+  transition: box-shadow 500ms ease-in;
+}
+
+.RegisterForm > div:last-child > .button-beige:hover {
+  box-shadow: 0 0 2rem var(--beige-color);
 }
 
 #stepOne,

@@ -100,7 +100,7 @@
   transition: margin-top 1s ease-in, grid-template-columns 1s ease-in;
 }
 
-.Search form input:last-child {
+#UserProfile .Search form input:last-child {
   padding: 0.4rem;
   transition: max-width 1s ease-in;
 }

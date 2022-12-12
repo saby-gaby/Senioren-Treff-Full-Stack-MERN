@@ -28,7 +28,7 @@ body {
   background-image: url("../public/grün.jpg");
   background-repeat: no-repeat;
   background-position: center;
-  background-size:cover;
+  background-size: cover;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -37,6 +37,7 @@ body {
 }
 
 .button-green {
+  font-family: "Poppins", "Kanit";
   font-size: 2rem;
   padding: 0.75rem 1.5rem;
   background-color: var(--middle-green-color);
@@ -46,9 +47,8 @@ body {
   border-radius: 1rem;
   text-decoration: none;
   cursor: pointer;
-  transition: font-weight 1s ease-in;
-  transition: font-size 1s ease-in;
-
+  transition: font-weight 500ms ease-in, font-size 1s ease-in,
+    padding 1s ease-in, color 500ms ease-in, background-color 500ms ease-in;
 }
 
 .button-green:hover {
@@ -57,6 +57,7 @@ body {
 }
 
 .button-dark-green {
+  font-family: "Poppins", "Kanit";
   font-size: 2rem;
   padding: 0.75rem 1.5rem;
   background-color: var(--dark-green-color);
@@ -66,12 +67,17 @@ body {
   border-radius: 1rem;
   text-decoration: none;
   cursor: pointer;
-  transition: font-weight 1s ease-in;
-  transition: font-size 1s ease-in;
-  transition: padding 1s ease-in;
+  transition: font-weight 500ms ease-in, font-size 1s ease-in,
+    padding 1s ease-in, color 500ms ease-in, background-color 500ms ease-in;
+}
+
+.button-dark-green:hover {
+  background-color: var(--middle-green-color);
+  color: var(--dark-green-color);
 }
 
 .button-beige {
+  font-family: "Poppins", "Kanit";
   font-size: 2rem;
   padding: 0.75rem 1.5rem;
   background-color: var(--beige-color);
@@ -81,21 +87,24 @@ body {
   border-radius: 1rem;
   text-decoration: none;
   cursor: pointer;
-  transition: font-weight 1s ease-in;
-  transition: font-size 1s ease-in;
-  transition: padding 1s ease-in;
+  transition: font-weight 500ms ease-in, font-size 1s ease-in, padding 1s ease-in, color 500ms ease-in, background-color 500ms ease-in;
+}
+
+.button-beige:hover {
+  background-color: var(--dark-green-color);
+    color: var(--beige-color);
 }
 
 .swal-title {
   color: var(--middle-green-color);
 }
 
-.swal-button, .swal-button--confirm{
+.swal-button,
+.swal-button--confirm {
   background-color: var(--middle-green-color);
 }
 
 @media screen and (max-width: 767px) {
-
   body {
     font-size: 2rem;
   }
@@ -103,13 +112,13 @@ body {
   .button-green,
   .button-dark-green,
   .button-beige {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     font-weight: bolder;
   }
 
   .button-green,
-  .button-beige, 
+  .button-beige,
   .button-dark-green {
-    padding: 0.25rem 0.5rem;
+    padding: 0.5rem;
   }
 }

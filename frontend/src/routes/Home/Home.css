@@ -4,13 +4,10 @@
   flex-direction: column;
   align-items: center;
   gap: 2rem;
-  margin-top: 2rem;
 }
 
 .Home > .create {
-  width: 80%;/* 
-  min-width: 400px;
-  max-width: 800px; */
+  width: 80%;
   background-color: var(--beige-transparent-color);
   padding: 1rem;
   display: flex;

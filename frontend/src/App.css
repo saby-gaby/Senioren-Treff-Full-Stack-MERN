@@ -27,8 +27,9 @@ header {
   background-color: #011b1080;
   padding: 0.5rem 1rem;
   min-width: max-content;
-  max-height: 20vmin;
+  max-height: 17vmin;
   position: fixed;
+  z-index: 1;
   transition: padding-left 1s ease-in, padding-right 1s ease-in;
 }
 
@@ -55,10 +56,10 @@ nav > ul li {
 }
 
 nav img {
-  height: 18vmin;
+  height: 15vmin;
   display: flex;
   justify-content: flex-start;
-  transition: height 1s ease-in;
+  transition: height 650ms ease-in;
 }
 
 .navBtn {
@@ -66,12 +67,18 @@ nav img {
   color: #004200;
   background-color: #f4e3d7;
   width: max-content;
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: bold;
   padding: 1rem;
   outline: 2px solid #004200;
   border-radius: 0.75rem;
-  transition: font-size 1s ease-in, padding 1s ease-in;
+  transition: font-size 1s ease-in, padding 1s ease-in, background-color 500ms ease-in, color 500ms ease-in, box-shadow 500ms ease-in;
+}
+
+.navBtn:hover {
+  background-color: var(--middle-green-color);
+  color: var(--beige-color);
+  box-shadow: 0 0 1rem var(--dark-green-color);
 }
 
 .text {
@@ -79,7 +86,7 @@ nav img {
 }
 
 main {
-  margin-top: calc(20vmin + 2rem);
+  margin-top: calc(17vmin + 2rem);
   width: 100%;
 }
 
@@ -90,12 +97,18 @@ main {
   }
 
   .navBtn {
-    font-size: 1rem;
-    padding: 0.5rem;
+    font-size: 1.75rem;
+    padding: 0.25rem 0.5rem;
   }
 
   main {
-    margin-top: calc(20vmin + 1rem);
+    margin-top: calc(12vmin + 2rem);
+  }
+}
+
+@media screen and (max-width: 379px){
+  .navBtn {
+    font-size: 1.5rem;
   }
 }
 
