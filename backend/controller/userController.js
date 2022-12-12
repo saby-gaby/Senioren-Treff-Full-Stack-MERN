@@ -124,6 +124,17 @@ export const updateUserByID = async (req, res) => {
   }
 };
 
+export const addComment = async (req, res) => {
+  try {
+    const getUser = await UserModel.findById(req.params.id);
+    getUser.comments.push(req.body)
+    await getUser.save()
+    res.status(206).send(`user: ${getUser.userName} successfully updated`);
+  } catch (error) {
+    res.status(404).send(error.message);
+  }
+};
+
 export const addToWatchList = async (req, res) => {
   try {
     const passedToken = req.cookies.jwt;

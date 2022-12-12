@@ -313,7 +313,10 @@ export default function OneEvent() {
           <ul>
             {eventData.subscribers &&
               eventData.subscribers.map((ele, i) => {
-                return <li key={i}>{ele.userName}</li>;
+                return <li key={i} onClick={() => {
+                  navigate(`/user/${ele.userName}`);
+                  location.reload();
+                }}>@{ele.userName}</li>;
               })}
           </ul>
         </div>
