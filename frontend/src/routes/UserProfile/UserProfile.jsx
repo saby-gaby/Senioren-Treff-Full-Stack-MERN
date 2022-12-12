@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { SectionsContext } from "../../context/sectionsContext";
 import axiosConfig from "../../util/axiosConfig";
-import Search from "../../components/Search/Search";
+  import Search from "../../components/Search/Search";
 import RainbowEffect from "../../components/DiverseEffect/RainbowEffect";
 import "./UserProfil.css";
 
