@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import axiosInstance from "../../util/axiosConfig";
 import { NavLink } from "react-router-dom";
@@ -6,6 +6,8 @@ import { SectionsContext } from "../../context/sectionsContext";
 import swal from "sweetalert";
 
 export default function Userinfo() {
+  const formEl = useRef()
+
   const [userData, setUserData] = useState({});
   const [comment, setComment] = useState({});
 
@@ -25,6 +27,7 @@ export default function Userinfo() {
   const handleSubmit = async (data) => {
     await axiosInstance.patch(`/user/comment/${userData._id}`, data);
     getUserData();
+    formEl.current.reset()
   };
 
   const deleteComment = async (comment) => {
@@ -124,17 +127,18 @@ export default function Userinfo() {
                   </div>
                 </li>
               );
-            })}
+              
+            })} 
         </ul>
       </div>
 
-      <div>
+      <div id="UserProfile">
         <h3>Kommentare</h3>
         <ul>
           {userData.comments &&
             userData.comments.map((ele, i) => {
               return (
-                <li key={i}>
+                <li key={i} className="box">
                   <p
                     onClick={() => {
                       navigate(`/user/${ele.userName}`);
@@ -158,7 +162,7 @@ export default function Userinfo() {
         </ul>
 
         {isAuth && (
-          <form
+          <form ref={formEl}
             onSubmit={(e) => {
               e.preventDefault();
               const data = {
