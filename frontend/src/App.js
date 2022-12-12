@@ -13,6 +13,7 @@ import Page404 from "./routes/Page404/Page404";
 import UpdateUser from "./routes/UpdateUser/UpdateUser";
 import UpdateEvent from "./routes/UpdateEvent/UpdateEvent";
 import Footer from "./components/Footer/Footer";
+import Userinfo from "./routes/UserInfo/Userinfo";
 import { autoLogout } from "./util/AutoLogout";
 import ScrollToTop from "../src/util/scrollUp";
 
@@ -90,6 +91,7 @@ function App() {
           <Route path="/*" element={<Page404 />} />
           <Route path="/user/edit" element={<UpdateUser />} />
           <Route path="/event-edit/:id" element={<UpdateEvent />} />
+          <Route path="/user/:userName" element={<Userinfo />} />
         </Routes>
       </main>
       <Footer />
