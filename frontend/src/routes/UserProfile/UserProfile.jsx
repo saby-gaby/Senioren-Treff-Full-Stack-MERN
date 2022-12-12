@@ -61,7 +61,7 @@ export default function UserProfil() {
       </h2>
       <div>
         <Search />
-        <div id="eventbox">
+        {userData.myEvents && <div id="eventbox">
           <h4>Eigene Veranstaltungen</h4>
           {!showMyEvents ? (
             <button
@@ -78,7 +78,7 @@ export default function UserProfil() {
               Zuklappen
             </button>
           )}
-        </div>
+        </div>}
 
         {showMyEvents ? (
               <ul className="ShowEvents">

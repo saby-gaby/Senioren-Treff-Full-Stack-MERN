@@ -5,6 +5,8 @@
 }
 
 #UserProfile > h2 {
+  font-size: 1.25em;
+  line-height: 1em;
   background-color: var(--dark-transparent-color);
   color: var(--beige-color);
   text-align: center;
@@ -12,16 +14,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
   margin-bottom: 2rem;
   padding: 0.5rem 1rem;
-  transition: font-size 1s ease-in;
+  transition: font-size 1s ease-in, flex-wrap 1s ease-in, line-height 1s ease-in;
 }
 
 #UserProfile > h2 > img {
   height: 7rem;
-  margin-left: 1rem;
-  transition: height 1s ease-in, margin-left 1s ease-in;
+  margin: 0 1rem;
+  transition: height 1s ease-in, margin 1s ease-in;
 }
 
 #UserProfile > div:first-of-type {
@@ -45,6 +46,7 @@
 
 #abmelden {
   justify-content: center;
+  transition: padding 1s ease-in;
 }
 
 #abmelden > button {
@@ -87,17 +89,21 @@
 }
 
 #UserProfile .box h3 {
-  font-size: 1.5rem;
+  font-size: 2.25rem;
+  line-height: 2.25rem;
+  color: var(--middle-green-color);
   grid-column: 2 / 3;
   grid-row: 1 / 2;
-  margin-top: 1.5rem;
-  transition: margin-top 1s ease-in, line-height 1s ease-in;
+  margin-top: 0.5rem;
+  transition: margin-top 1s ease-in, line-height 1s ease-in, font-size 1s ease-in, line-height 1s ease-in;
 }
 
 #UserProfile .box h4 {
   grid-column: 2 / 3;
   grid-row: 2 / 3;
-  font-size: 1rem;
+  font-size: 1.5rem;
+  line-height: 1.5rem;
+  transition: font-size 1s ease-in, line-height 1s ease-in;
 }
 
 #UserProfile .box img {
@@ -113,11 +119,16 @@
 
 #UserProfile .box > div:last-of-type {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   grid-column: 2 / 3;
   grid-row: 3 / 4;
-  justify-content: center;
+  justify-content: flex-end;
   width: 100%;
+}
+
+#UserProfile .box > div:last-of-type > .button-green{
+  margin-right: 1rem;
+  transition: margin-right 1s ease-in;
 }
 
 #UserProfile .box > .expired {
@@ -139,6 +150,7 @@
 #dataUser {
   width: 100%;
   padding: 0;
+  border: 1px solid var(--middle-green-color);
 }
 
 #dataUser ul {
@@ -155,21 +167,25 @@
   justify-content: space-between;
   padding: 0 2rem 0 2rem;
   font-size: 2rem;
+  transition: font-size 1s ease-in, gap 1s ease-in;
 }
 
 #dataUser ul li:last-child {
   justify-content: center;
   margin-top: 2rem;
-  margin-bottom: 1rem;
+  transition: margin-top 1s ease-in;
 }
 
 #vorletztesDiv > .button-green {
   padding: 0.5rem 3rem;
+  transition: padding 1s ease-in, font-size 1s ease-in;
 }
 
 @media screen and (max-width: 767px) {
   #UserProfile h2 {
     font-size: 2rem;
+    flex-wrap: wrap;
+    line-height: 2.25rem;
   }
 
   #UserProfile > h2 > img {
@@ -204,6 +220,13 @@
     font-size: 1.5rem;
   }
 
+  #eventbox .button-dark-green,
+  #eventbox .button-beige {
+    padding: 0.75rem 1.25rem;
+    font-size: 1.75rem;
+    transition: padding 1s ease-in, font-size 1s ease-in;
+  }
+
   #UserProfile .box {
     padding: 0.5rem;
     column-gap: 0.25rem;
@@ -211,9 +234,20 @@
     grid-template-columns: 40% 60%;
   }
 
+  #UserProfile .box .button-green {
+    font-size: 1.75rem;
+    padding: 0.5rem 1.25rem;
+  }
+
   #UserProfile .box h3 {
+    font-size: 1.75rem;
     margin-top: 0;
     line-height: 1.75rem;
+  }
+
+  #UserProfile .box h4 {
+    font-size: 1.25rem;
+    line-height: 1.25rem;
   }
 
   #UserProfile .box > img {
@@ -224,13 +258,64 @@
     max-height: 450px;
   }
 
+  #UserProfile .box > div:last-of-type > .button-green{
+    margin-right: 0.5rem;
+  }
+
   #UserProfile .box > .expired {
     padding: 0.5rem 1rem;
     top: 30%;
   }
 
   #vorletztesDiv > .button-green {
-    padding: 0.25rem 1.5rem;
+    padding: 0.5rem 2rem;
+    font-size: 1.75rem;
+  }
+
+  #dataUser ul li {
+    font-size: 1.75rem;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+  
+  #dataUser ul li h5 {
+    margin-top: 1.25rem;
+    font-size: 1.75rem;
+    line-height: 2rem;
+    transition: margin-top 1s ease-in, font-size 1s ease-in, line-height 1s ease-in;
+  }
+
+  #dataUser ul li p {
+    text-align: center;
+  }
+
+  #dataUser ul li:first-child,
+  #dataUser ul li:nth-child(6){
+    align-items: flex-start;
+    justify-content: start;
+  }
+  #dataUser ul li:first-child h5,
+  #dataUser ul li:nth-child(6) h5 {
+    width: max-content;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  #dataUser ul li:first-child p,
+  #dataUser ul li:nth-child(6) p {
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  #dataUser ul li:last-child {
+    margin-top: 1rem;
+  }
+
+  #dataUser ul li:last-child .button-green {
+    padding: 0.75rem 1.25rem;
+    font-size: 1.75rem;
+    transition: padding 1s ease-in, font-size 1s ease-in;
   }
 }
 
@@ -243,10 +328,15 @@
   #vorletztesDiv h4 {
     text-align: center;
   }
+
+  #UserProfile .box .button-green {
+    font-size: 1.5rem;
+    padding: 0.5rem 0.75rem;
+  }
 }
 
 @media screen and (min-width: 1024px) {
   #UserProfile > div:first-of-type {
-    width: 800px;
+    width: 900px;
   }
 }

@@ -50,6 +50,9 @@
 
 .UpdateUser ul > .button-green {
   margin: 1.5rem auto 0 auto;
+  font-size: 2.5rem;
+  padding: 0.5rem 1.5rem;
+  transition: font-size 1s ease-in;
 }
 
 .UpdateUser .col2 input,
@@ -144,6 +147,10 @@
 
   .UpdateUser .col1 {
     font-weight: bold;
+  }
+
+  .UpdateUser ul > .button-green {
+    font-size: 2rem;
   }
 }
 

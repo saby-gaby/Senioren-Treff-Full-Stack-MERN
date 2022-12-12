@@ -19,10 +19,18 @@
     background-size: 200% 100%;
     background-clip: text;
     color: transparent;
+    margin-left: 1rem;
     animation: Animation 3s ease infinite alternate;
+    transition: margin-left 1s ease-in;
 }
 
   @keyframes Animation { 
     0%{background-position-x:0%}
     100%{background-position-x:100%}
   }
+
+@media screen and (max-width:767px) {
+  .RainbowEffect span {
+    margin-left: 0.5rem;
+  }
+}
