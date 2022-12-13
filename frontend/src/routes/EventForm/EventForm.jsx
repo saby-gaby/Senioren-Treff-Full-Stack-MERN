@@ -207,7 +207,7 @@ export default function EventForm() {
                     handleChange(e);
                     setSpiele(!spiele);
                   }}
-                />{" "}
+                />
                 Spiele
               </label>
             </div>

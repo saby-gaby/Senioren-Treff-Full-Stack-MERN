@@ -1,0 +1,247 @@
+.UpdateEvent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+  transition: gap 1s ease-in;
+}
+
+.UpdateEvent h1 {
+  font-size: 3rem;
+  width: 100%;
+  text-align: center;
+  color: var(--beige-color);
+  background-color: var(--dark-transparent-color);
+  transition: font-size 1s ease-in;
+}
+
+.UpdateEvent > .editEvent {
+  background-color: var(--beige-transparent-color);
+  width: 90%;
+  border-radius: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.25rem;
+  padding: 1.5rem 1rem 2rem 1rem;
+  transition: width 1s ease-in, border-radius 1s ease-in, padding 1s ease-in;
+}
+
+.UpdateEvent > .editEvent > ul {
+  font-size: 1.75rem;
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.25rem;
+  transition: font-size 1s ease-in;
+}
+
+.UpdateEvent > .editEvent > ul li {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 30% 67%;
+  gap: 1.5%;
+  margin-top: 0.5rem;
+}
+
+.UpdateEvent > .editEvent > div:last-of-type {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.UpdateEvent .col1 {
+  font-weight: bolder;
+}
+
+.UpdateEvent .col2 {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+  position: relative;
+  transition: line-height 1s ease-in, gap 1s ease-in;
+}
+
+.UpdateEvent .col2 input,
+.UpdateEvent .col2 textarea {
+  font-size: 1.75rem;
+  color: var(--dark-green-color);
+  border-radius: 0.5rem;
+  border-color: var(--dark-green-color) var(--middle-green-color)
+    var(--middle-green-color) var(--dark-green-color);
+  transition: width 1s ease-in, font-size 1s ease-in;
+}
+
+.UpdateEvent .col2 textarea {
+  width: 100%;
+  font-family: "Poppins", "Kanit";
+}
+
+.UpdateEvent .col2 textarea:focus {
+  outline: 3px solid var(--middle-green-color);
+}
+
+.UpdateEvent .col2 input:focus {
+  outline: 3px solid var(--middle-green-color);
+}
+
+.UpdateEvent .category {
+  position: relative;
+}
+
+.UpdateEvent fieldset {
+  width: 100%;
+  display: grid;
+  border: none;
+  padding: 2rem 0.5rem 1rem 0.5rem;
+  border-radius: 1rem;
+  box-shadow: inset 0px 0px 0.5rem var(--middle-green-color);
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem 0.5rem;
+  position: relative;
+  top: -0.5rem;
+}
+
+.UpdateEvent fieldset legend {
+  position: relative;
+  top: 1.75rem;
+  left: 0.5rem;
+}
+
+.UpdateEvent input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+}
+
+.UpdateEvent .button-beige,
+.UpdateEvent .button-dark-green {
+  font-size: 1.75rem;
+  padding: 0.5rem 0;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.UpdateEvent .col2 img {
+  width: 100%;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 1rem var(--middle-green-color);
+}
+
+.UpdateEvent ul li:last-of-type .anticon-edit {
+  position: absolute;
+  right: calc(50% - 2.75rem);
+  top: calc(50% - 2.75rem);
+  font-size: 5rem;
+  background-color: var(--beige-transparent-color);
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--middle-green-color);
+}
+
+.UpdateEvent .anticon-save,
+.UpdateEvent .anticon-edit {
+  color: var(--middle-green-color);
+  text-align: start;
+  font-size: 2.25rem;
+  transition: font-size 1s ease-in;
+}
+
+.UpdateEvent .anticon-save:after {
+  content: "Speichern";
+}
+
+.UpdateEvent .anticon-edit:after {
+  content: "Ändern";
+}
+
+.UpdateEvent .anticon-save:after,
+.UpdateEvent .anticon-edit:after {
+  color: var(--beige-color);
+  text-shadow: 0 0 0.25rem var(--middle-green-color);
+  font-weight: bold;
+  transform: translate(-65%, -1rem);
+  position: absolute;
+  z-index: 1;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.UpdateEvent .anticon-save:hover::after,
+.UpdateEvent .anticon-edit:hover::after {
+  opacity: 1;
+  visibility: visible;
+}
+
+@media screen and (max-width: 767px) {
+  .UpdateEvent {
+    gap: 1rem;
+  }
+
+  .UpdateEvent h1 {
+    font-size: 2rem;
+  }
+
+  .UpdateEvent > .editEvent {
+    width: 95%;
+    border-radius: 1rem;
+    padding: 0.5rem 0.5rem 2rem 0.5rem;
+  }
+
+  .UpdateEvent > .editEvent > ul {
+    font-size: 1.5rem;
+  }
+
+  .UpdateEvent > .editEvent > ul li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .UpdateEvent fieldset {
+    grid-template-columns: repeat(2,1fr);
+    gap: 0.5rem 0.25rem;
+  }
+
+  .UpdateEvent .col2 input, 
+  .UpdateEvent .col2 textarea  {
+    width: 80%;
+    font-size: 1.5rem;
+  }
+
+  .UpdateEvent .col2 {
+    text-align: center;
+    line-height: 1.75rem;
+    gap: 0.5rem;
+  }
+
+  .UpdateEvent .description {
+    height: 75px;
+    overflow-y: auto;
+    transition: height 1s ease-in;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .UpdateEvent .editEvent {
+    width: 900px;
+  }
+
+  .UpdateEvent h1 {
+    font-size: 4rem;
+  }
+
+  .UpdateEvent > .editEvent > ul {
+    font-size: 2.25rem;
+  }
+
+  .UpdateEvent .anticon-save,
+  .UpdateEvent .anticon-edit {
+    font-size: 3rem;
+  }
+}
