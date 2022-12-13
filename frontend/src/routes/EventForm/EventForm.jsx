@@ -81,7 +81,6 @@ export default function EventForm() {
     <div className="EventForm">
       <h1>Veranstaltung erstellen</h1>
         <form
-          className="center"
           onSubmit={handleSubmit}
           encType="multipart/form-data"
           id="eventForm"
@@ -98,7 +97,7 @@ export default function EventForm() {
               }}
             />
           </label>
-          <fieldset id="categoryChecks">
+          <fieldset>
             <legend>Veranstaltungs - Kategorien: </legend>
             <div className="checks">
               <label

@@ -45,6 +45,19 @@
   margin-top: 0.5rem;
 }
 
+.UpdateEvent .col2 form {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.UpdateEvent .col2 form .button-beige,
+.UpdateEvent .col2 form .button-green {
+  font-size: 1.75rem;
+  padding: 0.5rem;
+}
+
 .UpdateEvent > .editEvent > div:last-of-type {
   width: 100%;
   display: flex;
@@ -69,6 +82,7 @@
 .UpdateEvent .col2 textarea {
   font-size: 1.75rem;
   color: var(--dark-green-color);
+  background-color: var(--beige-transparent-color);
   border-radius: 0.5rem;
   border-color: var(--dark-green-color) var(--middle-green-color)
     var(--middle-green-color) var(--dark-green-color);
@@ -81,11 +95,18 @@
 }
 
 .UpdateEvent .col2 textarea:focus {
+  background-color: var(--beige-color);
   outline: 3px solid var(--middle-green-color);
 }
 
 .UpdateEvent .col2 input:focus {
+  background-color: var(--beige-color);
   outline: 3px solid var(--middle-green-color);
+}
+
+.UpdateEvent input[type="file"] {
+  position: absolute;
+  visibility: hidden;
 }
 
 .UpdateEvent .category {
@@ -116,8 +137,8 @@
   opacity: 0;
 }
 
-.UpdateEvent .button-beige,
-.UpdateEvent .button-dark-green {
+.UpdateEvent fieldset .button-beige,
+.UpdateEvent fieldset .button-dark-green {
   font-size: 1.75rem;
   padding: 0.5rem 0;
   font-weight: bold;
@@ -178,7 +199,7 @@
   visibility: visible;
 }
 
-.UpdateEvent .button-green {
+.UpdateEvent .editEvent > div .button-green {
   font-size: 2.5rem;
   padding: 0.5rem 1.5rem;
 }

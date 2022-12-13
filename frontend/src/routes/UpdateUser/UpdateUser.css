@@ -63,6 +63,7 @@
   border-radius: 0.5rem;
   border-color: var(--dark-green-color) var(--middle-green-color)
     var(--middle-green-color) var(--dark-green-color);
+    background-color: var(--beige-transparent-color);
 }
 
 .UpdateUser .col2 select {
@@ -76,7 +77,9 @@
   color: var(--beige-color);
 }
 
-.UpdateUser .col2 input:focus {
+.UpdateUser .col2 input:focus,
+.UpdateUser .col2 select:focus {
+  background-color: var(--beige-color);
   outline: 3px solid var(--middle-green-color);
 }
 

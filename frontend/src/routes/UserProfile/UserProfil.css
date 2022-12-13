@@ -85,7 +85,8 @@
   box-shadow: 0 0 1rem var(--dark-green-color);
   column-gap: 1rem;
   padding: 1rem;
-  transition: padding 1s ease-in, column-gap 1s ease-in, height 1s ease-in, grid-template-columns 1s ease-in;
+  transition: padding 1s ease-in, column-gap 1s ease-in, height 1s ease-in,
+    grid-template-columns 1s ease-in;
 }
 
 #UserProfile .box h3 {
@@ -95,7 +96,8 @@
   grid-column: 2 / 3;
   grid-row: 1 / 2;
   margin-top: 0.5rem;
-  transition: margin-top 1s ease-in, line-height 1s ease-in, font-size 1s ease-in, line-height 1s ease-in;
+  transition: margin-top 1s ease-in, line-height 1s ease-in,
+    font-size 1s ease-in, line-height 1s ease-in;
 }
 
 #UserProfile .box h4 {
@@ -126,7 +128,7 @@
   width: 100%;
 }
 
-#UserProfile .box > div:last-of-type > .button-green{
+#UserProfile .box > div:last-of-type > .button-green {
   margin-right: 1rem;
   transition: margin-right 1s ease-in;
 }
@@ -201,8 +203,8 @@
   #vorletztesDiv {
     padding: 0.5rem 0.75rem;
   }
-  
-  #eventbox{
+
+  #eventbox {
     margin-top: 1.75rem;
   }
 
@@ -258,7 +260,7 @@
     max-height: 450px;
   }
 
-  #UserProfile .box > div:last-of-type > .button-green{
+  #UserProfile .box > div:last-of-type > .button-green {
     margin-right: 0.5rem;
   }
 
@@ -278,12 +280,13 @@
     align-items: center;
     gap: 0;
   }
-  
+
   #dataUser ul li h5 {
     margin-top: 1.25rem;
     font-size: 1.75rem;
     line-height: 2rem;
-    transition: margin-top 1s ease-in, font-size 1s ease-in, line-height 1s ease-in;
+    transition: margin-top 1s ease-in, font-size 1s ease-in,
+      line-height 1s ease-in;
   }
 
   #dataUser ul li p {
@@ -291,7 +294,7 @@
   }
 
   #dataUser ul li:first-child,
-  #dataUser ul li:nth-child(6){
+  #dataUser ul li:nth-child(6) {
     align-items: flex-start;
     justify-content: start;
   }
@@ -338,5 +341,24 @@
 @media screen and (min-width: 1024px) {
   #UserProfile > div:first-of-type {
     width: 900px;
+  }
+
+  #eventbox h4,
+  #vorletztesDiv h4 {
+    font-size: 2.5rem;
+  }
+
+  #UserProfile .box h3 {
+    font-size: 2.5rem;
+    line-height: 2.5rem;
+  }
+
+  #UserProfile .box h4 {
+    font-size: 2rem;
+  }
+
+  #dataUser ul li h5,
+  #dataUser ul li {
+    font-size: 2.25rem;
   }
 }
