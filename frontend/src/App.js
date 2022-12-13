@@ -83,6 +83,7 @@ function App() {
           <Route path="/register" element={<RegisterForm />} />
           <Route path="/event-form" element={<EventForm />} />
           <Route path="/event/:id" element={<OneEvent />} />
+          <Route path="/user/:userName" element={<Userinfo />} />
           <Route
             path="/events/:searchedLocation"
             element={<SearchedEvents />}
@@ -91,7 +92,6 @@ function App() {
           <Route path="/*" element={<Page404 />} />
           <Route path="/user/edit" element={<UpdateUser />} />
           <Route path="/event-edit/:id" element={<UpdateEvent />} />
-          <Route path="/user/:userName" element={<Userinfo />} />
         </Routes>
       </main>
       <Footer />

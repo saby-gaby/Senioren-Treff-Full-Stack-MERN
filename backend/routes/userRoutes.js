@@ -9,7 +9,8 @@ import {
   addToWatchList,
   getUserByUsername,
   getUserByEmail,
-  getUserInfo
+  getUserInfo,
+  addComment
 } from "../controller/userController.js";
 import { userValidationSchema } from "../models/userValidationModel.js";
 import { updateUserValidationSchema } from "../models/updateUserValidationSchema.js";
@@ -33,7 +34,7 @@ router.route("/user/logout").post(userLogout);
 router.route("/user/username/:username").get(getUserByUsername);
 router.route("/user/email/:email").get(getUserByEmail);
 router.route("/userinfo/:username").get(getUserInfo);
-
+router.route("/user/comment/:id").patch(isAuth, addComment);
 router.route("/user/watchedEvents/:id").patch(isAuth, addToWatchList);
 
 export default router;
