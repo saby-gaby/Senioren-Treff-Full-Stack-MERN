@@ -64,13 +64,13 @@ nav img {
 
 .navBtn {
   text-decoration: none;
-  color: #004200;
+  color: var(--dark-green-color);
   background-color: #f4e3d7;
   width: max-content;
   font-size: 2rem;
   font-weight: bold;
   padding: 1rem;
-  outline: 2px solid #004200;
+  border: 2px solid var(--dark-green-color);
   border-radius: 0.75rem;
   transition: font-size 1s ease-in, padding 1s ease-in, background-color 500ms ease-in, color 500ms ease-in, box-shadow 500ms ease-in;
 }

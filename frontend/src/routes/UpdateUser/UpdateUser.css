@@ -76,7 +76,6 @@
 }
 
 .UpdateUser .col2 input:focus {
-  border: none;
   outline: 3px solid var(--middle-green-color);
 }
 
@@ -84,6 +83,8 @@
 .UpdateUser .edit-icon {
   color: var(--middle-green-color);
   text-align: start;
+  font-size: 2.25rem;
+  transition: font-size 1s ease-in;
 }
 
 .UpdateUser .save-icon:after {
@@ -121,7 +122,7 @@
   .UpdateUser ul {
     width: 95%;
     padding-left: 0.5rem;
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     gap: 1.5rem;
   }
   .UpdateUser ul li {
@@ -163,4 +164,9 @@
     width: 900px;
     font-size: 2rem;
   }
+
+  .UpdateUser .save-icon,
+.UpdateUser .edit-icon {
+  font-size: 3rem;
+}
 }
