@@ -178,6 +178,11 @@
   visibility: visible;
 }
 
+.UpdateEvent .button-green {
+  font-size: 2.5rem;
+  padding: 0.5rem 1.5rem;
+}
+
 @media screen and (max-width: 767px) {
   .UpdateEvent {
     gap: 1rem;
@@ -204,12 +209,12 @@
   }
 
   .UpdateEvent fieldset {
-    grid-template-columns: repeat(2,1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 0.5rem 0.25rem;
   }
 
-  .UpdateEvent .col2 input, 
-  .UpdateEvent .col2 textarea  {
+  .UpdateEvent .col2 input,
+  .UpdateEvent .col2 textarea {
     width: 80%;
     font-size: 1.5rem;
   }
@@ -224,6 +229,10 @@
     height: 75px;
     overflow-y: auto;
     transition: height 1s ease-in;
+  }
+
+  .UpdateEvent .button-green {
+    font-size: 2rem;
   }
 }
 
