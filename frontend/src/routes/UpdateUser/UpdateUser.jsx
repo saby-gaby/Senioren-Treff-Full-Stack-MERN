@@ -173,7 +173,7 @@ export default function UpdateUser() {
           <span className="col1">Benutzername: </span>
           <span className="col2">
             {!editUserName ? (
-              userData.userName
+              <span>{userData.userName}</span>
             ) : (
               <input
                 type="text"
@@ -232,7 +232,7 @@ export default function UpdateUser() {
           <span className="col1">Vorname: </span>
           <span className="col2">
             {!editFirstName ? (
-              userData.firstName
+              <span>{userData.firstName}</span>
             ) : (
               <input
                 type="text"
@@ -291,7 +291,7 @@ export default function UpdateUser() {
           <span className="col1">Nachname: </span>
           <span className="col2">
             {!editLastName ? (
-              userData.lastName
+              <span>{userData.lastName}</span>
             ) : (
               <input
                 type="text"
@@ -350,7 +350,7 @@ export default function UpdateUser() {
           <span className="col1">Geschlecht: </span>
           <span className="col2">
             {!editGender ? (
-              genderRender()
+              <span>{genderRender()}</span>
             ) : (
               <select
                 defaultValue={userData.gender}
@@ -429,7 +429,7 @@ export default function UpdateUser() {
           <span className="col1">Einschränkungen: </span>
           <span className="col2">
             {!editDisabilities ? (
-              userData.disabilities
+              <span>{userData.disabilities}</span>
             ) : (
               <input
                 type="text"
@@ -491,7 +491,7 @@ export default function UpdateUser() {
           <span className="col1">Wohnort: </span>
           <span className="col2">
             {!editLocation ? (
-              userData.location
+              <span>{userData.location}</span>
             ) : (
               <input
                 type="text"
@@ -554,7 +554,7 @@ export default function UpdateUser() {
           <span className="col1">Email: </span>
           <span className="col2">
             {!editEmail ? (
-              userData.email
+              <span>{userData.email}</span>
             ) : (
               <input
                 type="text"
