@@ -56,7 +56,6 @@
 
 .LoginForm form label > input:focus {
   background-color: var(--beige-color);
-  border: none;
   outline: 3px solid var(--middle-green-color);
 }
 

@@ -113,12 +113,6 @@ body {
   .button-dark-green,
   .button-beige {
     font-size: 1.5rem;
-    font-weight: bolder;
-  }
-
-  .button-green,
-  .button-beige,
-  .button-dark-green {
     padding: 0.5rem;
   }
 }

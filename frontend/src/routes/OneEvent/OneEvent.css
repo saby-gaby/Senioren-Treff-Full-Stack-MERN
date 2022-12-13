@@ -45,6 +45,14 @@
   gap: 1rem;
 }
 
+#oneEvent #details > li:first-child a {
+  text-decoration: none;
+}
+
+#oneEvent #details > li:first-child a p {
+  color: var(--middle-green-color);
+}
+
 #oneEvent #details > li {
   margin-top: 0.5rem;
 }
