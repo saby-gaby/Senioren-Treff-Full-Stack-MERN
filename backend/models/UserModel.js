@@ -62,6 +62,7 @@ const userSchema = new Schema({
       ref: "event",
     },
   ],
+  comments: [{}],
 });
 
 userSchema.pre(["save"], function (next) {
