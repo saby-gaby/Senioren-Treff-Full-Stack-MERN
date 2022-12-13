@@ -22,7 +22,7 @@ export default function UpdateEvent() {
 
   const [eventTitle, setEventTitle] = useState("");
   const [eventCategory, setEventCategory] = useState({ categories: [] });
-  const [eventLocation, setEventLocation] = useState("");
+  const [eventLocation, setEventLocation] = useState([]);
   const [eventDate, setEventDate] = useState("");
   const [eventTime, setEventTime] = useState("");
   const [eventPrice, setEventPrice] = useState("");
@@ -60,7 +60,7 @@ export default function UpdateEvent() {
 
       // Kapitalisieren Location-Array
       let arr = [];
-      data.location.forEach((loc) => {
+      data.location.map((loc) => {
         arr.push(capitalize(loc));
       });
       setCapitalisedLocations(arr);
@@ -318,7 +318,14 @@ export default function UpdateEvent() {
                 <input
                   type="text"
                   defaultValue={eventData.location}
-                  onChange={(e) => setEventLocation(e.target.value)}
+                    onChange={(e) => {
+                      const locationArr = e.target.value.split(",")
+                      let arr = []
+                      locationArr.map(ele => {
+                        arr.push(ele.trim())
+                      })
+                      setEventLocation(arr)
+                    }}
                   id=""
                 />
               )}
@@ -332,7 +339,7 @@ export default function UpdateEvent() {
                     } else {
                       swal({
                         title: "Ort ändern?",
-                        text: eventLocation,
+                        // text: eventLocation,
                         icon: "warning",
                         buttons: ["Nein, nicht ändern!", "Ja, ändern!"],
                         dangerMode: true,
@@ -340,7 +347,7 @@ export default function UpdateEvent() {
                         if (isConfirm) {
                           swal({
                             title: "Ort erfolgreich geändert!!",
-                            text: eventLocation,
+                            // text: eventLocation,
                             icon: "success",
                           }).then(() => {
                             const data = { location: eventLocation };
