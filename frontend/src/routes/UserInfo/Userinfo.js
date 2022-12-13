@@ -22,7 +22,7 @@ export default function Userinfo() {
 
   useEffect(() => {
     getUserData();
-  }, []);
+  }, [userName]);
 
   const handleSubmit = async (data) => {
     await axiosInstance.patch(`/user/comment/${userData._id}`, data);
@@ -142,7 +142,6 @@ export default function Userinfo() {
                   <p
                     onClick={() => {
                       navigate(`/user/${ele.userName}`);
-                      location.reload();
                     }}
                   >
                     @{ele.userName}
