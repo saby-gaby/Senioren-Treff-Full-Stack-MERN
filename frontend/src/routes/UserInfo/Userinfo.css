@@ -1,0 +1,228 @@
+#Userinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+#Userinfo > h2,
+#Userinfo #Comments h3 {
+  font-size: 3rem;
+  line-height: 1em;
+  background-color: var(--dark-transparent-color);
+  color: var(--beige-color);
+  text-align: center;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+}
+
+#Userinfo #Comments h3 {
+  border-bottom: 1px solid var(--beige-transparent-color);
+}
+
+#Userinfo .ShowEvents {
+  list-style-type: none;
+  width: 90%;
+  max-height: 600px;
+  background-color: var(--beige-transparent-color);
+  padding: 1rem;
+  border-radius: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+#Userinfo .box {
+  position: relative;
+  height: 250px;
+  width: 95%;
+  border-radius: 1rem;
+  background-color: var(--beige-transparent-color);
+  display: grid;
+  grid-template-columns: 50% 50%;
+  column-gap: 1rem;
+  margin: 1rem auto;
+  box-shadow: 0 0 1rem var(--dark-green-color);
+  padding: 1rem;
+}
+
+#Userinfo .box .expired {
+  grid-column: 1 / 3;
+  position: absolute;
+  padding: 2rem;
+  top: 30%;
+  left: 20%;
+  text-align: center;
+  background-color: var(--dark-transparent-color);
+  color: var(--beige-color);
+  font-size: 1.5rem;
+  font-weight: bold;
+  border-radius: 1rem;
+  transform: rotate(-20deg);
+  transition: padding 1s ease-in, top 1s ease-in;
+}
+
+#Userinfo .box h3 {
+  font-size: 2.25rem;
+  line-height: 2.25rem;
+  color: var(--middle-green-color);
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+  margin-top: 0.5rem;
+}
+
+#Userinfo .box h4 {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+  font-size: 1.5rem;
+  line-height: 1.5rem;
+}
+
+#Userinfo .box img {
+  width: 100%;
+  height: calc(250px - 2rem);
+  grid-column: 1 / 2;
+  grid-row: 1 / 4;
+  margin: 0;
+  border-radius: 0.75rem;
+  object-fit: cover;
+  transition: height 1s ease-in;
+}
+
+#Userinfo #Comments {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#Userinfo #Comments > ul {
+  width: 100%;
+  list-style-type: none;
+  background-color: var(--dark-transparent-color);
+  display: flex;
+  flex-direction: column-reverse;
+  padding: 0.75rem 0;
+  max-height: 595px;
+  overflow-y: auto;
+}
+
+#Userinfo #Comments .commentBox {
+  height: max-content;
+  width: 90%;
+  border-radius: 1rem;
+  background-color: var(--beige-transparent-color);
+  margin: 1rem auto;
+  padding: 1rem;
+  font-size: 1.75rem;
+}
+
+#Userinfo #Comments .commentBox > div {
+  background-color: var(--beige-transparent-color);
+  padding: 0 0.5rem;
+  border-radius: 0.5rem;
+}
+
+#Userinfo #Comments .commentBox span {
+  cursor: pointer;
+  color: var(--middle-green-color);
+  font-size: 2rem;
+  margin-left: 0.5rem;
+}
+
+#Userinfo #Comments .commentBox > p {
+  border: 2px dotted var(--middle-green-color);
+  background-color: var(--beige-color);
+  padding: 0.5rem 1rem;
+  margin: 0.5rem 0 0.5rem 3rem;
+  border-radius: 1rem;
+  position: relative;
+}
+
+#Userinfo #Comments .commentBox > p > .anticon-delete {
+  font-size: 2.5rem;
+  background-color: var(--beige-transparent-color);
+  border: 1px solid;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+#Userinfo #Comments .commentBox > p > .anticon-delete:after {
+  content: "Diesen Kommentar löschen";
+  width: max-content;
+  font-size: 2rem;
+  font-weight: bold;
+  padding: 1.25rem 0.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 1rem var(--dark-color);
+  color: var(--middle-green-color);
+  background-color: var(--beige-color);
+  transform: translate(-100%, -2.75rem);
+  position: absolute;
+  z-index: 1;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+#Userinfo #Comments .commentBox > p > .anticon-delete:hover::after {
+  opacity: 1;
+  visibility: visible;
+}
+
+#Userinfo #Comments > form {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--dark-green-color);
+  background-color: var(--beige-transparent-color);
+  margin-top: 2rem;
+  padding: 0.5rem;
+  border-radius: 1rem;
+}
+
+#Userinfo #Comments > form h4 {
+  text-align: center;
+}
+
+#Userinfo #Comments > form textarea {
+  width: 90%;
+  height: 200px;
+  font-family: "Poppins", "Kanit";
+  font-size: 1.75rem;
+  color: var(--dark-green-color);
+  background-color: var(--beige-transparent-color);
+  border-radius: 0.5rem;
+  border-color: var(--dark-green-color) var(--middle-green-color)
+    var(--middle-green-color) var(--dark-green-color);
+  padding-left: 0.75rem;
+}
+
+#Userinfo #Comments > form .button-green {
+  margin: 1rem 0;
+}
+
+@media screen and (max-width: 767px) {
+  #Userinfo {
+    gap: 1rem;
+  }
+
+  #Userinfo h2,
+  #Userinfo #Comments h3 {
+    font-size: 2rem;
+    flex-wrap: wrap;
+    line-height: 2.25rem;
+  }
+
+  #Userinfo .ShowEvents {
+    width: 95%;
+  }
+}
