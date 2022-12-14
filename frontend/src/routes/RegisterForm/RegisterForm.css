@@ -26,6 +26,11 @@
   transition: box-shadow 500ms ease-in;
 }
 
+.RegisterForm > div:last-child > .button-beige {
+  box-shadow: 0 0 1rem var(--dark-color);
+  transition: box-shadow 500ms ease-in;
+}
+
 .RegisterForm > div:last-child > .button-beige:hover {
   box-shadow: 0 0 2rem var(--beige-color);
 }
@@ -41,6 +46,7 @@
   width: 80%;
   padding: 1.5rem 1rem;
   border-radius: 1.5rem;
+  box-shadow: 0 0 1rem var(--dark-color);
   transition: width 1s ease-in;
 }
 

@@ -12,6 +12,7 @@ export default function Userinfo() {
 
   const [userData, setUserData] = useState({});
   const [comment, setComment] = useState({});
+  const [commentsReverse, setCommentsReverse] = useState([])
 
   const { navigate, isAuth } = useContext(SectionsContext);
 
@@ -20,6 +21,7 @@ export default function Userinfo() {
   const getUserData = async () => {
     const response = await axiosInstance.get(`/userInfo/${userName.userName}`);
     setUserData(response.data[0]);
+    setCommentsReverse(response.data[0].comments.reverse())
   };
 
   useEffect(() => {
@@ -130,11 +132,11 @@ export default function Userinfo() {
           })}
       </ul>
 
-      <div id="Comments">
         <h3>Kommentare</h3>
+      <div id="Comments">
         <ul>
           {userData.comments &&
-            userData.comments.reverse().map((ele, i) => {
+            commentsReverse.map((ele, i) => {
               return (
                 <li key={i} className="commentBox">
                   <div>

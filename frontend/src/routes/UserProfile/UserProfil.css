@@ -41,6 +41,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  box-shadow: 0 0 1rem var(--dark-color);
   transition: padding 1s ease-in, margin-top 1s ease-in;
 }
 
@@ -261,7 +262,7 @@
   }
 
   #UserProfile .box > div:last-of-type > .button-green {
-    margin-right: 0.5rem;
+    margin-right: 0.25rem;
   }
 
   #UserProfile .box > .expired {

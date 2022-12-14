@@ -30,8 +30,8 @@
   width: 80%;
   padding: 1.5rem 1rem;
   border-radius: 1.5rem;
-  transition: width 1s ease-in;
-  transition: padding 1s ease-in;
+  box-shadow: 0 0 1rem var(--dark-color);
+  transition: width 1s ease-in, padding 1s ease-in;
 }
 
 .toRegister {

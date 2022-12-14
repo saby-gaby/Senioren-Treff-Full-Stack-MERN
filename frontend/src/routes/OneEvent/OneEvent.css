@@ -5,7 +5,7 @@
   background-color: var(--beige-transparent-color);
   width: 95%;
   margin: 0 auto;
-  box-shadow: 0 0 2rem var(--dark-green-color);
+  box-shadow: 0 0 2rem var(--dark-color);
   position: relative;
 }
 

@@ -14,6 +14,7 @@
   gap: 0.5rem;
   border-radius: 1.5rem;
   color: var(--dark-green-color);
+  box-shadow: 0 0 1rem var(--dark-color);
   transition: width 1s ease-in;
 }
 
