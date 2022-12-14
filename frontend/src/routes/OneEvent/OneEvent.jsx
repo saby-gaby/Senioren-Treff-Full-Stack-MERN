@@ -314,11 +314,11 @@ export default function OneEvent() {
           </li>
           <li>
             <h5>Preis: </h5>
-            <p>{eventData.price} € / pro Person</p>
+            <p>{eventData.price <= 0 ? "kostenlos" : `${eventData.price} € / pro Person` }</p>
           </li>
           <li>
             <h5>Verfügbare Plätze: </h5>
-            <p>{eventData.participants}</p>
+            <p>{eventData.participants <= 0 ? "ausgebucht" : eventData.participants}</p>
           </li>
         </ul>
         <div id="description">
