@@ -17,14 +17,14 @@ export default function Search() {
   const submitHandler = async (e) => {
     e.preventDefault();
 
-    const location = locationElement.current.value.toLowerCase();
+    const targetLocation = locationElement.current.value.toLowerCase();
 
-    if (!location && !isAuth) {
+    if (!targetLocation && !isAuth) {
       swal({
         title:"Bitte gib eine Stadt ein", 
         text: "Nochmal probieren?"
       })
-    } else if (!location && isAuth) {
+    } else if (!targetLocation && isAuth) {
       try {
         const axiosResp = await axiosConfig.get(`/search/${defSearch}`);
         if (axiosResp.data[0]) {
@@ -39,12 +39,12 @@ export default function Search() {
       }
     } else {
       try {
-        const axiosResp = await axiosConfig.get(`/search/${location}`);
+        const axiosResp = await axiosConfig.get(`/search/${targetLocation}`);
         if (axiosResp.data[0]) {
-          navigateToEvents(location);
+          navigateToEvents(targetLocation);
         } else {
           swal({
-            title: `Keine Veranstaltungen in ${capitalize(location)} gefunden`,
+            title: `Keine Veranstaltungen in ${capitalize(targetLocation)} gefunden`,
           }) 
         }
       } catch (error) {
@@ -61,8 +61,8 @@ export default function Search() {
   return (
     <div className="Search">
       <div>
-        <h1>Veranstaltungen in deiner Nähe</h1>
-        <p>Wo bist du gerade?</p>
+        <h1>{location.pathname.startsWith("/events") ? "Neue Suche": "Veranstaltungen in deiner Nähe" }</h1>
+        {!location.pathname.startsWith("/events") && <p>Wo bist du gerade?</p>}
         <form ref={formElement} method="" onSubmit={submitHandler}>
           <input
             list="places"
@@ -70,8 +70,7 @@ export default function Search() {
             name="city"
             ref={locationElement}
             type="text"
-            placeholder="Dein Ort"
-            defaultValue={isAuth ? capitalize(defSearch):null}
+            placeholder={isAuth ? capitalize(defSearch):"Dein Ort"}
           />
         <datalist id="places">
             <option>Berlin</option>

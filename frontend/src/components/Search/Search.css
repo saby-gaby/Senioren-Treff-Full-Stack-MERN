@@ -18,6 +18,10 @@
   transition: width 1s ease-in;
 }
 
+.SearchedEvents .Search > div {
+  width: 700px;
+}
+
 .Search h1 {
   max-width: 80%;
   text-align: center;
@@ -63,7 +67,7 @@
   outline: 3px solid var(--middle-green-color);
 }
 
-#UserProfile .Search > div {
+#UserProfile .Search > div .SearchedEvents .Search > div {
   align-items: flex-start;
   padding: 1rem 2rem;
   width: 100%;
@@ -71,12 +75,14 @@
   transition: padding 1s ease-in;
 }
 
-#UserProfile .Search {
+#UserProfile .Search,
+.SearchedEvents .Search {
   align-items: center;
   justify-content: center;
 }
 
-#UserProfile .Search > div > h1 {
+#UserProfile .Search > div > h1,
+.SearchedEvents .Search > div > h1 {
   max-width: 100%;
   width: 100%;
   font-size: 2.5rem;
@@ -91,7 +97,8 @@
   transition: font-size 1s ease-in, line-height 1s ease-in;
 }
 
-#UserProfile .Search > div > form {
+#UserProfile .Search > div > form,
+.SearchedEvents .Search > div > form {
   max-width: 100%;
   width: 100%;
   display: grid;
@@ -101,13 +108,18 @@
   transition: margin-top 1s ease-in, grid-template-columns 1s ease-in;
 }
 
-#UserProfile .Search form input:last-child {
+#UserProfile .Search form input:last-child,
+.SearchedEvents .Search form input:last-child {
   padding: 0.4rem;
   transition: max-width 1s ease-in;
 }
 
-@media screen and (max-width:767px) {
-  .Search h1{
+@media screen and (max-width: 767px) {
+  .SearchedEvents > .Search > div {
+    width: 95%;
+  }
+
+  .Search h1 {
     font-size: 1.5rem;
   }
 
@@ -125,32 +137,52 @@
     width: 95%;
   }
 
-  #UserProfile .Search > div {
+  #UserProfile .Search > div,
+  .SearchedEvents .Search > div {
     padding: 1rem;
   }
-  
-  #UserProfile .Search > div > h1 {
+
+  #UserProfile .Search > div > h1,
+  .SearchedEvents .Search > div > h1 {
     font-size: 2rem;
     margin-bottom: 0;
   }
-  
+
   #UserProfile .Search > div > p {
     font-size: 1.5rem;
     line-height: 1.5rem;
   }
-  
-  #UserProfile .Search > div > form {
+
+  #UserProfile .Search > div > form,
+  .SearchedEvents .Search > div > form {
     margin-top: 0;
     grid-template-columns: 49% 49%;
   }
 
-  #UserProfile .Search > div > form > input:first-child{
+  #UserProfile .Search > div > form > input:first-child,
+  .SearchedEvents .Search > div > form > input:first-child {
     max-width: 100%;
   }
 }
 
-@media screen and (min-width:1024px){
+@media screen and (min-width: 1024px) {
   .Search > div {
     width: 900px;
+  }
+
+  .SearchedEvents .Search > div {
+    width: 900px;
+  }
+
+  .SearchedEvents .Search > div > form {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .SearchedEvents .Search > div > form .button-green {
+    padding-left: 2rem;
+    padding-right: 2rem;
   }
 }

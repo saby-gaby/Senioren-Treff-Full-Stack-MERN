@@ -162,7 +162,7 @@ export default function UpdateEvent() {
             <span className="col1">Kategorie:</span>
             <span className="col2 category">
               {!editCategory ? (
-                <span>{eventData.category && eventData.category.join(", ")}</span>
+                <span>{eventData.category && eventData.category.map(ele=>capitalize(ele)).join(", ")}</span>
               ) : (
                 <>
                   <fieldset>

@@ -4,7 +4,7 @@ import { SectionsContext } from "../../context/sectionsContext";
 import "./Page404.css";
 
 export default function Page404() {
-  const {navigate} = useContext(SectionsContext)
+  const { navigate } = useContext(SectionsContext);
   return (
     <div className="Page404">
       <div>
@@ -16,7 +16,16 @@ export default function Page404() {
               Zur Startseite
             </NavLink>
             <span>oder</span>
-            <button onClick={()=>navigate(-1)} className="button-beige">
+            <button
+              onClick={() => {
+                if (location.pathname.startsWith("/404")) {
+                  navigate(-2);
+                } else {
+                  navigate(-1);
+                }
+              }}
+              className="button-beige"
+            >
               Schritt zurück
             </button>
           </div>
