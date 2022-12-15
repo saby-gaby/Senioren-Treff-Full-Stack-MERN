@@ -85,6 +85,8 @@ export default function CategoryFilter() {
       <button onClick={() => eventByCategory("spiele")} className={spiele ? "checked":"button"}>
         Spiele
       </button>
+      {(sport || kurse || kultur || reisen || natur || spiele) && <button onClick={setAllFalse} className="button lastButton">Alle Kategorien</button>}
+      
     </div>
   );
 }
