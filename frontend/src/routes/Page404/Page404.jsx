@@ -8,7 +8,7 @@ export default function Page404() {
   return (
     <div className="Page404">
       <div>
-        <img src="error404.svg" alt="" />
+        <img src="http://localhost:3000/error404.svg" alt="" />
         <div>
           <h1>Die Seite wurde nicht gefunden</h1>
           <div className="buttons">
