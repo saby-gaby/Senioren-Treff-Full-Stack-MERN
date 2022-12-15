@@ -89,9 +89,9 @@ function App() {
             element={<SearchedEvents />}
           />
           <Route path="/profile" element={<UserProfile />} />
-          <Route path="/*" element={<Page404 />} />
           <Route path="/user/edit" element={<UpdateUser />} />
           <Route path="/event-edit/:id" element={<UpdateEvent />} />
+          <Route path="/*" element={<Page404 />} />
         </Routes>
       </main>
       <Footer />

@@ -5,7 +5,7 @@
   --beige-transparent-color: #f4e3d7bb;
   --beige-color: #f4e3d7;
   --middle-green-color: #008000;
-  --dark-green-color: #004200;
+  --dark-green-color: rgb(0, 66, 0);
   --dark-color: #011b10;
   --dark-transparent-color: #011b1080;
 }
@@ -23,7 +23,7 @@ body > * {
 body {
   font-size: 3rem;
   font-family: "Poppins", "Kanit";
-  color: rgb(29, 59, 44);
+  color: var(--dark-green-color);
   background-attachment: fixed;
   background-image: url("../public/grün.jpg");
   background-repeat: no-repeat;
