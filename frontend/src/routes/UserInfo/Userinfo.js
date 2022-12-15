@@ -25,9 +25,6 @@ export default function Userinfo() {
       setCommentsReverse(response.data[0].comments.reverse()) 
     } catch (error) {
       navigate("/404")
-      swal({
-        title: "Benutzer nicht gefunden"
-      })
     }
   };
 
