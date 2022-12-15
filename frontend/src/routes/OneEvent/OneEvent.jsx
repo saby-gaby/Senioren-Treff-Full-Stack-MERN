@@ -28,47 +28,54 @@ export default function OneEvent() {
   const getEventData = () => {
     let subsArr = [];
     const getEventById = async () => {
-      const axiosResp = await axiosConfig.get(
-        `http://localhost:6001/event/${eventId}`
-      );
-      const data = axiosResp.data;
-      setEventData(data);
-      setEventCategories(data.category.join(", "));
-
-      data.subscribers.map((ele, i) => {
-        subsArr.push(ele._id);
-      });
-
-      // Kapitalisieren Location-Array
-      let arr = [];
-      data.location.forEach((loc) => {
-        arr.push(capitalize(loc));
-      });
-      setCapitalisedLocations(arr);
-
-      let watchedArr = [];
-
-      const userData = await axiosConfig.get(
-        `/user/${localStorage.getItem("userId")}`
-      );
-
-      userData.data.watchedEvents.map((ele, i) => {
-        watchedArr.push(ele._id);
-      });
-
-      subsArr.includes(localStorage.getItem("userId"))
-        ? setIsBooked(true)
-        : setIsBooked(false);
-
-      watchedArr.includes(eventId) ? setIsWatched(true) : setIsWatched(false);
-
-      data.eventOwner._id == localStorage.getItem("userId")
-        ? setMyEvent(true)
-        : setMyEvent(false);
-
-      new Date(data.date) < Date.now()
-        ? setIsExpired(true)
-        : setIsExpired(false);
+      try {
+        const axiosResp = await axiosConfig.get(
+          `http://localhost:6001/event/${eventId}`
+        );
+        const data = axiosResp.data;
+        setEventData(data);
+        setEventCategories(data.category.join(", "));
+  
+        data.subscribers.map((ele, i) => {
+          subsArr.push(ele._id);
+        });
+  
+        // Kapitalisieren Location-Array
+        let arr = [];
+        data.location.forEach((loc) => {
+          arr.push(capitalize(loc));
+        });
+        setCapitalisedLocations(arr);
+  
+        let watchedArr = [];
+  
+        const userData = await axiosConfig.get(
+          `/user/${localStorage.getItem("userId")}`
+        );
+  
+        userData.data.watchedEvents.map((ele, i) => {
+          watchedArr.push(ele._id);
+        });
+  
+        subsArr.includes(localStorage.getItem("userId"))
+          ? setIsBooked(true)
+          : setIsBooked(false);
+  
+        watchedArr.includes(eventId) ? setIsWatched(true) : setIsWatched(false);
+  
+        data.eventOwner._id == localStorage.getItem("userId")
+          ? setMyEvent(true)
+          : setMyEvent(false);
+  
+        new Date(data.date) < Date.now()
+          ? setIsExpired(true)
+          : setIsExpired(false);
+      } catch (error) {
+        navigate("/404")
+        swal({
+          title: "keine Veranstaltung mit dieser ID gefunden"
+        })
+      }
     };
     getEventById();
   };

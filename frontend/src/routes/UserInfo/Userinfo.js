@@ -19,9 +19,16 @@ export default function Userinfo() {
   let userName = useParams();
 
   const getUserData = async () => {
-    const response = await axiosInstance.get(`/userInfo/${userName.userName}`);
-    setUserData(response.data[0]);
-    setCommentsReverse(response.data[0].comments.reverse())
+    try {
+      const response = await axiosInstance.get(`/userInfo/${userName.userName}`);
+      setUserData(response.data[0]);
+      setCommentsReverse(response.data[0].comments.reverse()) 
+    } catch (error) {
+      navigate("/404")
+      swal({
+        title: "Benutzer nicht gefunden"
+      })
+    }
   };
 
   useEffect(() => {
