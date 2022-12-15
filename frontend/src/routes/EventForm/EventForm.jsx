@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import axiosConfig from "../../util/axiosConfig.js";
 import "./EventForm.css";
 import { SectionsContext } from "../../context/sectionsContext.js";
+import { CloseOutlined } from "@ant-design/icons";
 import swal from "sweetalert";
 
 export default function EventForm() {
@@ -23,6 +24,8 @@ export default function EventForm() {
   const [kurse, setKurse] = useState(false);
   const [natur, setNatur] = useState(false);
 
+  const [removed, setRemoved] = useState(false);
+
   const handleChange = (event) => {
     const { value, checked } = event.target;
     const { categories } = eventCategory;
@@ -38,11 +41,17 @@ export default function EventForm() {
 
     const formData = new FormData(e.target);
     console.debug(eventCategory);
+    let imgToSave;
+    if (removed || !file) {
+      imgToSave = null;
+    } else {
+      imgToSave = formData.get("image");
+    }
     try {
       const response = await axiosConfig.post(
         "/event",
         {
-          image: formData.get("image"),
+          image: imgToSave,
           eventTitle: eventTitle,
           category: JSON.stringify(eventCategory.categories),
           date: eventDate,
@@ -80,226 +89,250 @@ export default function EventForm() {
   return (
     <div className="EventForm">
       <h1>Veranstaltung erstellen</h1>
-        <form
-          onSubmit={handleSubmit}
-          encType="multipart/form-data"
-          id="eventForm"
-        >
-          <label>
-            Titel:
-            <input
-              type="text"
-              id="eventTitle"
-              name="eventTitle"
-              placeholder="Event Name"
-              onChange={(e) => {
-                setEventTitle(e.target.value);
-              }}
-            />
-          </label>
-          <fieldset>
-            <legend>Veranstaltungs - Kategorien: </legend>
-            <div className="checks">
-              <label
-                htmlFor="sport"
-                className={sport ? "button-dark-green" : "button-beige"}
-              >
-                <input
-                  type="checkbox"
-                  id="sport"
-                  name="sport"
-                  value="sport"
-                  onChange={(e) => {
-                    handleChange(e);
-                    setSport(!sport);
-                  }}
-                />
-                Sport
-              </label>
-            </div>
-
-            <div className="checks">
-              <label
-                htmlFor="kurse"
-                className={kurse ? "button-dark-green" : "button-beige"}
-              >
-                <input
-                  type="checkbox"
-                  id="kurse"
-                  name="kurse"
-                  value="kurse"
-                  onChange={(e) => {
-                    handleChange(e);
-                    setKurse(!kurse);
-                  }}
-                />
-                Kurse
-              </label>
-            </div>
-
-            <div className="checks">
-              <label
-                htmlFor="kultur"
-                className={kultur ? "button-dark-green" : "button-beige"}
-              >
-                <input
-                  type="checkbox"
-                  id="kultur"
-                  name="kultur"
-                  value="kultur"
-                  onChange={(e) => {
-                    handleChange(e);
-                    setKultur(!kultur);
-                  }}
-                />
-                Kultur
-              </label>
-            </div>
-            <div className="checks">
-              <label
-                htmlFor="reisen"
-                className={reisen ? "button-dark-green" : "button-beige"}
-              >
-                <input
-                  type="checkbox"
-                  id="reisen"
-                  name="reisen"
-                  value="reisen"
-                  onChange={(e) => {
-                    handleChange(e);
-                    setReisen(!reisen);
-                  }}
-                />
-                Reisen
-              </label>
-            </div>
-            <div className="checks">
-              <label
-                htmlFor="natur"
-                className={natur ? "button-dark-green" : "button-beige"}
-              >
-                <input
-                  type="checkbox"
-                  id="natur"
-                  name="natur"
-                  value="natur"
-                  onChange={(e) => {
-                    handleChange(e);
-                    setNatur(!natur);
-                  }}
-                />{" "}
-                Natur
-              </label>
-            </div>
-            <div className="checks">
-              <label
-                htmlFor="spiele"
-                className={spiele ? `button-dark-green` : `button-beige`}
-              >
-                <input
-                  type="checkbox"
-                  id="spiele"
-                  name="spiele"
-                  value="spiele"
-                  onChange={(e) => {
-                    handleChange(e);
-                    setSpiele(!spiele);
-                  }}
-                />
-                Spiele
-              </label>
-            </div>
-          </fieldset>
-          <label>
-            Ort:
-            <input
-              type="text"
-              name="location"
-              id="location"
-              placeholder="mein Ort"
-              onChange={(e) => {
-                const valuesArray = e.target.value.split(",");
-                setLocation(valuesArray);
-              }}
-            />
-          </label>
-          <label>
-            Datum:
-            <input
-              type="date"
-              name="date"
-              id="date"
-              onChange={(e) => {
-                setDate(e.target.value);
-              }}
-            />
-          </label>
-          <label>
-            Uhrzeit:
-            <input
-              type="time"
-              name="time"
-              id="time"
-              placeholder="Veranstaltungsbeginn"
-              onChange={(e) => {
-                setTime(e.target.value);
-              }}
-            />
-          </label>
-          <label>
-            Anzahl Personen:
-            <input
-              type="number"
-              min="1"
-              max="99"
-              name="participants"
-              id="participants"
-              onChange={(e) => {
-                setParticipants(e.target.value);
-              }}
-            />
-          </label>
-          <label>
-            Beschreibung:
-            <textarea
-              name="description"
-              id="description"
-              cols="45"
-              rows="25"
-              placeholder="Beschreibung..."
-              onChange={(e) => {
-                setDescription(e.target.value);
-              }}
-            ></textarea>
-          </label>
-          <div id="upload">
-            <label>
-              Foto hochladen:
+      <form
+        onSubmit={handleSubmit}
+        encType="multipart/form-data"
+        id="eventForm"
+      >
+        <label>
+          Titel:
+          <input
+            type="text"
+            id="eventTitle"
+            name="eventTitle"
+            placeholder="Event Name"
+            onChange={(e) => {
+              setEventTitle(e.target.value);
+            }}
+          />
+        </label>
+        <fieldset>
+          <legend>Veranstaltungs - Kategorien: </legend>
+          <div className="checks">
+            <label
+              htmlFor="sport"
+              className={sport ? "button-dark-green" : "button-beige"}
+            >
               <input
-                type="file"
-                name="image"
-                id="image"
-                onChange={(e) => setFile(e.target.files[0])}
+                type="checkbox"
+                id="sport"
+                name="sport"
+                value="sport"
+                onChange={(e) => {
+                  handleChange(e);
+                  setSport(!sport);
+                }}
               />
+              Sport
             </label>
+          </div>
+
+          <div className="checks">
+            <label
+              htmlFor="kurse"
+              className={kurse ? "button-dark-green" : "button-beige"}
+            >
+              <input
+                type="checkbox"
+                id="kurse"
+                name="kurse"
+                value="kurse"
+                onChange={(e) => {
+                  handleChange(e);
+                  setKurse(!kurse);
+                }}
+              />
+              Kurse
+            </label>
+          </div>
+
+          <div className="checks">
+            <label
+              htmlFor="kultur"
+              className={kultur ? "button-dark-green" : "button-beige"}
+            >
+              <input
+                type="checkbox"
+                id="kultur"
+                name="kultur"
+                value="kultur"
+                onChange={(e) => {
+                  handleChange(e);
+                  setKultur(!kultur);
+                }}
+              />
+              Kultur
+            </label>
+          </div>
+          <div className="checks">
+            <label
+              htmlFor="reisen"
+              className={reisen ? "button-dark-green" : "button-beige"}
+            >
+              <input
+                type="checkbox"
+                id="reisen"
+                name="reisen"
+                value="reisen"
+                onChange={(e) => {
+                  handleChange(e);
+                  setReisen(!reisen);
+                }}
+              />
+              Reisen
+            </label>
+          </div>
+          <div className="checks">
+            <label
+              htmlFor="natur"
+              className={natur ? "button-dark-green" : "button-beige"}
+            >
+              <input
+                type="checkbox"
+                id="natur"
+                name="natur"
+                value="natur"
+                onChange={(e) => {
+                  handleChange(e);
+                  setNatur(!natur);
+                }}
+              />{" "}
+              Natur
+            </label>
+          </div>
+          <div className="checks">
+            <label
+              htmlFor="spiele"
+              className={spiele ? `button-dark-green` : `button-beige`}
+            >
+              <input
+                type="checkbox"
+                id="spiele"
+                name="spiele"
+                value="spiele"
+                onChange={(e) => {
+                  handleChange(e);
+                  setSpiele(!spiele);
+                }}
+              />
+              Spiele
+            </label>
+          </div>
+        </fieldset>
+        <label>
+          Ort:
+          <input
+            type="text"
+            name="location"
+            id="location"
+            placeholder="mein Ort"
+            onChange={(e) => {
+              const valuesArray = e.target.value.split(",");
+              setLocation(valuesArray);
+            }}
+          />
+        </label>
+        <label>
+          Datum:
+          <input
+            type="date"
+            name="date"
+            id="date"
+            onChange={(e) => {
+              setDate(e.target.value);
+            }}
+          />
+        </label>
+        <label>
+          Uhrzeit:
+          <input
+            type="time"
+            name="time"
+            id="time"
+            placeholder="Veranstaltungsbeginn"
+            onChange={(e) => {
+              setTime(e.target.value);
+            }}
+          />
+        </label>
+        <label>
+          Anzahl Personen:
+          <input
+            type="number"
+            min="1"
+            max="99"
+            name="participants"
+            id="participants"
+            onChange={(e) => {
+              setParticipants(e.target.value);
+            }}
+          />
+        </label>
+        <label>
+          Beschreibung:
+          <textarea
+            name="description"
+            id="description"
+            cols="45"
+            rows="25"
+            placeholder="Beschreibung..."
+            onChange={(e) => {
+              setDescription(e.target.value);
+            }}
+          ></textarea>
+        </label>
+        <div id="upload">
+          <label>
+            Foto hochladen:
+            <input
+              type="file"
+              name="image"
+              id="image"
+              onChange={(e) => {
+                setFile(e.target.files[0]);
+                setRemoved(false);
+              }}
+            />
+          </label>
+          {file ? (
+            <>
+              <div>
+                <p>
+                  <span id="file">{file.name}</span>
+                  <CloseOutlined
+                    onClick={() => {
+                      setRemoved(true);
+                      setFile(null);
+                    }}
+                  />
+                </p>
+                <label className="button-beige" htmlFor="image">
+                  Dateien durchsuchen
+                </label>
+              </div>
+            </>
+          ) : (
             <label className="button-beige" htmlFor="image">
               Dateien durchsuchen
             </label>
-          </div>
-          <label>
-            Preis pro Person:
-            <input
-              type="currency"
-              name="price"
-              currency="EUR"
-              placeholder="in EUR"
-              onChange={(e) => {
-                setPrice(e.target.value);
-              }}
-            />
-          </label>
-          <span><input className="button-green" type="submit" value="Erstellen" /></span>
-        </form>
+          )}
+        </div>
+        <label>
+          Preis pro Person:
+          <input
+            type="currency"
+            name="price"
+            currency="EUR"
+            placeholder="in EUR"
+            onChange={(e) => {
+              setPrice(e.target.value);
+            }}
+          />
+        </label>
+        <span>
+          <input className="button-green" type="submit" value="Erstellen" />
+        </span>
+      </form>
     </div>
   );
 }

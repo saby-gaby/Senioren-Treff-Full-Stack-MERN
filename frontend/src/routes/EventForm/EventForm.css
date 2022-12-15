@@ -118,7 +118,40 @@ textarea {
   width: 100%;
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.5rem;
+}
+
+.EventForm #upload > div {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--dark-transparent-color);
+  padding: 0.5rem;
+  border-radius: 1rem;
+}
+
+.EventForm #upload > div > p {
+  width: 100%;
+  color: var(--beige-color);
+  font-size: 1.5rem;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3%;
+  transition: font-size 1s ease-in;
+}
+
+.EventForm #upload #file {
+  width: 87%;
+  display: flex;
+  justify-content: flex-start;
+  overflow: hidden;
+  padding-left: 0.5rem;
+}
+
+.EventForm #upload > div > p > span:last-child {
+  width: 5%;
 }
 
 .EventForm form span {
@@ -131,6 +164,7 @@ textarea {
 .EventForm #upload .button-beige {
   text-align: center;
   line-height: 2.25rem;
+  min-width: max-content;
   transition: width 1s ease-in;
 }
 
@@ -181,7 +215,7 @@ textarea {
   }
 
   .EventForm #upload .button-beige {
-    width: auto;
+    width: 100%;
   }
 
   .EventForm form span .button-green {
@@ -209,7 +243,8 @@ textarea {
   .EventForm input[type="time"],
   .EventForm input[type="number"],
   .EventForm input[type="currency"],
-  .EventForm textarea {
+  .EventForm textarea,
+  .EventForm #upload > div > p {
     font-size: 2rem;
   }
 }
