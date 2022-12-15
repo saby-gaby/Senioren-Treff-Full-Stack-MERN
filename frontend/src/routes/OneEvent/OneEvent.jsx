@@ -34,7 +34,7 @@ export default function OneEvent() {
         );
         const data = axiosResp.data;
         setEventData(data);
-        setEventCategories(data.category.join(", "));
+        setEventCategories(data.category.map(ele=>capitalize(ele)).join(", "));
   
         data.subscribers.map((ele, i) => {
           subsArr.push(ele._id);
@@ -49,13 +49,15 @@ export default function OneEvent() {
   
         let watchedArr = [];
   
-        const userData = await axiosConfig.get(
-          `/user/${localStorage.getItem("userId")}`
-        );
-  
-        userData.data.watchedEvents.map((ele, i) => {
-          watchedArr.push(ele._id);
-        });
+        if (isAuth) {
+          const userData = await axiosConfig.get(
+            `/user/${localStorage.getItem("userId")}`
+          );
+    
+          userData.data.watchedEvents.map((ele, i) => {
+            watchedArr.push(ele._id);
+          });
+        }
   
         subsArr.includes(localStorage.getItem("userId"))
           ? setIsBooked(true)

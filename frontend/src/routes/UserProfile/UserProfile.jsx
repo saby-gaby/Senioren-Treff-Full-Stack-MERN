@@ -34,7 +34,6 @@ export default function UserProfil() {
     if (!myWatched && axiosResp.data.watchedEvents[0]){
       setMyWatched(axiosResp.data.watchedEvents)
     }
-    console.log(myEvents,myBooked);
   };
 
   useEffect(() => {
