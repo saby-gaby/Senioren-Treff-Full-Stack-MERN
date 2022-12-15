@@ -72,9 +72,6 @@ export default function OneEvent() {
           : setIsExpired(false);
       } catch (error) {
         navigate("/404")
-        swal({
-          title: "keine Veranstaltung mit dieser ID gefunden"
-        })
       }
     };
     getEventById();
