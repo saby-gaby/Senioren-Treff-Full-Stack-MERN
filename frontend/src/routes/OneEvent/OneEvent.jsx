@@ -71,7 +71,7 @@ export default function OneEvent() {
           ? setIsExpired(true)
           : setIsExpired(false);
       } catch (error) {
-        navigate("/404")
+        navigate(`/404:eventId_${eventId}`)
       }
     };
     getEventById();
