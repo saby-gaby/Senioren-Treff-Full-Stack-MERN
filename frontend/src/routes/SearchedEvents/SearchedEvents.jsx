@@ -158,6 +158,7 @@ export default function SearchedEvents() {
           {categoryArray && renderExpiredEvents(categoryArray)}
         </ul>
       </div>
+      <Search />
     </div>
   );
 }

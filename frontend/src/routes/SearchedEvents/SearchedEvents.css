@@ -11,8 +11,11 @@
   align-items: center;
   width: 700px;
   margin-top: 2rem;
+  margin-bottom: 3rem;
+  border-radius: 1rem;
+  overflow: hidden;
   box-shadow: 0 0 1rem var(--dark-color);
-  transition: width 1s ease-in;
+  transition: width 1s ease-in, margin-bottom 1s ease-in;
 }
 
 .SearchedEvents h2 {
@@ -122,6 +125,7 @@
 @media screen and (max-width: 767px) {
   .FoundEvents {
     width: 95%;
+    margin-bottom: 2rem;
   }
 
   .SearchedEvents h2 {
