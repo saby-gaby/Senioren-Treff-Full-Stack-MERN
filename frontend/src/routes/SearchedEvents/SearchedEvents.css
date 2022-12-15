@@ -10,6 +10,8 @@
   flex-direction: column;
   align-items: center;
   width: 700px;
+  margin-top: 2rem;
+  box-shadow: 0 0 1rem var(--dark-color);
   transition: width 1s ease-in;
 }
 
@@ -18,7 +20,6 @@
   font-size: 2.5rem;
   background-color: var(--beige-color);
   text-align: center;
-  margin-top: 2rem;
   width: 100%;
   border: 2px solid var(--middle-green-color);
   border-bottom: none;
@@ -88,6 +89,20 @@
   width: 100%;
 }
 
+.SearchedEvents .box > div:last-of-type {
+  display: flex;
+  align-items: flex-end;
+  grid-column: 2 / 3;
+  grid-row: 3 / 4;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.SearchedEvents .box > div:last-of-type > .button-green {
+  margin-right: 1rem;
+  transition: margin-right 1s ease-in;
+}
+
 .SearchedEvents .box > .expired {
   grid-column: 1 / 3;
   position: absolute;
@@ -133,9 +148,18 @@
     max-height: 650px;
   }
 
+  .SearchedEvents .box > div:last-of-type > .button-green {
+    margin-right: 0.25rem;
+  }
+
   .SearchedEvents .box > .expired {
     padding: 0.5rem 1rem;
     top: 30%;
   }
 }
 
+@media screen and (min-width:1024px){
+  .FoundEvents {
+    width: 900px;
+  }
+}

@@ -26,8 +26,8 @@
   background-color: var(--beige-transparent-color);
   border-radius: 2rem;
   padding: 1.5rem 0rem 2rem 1rem;
-  transition: width 1s ease-in;
-  transition: font-size 1s ease-in;
+  box-shadow: 0 0 1rem var(--dark-color);
+  transition: width 1s ease-in, font-size 1s ease-in;
 }
 
 .UpdateUser ul li {
@@ -63,7 +63,8 @@
   border-radius: 0.5rem;
   border-color: var(--dark-green-color) var(--middle-green-color)
     var(--middle-green-color) var(--dark-green-color);
-    background-color: var(--beige-transparent-color);
+  background-color: var(--beige-transparent-color);
+  padding-left: 0.5rem;
 }
 
 .UpdateUser .col2 select {
@@ -185,7 +186,7 @@
   }
 
   .UpdateUser .save-icon,
-.UpdateUser .edit-icon {
-  font-size: 3rem;
-}
+  .UpdateUser .edit-icon {
+    font-size: 3rem;
+  }
 }

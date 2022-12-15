@@ -1,10 +1,12 @@
 .selection {
-  width: 100%;
+  width: 700px;
   display: grid;
-  grid-template-columns: 45% 45%;
+  grid-template-columns: 50% 50%;
   justify-content: center;
   gap: 0.25rem;
   margin-top: 2rem;
+  box-shadow: 0 0 1rem var(--dark-color);
+  border-radius: 1rem;
   transition: width 1s ease-in;
 }
 
@@ -19,9 +21,11 @@
   text-decoration: none;
   cursor: pointer;
   margin: 0.5rem 2rem;
-  transition: font-size 1s ease-in, margin 1s ease-in, padding 1s ease-in;
+  transition: font-size 1s ease-in, margin 1s ease-in, padding 1s ease-in,
+    background-color 500ms ease-in, color 500ms ease-in;
 }
 
+.selection .button:hover,
 .selection .checked {
   font-size: 2rem;
   padding: 0.75rem 1.5rem;
@@ -33,7 +37,8 @@
   text-decoration: none;
   cursor: pointer;
   margin: 0.5rem 2rem;
-  transition: font-size 1s ease-in, margin 1s ease-in, padding 1s ease-in;
+  transition: font-size 1s ease-in, margin 1s ease-in, padding 1s ease-in,
+    background-color 500ms ease-in, color 500ms ease-in;
 }
 
 .selection button:hover {
@@ -43,17 +48,40 @@
   border: 2px solid var(--beige-color);
 }
 
+.selection .lastButton {
+  grid-column: 1/3;
+  width: 100%;
+  max-width: 500px;
+  margin: 0.5rem auto;
+  transition: max-width 1s ease-in, margin 1s ease-in, padding 1s ease-in;
+}
+
+.selection .lastButton:hover {
+  margin: 0.5rem auto;
+}
+
 @media screen and (max-width: 767px) {
+  .selection {
+    width: 95%;
+  }
 
   .selection .button,
+  .selection .checked,
+  .selection .button:hover,
   .selection .checked {
     font-size: 1.5rem;
     margin: 0.5rem 0.25rem;
     padding: 0.5rem 1rem;
   }
+
+  .selection .lastButton {
+    max-width: calc(100% - 0.5rem);
+    margin: 0.5rem auto;
+    padding: 0.5rem 1rem;
+  }
 }
 
-@media screen and (min-width:1024px){
+@media screen and (min-width: 1024px) {
   .selection {
     width: 900px;
   }

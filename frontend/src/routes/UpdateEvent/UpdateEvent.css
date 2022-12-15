@@ -24,6 +24,7 @@
   align-items: flex-start;
   gap: 0.25rem;
   padding: 1.5rem 1rem 2rem 1rem;
+  box-shadow: 0 0 1rem var(--dark-color);
   transition: width 1s ease-in, border-radius 1s ease-in, padding 1s ease-in;
 }
 
