@@ -1,43 +1,38 @@
-import React, { useContext, useState, useRef, useEffect } from "react";
-import axiosConfig from "../../util/axiosConfig";
+import React, { useContext, useRef } from "react";
 import { SectionsContext } from "../../context/sectionsContext";
-import { Navigate, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import "./Home.css";
+import Search from "../../components/Search/Search";
+import swal from "sweetalert";
 
 export default function Home() {
-  const { foundEvents, setFoundEvents } = useContext(SectionsContext);
-  const formElement = useRef(null);
-  const locationElement = useRef(null);
-  const [found, setFound] = useState(false);
-  const submitHandler = async (e) => {
-    e.preventDefault();
-    const location = locationElement.current.value;
-    try {
-      const axiosResp = await axiosConfig.get(`/search/${location}`);
-      if (axiosResp.data[0]) {
-        setFound(true);
-        setFoundEvents(axiosResp.data);
-      }
-    } catch (error) {}
-  };
-  useEffect(() => {
-    setFound(false);
-    console.log(foundEvents);
-  }, [foundEvents]);
+  const { isAuth, setEventLogin } = useContext(SectionsContext);
 
   return (
     <div className="Home">
-      {found && <Navigate to="/events" />}
-      <div>
-        <h1>Veranstaltungen in deiner Nähe</h1>
-        <p>Wo bist du gerade?</p>
-        <form ref={formElement} method="" onSubmit={submitHandler}>
-          <input ref={locationElement} type="text" />
-          <input type="submit" value="Los geht´s!" />
-        </form>
-      </div>
-      <div>
+      <Search />
+      <div className="create">
         <h2>Veranstaltung erstellen</h2>
-        <NavLink to="/event-form">Erstellen</NavLink>
+        {isAuth ? (
+          <NavLink to="/event-form" className="button-green">
+            Erstellen
+          </NavLink>
+        ) : (
+          <NavLink
+            to="/login"
+            className="button-green"
+            onClick={() => {
+              swal({
+                title:
+                  "Du musst angemeldet sein, um eine Veranstaltung zu erstellen.",
+                button: "OK",
+              });
+              setEventLogin(true);
+            }}
+          >
+            Erstellen
+          </NavLink>
+        )}
       </div>
     </div>
   );

@@ -18,14 +18,14 @@ const router = new Router();
 router
   .route("/event")
   .get(getAllEvents)
-  .post(isAuth, validator, imageUpload, eventValidationSchema, createEvent);
+  .post(isAuth, eventValidationSchema, validator, imageUpload, createEvent);
 
 router
   .route("/event/:id")
   .get(getEventById)
   .delete(isAuth, deleteEventById)
-  .patch(isAuth, updateEventById);
-// .post(isAuth, addSubscribers);
+  .patch(isAuth, imageUpload, updateEventById)
+  .post(isAuth, addSubscribers);
 
 router.route("/event/subscribe/:id").patch(isAuth, addSubscribers);
 

@@ -1,0 +1,129 @@
+.LoginForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.LoginForm > h2 {
+  width: 100%;
+  font-size: 3rem;
+  text-align: center;
+  padding: 0.25rem 0.5rem;
+  margin-bottom: 1.5rem;
+  color: var(--beige-color);
+  background-color: var(--dark-transparent-color);
+  transition: font-size 1s ease-in;
+}
+
+.LoginForm > h2:last-of-type {
+  margin-top: 5rem;
+  transition: margin-top 1s ease-in;
+}
+
+.LoginForm form,
+.toRegister {
+  background-color: var(--beige-transparent-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+  padding: 1.5rem 1rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 0 1rem var(--dark-color);
+  transition: width 1s ease-in, padding 1s ease-in;
+}
+
+.toRegister {
+  text-align: center;
+  transition: font-size 1s ease-in;
+}
+
+.LoginForm form label > input {
+  height: 2.5rem;
+  background-color: var(--beige-transparent-color);
+  border-color: var(--middle-green-color);
+  border-radius: 0.75rem;
+  font-size: 2rem;
+  padding-left: 0.5rem;
+  transition: font-size 1s ease-in;
+}
+
+.LoginForm form > input {
+  margin-top: 2rem;
+  max-width: 100%;
+}
+
+.LoginForm form label > input:focus {
+  background-color: var(--beige-color);
+  outline: 3px solid var(--middle-green-color);
+}
+
+.LoginForm form label > input::placeholder {
+  color: var(--dark-transparent-color);
+}
+
+.LoginForm label {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  font-weight: bold;
+  font-size: 2rem;
+  margin-top: 1rem;
+  transition: font-size 1s ease-in;
+  transition: margin-left 1s ease-in;
+  transition: width 1s ease-in;
+}
+
+.LoginForm label:last-of-type {
+  margin-top: 1rem;
+}
+
+@media screen and (max-width: 767px) {
+  .LoginForm > h2 {
+    font-size: 2rem;
+  }
+
+  .LoginForm > h2:last-of-type{
+    margin-top: 1.5rem;
+  }
+
+  .LoginForm form,
+  .toRegister {
+    width: 95%;
+    padding: 0.5rem;
+  }
+
+  .LoginForm form label {
+    font-size: 1.5rem;
+    margin-left: 2rem;
+    width: 100%;
+  }
+
+  .LoginForm form label > input {
+    max-width: 80%;
+  }
+
+  .LoginForm form {
+    align-items: flex-start;
+  }
+
+  .LoginForm form > input {
+    margin: 1.5rem auto;
+  }
+
+  .toRegister {
+    font-size: 2rem;
+  }
+  
+  .LoginForm form label > input {
+    font-size: 1.5rem;
+  }
+}
+
+@media screen and (min-width:1024px){
+  .LoginForm form,
+  .toRegister{
+    width: 900px;
+  }  
+}

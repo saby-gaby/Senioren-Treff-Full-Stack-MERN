@@ -1,0 +1,365 @@
+#UserProfile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#UserProfile > h2 {
+  font-size: 1.25em;
+  line-height: 1em;
+  background-color: var(--dark-transparent-color);
+  color: var(--beige-color);
+  text-align: center;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
+  padding: 0.5rem 1rem;
+  transition: font-size 1s ease-in, flex-wrap 1s ease-in, line-height 1s ease-in;
+}
+
+#UserProfile > h2 > img {
+  height: 7rem;
+  margin: 0 1rem;
+  transition: height 1s ease-in, margin 1s ease-in;
+}
+
+#UserProfile > div:first-of-type {
+  width: 95%;
+  transition: width 1s ease-in;
+}
+
+#eventbox,
+#vorletztesDiv,
+#abmelden {
+  width: 100%;
+  background-color: var(--beige-transparent-color);
+  padding: 1.5rem 2rem;
+  border-radius: 0.75rem;
+  margin-top: 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 0 1rem var(--dark-color);
+  transition: padding 1s ease-in, margin-top 1s ease-in;
+}
+
+#abmelden {
+  justify-content: center;
+  transition: padding 1s ease-in;
+}
+
+#abmelden > button {
+  font-size: 3rem;
+  transition: font-size 1s ease-in, padding 1s ease-in;
+}
+
+#eventbox h4,
+#vorletztesDiv h4 {
+  color: var(--dark-green-color);
+  font-size: 2rem;
+  transition: font-size 1s ease-in;
+}
+
+#UserProfile .ShowEvents {
+  width: 100%;
+  list-style-type: none;
+  display: block;
+  background-color: var(--beige-transparent-color);
+  padding-bottom: 1rem;
+  max-height: 600px;
+  overflow-y: auto;
+  border: 2px solid var(--middle-green-color);
+  transition: max-height 1s ease-in;
+}
+
+#UserProfile .box {
+  position: relative;
+  height: 250px;
+  width: 95%;
+  border-radius: 1rem;
+  background-color: var(--beige-transparent-color);
+  display: grid;
+  grid-template-columns: 50% 50%;
+  margin: 1rem auto;
+  box-shadow: 0 0 1rem var(--dark-green-color);
+  column-gap: 1rem;
+  padding: 1rem;
+  transition: padding 1s ease-in, column-gap 1s ease-in, height 1s ease-in,
+    grid-template-columns 1s ease-in;
+}
+
+#UserProfile .box h3 {
+  font-size: 2.25rem;
+  line-height: 2.25rem;
+  color: var(--middle-green-color);
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+  margin-top: 0.5rem;
+  transition: margin-top 1s ease-in, line-height 1s ease-in,
+    font-size 1s ease-in, line-height 1s ease-in;
+}
+
+#UserProfile .box h4 {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+  font-size: 1.5rem;
+  line-height: 1.5rem;
+  transition: font-size 1s ease-in, line-height 1s ease-in;
+}
+
+#UserProfile .box img {
+  width: 100%;
+  height: calc(250px - 2rem);
+  grid-column: 1 / 2;
+  grid-row: 1 / 4;
+  margin: 0;
+  border-radius: 0.75rem;
+  object-fit: cover;
+  transition: height 1s ease-in;
+}
+
+#UserProfile .box > div:last-of-type {
+  display: flex;
+  align-items: flex-end;
+  grid-column: 2 / 3;
+  grid-row: 3 / 4;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+#UserProfile .box > div:last-of-type > .button-green {
+  margin-right: 1rem;
+  transition: margin-right 1s ease-in;
+}
+
+#UserProfile .box > .expired {
+  grid-column: 1 / 3;
+  position: absolute;
+  padding: 2rem;
+  top: 30%;
+  left: 20%;
+  text-align: center;
+  background-color: var(--dark-transparent-color);
+  color: var(--beige-color);
+  font-size: 1.5rem;
+  font-weight: bold;
+  border-radius: 1rem;
+  transform: rotate(-20deg);
+  transition: padding 1s ease-in, top 1s ease-in;
+}
+
+#dataUser {
+  width: 100%;
+  padding: 0;
+  border: 1px solid var(--middle-green-color);
+}
+
+#dataUser ul {
+  width: 100%;
+  list-style-type: none;
+  background-color: var(--beige-transparent-color);
+  padding-bottom: 2rem;
+  border-radius: 1rem;
+}
+
+#dataUser ul li {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  padding: 0 2rem 0 2rem;
+  font-size: 2rem;
+  transition: font-size 1s ease-in, gap 1s ease-in;
+}
+
+#dataUser ul li:last-child {
+  justify-content: center;
+  margin-top: 2rem;
+  transition: margin-top 1s ease-in;
+}
+
+#vorletztesDiv > .button-green {
+  padding: 0.5rem 3rem;
+  transition: padding 1s ease-in, font-size 1s ease-in;
+}
+
+@media screen and (max-width: 767px) {
+  #UserProfile h2 {
+    font-size: 2rem;
+    flex-wrap: wrap;
+    line-height: 2.25rem;
+  }
+
+  #UserProfile > h2 > img {
+    height: 4rem;
+    margin-left: 0.5rem;
+  }
+
+  #UserProfile > div:first-of-type {
+    width: 95%;
+  }
+
+  #eventbox,
+  #vorletztesDiv {
+    padding: 0.5rem 0.75rem;
+  }
+
+  #eventbox {
+    margin-top: 1.75rem;
+  }
+
+  #abmelden {
+    padding: 0.75rem 1rem;
+  }
+
+  #abmelden > button {
+    font-size: 2rem;
+    padding: 0.5rem 1rem;
+  }
+
+  #eventbox h4,
+  #vorletztesDiv h4 {
+    font-size: 1.5rem;
+  }
+
+  #eventbox .button-dark-green,
+  #eventbox .button-beige {
+    padding: 0.75rem 1.25rem;
+    font-size: 1.75rem;
+    transition: padding 1s ease-in, font-size 1s ease-in;
+  }
+
+  #UserProfile .box {
+    padding: 0.5rem;
+    column-gap: 0.25rem;
+    height: 200px;
+    grid-template-columns: 40% 60%;
+  }
+
+  #UserProfile .box .button-green {
+    font-size: 1.75rem;
+    padding: 0.5rem 1.25rem;
+  }
+
+  #UserProfile .box h3 {
+    font-size: 1.75rem;
+    margin-top: 0;
+    line-height: 1.75rem;
+  }
+
+  #UserProfile .box h4 {
+    font-size: 1.25rem;
+    line-height: 1.25rem;
+  }
+
+  #UserProfile .box > img {
+    height: calc(200px - 1rem);
+  }
+
+  #UserProfile .ShowEvents {
+    max-height: 450px;
+  }
+
+  #UserProfile .box > div:last-of-type > .button-green {
+    margin-right: 0.25rem;
+  }
+
+  #UserProfile .box > .expired {
+    padding: 0.5rem 1rem;
+    top: 30%;
+  }
+
+  #vorletztesDiv > .button-green {
+    padding: 0.5rem 2rem;
+    font-size: 1.75rem;
+  }
+
+  #dataUser ul li {
+    font-size: 1.75rem;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+
+  #dataUser ul li h5 {
+    margin-top: 1.25rem;
+    font-size: 1.75rem;
+    line-height: 2rem;
+    transition: margin-top 1s ease-in, font-size 1s ease-in,
+      line-height 1s ease-in;
+  }
+
+  #dataUser ul li p {
+    text-align: center;
+  }
+
+  #dataUser ul li:first-child,
+  #dataUser ul li:nth-child(6) {
+    align-items: flex-start;
+    justify-content: start;
+  }
+  #dataUser ul li:first-child h5,
+  #dataUser ul li:nth-child(6) h5 {
+    width: max-content;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  #dataUser ul li:first-child p,
+  #dataUser ul li:nth-child(6) p {
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  #dataUser ul li:last-child {
+    margin-top: 1rem;
+  }
+
+  #dataUser ul li:last-child .button-green {
+    padding: 0.75rem 1.25rem;
+    font-size: 1.75rem;
+    transition: padding 1s ease-in, font-size 1s ease-in;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  #eventbox,
+  #vorletztesDiv {
+    flex-direction: column;
+  }
+  #eventbox h4,
+  #vorletztesDiv h4 {
+    text-align: center;
+  }
+
+  #UserProfile .box .button-green {
+    font-size: 1.5rem;
+    padding: 0.5rem 0.75rem;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  #UserProfile > div:first-of-type {
+    width: 900px;
+  }
+
+  #eventbox h4,
+  #vorletztesDiv h4 {
+    font-size: 2.5rem;
+  }
+
+  #UserProfile .box h3 {
+    font-size: 2.5rem;
+    line-height: 2.5rem;
+  }
+
+  #UserProfile .box h4 {
+    font-size: 2rem;
+  }
+
+  #dataUser ul li h5,
+  #dataUser ul li {
+    font-size: 2.25rem;
+  }
+}

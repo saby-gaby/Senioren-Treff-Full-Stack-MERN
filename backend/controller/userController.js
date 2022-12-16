@@ -5,7 +5,6 @@ import bcrypt from "bcrypt";
 export const createUser = async (req, res) => {
   try {
     const hashedSaltyPassword = await bcrypt.hash(req.body.password, 14);
-
     const newUserData = await UserModel.create({
       userName: req.body.userName,
       firstName: req.body.firstName,
@@ -40,7 +39,10 @@ export const userLogin = async (req, res) => {
   const expiresInSec = 1 * 60 * 60 * 24; // 1 h * 24 => 24h
 
   const token = jwt.sign(
-    { userName: loginUser.userName, userId: loginUser._id },
+    {
+      userName: loginUser.userName,
+      userId: loginUser._id,
+    },
     process.env.TOKEN_SECRET,
     { expiresIn: expiresInSec }
   );
@@ -71,9 +73,23 @@ export const getUserByID = async (req, res) => {
   try {
     const getUser = await UserModel.findById(req.params.id)
       .populate("myEvents")
-      .populate("watchedEvents");
+      .populate("watchedEvents")
+      .populate("bookedEvents");
 
-    res.status(302).send(getUser);
+    res.status(200).send(getUser);
+  } catch (error) {
+    res.status(404).send(error.message);
+  }
+};
+
+export const getUserInfo = async (req, res) => {
+  try {
+    const getUser = await UserModel.find({userName: req.params.username})
+      .populate("myEvents")
+      .populate("watchedEvents")
+      .populate("bookedEvents");
+
+    res.status(200).send(getUser);
   } catch (error) {
     res.status(404).send(error.message);
   }
@@ -87,17 +103,37 @@ export const deleteUserByID = async (req, res) => {
     res.status(404).send(error.message);
   }
 };
+
 export const updateUserByID = async (req, res) => {
   try {
     const getUser = await UserModel.findById(req.params.id);
-    await UserModel.updateOne({ _id: req.params.id }, req.body);
+
+    if (req.body.password) {
+      const hashedSaltyPassword = await bcrypt.hash(req.body.password, 14);
+
+      await UserModel.updateOne(
+        { _id: req.params.id },
+        { password: hashedSaltyPassword }
+      );
+    } else {
+      await UserModel.updateOne({ _id: req.params.id }, req.body);
+    }
     res.status(206).send(`user: ${getUser.userName} successfully updated`);
   } catch (error) {
     res.status(404).send(error.message);
   }
 };
 
-// Event auf die Merkliste setzen
+export const addComment = async (req, res) => {
+  try {
+    const getUser = await UserModel.findById(req.params.id);
+    getUser.comments.push(req.body)
+    await getUser.save()
+    res.status(206).send(`user: ${getUser.userName} successfully updated`);
+  } catch (error) {
+    res.status(404).send(error.message);
+  }
+};
 
 export const addToWatchList = async (req, res) => {
   try {
@@ -113,5 +149,23 @@ export const addToWatchList = async (req, res) => {
     res.send(getUser);
   } catch (error) {
     res.status(401).send(error.message);
+  }
+};
+
+export const getUserByUsername = async (req, res) => {
+  try {
+    const user = await UserModel.findOne({ userName: req.params.username });
+    res.status(200).send(user.userName);
+  } catch (error) {
+    res.status(204).send(false);
+  }
+};
+
+export const getUserByEmail = async (req, res) => {
+  try {
+    const user = await UserModel.findOne({ email: req.params.email });
+    res.status(200).send(user.email);
+  } catch (error) {
+    res.status(204).send(false);
   }
 };

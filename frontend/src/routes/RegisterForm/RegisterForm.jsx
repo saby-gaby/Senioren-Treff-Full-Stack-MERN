@@ -1,34 +1,80 @@
-import React, { useState, useRef } from "react";
-import { NavLink } from "react-router-dom";
+import React, { useState, useRef, useContext } from "react";
+import { Navigate, NavLink } from "react-router-dom";
 import axiosConfig from "../../util/axiosConfig.js";
+import { SectionsContext } from "../../context/sectionsContext.js";
+import "./RegisterForm.css";
+import GenderRadioBtn from "../../components/Gender/GenderRadioBtn.jsx";
+import "./RegisterForm.css";
+import {
+  TextInput,
+  MailInput,
+  PasswordInput,
+} from "../../components/Inputs/Inputs.jsx";
+import {
+  NextBtnToStepTwo,
+  NextBtnToThree,
+  SubmitBtn,
+  ResetBtn,
+} from "../../components/NextBtnRegister/NextBtnRegister.jsx";
+import swal from "sweetalert";
 
 export default function RegisterForm() {
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [hasRegistered, setHasRegistered] = useState(false);
+  const { isAuth, setIsAuth, eventLogin, backToEvent, interestedEvent } =
+    useContext(SectionsContext);
+
+  const [stepOne, setStepOne] = useState(true);
+  const [stepTwo, setStepTwo] = useState(false);
+  const [stepThree, setStepThree] = useState(false);
 
   const formEl = useRef(null);
-  const userNameEl = useRef(null);
-  const firstNameEl = useRef(null);
-  const lastNameEl = useRef(null);
-  const emailEl = useRef(null);
-  const passwordEl = useRef(null);
-  const locationEl = useRef(null);
-  const genderEl = useRef(null);
-  const disabilitiesEl = useRef(null);
+  const [userName, setUserName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [genderRadio, setGenderRadio] = useState("none");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [location, setLocation] = useState("");
+  const [disabilities, setDisabilities] = useState("");
 
-  const submitHandler = async (e) => {
-    e.preventDefault();
+  const props = {
+    userName: userName,
+    setUserName: setUserName,
+    firstName: firstName,
+    setFirstName: setFirstName,
+    lastName: lastName,
+    setLastName: setLastName,
+    location: location,
+    setLocation: setLocation,
+    genderRadio: genderRadio,
+    setGenderRadio: setGenderRadio,
+    disabilities: disabilities,
+    setDisabilities: setDisabilities,
+    password: password,
+    setPassword: setPassword,
+    email: email,
+    setEmail: setEmail,
+    stepOne: stepOne,
+    setOne: setStepOne,
+    stepTwo: stepTwo,
+    setTwo: setStepTwo,
+    stepThree: stepThree,
+    setThree: setStepThree,
+  };
 
+  const submitHandler = async () => {
+    /*  e.preventDefault(); */
     const data = {
-      userName: userNameEl.current.value,
-      firstName: firstNameEl.current.value,
-      lastName: lastNameEl.current.value,
-      gender: genderEl.current.value,
-      disabilities: disabilitiesEl.current.value,
-      email: emailEl.current.value,
-      password: passwordEl.current.value,
-      location: locationEl.current.value,
+      userName: userName,
+      firstName: firstName,
+      lastName: lastName,
+      gender: genderRadio,
+      disabilities: disabilities,
+      email: email,
+      password: password,
+      location: location,
     };
 
     try {
@@ -37,7 +83,6 @@ export default function RegisterForm() {
       const axiosResp = await axiosConfig.post("/user", data);
       console.debug("axiosResp.data:", axiosResp.data);
       setIsLoading(false);
-
       if (axiosResp.data.error) {
         setIsError(true);
         setIsLoading(false);
@@ -45,108 +90,158 @@ export default function RegisterForm() {
         return;
       }
     } catch (error) {
+      for (const err of error.response.data.errors) {
+        if (err.msg === "Invalid value" && err.param === "email") {
+          swal({
+            title: "Tragen Sie eine valide Email Adresse",
+          });
+          break;
+        } else if (err.msg === "Invalid value" && err.param === "password") {
+          swal({
+            title: "Passwort ist ein Pflichtfeld! ",
+            text: "Ihr Passwort muss mindestens 8 Zeichen lang sein und eine Zahl, einen Groß- und einen Kleinbuchstaben enthalten.",
+          });
+        } else {
+          setIsError(true);
+          setIsLoading(false);
+          setHasRegistered(false);
+        }
+      }
       console.error("Error while sending with axios", error);
-      setIsError(true);
-      setIsLoading(false);
-      setHasRegistered(false);
       return;
     }
     setIsError(false);
     setHasRegistered(true);
-    formEl.current.reset();
+    logIn(data);
+  };
+
+  const logIn = async (data) => {
+    try {
+      const axiosResp = await axiosConfig.post("/user/login", data);
+      console.log("successful logged in");
+      handleSuccessfulLogin(axiosResp.data, data.location);
+    } catch (error) {
+      console.log("Fehler beim login", error);
+    }
+  };
+
+  const handleSuccessfulLogin = (respData, location) => {
+    const locationLowercase = location.toLowerCase();
+    localStorage.setItem("defSearch", locationLowercase);
+    setIsAuth(true);
+    localStorage.setItem("userName", respData.userName);
+    localStorage.setItem("userId", respData.userId);
   };
 
   return (
-    <div>
-      {}
-      RegisterForm
-      <form ref={formEl} method="POST" action="/user" onSubmit={submitHandler}>
-        <label htmlFor="">
-          {" "}
-          Benutzername:
-          <input
-            ref={userNameEl}
-            type="text"
-            name="userName"
-            id="userName"
-            required
-          />
-        </label>
-        <label htmlFor="">
-          Vorname:
-          <input
-            ref={firstNameEl}
-            type="text"
-            name="firstName"
-            id="firstName"
-            required
-          />
-        </label>
-        <label htmlFor="">
-          Nachname:
-          <input
-            ref={lastNameEl}
-            type="text"
-            name="lastName"
-            id="lastName"
-            required
-          />
-        </label>
-        <label htmlFor="">
-          Geschlecht:
-          <select name="gender" id="gender" ref={genderEl}>
-            <option value="female">Frau</option>
-            <option value="male">Mann</option>
-            <option value="diverse">Nicht binär</option>
-            <option value="none">keine Angabe</option>
-          </select>
-        </label>
-        <label htmlFor="">
-          eventuelle Einschränkung
-          <input
-            type="text"
-            name="disabilities"
-            id="disabilities"
-            ref={disabilitiesEl}
-          />
-        </label>
-
-        <label htmlFor="">
-          E-Mail Adresse:
-          <input ref={emailEl} type="email" name="email" id="email" required />
-        </label>
-        <label htmlFor="">
-          Passwort:
-          <input
-            ref={passwordEl}
-            type="password"
-            name="password"
-            id="password"
-            required
-          />
-        </label>
-        <label htmlFor="">
-          Wohnort:
-          <input
-            ref={locationEl}
-            type="text"
-            name="location"
-            id="location"
-            required
-          />
-        </label>
-        <input type="submit" value="Registrieren" />
-      </form>
-      <p>{isError ? <strong>Es ist ein Fehler aufgetreten.</strong> : null}</p>
-      <p>
-        {hasRegistered ? (
+    <div className="RegisterForm">
+      <h2>RegisterForm</h2>
+      <form ref={formEl} method="POST" action="/user">
+        {stepOne && (
           <>
-            <strong>Sie haben sich erfolgreich registriert.</strong> 
-            <NavLink to="/login">Jetzt Anmelden</NavLink>
+            <div id="stepOne">
+              <label htmlFor="userName">
+                <div>
+                  Benutzername:<sup id="infoUsername">*</sup>
+                </div>
+                <TextInput labelValue="userName" stateFunc={setUserName} />
+              </label>
+              <label htmlFor="firstName">
+                <div>
+                  Vorname:
+                  <sup
+                    id="infoFirstName"
+                    hover-text="Pflichtfeld: Ihren Vornamen"
+                  >
+                    *
+                  </sup>
+                </div>
+                <TextInput labelValue="firstName" stateFunc={setFirstName} />
+              </label>
+              <label htmlFor="lastName">
+                <div>
+                  Nachname:<sup id="infoLastName">*</sup>
+                </div>
+                <TextInput labelValue="lastName" stateFunc={setLastName} />
+              </label>
+              <label htmlFor="location">
+                <div>
+                  Wohnort:<sup id="infoLocation">*</sup>
+                </div>
+                <TextInput labelValue="location" stateFunc={setLocation} />
+              </label>
+              <NextBtnToStepTwo props={props} />
+            </div>
           </>
+        )}
+        {stepTwo && (
+          <div id="stepTwo">
+            <div className="gender">
+              <h3>Geschlecht:</h3>
+              <div className="radio">
+                <GenderRadioBtn gender="female" props={props} />
+                <GenderRadioBtn gender="male" props={props} />
+                <GenderRadioBtn gender="diverse" props={props} />
+                <GenderRadioBtn gender="none" props={props} />
+              </div>
+            </div>
+            <div className="disabilities">
+              <label htmlFor="disabilities">
+                <h3>Eventuelle Einschränkung</h3>
+              </label>
+              <TextInput
+                labelValue="disabilities"
+                stateFunc={setDisabilities}
+              />
+            </div>
+            <NextBtnToThree props={props} />
+          </div>
+        )}
+        {stepThree && (
+          <div id="stepThree">
+            <label htmlFor="email">
+              <div>
+                E-Mail Adresse:<sup id="infoEmail">*</sup>
+              </div>
+              <MailInput labelValue="email" stateFunc={setEmail} />
+            </label>
+            <label htmlFor="password">
+              <div>
+                Passwort:<sup id="infoPsw">*</sup>
+              </div>
+              <PasswordInput labelValue="password" stateFunc={setPassword} />
+            </label>
+            <SubmitBtn props={props} submitHandler={submitHandler} />
+          </div>
+        )}
+      </form>
+      <div>
+        {isError && (
+          <p>
+            <strong>Es ist ein Fehler aufgetreten.</strong>
+          </p>
+        )}
+        {hasRegistered && (
+          <p>
+            <strong>Sie haben sich erfolgreich registriert.</strong>
+          </p>
+        )}
+
+        {isAuth && eventLogin && <Navigate to="/event-form" replace={true} />}
+        {isAuth && backToEvent && (
+          <Navigate to={`/event/${interestedEvent}`} replace={true} />
+        )}
+        {isAuth && !eventLogin && !backToEvent && <Navigate to="/profile" />}
+        {isLoading ? (
+          <p>
+            <strong>Lade – bitte warten...</strong>
+          </p>
         ) : null}
-      </p>
-      <p>{isLoading ? <strong>Lade – bitte warten...</strong> : null}</p>
+        {(stepTwo || stepThree) && <ResetBtn props={props} />}
+        <NavLink to={"/login"} className="button-beige">
+          bereits registriert
+        </NavLink>
+      </div>
     </div>
   );
 }

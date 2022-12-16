@@ -1,0 +1,211 @@
+#oneEvent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--beige-transparent-color);
+  width: 95%;
+  margin: 0 auto;
+  box-shadow: 0 0 2rem var(--dark-color);
+  position: relative;
+}
+
+#oneEvent h1 {
+  background-color: var(--beige-color);
+  color: var(--dark-green-color);
+  text-align: center;
+  font-size: 3rem;
+  width: 100%;
+  border-bottom: 1px solid var(--middle-green-color);
+}
+
+#oneEvent #eventData,
+#btn {
+  width: 90%;
+}
+
+#oneEvent #details {
+  list-style-type: none;
+}
+
+#oneEvent #details,
+#oneEvent #description,
+#oneEvent #participants {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  margin: 1.5rem auto;
+  box-shadow: 0 0 1rem var(--dark-green-color);
+  border: 1px solid var(--middle-green-color);
+  border-radius: 0.5rem;
+}
+
+#oneEvent #details > li,
+#participants,
+#participants ul {
+  display: flex;
+  gap: 1rem;
+}
+
+#oneEvent #details > li:first-child a {
+  text-decoration: none;
+}
+
+#oneEvent #details > li:first-child a p {
+  color: var(--middle-green-color);
+}
+
+#oneEvent #details > li {
+  margin-top: 0.5rem;
+}
+
+#oneEvent h5 {
+  color: var(--dark-color);
+  font-size: 2rem;
+}
+
+#eventData p,
+#eventData ul {
+  color: var(--dark-green-color);
+  font-size: 2rem;
+}
+
+#subscribers {
+  display: inline;
+  flex-wrap: wrap;
+  list-style-type: none;
+}
+
+#oneEvent img {
+  width: 90%;
+  border-radius: 0.5rem;
+  margin-top: 1.5rem;
+  box-shadow: 0 0 1rem var(--dark-green-color);
+  border: 1px solid var(--middle-green-color);
+}
+
+#btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+#btn div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+#btn div .button-beige {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 500ms ease-in, color 500ms ease-in;
+}
+
+#btn div .button-beige:first-child {
+  gap: 0.5rem;
+}
+
+#btn .btnBooked {
+  height: max-content;
+  font-size: 2.5rem;
+}
+#oneEvent .expired {
+  position: absolute;
+  top: 40%;
+  width: 100%;
+  padding: 3rem 2rem;
+  text-align: center;
+  color: var(--beige-color);
+  background-color: var(--dark-transparent-color);
+  border-radius: 1rem;
+  z-index: 1;
+  transform: rotate(-30deg);
+  font-size: 2.5rem;
+  font-weight: bold;
+  transition: font-size 1s ease-in, padding 1s ease-in;
+}
+
+#btn > #disabled {
+  background-color: var(--dark-transparent-color);
+  border-color: var(--dark-color);
+}
+
+#btn > #disabled:after {
+  content: "Veranstaltung ist schon vorbei";
+  background-color: var(--beige-color);
+  color: red;
+  border: 2px solid var(--dark-color);
+  box-shadow: 0 0 2rem var(--dark-color);
+  text-align: center;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  transition: opacity 1s ease-in-out;
+  position: absolute;
+  top: 5%;
+  left: 0.5rem;
+  z-index: 1;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 1s ease-in, opacity 1s ease-in;
+}
+
+#btn > #disabled:hover {
+  font-weight: normal;
+  cursor: auto;
+}
+
+#btn > #disabled:hover::after {
+  visibility: visible;
+  opacity: 1;
+}
+
+@media screen and (max-width: 767px) {
+  #oneEvent h5,
+  #oneEvent p,
+  #subscribers li {
+    font-size: 1.5rem;
+  }
+
+  #eventData li {
+    flex-wrap: wrap;
+  }
+
+  #oneEvent .expired {
+    font-size: 1.75rem;
+    padding: 1rem 2rem;
+  }
+
+  #btn .btnBooked {
+    font-size: 2rem;
+    padding: 0.5rem 1rem;
+  }
+}
+
+@media screen and (max-width: 419px) {
+  #btn {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  #btn > div {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  #participants {
+    flex-wrap: wrap;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  #oneEvent {
+    width: 980px;
+  }
+
+  #oneEvent .expired {
+    font-size: 3rem;
+  }
+}

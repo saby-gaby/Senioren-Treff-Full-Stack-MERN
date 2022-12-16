@@ -22,9 +22,9 @@ export const getEventByLocation = async (req, res) => {
 
 export const getEventById = async (req, res) => {
   try {
-    const getEvent = await EventModel.findById(req.params.id).populate(
-      "subscribers"
-    );
+    const getEvent = await EventModel.findById(req.params.id)
+      .populate("subscribers")
+      .populate("eventOwner");
     res.status(200).send(getEvent);
   } catch (error) {
     res.status(404).send(error.message);
@@ -42,15 +42,18 @@ export const deleteEventById = async (req, res) => {
 
 export const createEvent = async (req, res) => {
   try {
+    req.body.category = JSON.parse(req.body.category);
+    req.body.location = JSON.parse(req.body.location);
+    req.body.location = req.body.location.map((city) =>
+      city.trim().toLowerCase()
+    );
     const newEvent = await EventModel.create(req.body);
-
     const passedToken = req.cookies.jwt;
     const decodedToken = jwt.verify(passedToken, process.env.TOKEN_SECRET);
 
-    await UserModel.findOneAndUpdate(
-      { _id: decodedToken.userId },
-      { myEvents: newEvent._id }
-    );
+    const user = await UserModel.findById(decodedToken.userId);
+    user.myEvents.push(newEvent._id);
+    await user.save();
 
     res.status(201).send(newEvent);
   } catch (error) {
@@ -62,6 +65,7 @@ export const updateEventById = async (req, res) => {
   try {
     const getEvent = await EventModel.findById(req.params.id);
     await EventModel.updateOne({ _id: req.params.id }, req.body);
+
     res.status(206).send(`event: ${getEvent.eventTitle} successfully updated`);
   } catch (error) {
     res.status(401).send(error.message);
@@ -72,11 +76,12 @@ export const addSubscribers = async (req, res) => {
   try {
     const getEvent = await EventModel.findById(req.params.id);
     getEvent.subscribers.push(req.body.subscribers);
-    // await EventModel.updateOne(
-    //   { _id: req.params.id },
-    //   { subscribers: req.body.subscribers }
-    // );
     await getEvent.save();
+
+    const getUser = await UserModel.findById(req.body.subscribers);
+    getUser.bookedEvents.push(req.params.id);
+    await getUser.save();
+
     res.send(getEvent);
   } catch (error) {
     res.status(401).send(error.message);

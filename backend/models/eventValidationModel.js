@@ -8,7 +8,7 @@ export const eventValidationSchema = [
   body("category").isString().not().isEmpty(),
   body("date").isDate(),
   body("time").trim().isString(),
-  body("location").trim().isString(),
+  body("location").isString().trim(),
   body("participants").isString().isLength({
     max: 2,
   }),
@@ -16,5 +16,5 @@ export const eventValidationSchema = [
   body("description").trim().isString().isLength({
     min: 10,
     max: 2500,
-  })
-]   
+  }),
+];
