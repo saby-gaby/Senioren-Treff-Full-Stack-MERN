@@ -35,9 +35,10 @@ Step by step creation of an old people event App
 
 ### How to use this Project
 
-In back- & front folder type in this command:
+Execute the following commands for both frontend and backend folders:
 
 <pre><code>npm install</code></pre>
+<pre><code>npm start</code></pre>
 
 ##### Developed With
 
