@@ -71,7 +71,7 @@ GitHub: <https://github.com/Holledrums> <br>
 - [icons](https://)
 - [excalidraw](https://excalidraw.com/#room=fe633d02fd4a46cc1dc0,ODbm7jX1aPKXrCksAoHAeA)
 - [npm](https://www.npmjs.com/)
-- [google.presentation](https://docs.google.com/presentation/d/1Xq9_OY2YEIlT-Q83_-bZsbpGEH6M-wsvAVpsRcDM5Ss/edit#slide=id.p)
+- [google.presentation](https://docs.google.com/presentation/d/1PJFTU_qTyHwiDI9q_8bzkUj3UBon-I-q7TAwzg9tTcI/edit#slide=id.g1a59ccd6f46_0_30)
 - [Google Fonts](https://fonts.google.com/)
 - [Visual Studio Code](https://code.visualstudio.com/)
 - [ColorZilla](https://www.colorzilla.com/chrome/)
