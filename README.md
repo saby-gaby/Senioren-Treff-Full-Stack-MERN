@@ -69,6 +69,7 @@ GitHub: <https://github.com/Holledrums> <br>
 ### Used Tools
 
 - [icons](https://ant.design/components/icon)
+- [alerts](https://sweetalert.js.org/guides/#advanced-examples)
 - [excalidraw](https://excalidraw.com/#room=fe633d02fd4a46cc1dc0,ODbm7jX1aPKXrCksAoHAeA)
 - [npm](https://www.npmjs.com/)
 - [google.presentation](https://docs.google.com/presentation/d/1PJFTU_qTyHwiDI9q_8bzkUj3UBon-I-q7TAwzg9tTcI/edit#slide=id.g14b7737e911_0_0)
