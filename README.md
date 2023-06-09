@@ -35,7 +35,7 @@ Step by step creation of an old people event App
 
 ### How to use this Project
 
-In the backend folder, create an .env file with your data as shown in the .env.emple file.
+In the backend folder, create an .env file with your data as shown in the .env.example file.
 After that execute the following commands for both frontend and backend folders:
 
 <pre><code>npm install</code></pre>
